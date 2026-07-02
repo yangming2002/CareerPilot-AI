@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# build outputs
+frontend/dist/
+dist/
+
+# local env files
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# project planning documents not uploaded in this repository stage
+docs/
+
+# Python cache for future backend work
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
