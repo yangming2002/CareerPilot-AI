@@ -1,4 +1,10 @@
-# CareerPilot-AI
+<div align="center">
+  <img src="frontend/LOGO.png" alt="CareerPilot-AI Logo" width="140" />
+  <h1>CareerPilot-AI</h1>
+  <p><strong>An intelligent JD-Resume matching and career application optimization system.</strong></p>
+</div>
+
+---
 
 CareerPilot-AI is an intelligent job application optimization system built around JD-Resume matching. It helps users analyze how well their resume fits a target job description, identify missing evidence or weak expressions, and generate trustworthy improvement suggestions without fabricating experience.
 
@@ -21,13 +27,13 @@ The system is designed for general job-search scenarios, including software engi
 
 ```text
 Resume + Job Description
-→ JD parsing
-→ Resume structure extraction
-→ Match scoring
-→ Gap analysis
-→ Optimization suggestions
-→ Integrity check
-→ Structured report
+-> JD parsing
+-> Resume structure extraction
+-> Match scoring
+-> Gap analysis
+-> Optimization suggestions
+-> Integrity check
+-> Structured report
 ```
 
 This workflow is used when a user already has a target company or job description.
@@ -36,12 +42,12 @@ This workflow is used when a user already has a target company or job descriptio
 
 ```text
 Resume + Target Direction
-→ JD knowledge base retrieval
-→ Role profile generation
-→ Resume-role matching
-→ Capability gap analysis
-→ Job recommendation
-→ Optimization suggestions
+-> JD knowledge base retrieval
+-> Role profile generation
+-> Resume-role matching
+-> Capability gap analysis
+-> Job recommendation
+-> Optimization suggestions
 ```
 
 This workflow is used when a user only knows the type of role they want, such as AI Engineer, Agent Developer, Backend Engineer, Product Manager, Testing Engineer, or Operations Specialist.
@@ -52,7 +58,7 @@ CareerPilot-AI follows several non-negotiable principles:
 
 - Optimize expression, not facts.
 - Suggest real evidence collection instead of inventing numbers.
-- Do not turn “participated in” into “led” unless the user actually led the work.
+- Do not turn "participated in" into "led" unless the user actually led the work.
 - Do not add skills, internships, papers, awards, patents, or projects that the user did not provide.
 - Flag uncertain, unsupported, or risky statements instead of silently polishing them.
 - Keep resume data private by default.
@@ -87,9 +93,9 @@ The backend is planned around:
 
 ```text
 CareerPilot-AI/
-├── frontend/      # Vue 3 frontend application
-├── README.md      # Project introduction
-└── .gitignore     # Git ignore rules
+|-- frontend/      # Vue 3 frontend application
+|-- README.md      # Project introduction
+`-- .gitignore     # Git ignore rules
 ```
 
 ## Getting Started
