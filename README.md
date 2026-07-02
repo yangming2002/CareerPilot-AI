@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="frontend/LOGO.png" alt="CareerPilot-AI Logo" width="140" />
+  <img src="./frontend/LOGO.png" alt="CareerPilot-AI Logo" width="140" />
   <h1>CareerPilot-AI</h1>
   <p><strong>An intelligent JD-Resume matching and career application optimization system.</strong></p>
 </div>
