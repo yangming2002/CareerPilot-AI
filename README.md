@@ -1,66 +1,75 @@
 <div align="center">
   <img src="./frontend/logo.png" alt="CareerPilot-AI Logo" width="420" />
-  <p><strong>An intelligent JD-Resume matching and career application optimization system.</strong></p>
+  <p><strong>An intelligent career workspace for JD matching, application tracking, interview review, and skill growth.</strong></p>
 </div>
 
 ---
 
-CareerPilot-AI is an intelligent job application optimization system built around JD-Resume matching. It helps users analyze how well their resume fits a target job description, identify missing evidence or weak expressions, and generate trustworthy improvement suggestions without fabricating experience.
+CareerPilot-AI is an intelligent career workspace for managing the full job application process. It helps users analyze target job descriptions against their resume, optimize resume wording without fabricating experience, track application progress, remember cooldown windows, review interview and written-test performance, and build a personal skill profile over time.
 
-The system is designed for general job-search scenarios, including software engineering, AI engineering, product, testing, operations, data analysis, and other roles. For users without a specific job description, CareerPilot-AI can also use a JD knowledge base to summarize common role requirements and recommend suitable job opportunities.
+The system is designed around user-provided job descriptions and user-owned job-search records. Instead of relying on unstable real-time crawling or unverified online search, CareerPilot-AI focuses on a trustworthy workflow: users bring the JD they care about, and the system helps them evaluate, prepare, track, and improve.
 
 ## Highlights
 
-- **JD-Resume Matching**: Analyze a resume against a specific job description and generate a structured match report.
-- **Role-Direction Matching**: Support users who only know their target direction by using a JD knowledge base to build a general role profile.
-- **Trustworthy Resume Optimization**: Improve wording based on real user experience instead of inventing companies, projects, skills, or metrics.
-- **Resume Integrity Guard**: Detect unsupported metrics, exaggerated responsibility claims, inconsistent skills, and potential fabrication risks.
-- **JD Knowledge Base**: Store and structure job descriptions for retrieval, aggregation, role profiling, and recommendation scenarios.
-- **Prompt Injection Awareness**: Treat resumes and job descriptions as untrusted input and prevent user-provided text from overriding system rules.
-- **Privacy-First Design**: Resume content is not persisted by default; JD data can be anonymized and added to the knowledge base only with explicit user permission.
-- **Evaluation Harness Ready**: Designed to support automated evaluation for JD parsing, match scoring, recommendation quality, integrity checking, and prompt injection defense.
+- **JD-Resume Matching**: Analyze a resume against a user-provided job description and generate a structured match report.
+- **Trustworthy Resume Optimization**: Improve wording based on real user experience without inventing companies, projects, skills, or metrics.
+- **Resume Integrity Guard**: Detect unsupported metrics, exaggerated responsibility claims, inconsistent skills, and fabrication risks.
+- **Application Tracker**: Record companies, positions, resume versions, application channels, dates, status changes, and notes.
+- **Cooldown Reminder**: Help users avoid forgetting previous applications and remind them when a company may still be in a cooldown period.
+- **Interview Review**: Record interview rounds, questions, weak answers, follow-up questions, and generate targeted coaching suggestions.
+- **Written-Test Review**: Track problem types, missed knowledge points, and weak areas across companies and test rounds.
+- **Skill Profile**: Aggregate JD gaps, resume gaps, interview feedback, and written-test performance into a personal capability map.
+- **Privacy-First Design**: Resume and job-search records should remain user-controlled; sensitive data is not persisted unless explicitly required by the user.
+- **Evaluation Harness Ready**: Designed to support automated evaluation for parsing, match scoring, integrity checking, prompt-injection defense, and coaching quality.
 
 ## Core Workflows
 
-### Specific JD Matching
+### JD Matching and Resume Optimization
 
 ```text
-Resume + Job Description
+Resume + User-provided JD
 -> JD parsing
 -> Resume structure extraction
 -> Match scoring
 -> Gap analysis
--> Optimization suggestions
+-> Trustworthy optimization suggestions
 -> Integrity check
 -> Structured report
 ```
 
-This workflow is used when a user already has a target company or job description.
-
-### Role-Direction Matching
+### Application Tracking
 
 ```text
-Resume + Target Direction
--> JD knowledge base retrieval
--> Role profile generation
--> Resume-role matching
--> Capability gap analysis
--> Job recommendation
--> Optimization suggestions
+Target company + position + JD
+-> Save application record
+-> Track current status
+-> Link resume version and analysis report
+-> Record outcome
+-> Trigger cooldown reminder when needed
 ```
 
-This workflow is used when a user only knows the type of role they want, such as AI Engineer, Agent Developer, Backend Engineer, Product Manager, Testing Engineer, or Operations Specialist.
+### Interview and Written-Test Review
+
+```text
+Interview or written-test record
+-> Capture questions and weak points
+-> Tag knowledge areas
+-> Generate coaching suggestions
+-> Update skill profile
+-> Recommend next preparation focus
+```
 
 ## Product Principles
 
 CareerPilot-AI follows several non-negotiable principles:
 
+- Users provide the JD they want to analyze.
 - Optimize expression, not facts.
 - Suggest real evidence collection instead of inventing numbers.
 - Do not turn "participated in" into "led" unless the user actually led the work.
 - Do not add skills, internships, papers, awards, patents, or projects that the user did not provide.
-- Flag uncertain, unsupported, or risky statements instead of silently polishing them.
-- Keep resume data private by default.
+- Treat user-provided resume, JD, and interview notes as sensitive data.
+- Use application history to support review and improvement, not to overpromise outcomes.
 
 ## Frontend Stack
 
@@ -83,10 +92,9 @@ The backend is planned around:
 - Pydantic
 - PostgreSQL
 - Redis
-- pgvector or another vector retrieval solution
 - Agent workflow orchestration
 - LLM function calling
-- Optional MCP integrations for external data sources and tools
+- Optional MCP integrations for document parsing, browser-assisted JD capture, and evaluation tools
 
 ## Repository Structure
 
@@ -120,12 +128,13 @@ npm run build
 
 ## Roadmap
 
-- Frontend workspace for resume and JD input.
-- Structured match report with match overview, JD parsing, resume summary, gap analysis, optimization suggestions, integrity checks, and job recommendations.
+- Frontend workspace for JD matching and job-search management.
+- Application tracker with status history, resume version linkage, and cooldown reminders.
+- Interview review module with question records, answer review, and coaching suggestions.
+- Written-test review module with problem tags, weak-point tracking, and skill visualization.
 - FastAPI backend with typed request and response models.
-- JD knowledge base with structured parsing, deduplication, quality scoring, and vector retrieval.
-- LLM-based analysis workflow with integrity guard and prompt injection defense.
-- Evaluation harness for parser quality, match ranking, recommendation relevance, hallucination control, and safety checks.
+- LLM-based analysis workflow with integrity guard and prompt-injection defense.
+- Evaluation harness for parser quality, match ranking, coaching quality, hallucination control, and safety checks.
 
 ## License
 

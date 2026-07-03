@@ -1,33 +1,40 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const mode = ref<'jd' | 'direction'>('jd')
+const activeModule = ref('matching')
 const resumeText = ref('')
 const jdText = ref('')
-const targetDirection = ref('Agent 开发工程师')
-const experienceLevel = ref('校招 / 实习')
+const companyName = ref('')
+const positionName = ref('')
+const applicationStatus = ref('已投递')
+const weakPoint = ref('')
 const hasReport = ref(false)
 
-const directionOptions = [
-  'Agent 开发工程师',
-  '算法工程师',
-  'Python 后端工程师',
-  '测试开发工程师',
-  '产品经理',
-  '运营岗位',
-  '数据分析师',
+const statusOptions = [
+  '待投递',
+  '已投递',
+  '简历筛选中',
+  '笔试',
+  '一面',
+  '二面',
+  '三面',
+  'HR 面',
+  'Offer',
+  '已挂',
+  '已放弃',
+  '冷静期',
 ]
 
-const reportTitle = computed(() => {
-  return mode.value === 'jd' ? '指定 JD 匹配报告' : '岗位方向泛化匹配报告'
-})
-
-const reportDescription = computed(() => {
-  if (mode.value === 'jd') {
-    return '系统将基于用户提供的具体 JD 与简历内容，输出匹配度、缺口分析和真实性约束下的优化建议。'
+const moduleTitle = computed(() => {
+  const titles: Record<string, string> = {
+    matching: 'JD 匹配分析',
+    tracker: '投递进度 Tracker',
+    interview: '面试复盘',
+    written: '笔试复盘',
+    profile: '能力画像',
   }
 
-  return '系统将从 JD 知识库抽取同类岗位画像，并结合简历给出通用匹配度、能力短板和岗位推荐。'
+  return titles[activeModule.value]
 })
 
 function runAnalysis() {
@@ -40,28 +47,31 @@ function runAnalysis() {
     <section class="page-header">
       <div>
         <p class="eyebrow">CareerPilot-AI</p>
-        <h1>基于 JD 与简历匹配的智能求职优化系统</h1>
+        <h1>面向个人求职全流程的智能工作台</h1>
         <p class="subtitle">
-          JD 可进入知识库，简历默认仅用于本次分析，不持久化存储。
+          围绕用户主动提供的 JD，完成简历匹配、可信优化、投递追踪、冷静期提醒、面试/笔试复盘与能力画像沉淀。
         </p>
       </div>
-      <el-tag type="success" effect="light">MVP 前端工作台</el-tag>
+      <el-tag type="success" effect="light">Frontend Preview</el-tag>
     </section>
 
     <section class="privacy-banner">
-      <strong>隐私原则：</strong>
-      简历内容默认不入库；JD 数据可沉淀为岗位知识库，用于岗位画像、相似 JD 检索和推荐。
+      <strong>产品原则：</strong>
+      不默认替用户联网找岗位，不实时硬爬招聘平台；用户提供目标 JD 后，系统做匹配、记录、复盘和辅导。简历与求职记录均按敏感数据处理。
     </section>
 
-    <section class="mode-card">
+    <section class="module-card">
       <div class="section-title">
-        <h2>选择分析模式</h2>
-        <span>支持精准 JD 匹配，也支持只有目标方向时的泛化匹配。</span>
+        <h2>工作台模块</h2>
+        <span>先跑通求职闭环，再逐步接入后端 Agent 工作流。</span>
       </div>
 
-      <el-radio-group v-model="mode">
-        <el-radio-button label="jd">我有具体 JD</el-radio-button>
-        <el-radio-button label="direction">我只有目标方向</el-radio-button>
+      <el-radio-group v-model="activeModule">
+        <el-radio-button label="matching">JD 匹配</el-radio-button>
+        <el-radio-button label="tracker">投递 Tracker</el-radio-button>
+        <el-radio-button label="interview">面试复盘</el-radio-button>
+        <el-radio-button label="written">笔试复盘</el-radio-button>
+        <el-radio-button label="profile">能力画像</el-radio-button>
       </el-radio-group>
     </section>
 
@@ -70,109 +80,122 @@ function runAnalysis() {
         <template #header>
           <div class="card-header">
             <span>简历内容</span>
-            <el-tag size="small" type="warning">不保存</el-tag>
+            <el-tag size="small" type="warning">敏感数据</el-tag>
           </div>
         </template>
 
         <el-input
           v-model="resumeText"
           type="textarea"
-          :rows="14"
+          :rows="12"
           resize="none"
-          placeholder="请粘贴简历文本。MVP 阶段先支持文本输入，后续再支持 PDF / DOCX 解析。"
+          placeholder="请粘贴简历文本。后端接入后，简历默认只用于本次分析，不写入公共知识库。"
         />
       </el-card>
 
       <el-card shadow="never" class="panel-card">
         <template #header>
           <div class="card-header">
-            <span>{{ mode === 'jd' ? '岗位 JD' : '目标岗位方向' }}</span>
-            <el-tag size="small">可入知识库</el-tag>
+            <span>{{ moduleTitle }}</span>
+            <el-tag size="small">用户主动记录</el-tag>
           </div>
         </template>
 
-        <template v-if="mode === 'jd'">
+        <template v-if="activeModule === 'matching'">
           <el-input
             v-model="jdText"
             type="textarea"
-            :rows="14"
+            :rows="12"
             resize="none"
-            placeholder="请粘贴目标公司的岗位 JD。系统会围绕这一个 JD 输出匹配报告，不默认推荐其他公司。"
+            placeholder="请粘贴你真正想投递的公司 JD。系统围绕该 JD 输出匹配报告，不默认联网搜索或编造岗位信息。"
+          />
+        </template>
+
+        <template v-else-if="activeModule === 'tracker'">
+          <el-form label-position="top">
+            <el-form-item label="公司名称">
+              <el-input v-model="companyName" placeholder="例如：某互联网公司" />
+            </el-form-item>
+            <el-form-item label="岗位名称">
+              <el-input v-model="positionName" placeholder="例如：Agent 开发工程师" />
+            </el-form-item>
+            <el-form-item label="当前状态">
+              <el-select v-model="applicationStatus" class="full-width">
+                <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+            </el-form-item>
+          </el-form>
+        </template>
+
+        <template v-else-if="activeModule === 'interview'">
+          <el-input
+            v-model="weakPoint"
+            type="textarea"
+            :rows="12"
+            resize="none"
+            placeholder="记录面试问题、自己没答好的地方、被追问的问题。系统后续会生成复盘建议和模拟追问。"
+          />
+        </template>
+
+        <template v-else-if="activeModule === 'written'">
+          <el-input
+            v-model="weakPoint"
+            type="textarea"
+            :rows="12"
+            resize="none"
+            placeholder="记录笔试题型、没做出来的题、卡住的知识点。后续可生成短板图表和刷题建议。"
           />
         </template>
 
         <template v-else>
-          <el-form label-position="top">
-            <el-form-item label="目标岗位">
-              <el-select v-model="targetDirection" class="full-width">
-                <el-option
-                  v-for="item in directionOptions"
-                  :key="item"
-                  :label="item"
-                  :value="item"
-                />
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="经验阶段">
-              <el-select v-model="experienceLevel" class="full-width">
-                <el-option label="校招 / 实习" value="校招 / 实习" />
-                <el-option label="1-3 年" value="1-3 年" />
-                <el-option label="3-5 年" value="3-5 年" />
-                <el-option label="5 年以上" value="5 年以上" />
-              </el-select>
-            </el-form-item>
-
-            <div class="job-profile-preview">
-              <h3>岗位画像预览</h3>
-              <p>
-                后续将从 JD 知识库检索同类岗位，聚合核心技能、项目要求、关键词权重和常见加分项。
-              </p>
+          <div class="profile-preview">
+            <h3>能力画像预览</h3>
+            <p>能力画像会综合 JD 缺口、简历问题、面试反馈和笔试表现，标注主要短板和下一步准备重点。</p>
+            <div class="skill-bars">
+              <span>项目表达</span><el-progress :percentage="76" />
+              <span>算法基础</span><el-progress :percentage="58" status="warning" />
+              <span>面试表达</span><el-progress :percentage="64" />
             </div>
-          </el-form>
+          </div>
         </template>
       </el-card>
     </section>
 
     <section class="action-bar">
-      <el-button type="primary" size="large" @click="runAnalysis">
-        开始分析
-      </el-button>
-      <el-button size="large">清空输入</el-button>
-      <span>当前为前端模拟结果，后续接入 FastAPI 与 LLM Agent 工作流。</span>
+      <el-button type="primary" size="large" @click="runAnalysis">生成模拟分析</el-button>
+      <el-button size="large">保存记录</el-button>
+      <span>当前为前端预览，后续接入 FastAPI、数据库和 LLM 工作流。</span>
     </section>
 
     <section v-if="hasReport" class="report-grid">
       <el-card shadow="never" class="panel-card score-card">
-        <template #header>{{ reportTitle }}</template>
+        <template #header>求职闭环概览</template>
         <div class="score-number">78</div>
-        <p>{{ reportDescription }}</p>
+        <p>当前简历与目标 JD 匹配度较好，但项目指标、面试表达和笔试短板需要持续记录和复盘。</p>
       </el-card>
 
       <el-card shadow="never" class="panel-card">
-        <template #header>能力匹配摘要</template>
-        <el-progress :percentage="82" />
-        <el-progress :percentage="74" status="success" />
-        <el-progress :percentage="61" status="warning" />
+        <template #header>系统建议</template>
         <ul class="plain-list">
-          <li>核心技能覆盖较好，但项目成果指标需要补充真实评测口径。</li>
-          <li>项目描述可进一步突出问题背景、技术方案和可验证结果。</li>
-          <li>缺失关键词不直接编造，只提示用户补充真实经历或学习计划。</li>
+          <li>先围绕目标 JD 优化简历关键词和项目表达。</li>
+          <li>每次投递记录公司、岗位、简历版本和当前状态。</li>
+          <li>面试后立刻记录问题和没答好的地方，避免遗忘。</li>
+          <li>笔试题按知识点打标签，积累后生成能力短板图。</li>
         </ul>
       </el-card>
 
       <el-card shadow="never" class="panel-card">
-        <template #header>真实性检查</template>
+        <template #header>真实性与隐私</template>
         <el-alert
-          title="不生成无法验证的虚假经历或虚假指标"
+          title="只优化真实经历，不编造项目、指标、公司或技能"
           type="success"
           :closable="false"
           show-icon
         />
         <ul class="plain-list">
-          <li>没有实际数据时，不写“提升 35%”这类具体数值。</li>
-          <li>建议先补充测试样本、评测方式、耗时对比，再填写真实结果。</li>
-          <li>把“参与”包装成“主导”会被标记为夸大风险。</li>
+          <li>缺少数据时提示补充真实评测，而不是生成虚假数字。</li>
+          <li>投递记录和面试复盘属于个人敏感数据，需要用户授权后才持久化。</li>
+          <li>冷静期提醒基于用户自己的投递历史，不依赖不稳定的实时爬虫。</li>
         </ul>
       </el-card>
     </section>
@@ -216,12 +239,14 @@ h1 {
 }
 
 .subtitle {
+  max-width: 860px;
   margin-bottom: 0;
   color: #667085;
+  line-height: 1.7;
 }
 
 .privacy-banner,
-.mode-card,
+.module-card,
 .panel-card,
 .action-bar {
   border: 1px solid #dbe3ef;
@@ -233,9 +258,10 @@ h1 {
   margin-bottom: 18px;
   padding: 14px 16px;
   color: #475467;
+  line-height: 1.7;
 }
 
-.mode-card {
+.module-card {
   margin-bottom: 18px;
   padding: 18px;
 }
@@ -275,8 +301,8 @@ h1 {
   width: 100%;
 }
 
-.job-profile-preview {
-  min-height: 214px;
+.profile-preview {
+  min-height: 267px;
   padding: 18px;
   border: 1px dashed #b9c4d3;
   border-radius: 8px;
@@ -284,10 +310,16 @@ h1 {
   color: #475467;
 }
 
-.job-profile-preview h3 {
+.profile-preview h3 {
   margin-bottom: 8px;
   color: #111827;
   font-size: 16px;
+}
+
+.skill-bars {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 .action-bar {
