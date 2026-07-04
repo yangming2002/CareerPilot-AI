@@ -4,22 +4,24 @@ from typing import TypeVar
 
 from openai import APIError, APITimeoutError, APIConnectionError, OpenAI
 
+from app.core.config import LLM_TIMEOUT, OPENAI_API_KEY, OPENAI_MODEL
+
 T = TypeVar("T")
 
 
 @dataclass
 class LLMConfig:
-    model: str = "gpt-4o"
+    model: str = OPENAI_MODEL
     max_tokens: int = 4096
     temperature: float = 0.3
     max_retries: int = 2
-    timeout: float = 30.0
+    timeout: float = LLM_TIMEOUT
 
 
 class LLMClient:
     def __init__(self, config: LLMConfig | None = None):
         self.config = config or LLMConfig()
-        self._client = OpenAI(timeout=self.config.timeout)
+        self._client = OpenAI(api_key=OPENAI_API_KEY, timeout=self.config.timeout)
 
     @property
     def client(self) -> OpenAI:
@@ -40,7 +42,7 @@ class LLMClient:
                 )
                 return response.choices[0].message.content or ""
             except (APITimeoutError, APIConnectionError) as e:
-                raise  # Don't retry on network errors, let caller handle
+                raise
             except Exception as e:
                 last_error = e
                 if attempt < self.config.max_retries:
@@ -48,8 +50,6 @@ class LLMClient:
         raise last_error  # type: ignore[misc]
 
     def complete_structured(self, system: str, user: str, output_schema: type[T]) -> T:
-        """Use OpenAI structured output (JSON mode). Raises on failure."""
-
         schema_json = output_schema.model_json_schema()
         schema_str = json.dumps(schema_json, ensure_ascii=False, indent=2)
 
@@ -77,7 +77,7 @@ class LLMClient:
                 return output_schema.model_validate(data)
 
             except (APITimeoutError, APIConnectionError):
-                raise  # Network errors — don't retry, let caller degrade
+                raise
 
             except APIError as e:
                 if attempt < self.config.max_retries:
@@ -85,7 +85,6 @@ class LLMClient:
                 raise
 
             except Exception as e:
-                # Schema validation or JSON parse error
                 if attempt < self.config.max_retries:
                     continue
                 raise
