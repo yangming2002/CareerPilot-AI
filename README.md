@@ -71,60 +71,79 @@ CareerPilot-AI follows several non-negotiable principles:
 - Treat user-provided resume, JD, and interview notes as sensitive data.
 - Use application history to support review and improvement, not to overpromise outcomes.
 
-## Frontend Stack
+## Tech Stack
 
-The frontend is built with:
+### Frontend
 
-- Vue 3
-- Vite
-- TypeScript
-- Vue Router
-- Pinia
-- Element Plus
-- Axios
+- Vue 3 · Vite · TypeScript
+- Vue Router · Pinia · Element Plus · Axios
 
-## Planned Backend Stack
+### Backend
 
-The backend is planned around:
-
-- Python
-- FastAPI
-- Pydantic
-- PostgreSQL
-- Redis
-- Agent workflow orchestration
-- LLM function calling
-- Optional MCP integrations for document parsing, browser-assisted JD capture, and evaluation tools
+- Python 3.11+ · FastAPI · Pydantic v2
+- SQLAlchemy 2.x · SQLite (MVP, PostgreSQL-ready)
+- Service layer designed for LLM / Agent drop-in
 
 ## Repository Structure
 
 ```text
 CareerPilot-AI/
-|-- frontend/      # Vue 3 frontend application
-|-- README.md      # Project introduction
-`-- .gitignore     # Git ignore rules
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI entry + CORS
+│   │   ├── core/                # config, database
+│   │   ├── models/              # SQLAlchemy models (5 tables)
+│   │   ├── schemas/             # Pydantic request / response
+│   │   ├── api/v1/              # REST routes (5 modules)
+│   │   └── services/            # business logic (rule engine, ready for LLM)
+│   └── requirements.txt
+├── frontend/
+│   └── src/
+│       ├── api/                 # Axios client + API functions
+│       ├── stores/              # Pinia stores (5 modules)
+│       ├── components/workspace/# 8 workspace sub-panels
+│       └── views/               # WorkspaceView
+└── README.md
 ```
 
 ## Getting Started
 
-Install frontend dependencies:
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
+```
+
+API docs auto-served at http://localhost:8002/docs.
+
+### Frontend
 
 ```bash
 cd frontend
 npm install
-```
-
-Start the frontend development server:
-
-```bash
 npm run dev
 ```
 
-Build the frontend:
+Frontend served at http://localhost:5173, expects backend on port 8002.
 
-```bash
-npm run build
-```
+## API Overview
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/v1/analysis/jd-match` | JD-resume matching analysis |
+| GET | `/api/v1/analysis/reports` | Historical reports |
+| POST | `/api/v1/applications` | Create application record |
+| GET | `/api/v1/applications` | List applications |
+| PATCH | `/api/v1/applications/{id}/status` | Update application status |
+| DELETE | `/api/v1/applications/{id}` | Delete application |
+| GET | `/api/v1/applications/{id}/cooldown` | Cooldown check |
+| POST | `/api/v1/interviews/reviews` | Create interview review |
+| GET | `/api/v1/interviews/reviews` | List interview reviews |
+| POST | `/api/v1/written-tests/reviews` | Create written-test review |
+| GET | `/api/v1/written-tests/reviews` | List written-test reviews |
+| GET | `/api/v1/skill-profile` | Aggregated skill profile |
 
 ## Roadmap
 
