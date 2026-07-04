@@ -24,40 +24,54 @@ class RunnerResult:
 
 
 class GuardRunner:
-    """Orchestrates multiple guards in sequence."""
+    """Orchestrates multiple guards in sequence.
 
-    def __init__(self, guards: list[GuardBase] | None = None):
-        self.guards = guards or [
-            IntegrityGuard(),
-            GroundingGuard(),
-        ]
+    Blocking guards (IntegrityGuard): trigger LLM retry on failure.
+    Advisory guards (GroundingGuard): run and report but never block.
+    """
+
+    BLOCKING_GUARDS: list[type[GuardBase]] = [IntegrityGuard]
+    ADVISORY_GUARDS: list[type[GuardBase]] = [GroundingGuard]
+
+    def __init__(self, blocking: list[GuardBase] | None = None,
+                 advisory: list[GuardBase] | None = None):
+        self.blocking = blocking or [g() for g in self.BLOCKING_GUARDS]
+        self.advisory = advisory or [g() for g in self.ADVISORY_GUARDS]
 
     def run(self, resume_text: str, suggestions: list[dict]) -> RunnerResult:
         results: list[GuardResult] = []
-        all_passed = True
+        passed = True
 
-        for guard in self.guards:
-            logger.debug(f"Running guard: {guard.name}")
+        # Only blocking guards affect pass/fail
+        for guard in self.blocking:
             result = guard.check(resume_text, suggestions)
             results.append(result)
             if not result.passed:
-                all_passed = False
+                passed = False
                 logger.warning(
-                    f"Guard '{guard.name}' failed: {result.risk_count} risks, "
+                    f"[BLOCKING] Guard '{guard.name}': {result.risk_count} risks, "
                     f"{result.warning_count} warnings"
                 )
+
+        # Advisory guards run but don't block
+        for guard in self.advisory:
+            result = guard.check(resume_text, suggestions)
+            results.append(result)
+            logger.info(
+                f"[ADVISORY] Guard '{guard.name}': {result.risk_count} risks, "
+                f"{result.warning_count} warnings"
+            )
 
         combined_hints: list[str] = []
         for r in results:
             combined_hints.extend(r.revision_hints)
 
         return RunnerResult(
-            passed=all_passed,
+            passed=passed,
             results=results,
             combined_hints=combined_hints,
         )
 
     def check_input(self, text: str, text_type: str = "text") -> GuardResult:
-        """Quick injection scan on raw user input."""
         guard = PromptInjectionGuard()
         return guard.check(text)

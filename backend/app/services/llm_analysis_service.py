@@ -1,15 +1,11 @@
 import hashlib
 import logging
+import sys
 
 from openai import APITimeoutError, APIConnectionError
 from sqlalchemy.orm import Session
 
-from app.core.errors import (
-    GuardRejectionError,
-    InputInsufficientError,
-    LLMConnectionError,
-    LLMSchemaError,
-)
+from app.core.errors import InputInsufficientError
 from app.guards.guard_runner import GuardRunner
 from app.llm.client import get_llm_client
 from app.llm.prompts import JD_MATCH_SYSTEM, JD_MATCH_USER
@@ -27,41 +23,43 @@ logger = logging.getLogger(__name__)
 
 MIN_RESUME_CHARS = 50
 MIN_JD_CHARS = 30
-MAX_GUARD_RETRIES = 2
+MAX_GUARD_RETRIES = 1  # reduced: 1 initial + 1 retry = max 2 LLM calls
+
+
+def _log(msg: str) -> None:
+    """Print to stderr so it shows in uvicorn console immediately."""
+    print(f"[LLM] {msg}", file=sys.stderr, flush=True)
+    logger.info(msg)
 
 
 class LLMAnalysisService:
-    """JD-Resume matching with OpenAI LLM + Guards + resilience."""
-
     def __init__(self):
         self.guard_runner = GuardRunner()
 
     def analyze(self, db: Session, resume_text: str, jd_text: str, user_id: int) -> JDMatchResponse:
-        # ── 1. Input validation ──
+        # ── 1. Input check ──
+        _log("步骤 1/4: 检查输入...")
         self._validate_input(resume_text, jd_text)
+        _log(f"  输入长度 OK (简历 {len(resume_text)} 字, JD {len(jd_text)} 字)")
 
-        # ── 2. Prompt injection scan ──
+        # ── 2. Injection scan ──
+        _log("步骤 2/4: 安全检查...")
         jd_check = self.guard_runner.check_input(jd_text, "JD")
         if not jd_check.passed:
-            return self._build_degraded(
-                db, resume_text, jd_text, user_id,
-                "JD 内容包含疑似指令注入，已使用规则引擎分析。",
-                match_score=0,
-            )
-        resume_check = self.guard_runner.check_input(resume_text, "简历")
-        if not resume_check.passed:
-            return self._build_degraded(
-                db, resume_text, jd_text, user_id,
-                "简历内容包含疑似指令注入，已使用规则引擎分析。",
-                match_score=0,
-            )
+            _log("  JD 包含疑似注入，降级到规则引擎")
+            return self._build_degraded(db, resume_text, jd_text, user_id,
+                                        "JD 内容包含疑似指令注入，已使用规则引擎分析。", match_score=0)
 
-        # ── 3. LLM call with guard retry loop ──
+        # ── 3. LLM call + guard ──
+        _log("步骤 3/4: 调用 LLM 分析...")
         llm = get_llm_client()
         user_prompt = JD_MATCH_USER.format(jd_text=jd_text, resume_text=resume_text)
         result: LLMMatchResult | None = None
 
         for attempt in range(MAX_GUARD_RETRIES + 1):
+            label = "初次调用" if attempt == 0 else f"Guard 重试 ({attempt}/{MAX_GUARD_RETRIES})"
+            _log(f"  {label}...")
+
             try:
                 result = llm.complete_structured(
                     system=JD_MATCH_SYSTEM,
@@ -69,59 +67,47 @@ class LLMAnalysisService:
                     output_schema=LLMMatchResult,
                 )
             except (APITimeoutError, APIConnectionError):
-                logger.warning("LLM connection failed, degrading to rule engine")
-                return self._build_degraded(
-                    db, resume_text, jd_text, user_id,
-                    "LLM 服务连接超时，已自动切换为规则引擎分析。",
-                    match_score=None,
-                )
+                _log("  连接失败，降级到规则引擎")
+                return self._build_degraded(db, resume_text, jd_text, user_id,
+                                            "LLM 服务连接超时，已自动切换为规则引擎分析。", match_score=None)
             except Exception as e:
-                logger.exception("LLM call failed")
+                _log(f"  调用异常: {e}")
                 if attempt < MAX_GUARD_RETRIES:
                     continue
-                return self._build_degraded(
-                    db, resume_text, jd_text, user_id,
-                    f"LLM 分析失败：{e}。已自动切换为规则引擎分析。",
-                    match_score=None,
-                )
+                return self._build_degraded(db, resume_text, jd_text, user_id,
+                                            f"LLM 分析失败：{e}。已自动切换为规则引擎分析。", match_score=None)
 
-            # If we got here, LLM returned a structured result
+            _log(f"  返回匹配分: {result.match_score}, 技能缺口: {len(result.skill_gaps)}, "
+                 f"建议: {len(result.suggestions)}")
+
+            # Run guards (GroundingGuard is advisory-only, IntegrityGuard can block)
             if attempt < MAX_GUARD_RETRIES:
-                # Run guards on suggestions
                 runner_result = self.guard_runner.run(resume_text, [
                     s.model_dump() for s in result.suggestions
                 ])
                 if runner_result.passed:
-                    break  # All good, proceed to save
+                    _log("  Guard 检查通过")
+                    break
                 else:
-                    # Feed guard feedback back to LLM for retry
+                    _log(f"  Guard 发现问题，反馈给 LLM 重写...")
                     hints = "\n".join(runner_result.combined_hints)
                     user_prompt = (
                         JD_MATCH_USER.format(jd_text=jd_text, resume_text=resume_text)
                         + f"\n\n## 上次输出的问题（请修正）\n{hints}"
                     )
-                    logger.warning(
-                        f"Guard retry {attempt + 1}/{MAX_GUARD_RETRIES}: "
-                        f"{len(runner_result.all_findings)} findings"
-                    )
             else:
-                # Last attempt — guard had its say, proceed with warnings
-                runner_result = self.guard_runner.run(resume_text, [
-                    s.model_dump() for s in result.suggestions
-                ])
-                if not runner_result.passed:
-                    logger.warning("Guards still failing after max retries, returning partial result")
+                _log("  已达最大重试次数，使用当前结果")
 
         if result is None:
-            return self._build_degraded(
-                db, resume_text, jd_text, user_id,
-                "LLM 未能生成有效分析结果，已自动切换为规则引擎。",
-                match_score=None,
-            )
+            _log("  无有效结果，降级")
+            return self._build_degraded(db, resume_text, jd_text, user_id,
+                                        "LLM 未能生成有效分析结果，已自动切换为规则引擎。", match_score=None)
 
-        return self._build_response(db, resume_text, jd_text, result, user_id)
-
-    # ──────── private ────────
+        # ── 4. Save ──
+        _log("步骤 4/4: 保存报告...")
+        response = self._build_response(db, resume_text, jd_text, result, user_id)
+        _log(f"完成! 匹配分={response.match_score}, 降级={response.degraded}")
+        return response
 
     def _validate_input(self, resume_text: str, jd_text: str) -> None:
         if len(resume_text.strip()) < MIN_RESUME_CHARS:
@@ -193,8 +179,6 @@ class LLMAnalysisService:
         self, db: Session, resume_text: str, jd_text: str,
         user_id: int, reason: str, match_score: int | None,
     ) -> JDMatchResponse:
-        """Return a response that signals degradation. Caller should replace
-        with rule-engine result when match_score is None."""
         from app.services.analysis_service import AnalysisService
 
         if match_score is None:

@@ -73,8 +73,16 @@ export interface IntegrityCheckItem {
   detail: string
 }
 
-export function runJDMatch(data: JDMatchRequest, engine: 'rule' | 'llm' = 'rule'): Promise<JDMatchResponse> {
-  return client.post('/api/v1/analysis/jd-match', data, { params: { engine } }).then((r) => r.data)
+export function runJDMatch(
+  data: JDMatchRequest,
+  engine: 'rule' | 'llm' = 'rule',
+  options: { signal?: AbortSignal } = {},
+): Promise<JDMatchResponse> {
+  return client.post('/api/v1/analysis/jd-match', data, {
+    params: { engine },
+    signal: options.signal,
+    timeout: engine === 'llm' ? 45000 : 15000,
+  }).then((r) => r.data)
 }
 
 // ---------- Applications ----------
@@ -217,3 +225,4 @@ export interface SkillProfile {
 export function getSkillProfile(): Promise<SkillProfile> {
   return client.get('/api/v1/skill-profile').then((r) => r.data)
 }
+

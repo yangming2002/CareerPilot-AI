@@ -4,7 +4,13 @@ from typing import TypeVar
 
 from openai import APIError, APITimeoutError, APIConnectionError, OpenAI
 
-from app.core.config import LLM_TIMEOUT, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL
+from app.core.config import (
+    LLM_MAX_RETRIES,
+    LLM_TIMEOUT,
+    OPENAI_API_KEY,
+    OPENAI_BASE_URL,
+    OPENAI_MODEL,
+)
 
 T = TypeVar("T")
 
@@ -14,7 +20,7 @@ class LLMConfig:
     model: str = OPENAI_MODEL
     max_tokens: int = 4096
     temperature: float = 0.3
-    max_retries: int = 2
+    max_retries: int = LLM_MAX_RETRIES
     timeout: float = LLM_TIMEOUT
 
 
@@ -102,3 +108,4 @@ def get_llm_client() -> LLMClient:
     if _llm_client is None:
         _llm_client = LLMClient()
     return _llm_client
+
