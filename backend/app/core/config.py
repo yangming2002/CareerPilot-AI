@@ -19,7 +19,8 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "careerpilot-dev-secret-change-in-p
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_HOURS = int(os.getenv("ACCESS_TOKEN_EXPIRE_HOURS", "24"))
 
-# ── OpenAI ──
+# ── LLM (阿里云百炼 / OpenAI 兼容) ──
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "qwen-plus")
 LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "30"))

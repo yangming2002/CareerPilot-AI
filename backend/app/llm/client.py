@@ -4,7 +4,7 @@ from typing import TypeVar
 
 from openai import APIError, APITimeoutError, APIConnectionError, OpenAI
 
-from app.core.config import LLM_TIMEOUT, OPENAI_API_KEY, OPENAI_MODEL
+from app.core.config import LLM_TIMEOUT, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL
 
 T = TypeVar("T")
 
@@ -21,7 +21,11 @@ class LLMConfig:
 class LLMClient:
     def __init__(self, config: LLMConfig | None = None):
         self.config = config or LLMConfig()
-        self._client = OpenAI(api_key=OPENAI_API_KEY, timeout=self.config.timeout)
+        self._client = OpenAI(
+            api_key=OPENAI_API_KEY,
+            base_url=OPENAI_BASE_URL,
+            timeout=self.config.timeout,
+        )
 
     @property
     def client(self) -> OpenAI:
