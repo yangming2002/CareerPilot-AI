@@ -32,6 +32,32 @@ function handleSave() {
     ElMessage.info('请手动复制改写后的简历')
   })
 }
+
+async function handleExport(fmt: 'md' | 'pdf') {
+  const id = store.report?.id
+  if (!id) return
+  const token = localStorage.getItem('token')
+  try {
+    const resp = await fetch(`http://localhost:8001/api/v1/analysis/export-${fmt}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({ detail: '导出失败' }))
+      ElMessage.error(err.detail || '导出失败')
+      return
+    }
+    const blob = await resp.blob()
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `revised_resume.${fmt}`
+    a.click()
+    URL.revokeObjectURL(url)
+    ElMessage.success(`已导出为 ${fmt.toUpperCase()} 文件`)
+  } catch {
+    ElMessage.error('导出失败，请检查网络连接')
+  }
+}
 </script>
 
 <template>
@@ -152,9 +178,9 @@ function handleSave() {
         <el-button type="primary" :loading="store.loading" @click="handleRetest">
           重新评估匹配度
         </el-button>
-        <el-button @click="handleSave">
-          保存到剪贴板
-        </el-button>
+        <el-button @click="handleSave">复制到剪贴板</el-button>
+        <el-button v-if="store.report?.id" @click="handleExport('md')">导出 Markdown</el-button>
+        <el-button v-if="store.report?.id" @click="handleExport('pdf')">导出 PDF</el-button>
       </div>
     </el-card>
   </section>

@@ -127,3 +127,68 @@ async def parse_resume(
         logger.exception("Resume parsing failed")
         # Return raw text as fallback
         return ParsedResumeFields(raw_summary=raw_text[:500])
+
+
+@router.get("/analysis/export-md/{report_id}")
+def export_markdown(
+    report_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Download the revised resume as a Markdown file."""
+    from fastapi.responses import PlainTextResponse
+
+    report = AnalysisService.get_report(db, report_id, current_user.id)
+    if not report:
+        raise HTTPException(status_code=404, detail="分析报告不存在或无权访问")
+
+    suggestions_data = report.suggestions or []
+    revised = ""
+    for s in suggestions_data:
+        if isinstance(s, dict) and s.get("suggestion"):
+            revised += s["suggestion"] + "\n\n"
+
+    if not revised.strip():
+        revised = "暂无改写内容，请先运行 LLM 分析并生成改写后的简历。"
+
+    headers = {"Content-Disposition": "attachment; filename=revised_resume.md"}
+    return PlainTextResponse(content=revised, media_type="text/markdown", headers=headers)
+
+
+@router.get("/analysis/export-pdf/{report_id}")
+def export_pdf(
+    report_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Export revised resume as PDF."""
+    import markdown as md_lib
+    from weasyprint import HTML
+
+    report = AnalysisService.get_report(db, report_id, current_user.id)
+    if not report:
+        raise HTTPException(status_code=404, detail="分析报告不存在或无权访问")
+
+    suggestions_data = report.suggestions or []
+    content_md = ""
+    for s in suggestions_data:
+        if isinstance(s, dict) and s.get("suggestion"):
+            content_md += s["suggestion"] + "\n\n"
+
+    if not content_md.strip():
+        content_md = "暂无改写内容，请先运行 LLM 分析并生成改写后的简历。"
+
+    html_body = md_lib.markdown(content_md, extensions=["extra", "nl2br"])
+    html_doc = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>改写后的简历</title>
+<style>
+body {{ font-family: "Microsoft YaHei", "SimHei", sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #1f2937; }}
+h1, h2, h3 {{ color: #111827; }} p {{ margin: 8px 0; }}
+</style></head>
+<body>{html_body}</body></html>"""
+
+    pdf_bytes = HTML(string=html_doc).write_pdf()
+    headers = {"Content-Disposition": "attachment; filename=revised_resume.pdf"}
+    from fastapi.responses import Response
+    return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
