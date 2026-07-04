@@ -27,10 +27,15 @@ class LLMConfig:
 class LLMClient:
     def __init__(self, config: LLMConfig | None = None):
         self.config = config or LLMConfig()
+        import httpx
+        http_client = httpx.Client(
+            timeout=self.config.timeout,
+            http2=False,
+        )
         self._client = OpenAI(
             api_key=OPENAI_API_KEY,
             base_url=OPENAI_BASE_URL,
-            timeout=self.config.timeout,
+            http_client=http_client,
         )
 
     @property
@@ -77,7 +82,7 @@ class LLMClient:
                     temperature=self.config.temperature,
                     messages=[
                         {"role": "system", "content": structured_system},
-                        {"role": "user", "content": user},
+                        {"role": "user", "content": user + "\n(Please respond with a JSON object.)"},
                     ],
                     response_format={"type": "json_object"},
                 )

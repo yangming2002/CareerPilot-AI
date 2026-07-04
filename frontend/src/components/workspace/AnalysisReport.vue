@@ -16,6 +16,14 @@ const store = useAnalysisStore()
       style="grid-column: 1 / -1; margin-bottom: 4px"
     />
 
+    <!-- Progress Log -->
+    <el-card v-if="store.report.progress_log?.length" shadow="never" class="panel-card" style="grid-column: 1 / -1">
+      <template #header>分析过程 ({{ store.report.progress_log.length }} 步)</template>
+      <ol class="progress-list">
+        <li v-for="(step, i) in store.report.progress_log" :key="i">{{ step }}</li>
+      </ol>
+    </el-card>
+
     <!-- Match Score -->
     <el-card shadow="never" class="panel-card score-card">
       <template #header>匹配得分</template>
@@ -173,6 +181,14 @@ const store = useAnalysisStore()
   color: #1f2937;
   font-size: 14px;
   line-height: 1.7;
+}
+
+.progress-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #475467;
+  font-size: 13px;
+  line-height: 2;
 }
 
 .no-data {

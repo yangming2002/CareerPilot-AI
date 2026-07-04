@@ -44,6 +44,7 @@ class JDMatchResponse(BaseModel):
     resume_summary: str = ""
     degraded: bool = False
     degraded_reason: str = ""
+    progress_log: list[str] = []
 
 
 class ReportListItem(BaseModel):

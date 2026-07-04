@@ -44,6 +44,7 @@ export interface JDMatchResponse {
   resume_summary: string
   degraded: boolean
   degraded_reason: string
+  progress_log: string[]
 }
 
 export interface SkillGap {
