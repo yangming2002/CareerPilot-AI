@@ -7,6 +7,10 @@ from app.api.v1 import router as v1_router
 from app.core.config import CORS_ORIGINS
 from app.core.database import Base, engine
 
+# Ensure all models are imported for table creation
+import app.models.models  # noqa: F401
+import app.models.user  # noqa: F401
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

@@ -11,6 +11,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
   const report = ref<JDMatchResponse | null>(null)
   const loading = ref(false)
   const error = ref('')
+  const engine = ref<'rule' | 'llm'>('rule')
 
   async function analyze() {
     if (!resumeText.value.trim() || !jdText.value.trim()) {
@@ -20,10 +21,13 @@ export const useAnalysisStore = defineStore('analysis', () => {
     loading.value = true
     error.value = ''
     try {
-      report.value = await runJDMatch({
-        resume_text: resumeText.value,
-        jd_text: jdText.value,
-      })
+      report.value = await runJDMatch(
+        {
+          resume_text: resumeText.value,
+          jd_text: jdText.value,
+        },
+        engine.value,
+      )
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : '分析失败'
       error.value = msg
@@ -37,5 +41,5 @@ export const useAnalysisStore = defineStore('analysis', () => {
     error.value = ''
   }
 
-  return { resumeText, jdText, report, loading, error, analyze, reset }
+  return { resumeText, jdText, report, loading, error, engine, analyze, reset }
 })

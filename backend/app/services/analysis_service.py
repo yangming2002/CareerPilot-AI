@@ -33,9 +33,7 @@ class AnalysisService:
         "stakeholder management", "cross-functional",
     }
 
-    DEGREE_KEYWORDS = {"本科", "硕士", "博士", "bachelor", "master", "phd", "计算机", "软件工程"}
-
-    def analyze(self, db: Session, resume_text: str, jd_text: str) -> JDMatchResponse:
+    def analyze(self, db: Session, resume_text: str, jd_text: str, user_id: int) -> JDMatchResponse:
         resume_lower = resume_text.lower()
         jd_lower = jd_text.lower()
 
@@ -55,6 +53,7 @@ class AnalysisService:
         jd_hash = hashlib.sha256(jd_text.encode()).hexdigest()
 
         report = AnalysisReport(
+            user_id=user_id,
             resume_text_hash=resume_hash,
             jd_text_hash=jd_hash,
             match_score=match_score,
@@ -199,9 +198,19 @@ class AnalysisService:
     # ---------- list / detail ----------
 
     @staticmethod
-    def list_reports(db: Session) -> list[AnalysisReport]:
-        return db.query(AnalysisReport).order_by(AnalysisReport.created_at.desc()).limit(20).all()
+    def list_reports(db: Session, user_id: int) -> list[AnalysisReport]:
+        return (
+            db.query(AnalysisReport)
+            .filter(AnalysisReport.user_id == user_id)
+            .order_by(AnalysisReport.created_at.desc())
+            .limit(20)
+            .all()
+        )
 
     @staticmethod
-    def get_report(db: Session, report_id: int) -> AnalysisReport | None:
-        return db.query(AnalysisReport).filter(AnalysisReport.id == report_id).first()
+    def get_report(db: Session, report_id: int, user_id: int) -> AnalysisReport | None:
+        return (
+            db.query(AnalysisReport)
+            .filter(AnalysisReport.id == report_id, AnalysisReport.user_id == user_id)
+            .first()
+        )

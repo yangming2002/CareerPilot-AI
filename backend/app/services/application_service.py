@@ -10,8 +10,9 @@ class ApplicationService:
     COOLDOWN_STATUSES = {"已挂", "已放弃", "冷静期"}
 
     @staticmethod
-    def create(db: Session, data: ApplicationCreate) -> Application:
+    def create(db: Session, data: ApplicationCreate, user_id: int) -> Application:
         app = Application(
+            user_id=user_id,
             company=data.company,
             position=data.position,
             channel=data.channel,
@@ -34,16 +35,29 @@ class ApplicationService:
         return app
 
     @staticmethod
-    def list_all(db: Session) -> list[Application]:
-        return db.query(Application).order_by(Application.created_at.desc()).all()
+    def list_all(db: Session, user_id: int) -> list[Application]:
+        return (
+            db.query(Application)
+            .filter(Application.user_id == user_id)
+            .order_by(Application.created_at.desc())
+            .all()
+        )
 
     @staticmethod
-    def get(db: Session, app_id: int) -> Application | None:
-        return db.query(Application).filter(Application.id == app_id).first()
+    def get(db: Session, app_id: int, user_id: int) -> Application | None:
+        return (
+            db.query(Application)
+            .filter(Application.id == app_id, Application.user_id == user_id)
+            .first()
+        )
 
     @staticmethod
-    def update(db: Session, app_id: int, data: ApplicationUpdate) -> Application | None:
-        app = db.query(Application).filter(Application.id == app_id).first()
+    def update(db: Session, app_id: int, data: ApplicationUpdate, user_id: int) -> Application | None:
+        app = (
+            db.query(Application)
+            .filter(Application.id == app_id, Application.user_id == user_id)
+            .first()
+        )
         if not app:
             return None
         for field, value in data.model_dump(exclude_unset=True).items():
@@ -53,8 +67,12 @@ class ApplicationService:
         return app
 
     @staticmethod
-    def update_status(db: Session, app_id: int, data: StatusUpdate) -> Application | None:
-        app = db.query(Application).filter(Application.id == app_id).first()
+    def update_status(db: Session, app_id: int, data: StatusUpdate, user_id: int) -> Application | None:
+        app = (
+            db.query(Application)
+            .filter(Application.id == app_id, Application.user_id == user_id)
+            .first()
+        )
         if not app:
             return None
         old_status = app.status
@@ -70,8 +88,12 @@ class ApplicationService:
         return app
 
     @staticmethod
-    def delete(db: Session, app_id: int) -> bool:
-        app = db.query(Application).filter(Application.id == app_id).first()
+    def delete(db: Session, app_id: int, user_id: int) -> bool:
+        app = (
+            db.query(Application)
+            .filter(Application.id == app_id, Application.user_id == user_id)
+            .first()
+        )
         if not app:
             return False
         db.delete(app)
@@ -79,14 +101,22 @@ class ApplicationService:
         return True
 
     @staticmethod
-    def check_cooldown(db: Session, app_id: int) -> CooldownInfo | None:
-        app = db.query(Application).filter(Application.id == app_id).first()
+    def check_cooldown(db: Session, app_id: int, user_id: int) -> CooldownInfo | None:
+        app = (
+            db.query(Application)
+            .filter(Application.id == app_id, Application.user_id == user_id)
+            .first()
+        )
         if not app:
             return None
 
         same_company = (
             db.query(Application)
-            .filter(Application.company == app.company, Application.id != app.id)
+            .filter(
+                Application.user_id == user_id,
+                Application.company == app.company,
+                Application.id != app.id,
+            )
             .order_by(Application.created_at.desc())
             .first()
         )

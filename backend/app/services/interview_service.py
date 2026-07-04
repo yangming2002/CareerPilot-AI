@@ -6,9 +6,10 @@ from app.schemas.interview import InterviewCreate
 
 class InterviewService:
     @staticmethod
-    def create(db: Session, data: InterviewCreate) -> InterviewReview:
+    def create(db: Session, data: InterviewCreate, user_id: int) -> InterviewReview:
         coaching = InterviewService._generate_coaching(data)
         review = InterviewReview(
+            user_id=user_id,
             company=data.company,
             position=data.position,
             round=data.round,
@@ -24,8 +25,13 @@ class InterviewService:
         return review
 
     @staticmethod
-    def list_all(db: Session) -> list[InterviewReview]:
-        return db.query(InterviewReview).order_by(InterviewReview.created_at.desc()).all()
+    def list_all(db: Session, user_id: int) -> list[InterviewReview]:
+        return (
+            db.query(InterviewReview)
+            .filter(InterviewReview.user_id == user_id)
+            .order_by(InterviewReview.created_at.desc())
+            .all()
+        )
 
     @staticmethod
     def _generate_coaching(data: InterviewCreate) -> list[str]:

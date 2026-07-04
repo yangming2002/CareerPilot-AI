@@ -10,6 +10,9 @@ class Application(Base):
     __tablename__ = "applications"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("users.id"), nullable=True, index=True
+    )
     company: Mapped[str] = mapped_column(String(200), nullable=False)
     position: Mapped[str] = mapped_column(String(200), nullable=False)
     channel: Mapped[str | None] = mapped_column(String(100), default=None)
@@ -49,6 +52,9 @@ class AnalysisReport(Base):
     __tablename__ = "analysis_reports"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("users.id"), nullable=True, index=True
+    )
     resume_text_hash: Mapped[str] = mapped_column(String(64), nullable=False)
     jd_text_hash: Mapped[str] = mapped_column(String(64), nullable=False)
     match_score: Mapped[int] = mapped_column(Integer, default=0)
@@ -67,6 +73,9 @@ class InterviewReview(Base):
     __tablename__ = "interview_reviews"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("users.id"), nullable=True, index=True
+    )
     company: Mapped[str] = mapped_column(String(200), nullable=False)
     position: Mapped[str | None] = mapped_column(String(200), default=None)
     round: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -84,6 +93,9 @@ class WrittenTestReview(Base):
     __tablename__ = "written_test_reviews"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("users.id"), nullable=True, index=True
+    )
     company: Mapped[str] = mapped_column(String(200), nullable=False)
     position: Mapped[str | None] = mapped_column(String(200), default=None)
     test_date: Mapped[str | None] = mapped_column(String(20), default=None)

@@ -1,5 +1,32 @@
 import client from './client'
 
+// ---------- Auth ----------
+export interface TokenResponse {
+  access_token: string
+  token_type: string
+  user_id: number
+  username: string
+  email: string
+}
+
+export interface UserResponse {
+  id: number
+  email: string
+  username: string
+}
+
+export function login(email: string, password: string): Promise<TokenResponse> {
+  return client.post('/api/v1/auth/login', { email, password }).then((r) => r.data)
+}
+
+export function register(email: string, username: string, password: string): Promise<TokenResponse> {
+  return client.post('/api/v1/auth/register', { email, username, password }).then((r) => r.data)
+}
+
+export function getMe(): Promise<UserResponse> {
+  return client.get('/api/v1/auth/me').then((r) => r.data)
+}
+
 // ---------- Analysis ----------
 export interface JDMatchRequest {
   resume_text: string
@@ -44,8 +71,8 @@ export interface IntegrityCheckItem {
   detail: string
 }
 
-export function runJDMatch(data: JDMatchRequest): Promise<JDMatchResponse> {
-  return client.post('/api/v1/analysis/jd-match', data).then((r) => r.data)
+export function runJDMatch(data: JDMatchRequest, engine: 'rule' | 'llm' = 'rule'): Promise<JDMatchResponse> {
+  return client.post('/api/v1/analysis/jd-match', data, { params: { engine } }).then((r) => r.data)
 }
 
 // ---------- Applications ----------

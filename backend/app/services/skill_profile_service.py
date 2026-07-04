@@ -8,10 +8,18 @@ from app.schemas.skill_profile import SkillProfileResponse
 
 class SkillProfileService:
     @staticmethod
-    def get_profile(db: Session) -> SkillProfileResponse:
-        apps = db.query(Application).count()
-        interviews = db.query(InterviewReview).all()
-        written_tests = db.query(WrittenTestReview).all()
+    def get_profile(db: Session, user_id: int) -> SkillProfileResponse:
+        apps = db.query(Application).filter(Application.user_id == user_id).count()
+        interviews = (
+            db.query(InterviewReview)
+            .filter(InterviewReview.user_id == user_id)
+            .all()
+        )
+        written_tests = (
+            db.query(WrittenTestReview)
+            .filter(WrittenTestReview.user_id == user_id)
+            .all()
+        )
 
         interview_weak: list[str] = []
         for iw in interviews:
