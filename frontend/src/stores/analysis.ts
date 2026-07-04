@@ -114,6 +114,12 @@ export const useAnalysisStore = defineStore('analysis', () => {
     error.value = ''
   }
 
+  async function retestWithRevised() {
+    if (!report.value?.revised_resume || !jdText.value.trim()) return
+    resumeText.value = report.value.revised_resume
+    await analyze(engine.value)
+  }
+
   return {
     resumeText,
     jdText,
@@ -128,5 +134,6 @@ export const useAnalysisStore = defineStore('analysis', () => {
     analyze,
     cancelAndRunRule,
     reset,
+    retestWithRevised,
   }
 })

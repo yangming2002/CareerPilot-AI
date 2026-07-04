@@ -45,6 +45,7 @@ export interface JDMatchResponse {
   degraded: boolean
   degraded_reason: string
   progress_log: string[]
+  revised_resume: string
 }
 
 export interface SkillGap {
@@ -82,7 +83,7 @@ export function runJDMatch(
   return client.post('/api/v1/analysis/jd-match', data, {
     params: { engine },
     signal: options.signal,
-    timeout: engine === 'llm' ? 45000 : 15000,
+    timeout: engine === 'llm' ? 90000 : 15000,
   }).then((r) => r.data)
 }
 
@@ -225,5 +226,28 @@ export interface SkillProfile {
 
 export function getSkillProfile(): Promise<SkillProfile> {
   return client.get('/api/v1/skill-profile').then((r) => r.data)
+}
+
+// ---------- Resume Parsing ----------
+export interface ParsedResumeFields {
+  name: string
+  email: string
+  phone: string
+  education: Record<string, string>[]
+  skills: string[]
+  projects: Record<string, string>[]
+  internships: Record<string, string>[]
+  campus_experience: Record<string, string>[]
+  self_evaluation: string
+  raw_summary: string
+}
+
+export function uploadAndParseResume(file: File): Promise<ParsedResumeFields> {
+  const form = new FormData()
+  form.append('file', file)
+  return client.post('/api/v1/analysis/parse-resume', form, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    timeout: 60000,
+  }).then((r) => r.data)
 }
 

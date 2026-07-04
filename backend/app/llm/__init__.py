@@ -6,6 +6,6 @@ from app.llm.schemas import (
     LLMSkillGap,
     LLMSuggestion,
     ParsedJD,
-    ParsedResume,
+    ParsedResumeFields,
 )
 from app.llm import prompts

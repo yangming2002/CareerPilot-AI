@@ -27,22 +27,26 @@ async function submit() {
     .map((t) => t.trim())
     .filter(Boolean)
 
-  await store.create({
-    company: company.value.trim(),
-    position: position.value.trim() || undefined,
-    problem_type: problemType.value || undefined,
-    difficulty: difficulty.value,
-    solved: solved.value,
-    stuck_point: stuckPoint.value.trim() || undefined,
-    knowledge_tags: tags.length ? tags : undefined,
-  })
-  company.value = ''
-  position.value = ''
-  problemType.value = ''
-  solved.value = false
-  stuckPoint.value = ''
-  knowledgeTags.value = ''
-  ElMessage.success('笔试复盘已保存')
+  try {
+    await store.create({
+      company: company.value.trim(),
+      position: position.value.trim() || undefined,
+      problem_type: problemType.value || undefined,
+      difficulty: difficulty.value,
+      solved: solved.value,
+      stuck_point: stuckPoint.value.trim() || undefined,
+      knowledge_tags: tags.length ? tags : undefined,
+    })
+    company.value = ''
+    position.value = ''
+    problemType.value = ''
+    solved.value = false
+    stuckPoint.value = ''
+    knowledgeTags.value = ''
+    ElMessage.success('笔试复盘已保存')
+  } catch {
+    // Error toast already shown by interceptor
+  }
 }
 </script>
 

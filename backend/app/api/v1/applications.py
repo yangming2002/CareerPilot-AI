@@ -41,7 +41,7 @@ def get_application(
 ):
     app = ApplicationService.get(db, app_id, current_user.id)
     if not app:
-        raise HTTPException(status_code=404, detail="Application not found")
+        raise HTTPException(status_code=404, detail="投递记录不存在或无权访问")
     return app
 
 
@@ -54,7 +54,7 @@ def update_application(
 ):
     app = ApplicationService.update(db, app_id, body, current_user.id)
     if not app:
-        raise HTTPException(status_code=404, detail="Application not found")
+        raise HTTPException(status_code=404, detail="投递记录不存在或无权访问")
     return app
 
 
@@ -67,7 +67,7 @@ def update_status(
 ):
     app = ApplicationService.update_status(db, app_id, body, current_user.id)
     if not app:
-        raise HTTPException(status_code=404, detail="Application not found")
+        raise HTTPException(status_code=404, detail="投递记录不存在或无权访问")
     return app
 
 
@@ -79,7 +79,7 @@ def delete_application(
 ):
     ok = ApplicationService.delete(db, app_id, current_user.id)
     if not ok:
-        raise HTTPException(status_code=404, detail="Application not found")
+        raise HTTPException(status_code=404, detail="投递记录不存在或无权访问")
 
 
 @router.get("/applications/{app_id}/cooldown", response_model=CooldownInfo)
@@ -90,5 +90,5 @@ def check_cooldown(
 ):
     info = ApplicationService.check_cooldown(db, app_id, current_user.id)
     if not info:
-        raise HTTPException(status_code=404, detail="Application not found")
+        raise HTTPException(status_code=404, detail="投递记录不存在或无权访问")
     return info

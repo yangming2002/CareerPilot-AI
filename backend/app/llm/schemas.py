@@ -1,6 +1,22 @@
 from pydantic import BaseModel, Field
 
 
+# --- Structured Resume Fields ---
+
+class ParsedResumeFields(BaseModel):
+    """LLM-extracted structured resume fields."""
+    name: str = ""
+    email: str = ""
+    phone: str = ""
+    education: list[dict] = Field(default_factory=list)  # [{school, degree, major, year}]
+    skills: list[str] = Field(default_factory=list)
+    projects: list[dict] = Field(default_factory=list)   # [{name, role, description, highlights}]
+    internships: list[dict] = Field(default_factory=list)  # [{company, role, duration, description}]
+    campus_experience: list[dict] = Field(default_factory=list)  # [{org, role, description}]
+    self_evaluation: str = ""
+    raw_summary: str = ""
+
+
 # --- JD Match structured outputs ---
 
 class ParsedJD(BaseModel):
@@ -13,16 +29,6 @@ class ParsedJD(BaseModel):
     education: str = ""
     responsibilities: list[str] = Field(default_factory=list)
     keywords: list[str] = Field(default_factory=list)
-    summary: str = ""
-
-
-class ParsedResume(BaseModel):
-    """Structured resume extraction."""
-    years_of_experience: int | None = None
-    skills: list[str] = Field(default_factory=list)
-    projects: list[str] = Field(default_factory=list)
-    education: str = ""
-    companies: list[str] = Field(default_factory=list)
     summary: str = ""
 
 
@@ -60,6 +66,7 @@ class LLMMatchResult(BaseModel):
     keyword_coverage: list[dict] = Field(default_factory=list)
     suggestions: list[LLMSuggestion] = Field(default_factory=list)
     integrity_checks: list[LLMIntegrityCheck] = Field(default_factory=list)
+    revised_resume: str = ""
 
 
 # --- Interview Coaching structured outputs ---

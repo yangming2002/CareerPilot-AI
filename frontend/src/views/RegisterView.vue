@@ -14,8 +14,12 @@ const password2 = ref('')
 const loading = ref(false)
 
 async function handleRegister() {
-  if (!username.value || !email.value || !password.value) {
+  if (!username.value.trim() || !email.value.trim() || !password.value) {
     ElMessage.warning('请填写所有字段')
+    return
+  }
+  if (!email.value.includes('@')) {
+    ElMessage.warning('请输入有效的邮箱地址')
     return
   }
   if (password.value !== password2.value) {
@@ -31,9 +35,8 @@ async function handleRegister() {
     await auth.register(email.value, username.value, password.value)
     ElMessage.success('注册成功')
     router.push('/')
-  } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message : '注册失败'
-    ElMessage.error(msg)
+  } catch {
+    // Error toast already shown by axios interceptor
   } finally {
     loading.value = false
   }

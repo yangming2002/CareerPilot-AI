@@ -12,8 +12,12 @@ const password = ref('')
 const loading = ref(false)
 
 async function handleLogin() {
-  if (!email.value || !password.value) {
+  if (!email.value.trim() || !password.value) {
     ElMessage.warning('请填写邮箱和密码')
+    return
+  }
+  if (!email.value.includes('@')) {
+    ElMessage.warning('请输入有效的邮箱地址')
     return
   }
   loading.value = true
@@ -21,9 +25,8 @@ async function handleLogin() {
     await auth.login(email.value, password.value)
     ElMessage.success('登录成功')
     router.push('/')
-  } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message : '登录失败'
-    ElMessage.error(msg)
+  } catch {
+    // Error toast already shown by axios interceptor
   } finally {
     loading.value = false
   }

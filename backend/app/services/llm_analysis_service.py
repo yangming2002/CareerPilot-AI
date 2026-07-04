@@ -178,6 +178,7 @@ class LLMAnalysisService:
             suggestions=suggestions, integrity_checks=integrity_checks,
             jd_summary=result.jd_summary, resume_summary=result.resume_summary,
             progress_log=self._progress,
+            revised_resume=result.revised_resume,
         )
 
     def _build_degraded(

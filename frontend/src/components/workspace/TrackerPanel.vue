@@ -23,19 +23,23 @@ async function submit() {
     ElMessage.warning('请填写公司名称和岗位名称')
     return
   }
-  await store.create({
-    company: company.value.trim(),
-    position: position.value.trim(),
-    channel: channel.value.trim() || undefined,
-    status: status.value,
-    notes: notes.value.trim() || undefined,
-  })
-  company.value = ''
-  position.value = ''
-  channel.value = ''
-  status.value = '待投递'
-  notes.value = ''
-  ElMessage.success('投递记录已保存')
+  try {
+    await store.create({
+      company: company.value.trim(),
+      position: position.value.trim(),
+      channel: channel.value.trim() || undefined,
+      status: status.value,
+      notes: notes.value.trim() || undefined,
+    })
+    company.value = ''
+    position.value = ''
+    channel.value = ''
+    status.value = '待投递'
+    notes.value = ''
+    ElMessage.success('投递记录已保存')
+  } catch {
+    // Error toast already shown by interceptor
+  }
 }
 
 async function changeStatus(appId: number, newStatus: string) {

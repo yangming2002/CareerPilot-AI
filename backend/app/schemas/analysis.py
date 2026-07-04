@@ -2,8 +2,8 @@ from pydantic import BaseModel, Field
 
 
 class JDMatchRequest(BaseModel):
-    resume_text: str = Field(..., min_length=10, description="用户简历全文")
-    jd_text: str = Field(..., min_length=10, description="目标岗位 JD 全文")
+    resume_text: str = Field(..., min_length=1, description="用户简历全文")
+    jd_text: str = Field(..., min_length=1, description="目标岗位 JD 全文")
 
 
 class SuggestionItem(BaseModel):
@@ -45,6 +45,7 @@ class JDMatchResponse(BaseModel):
     degraded: bool = False
     degraded_reason: str = ""
     progress_log: list[str] = []
+    revised_resume: str = ""
 
 
 class ReportListItem(BaseModel):

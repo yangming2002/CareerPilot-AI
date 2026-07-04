@@ -1,11 +1,51 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+import { ElMessage } from 'element-plus'
 import { useAnalysisStore } from '@/stores/analysis'
 
 const store = useAnalysisStore()
+const editedResume = ref('')
+const showNotice = ref(false)
+
+// Show completion notification when report arrives
+watch(() => store.report, (r) => {
+  if (r) {
+    editedResume.value = r.revised_resume || ''
+    if (!r.degraded && store.engine === 'llm') {
+      ElMessage.success(`分析完成！匹配度 ${r.match_score} 分`)
+    }
+  }
+})
+
+function handleRetest() {
+  if (!editedResume.value.trim()) return
+  store.report!.revised_resume = editedResume.value
+  store.retestWithRevised()
+}
+
+function handleSave() {
+  const text = editedResume.value || store.report?.revised_resume || ''
+  if (!text) return
+  navigator.clipboard.writeText(text).then(() => {
+    ElMessage.success('改写后的简历已复制到剪贴板')
+  }).catch(() => {
+    ElMessage.info('请手动复制改写后的简历')
+  })
+}
 </script>
 
 <template>
   <section v-if="store.report" class="report-grid">
+    <!-- Completion Notice -->
+    <el-alert
+      v-if="!store.report.degraded && store.engine === 'llm'"
+      :title="`LLM 分析完成 | 匹配度 ${store.report.match_score} 分 | 耗时 ${store.elapsedSeconds} 秒`"
+      type="success"
+      :closable="true"
+      show-icon
+      style="grid-column: 1 / -1"
+    />
+
     <!-- Degraded Banner -->
     <el-alert
       v-if="store.report.degraded"
@@ -13,7 +53,7 @@ const store = useAnalysisStore()
       type="warning"
       :closable="false"
       show-icon
-      style="grid-column: 1 / -1; margin-bottom: 4px"
+      style="grid-column: 1 / -1"
     />
 
     <!-- Progress Log -->
@@ -32,24 +72,14 @@ const store = useAnalysisStore()
         :percentage="store.report.match_score"
         :color="store.report.match_score >= 70 ? '#22c55e' : store.report.match_score >= 40 ? '#f59e0b' : '#ef4444'"
       />
-      <p style="margin-top: 12px; color: #667085; line-height: 1.7">
-        {{ store.report.jd_summary }}
-      </p>
     </el-card>
 
     <!-- Skill Gaps -->
     <el-card shadow="never" class="panel-card">
       <template #header>技能缺口分析</template>
       <div v-if="store.report.skill_gaps.length">
-        <div
-          v-for="gap in store.report.skill_gaps"
-          :key="gap.skill"
-          class="gap-row"
-        >
-          <el-tag
-            :type="gap.user_has ? 'success' : 'danger'"
-            size="small"
-          >
+        <div v-for="gap in store.report.skill_gaps" :key="gap.skill" class="gap-row">
+          <el-tag :type="gap.user_has ? 'success' : 'danger'" size="small">
             {{ gap.user_has ? '已覆盖' : '缺失' }}
           </el-tag>
           <span class="gap-skill">{{ gap.skill }}</span>
@@ -63,11 +93,7 @@ const store = useAnalysisStore()
     <el-card shadow="never" class="panel-card">
       <template #header>优化建议</template>
       <div v-if="store.report.suggestions.length">
-        <div
-          v-for="(s, i) in store.report.suggestions"
-          :key="i"
-          class="suggestion-item"
-        >
+        <div v-for="(s, i) in store.report.suggestions" :key="i" class="suggestion-item">
           <div class="suggestion-header">
             <el-tag
               size="small"
@@ -102,6 +128,34 @@ const store = useAnalysisStore()
         </el-alert>
       </div>
       <p v-else class="no-data">完整性检查通过</p>
+    </el-card>
+
+    <!-- Revised Resume -->
+    <el-card v-if="store.report.revised_resume" shadow="never" class="panel-card" style="grid-column: 1 / -1">
+      <template #header>
+        <div class="revised-header">
+          <span>改写后的简历</span>
+          <el-tag size="small" type="success">仅优化表达，未编造经历</el-tag>
+        </div>
+      </template>
+      <p class="revised-hint">
+        以下是基于可信建议改写后的简历。你可以手动编辑，然后重新评估匹配度。
+      </p>
+      <el-input
+        v-model="editedResume"
+        type="textarea"
+        :rows="14"
+        resize="vertical"
+        placeholder="改写后的简历..."
+      />
+      <div class="revised-actions">
+        <el-button type="primary" :loading="store.loading" @click="handleRetest">
+          重新评估匹配度
+        </el-button>
+        <el-button @click="handleSave">
+          保存到剪贴板
+        </el-button>
+      </div>
     </el-card>
   </section>
 </template>
@@ -189,6 +243,25 @@ const store = useAnalysisStore()
   color: #475467;
   font-size: 13px;
   line-height: 2;
+}
+
+.revised-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.revised-hint {
+  margin: 0 0 12px;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.revised-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .no-data {

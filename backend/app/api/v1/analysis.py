@@ -1,15 +1,20 @@
 import logging
+import tempfile
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.deps import get_current_user
 from app.core.errors import InputInsufficientError, LLMConnectionError
+from app.llm.client import get_llm_client
+from app.llm.prompts import RESUME_PARSE_SYSTEM, RESUME_PARSE_USER
+from app.llm.schemas import ParsedResumeFields
 from app.models.user import User
 from app.schemas.analysis import JDMatchRequest, JDMatchResponse, ReportListItem
 from app.services.analysis_service import AnalysisService
 from app.services.llm_analysis_service import LLMAnalysisService
+from app.utils.file_parser import extract_text
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -60,7 +65,7 @@ def get_report(
 ):
     report = AnalysisService.get_report(db, report_id, current_user.id)
     if not report:
-        raise HTTPException(status_code=404, detail="Report not found")
+        raise HTTPException(status_code=404, detail="分析报告不存在或无权访问")
     return JDMatchResponse(
         id=report.id,
         match_score=report.match_score,
@@ -71,3 +76,54 @@ def get_report(
         jd_summary=report.raw_jd_summary or "",
         resume_summary=report.raw_resume_summary or "",
     )
+
+
+@router.post("/analysis/parse-resume", response_model=ParsedResumeFields)
+async def parse_resume(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+):
+    """Upload a PDF/DOCX/TXT resume and get structured fields back."""
+    ALLOWED = {".pdf", ".docx", ".doc", ".txt", ".md"}
+    filename = file.filename or ""
+    ext = "." + filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
+    if ext not in ALLOWED:
+        raise HTTPException(status_code=400, detail=f"不支持的文件格式 {ext}，请上传 PDF、DOCX 或 TXT 文件。")
+
+    try:
+        content = await file.read()
+        if len(content) > 5 * 1024 * 1024:
+            raise HTTPException(status_code=400, detail="文件过大，请上传小于 5MB 的简历文件。")
+
+        with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
+            tmp.write(content)
+            tmp_path = tmp.name
+
+        raw_text = extract_text(tmp_path, filename)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=422, detail="文件解析失败，请确认文件未损坏，或尝试直接粘贴简历内容。")
+    finally:
+        import os
+        if 'tmp_path' in locals():
+            os.unlink(tmp_path)
+
+    if len(raw_text.strip()) < 20:
+        raise HTTPException(status_code=400, detail="文件解析后内容过短，可能文件为空白或仅为图片。请尝试直接粘贴简历内容。")
+
+    # Parse with LLM
+    llm = get_llm_client()
+    try:
+        fields = llm.complete_structured(
+            system=RESUME_PARSE_SYSTEM,
+            user=RESUME_PARSE_USER.format(resume_text=raw_text[:6000]),
+            output_schema=ParsedResumeFields,
+        )
+        if fields is None:
+            raise Exception("LLM parsing returned None")
+        return fields
+    except Exception as e:
+        logger.exception("Resume parsing failed")
+        # Return raw text as fallback
+        return ParsedResumeFields(raw_summary=raw_text[:500])

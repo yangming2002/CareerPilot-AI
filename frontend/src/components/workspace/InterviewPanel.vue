@@ -19,18 +19,22 @@ async function submit() {
     ElMessage.warning('请填写公司名称')
     return
   }
-  await store.create({
-    company: company.value.trim(),
-    position: position.value.trim() || undefined,
-    round: round.value,
-    weak_points: weakPoints.value.trim() || undefined,
-    result: result.value || undefined,
-  })
-  company.value = ''
-  position.value = ''
-  weakPoints.value = ''
-  result.value = ''
-  ElMessage.success('面试复盘已保存')
+  try {
+    await store.create({
+      company: company.value.trim(),
+      position: position.value.trim() || undefined,
+      round: round.value,
+      weak_points: weakPoints.value.trim() || undefined,
+      result: result.value || undefined,
+    })
+    company.value = ''
+    position.value = ''
+    weakPoints.value = ''
+    result.value = ''
+    ElMessage.success('面试复盘已保存')
+  } catch {
+    // Error toast already shown by interceptor
+  }
 }
 </script>
 

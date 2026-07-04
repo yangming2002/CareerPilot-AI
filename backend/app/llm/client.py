@@ -18,7 +18,7 @@ T = TypeVar("T")
 @dataclass
 class LLMConfig:
     model: str = OPENAI_MODEL
-    max_tokens: int = 4096
+    max_tokens: int = 2048
     temperature: float = 0.3
     max_retries: int = LLM_MAX_RETRIES
     timeout: float = LLM_TIMEOUT
