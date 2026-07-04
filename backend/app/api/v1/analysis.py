@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.deps import get_current_user
+from app.core.errors import InputInsufficientError, LLMConnectionError
 from app.models.user import User
 from app.schemas.analysis import JDMatchRequest, JDMatchResponse, ReportListItem
 from app.services.analysis_service import AnalysisService
@@ -24,12 +25,22 @@ def jd_match(
     if engine == "llm":
         try:
             return LLMAnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
+        except InputInsufficientError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        except LLMConnectionError:
+            # Auto-degrade to rule engine
+            result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
+            result.degraded = True
+            result.degraded_reason = "LLM 服务暂时不可用，已自动切换为规则引擎分析"
+            return result
         except Exception as e:
-            logger.exception("LLM analysis failed")
-            raise HTTPException(
-                status_code=502,
-                detail=f"LLM analysis failed: {e}. Set engine=rule to use the rule-based engine.",
-            )
+            logger.exception("LLM analysis failed unexpectedly")
+            # Also degrade on unknown errors
+            result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
+            result.degraded = True
+            result.degraded_reason = f"LLM 分析异常（{e}），已自动切换为规则引擎分析"
+            return result
+
     return AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
 
 

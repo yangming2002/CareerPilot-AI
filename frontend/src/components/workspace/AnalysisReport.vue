@@ -6,6 +6,16 @@ const store = useAnalysisStore()
 
 <template>
   <section v-if="store.report" class="report-grid">
+    <!-- Degraded Banner -->
+    <el-alert
+      v-if="store.report.degraded"
+      :title="store.report.degraded_reason || 'LLM 分析降级'"
+      type="warning"
+      :closable="false"
+      show-icon
+      style="grid-column: 1 / -1; margin-bottom: 4px"
+    />
+
     <!-- Match Score -->
     <el-card shadow="never" class="panel-card score-card">
       <template #header>匹配得分</template>

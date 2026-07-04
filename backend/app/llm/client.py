@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass
 from typing import TypeVar
 
-from openai import OpenAI
+from openai import APIError, APITimeoutError, APIConnectionError, OpenAI
 
 T = TypeVar("T")
 
@@ -13,12 +13,13 @@ class LLMConfig:
     max_tokens: int = 4096
     temperature: float = 0.3
     max_retries: int = 2
+    timeout: float = 30.0
 
 
 class LLMClient:
     def __init__(self, config: LLMConfig | None = None):
         self.config = config or LLMConfig()
-        self._client = OpenAI()
+        self._client = OpenAI(timeout=self.config.timeout)
 
     @property
     def client(self) -> OpenAI:
@@ -38,14 +39,16 @@ class LLMClient:
                     ],
                 )
                 return response.choices[0].message.content or ""
+            except (APITimeoutError, APIConnectionError) as e:
+                raise  # Don't retry on network errors, let caller handle
             except Exception as e:
                 last_error = e
                 if attempt < self.config.max_retries:
                     continue
         raise last_error  # type: ignore[misc]
 
-    def complete_structured(self, system: str, user: str, output_schema: type[T]) -> T | None:
-        """Use OpenAI structured output (JSON mode) to get typed output."""
+    def complete_structured(self, system: str, user: str, output_schema: type[T]) -> T:
+        """Use OpenAI structured output (JSON mode). Raises on failure."""
 
         schema_json = output_schema.model_json_schema()
         schema_str = json.dumps(schema_json, ensure_ascii=False, indent=2)
@@ -56,7 +59,6 @@ class LLMClient:
             + "Reply ONLY with the JSON object, no markdown fences, no extra text."
         )
 
-        last_error: Exception | None = None
         for attempt in range(self.config.max_retries + 1):
             try:
                 response = self._client.chat.completions.create(
@@ -74,12 +76,19 @@ class LLMClient:
                 data = json.loads(raw)
                 return output_schema.model_validate(data)
 
-            except Exception as e:
-                last_error = e
+            except (APITimeoutError, APIConnectionError):
+                raise  # Network errors — don't retry, let caller degrade
+
+            except APIError as e:
                 if attempt < self.config.max_retries:
                     continue
+                raise
 
-        return None
+            except Exception as e:
+                # Schema validation or JSON parse error
+                if attempt < self.config.max_retries:
+                    continue
+                raise
 
 
 _llm_client: LLMClient | None = None

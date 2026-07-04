@@ -42,6 +42,8 @@ export interface JDMatchResponse {
   integrity_checks: IntegrityCheckItem[]
   jd_summary: string
   resume_summary: string
+  degraded: boolean
+  degraded_reason: string
 }
 
 export interface SkillGap {

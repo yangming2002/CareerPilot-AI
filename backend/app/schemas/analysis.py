@@ -42,6 +42,8 @@ class JDMatchResponse(BaseModel):
     integrity_checks: list[IntegrityCheckItem] = []
     jd_summary: str = ""
     resume_summary: str = ""
+    degraded: bool = False
+    degraded_reason: str = ""
 
 
 class ReportListItem(BaseModel):
