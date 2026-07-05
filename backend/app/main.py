@@ -12,6 +12,7 @@ from app.core.database import Base, engine
 # Ensure all models are imported for table creation
 import app.models.models  # noqa: F401
 import app.models.user  # noqa: F401
+import app.memory.models  # noqa: F401
 
 
 @asynccontextmanager

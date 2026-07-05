@@ -6,33 +6,25 @@ const store = useAnalysisStore()
 </script>
 
 <template>
-  <el-card shadow="never" class="panel-card">
-    <template #header>
-      <div class="card-header">
-        <span>JD 匹配分析</span>
-        <div class="header-right">
-          <el-radio-group v-model="store.engine" size="small" :disabled="store.loading">
-            <el-radio-button label="rule">规则引擎</el-radio-button>
-            <el-radio-button label="llm">
-              <span class="llm-label">
-                LLM
-                <el-tag size="small" type="warning" effect="dark" class="beta-tag">BETA</el-tag>
-              </span>
-            </el-radio-button>
-          </el-radio-group>
-        </div>
-      </div>
-    </template>
+  <div>
+    <div class="engine-bar">
+      <el-radio-group v-model="store.engine" size="small" :disabled="store.loading">
+        <el-radio-button label="rule">规则引擎</el-radio-button>
+        <el-radio-button label="llm">LLM</el-radio-button>
+        <el-radio-button label="graph">
+          Agent
+          <el-tag size="small" type="warning" effect="dark" class="beta-tag">NEW</el-tag>
+        </el-radio-button>
+      </el-radio-group>
+    </div>
 
     <el-input
       v-model="store.jdText"
       type="textarea"
-      :rows="12"
+      :rows="10"
       resize="none"
       :disabled="store.loading"
-      :placeholder="store.engine === 'llm'
-        ? '粘贴 JD。LLM 会深度解析岗位要求、技能权重和职责描述。'
-        : '粘贴 JD。规则引擎会通过关键词白名单和正则进行快速匹配。'"
+      :placeholder="store.engine === 'rule' ? '粘贴 JD。规则引擎通过关键词白名单和正则快速匹配。' : '粘贴 JD。' + (store.engine === 'graph' ? 'Agent 工作流将逐步解析、匹配、校验。' : 'LLM 深度解析岗位要求和技能权重。')"
     />
 
     <div v-if="store.loading" class="analysis-status">
@@ -42,19 +34,16 @@ const store = useAnalysisStore()
         <strong>{{ store.elapsedSeconds }}s</strong>
       </div>
       <el-progress
-        :percentage="Math.min(100, Math.round((store.elapsedSeconds / (store.engine === 'llm' ? 45 : 15)) * 100))"
+        :percentage="Math.min(100, Math.round((store.elapsedSeconds / (store.engine === 'rule' ? 15 : 60)) * 100))"
         :status="store.isVerySlowLLM ? 'warning' : undefined"
       />
-      <el-button
-        v-if="store.engine === 'llm' && store.isSlowLLM"
-        size="small"
-        plain
-        type="warning"
-        class="fallback-button"
-        @click="store.cancelAndRunRule()"
-      >
-        停止等待，改用规则引擎
-      </el-button>
+      <div v-if="store.progressSteps.length" class="progress-steps">
+        <div v-for="(step, i) in store.progressSteps.slice(-5)" :key="i" class="progress-step">
+          <el-icon v-if="i < store.progressSteps.length - 1 || store.progressDone" color="#22c55e"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/></svg></el-icon>
+          <el-icon v-else class="is-loading" color="#2563eb"><Loading /></el-icon>
+          <span>{{ step }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="button-row">
@@ -65,18 +54,9 @@ const store = useAnalysisStore()
         :disabled="store.loading"
         @click="store.analyze()"
       >
-        {{ store.engine === 'llm' ? 'LLM 深度分析' : '规则匹配分析' }}
+        {{ store.engine === 'graph' ? 'Agent 工作流分析' : store.engine === 'llm' ? 'LLM 深度分析' : '规则匹配分析' }}
       </el-button>
     </div>
-
-    <el-alert
-      v-if="store.engine === 'llm' && !store.loading"
-      title="LLM 模式可能受网络和模型响应速度影响；如需快速结果，可切换规则引擎。"
-      type="info"
-      :closable="false"
-      show-icon
-      style="margin-top: 12px"
-    />
 
     <el-alert
       v-if="store.error"
@@ -86,37 +66,21 @@ const store = useAnalysisStore()
       :closable="false"
       style="margin-top: 12px"
     />
-  </el-card>
+  </div>
 </template>
 
 <style scoped>
-.panel-card {
-  border: 1px solid #dbe3ef;
-  border-radius: 8px;
-}
-
-.card-header {
+.engine-bar {
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-.llm-label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
 .beta-tag {
   padding: 0 4px;
   font-size: 10px;
   line-height: 16px;
+  margin-left: 4px;
 }
 
 .analysis-status {
@@ -143,8 +107,19 @@ const store = useAnalysisStore()
   font-variant-numeric: tabular-nums;
 }
 
-.fallback-button {
+.progress-steps {
   margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 12px;
+  color: #6b7280;
 }
 
 .button-row {

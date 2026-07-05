@@ -45,7 +45,10 @@ async function handleUpload(file: File) {
     }
     if (result.projects.length) {
       parts.push('\n项目经历:')
-      result.projects.forEach(p => parts.push(`  ${p.name} | ${p.role || ''}\n  ${p.description || ''}`))
+      result.projects.forEach(p => {
+        parts.push(`  ${p.name}${p.role ? ' | ' + p.role : ''}`)
+        if (p.description) parts.push(`  ${p.description}`)
+      })
     }
     if (result.campus_experience.length) {
       parts.push('\n校园经历:')
@@ -123,7 +126,10 @@ function clearFields() {
           <div v-for="(e, i) in parsedFields.education" :key="i">{{ e.school }} | {{ e.degree }} | {{ e.major }} {{ e.year ? '| ' + e.year : '' }}</div>
         </div>
         <div v-if="f.key === 'projects' && parsedFields.projects.length" class="mini-list">
-          <div v-for="(p, i) in parsedFields.projects" :key="i">{{ p.name }}{{ p.role ? ' | ' + p.role : '' }}</div>
+          <div v-for="(p, i) in parsedFields.projects" :key="i">
+            <strong>{{ p.name }}</strong>{{ p.role ? ' | ' + p.role : '' }}
+            <div v-if="p.description" class="project-desc">{{ p.description }}</div>
+          </div>
         </div>
         <div v-if="f.key === 'internships' && parsedFields.internships.length" class="mini-list">
           <div v-for="(i, j) in parsedFields.internships" :key="j">{{ i.company }} | {{ i.role }} {{ i.duration ? '| ' + i.duration : '' }}</div>
@@ -218,5 +224,14 @@ function clearFields() {
   font-size: 12px;
   color: #6b7280;
   line-height: 1.6;
+}
+
+.project-desc {
+  margin-top: 2px;
+  padding-left: 8px;
+  border-left: 2px solid #d1d5db;
+  white-space: pre-line;
+  color: #9ca3af;
+  font-size: 11px;
 }
 </style>

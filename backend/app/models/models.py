@@ -64,6 +64,7 @@ class AnalysisReport(Base):
     integrity_checks: Mapped[list | None] = mapped_column(JSON, default=None)
     raw_jd_summary: Mapped[str | None] = mapped_column(Text, default=None)
     raw_resume_summary: Mapped[str | None] = mapped_column(Text, default=None)
+    revised_resume: Mapped[str | None] = mapped_column(Text, default=None)
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime, server_default=func.now()
     )

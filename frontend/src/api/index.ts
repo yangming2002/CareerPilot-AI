@@ -46,6 +46,16 @@ export interface JDMatchResponse {
   degraded_reason: string
   progress_log: string[]
   revised_resume: string
+  session_id: string
+}
+
+export interface ProgressData {
+  steps: string[]
+  done: boolean
+}
+
+export function getProgress(sessionId: string): Promise<ProgressData> {
+  return client.get(`/api/v1/analysis/progress/${sessionId}`).then((r) => r.data)
 }
 
 export interface SkillGap {
@@ -77,13 +87,13 @@ export interface IntegrityCheckItem {
 
 export function runJDMatch(
   data: JDMatchRequest,
-  engine: 'rule' | 'llm' = 'rule',
+  engine: 'rule' | 'llm' | 'graph' = 'rule',
   options: { signal?: AbortSignal } = {},
 ): Promise<JDMatchResponse> {
   return client.post('/api/v1/analysis/jd-match', data, {
     params: { engine },
     signal: options.signal,
-    timeout: engine === 'llm' ? 90000 : 15000,
+    timeout: engine === 'rule' ? 15000 : 90000,
   }).then((r) => r.data)
 }
 
@@ -235,7 +245,7 @@ export interface ParsedResumeFields {
   phone: string
   education: Record<string, string>[]
   skills: string[]
-  projects: Record<string, string>[]
+  projects: { name: string; role: string; description: string }[]
   internships: Record<string, string>[]
   campus_experience: Record<string, string>[]
   self_evaluation: string

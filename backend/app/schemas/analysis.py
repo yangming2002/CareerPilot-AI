@@ -46,6 +46,7 @@ class JDMatchResponse(BaseModel):
     degraded_reason: str = ""
     progress_log: list[str] = []
     revised_resume: str = ""
+    session_id: str = ""
 
 
 class ReportListItem(BaseModel):

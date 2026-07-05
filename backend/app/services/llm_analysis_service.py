@@ -167,6 +167,7 @@ class LLMAnalysisService:
             integrity_checks=[i.model_dump() for i in integrity_checks],
             raw_jd_summary=result.jd_summary,
             raw_resume_summary=result.resume_summary,
+            revised_resume=result.revised_resume,
         )
         db.add(report)
         db.commit()

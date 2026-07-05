@@ -7,7 +7,6 @@ const client = axios.create({
   headers: { 'Content-Type': 'application/json' },
 })
 
-// Request interceptor: attach token
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -16,22 +15,18 @@ client.interceptors.request.use((config) => {
   return config
 })
 
-// Response interceptor: unified error handling
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    // 401: clear token and redirect to login
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       const path = window.location.pathname
       if (path !== '/login' && path !== '/register') {
         window.location.href = '/login'
+        return Promise.reject(error)
       }
-      // Don't show toast for 401 — the redirect is enough
-      return Promise.reject(error)
     }
 
-    // Build message from server detail
     let msg = ''
     const detail = error.response?.data?.detail
 

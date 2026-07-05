@@ -2,10 +2,11 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import {
   type JDMatchResponse,
+  getProgress,
   runJDMatch,
 } from '@/api'
 
-type AnalysisEngine = 'rule' | 'llm'
+type AnalysisEngine = 'rule' | 'llm' | 'graph'
 
 export const useAnalysisStore = defineStore('analysis', () => {
   const resumeText = ref('')
@@ -15,8 +16,11 @@ export const useAnalysisStore = defineStore('analysis', () => {
   const error = ref('')
   const engine = ref<AnalysisEngine>('rule')
   const elapsedSeconds = ref(0)
+  const progressSteps = ref<string[]>([])
+  const progressDone = ref(false)
 
   let timer: ReturnType<typeof setInterval> | null = null
+  let progressPoller: ReturnType<typeof setInterval> | null = null
   let currentController: AbortController | null = null
   let activeRequestId = 0
 
@@ -25,6 +29,11 @@ export const useAnalysisStore = defineStore('analysis', () => {
   const statusMessage = computed(() => {
     if (!loading.value) return ''
     if (engine.value === 'rule') return '规则引擎正在快速分析，通常几秒内完成。'
+    if (engine.value === 'graph' && progressSteps.value.length) {
+      const last = progressSteps.value[progressSteps.value.length - 1]
+      return last || 'Agent 工作流正在分析...'
+    }
+    if (engine.value === 'graph') return 'Agent 工作流正在逐步分析...'
     if (elapsedSeconds.value < 10) return 'LLM 正在深度分析 JD 和简历，请稍等。'
     if (elapsedSeconds.value < 25) return 'LLM 还在生成结构化报告，网络或模型繁忙时会变慢。'
     return 'LLM 已等待较久，可以继续等，也可以先切换到规则引擎拿到快速结果。'
@@ -32,10 +41,36 @@ export const useAnalysisStore = defineStore('analysis', () => {
 
   function startTimer() {
     elapsedSeconds.value = 0
+    progressSteps.value = []
+    progressDone.value = false
     if (timer) window.clearInterval(timer)
     timer = window.setInterval(() => {
       elapsedSeconds.value += 1
     }, 1000)
+  }
+
+  function startProgressPolling(sessionId: string) {
+    if (progressPoller) window.clearInterval(progressPoller)
+    progressPoller = window.setInterval(async () => {
+      try {
+        const data = await getProgress(sessionId)
+        progressSteps.value = data.steps
+        progressDone.value = data.done
+        if (data.done && progressPoller) {
+          window.clearInterval(progressPoller)
+          progressPoller = null
+        }
+      } catch {
+        // Session not ready yet, keep polling
+      }
+    }, 500)
+  }
+
+  function stopProgressPolling() {
+    if (progressPoller) {
+      window.clearInterval(progressPoller)
+      progressPoller = null
+    }
   }
 
   function stopTimer() {
@@ -43,6 +78,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
       window.clearInterval(timer)
       timer = null
     }
+    stopProgressPolling()
   }
 
   function getErrorMessage(e: unknown, selectedEngine: AnalysisEngine) {
@@ -86,6 +122,10 @@ export const useAnalysisStore = defineStore('analysis', () => {
       )
       if (requestId !== activeRequestId) return
       report.value = result
+      if (result.progress_log?.length) {
+        progressSteps.value = result.progress_log
+        progressDone.value = true
+      }
     } catch (e: unknown) {
       if (requestId !== activeRequestId) return
       const msg = getErrorMessage(e, selectedEngine)
@@ -128,6 +168,8 @@ export const useAnalysisStore = defineStore('analysis', () => {
     error,
     engine,
     elapsedSeconds,
+    progressSteps,
+    progressDone,
     isSlowLLM,
     isVerySlowLLM,
     statusMessage,

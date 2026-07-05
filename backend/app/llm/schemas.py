@@ -10,7 +10,7 @@ class ParsedResumeFields(BaseModel):
     phone: str = ""
     education: list[dict] = Field(default_factory=list)  # [{school, degree, major, year}]
     skills: list[str] = Field(default_factory=list)
-    projects: list[dict] = Field(default_factory=list)   # [{name, role, description, highlights}]
+    projects: list[dict] = Field(default_factory=list)   # [{name, role, description}] — description must include ALL details, highlights, and bullet points
     internships: list[dict] = Field(default_factory=list)  # [{company, role, duration, description}]
     campus_experience: list[dict] = Field(default_factory=list)  # [{org, role, description}]
     self_evaluation: str = ""
