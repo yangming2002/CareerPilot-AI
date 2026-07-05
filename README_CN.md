@@ -32,8 +32,13 @@ npm install && npm run dev
 ### Docker 部署
 
 ```bash
-cp backend/.env.example backend/.env
-docker compose up -d
+cp backend/.env.example backend/.env   # 填入 API Key
+
+# 拉预构建镜像（推荐）
+docker compose pull && docker compose up -d
+
+# 或本地构建
+docker compose up --build -d
 ```
 
 访问 http://localhost。
