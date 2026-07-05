@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
+// In dev mode, Vite proxies /api/ to localhost:8001
+// In production (Docker), nginx proxies /api/ to backend:8001
+// Use relative URL so both work without config changes
 const client = axios.create({
-  baseURL: 'http://localhost:8001',
+  baseURL: import.meta.env.PROD ? '' : 'http://localhost:8001',
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
 })

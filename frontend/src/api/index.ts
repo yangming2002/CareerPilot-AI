@@ -49,6 +49,9 @@ export interface JDMatchResponse {
   progress_log: string[]
   revised_resume: string
   session_id: string
+  nlp_score: number
+  tfidf_score: number
+  keyword_score: number
 }
 
 export interface ProgressData {

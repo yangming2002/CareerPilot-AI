@@ -125,7 +125,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
       const { data } = await client.post('/api/v1/analysis/rewrite-resume', {
         resume_text: resumeText.value,
         jd_text: jdText.value,
-      }, { params: { match_score: report.value.match_score }, timeout: 60000 })
+      }, { params: { match_score: report.value.match_score, report_id: report.value.id || 0 }, timeout: 60000 })
       if (data.revised_resume) {
         report.value = { ...report.value, revised_resume: data.revised_resume } as any
         // Trigger rewrite success dialog

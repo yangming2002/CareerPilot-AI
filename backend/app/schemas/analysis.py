@@ -49,6 +49,9 @@ class JDMatchResponse(BaseModel):
     progress_log: list[str] = []
     revised_resume: str = ""
     session_id: str = ""
+    nlp_score: float = 0.0
+    tfidf_score: float = 0.0
+    keyword_score: float = 0.0
 
 
 class ReportListItem(BaseModel):

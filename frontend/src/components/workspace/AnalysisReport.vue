@@ -5,40 +5,49 @@ import { useAnalysisStore } from '@/stores/analysis'
 
 const store = useAnalysisStore()
 const editedResume = ref('')
+const shownAnalysisDialog = ref(false)
 
-// Show completion dialog when report arrives
+// Show completion dialog only when analysis first completes (not on resume rewrite)
 watch(() => store.report, (r) => {
   if (r) {
     editedResume.value = r.revised_resume || ''
-    const gaps = r.skill_gaps || []
-    const covered = gaps.filter(g => g.user_has).length
-    const total = gaps.length
-    // Parse backend elapsed time from progress_log
-    let backendTime = ''
-    const log = r.progress_log || []
-    for (let i = log.length - 1; i >= 0; i--) {
-      const m = log[i].match(/\(([\d.]+)s\)/)
-      if (m) { backendTime = m[1] + 's'; break }
+
+    // Only show analysis dialog once per analysis
+    if (!shownAnalysisDialog.value) {
+      shownAnalysisDialog.value = true
+      const gaps = r.skill_gaps || []
+      const covered = gaps.filter(g => g.user_has).length
+      const total = gaps.length
+      let backendTime = ''
+      const log = r.progress_log || []
+      for (let i = log.length - 1; i >= 0; i--) {
+        const m = log[i].match(/\(([\d.]+)s\)/)
+        if (m) { backendTime = m[1] + 's'; break }
+      }
+
+      const msg = r.degraded
+        ? `<p style='color:#f59e0b'>⚠ ${r.degraded_reason || '分析降级完成'}</p>`
+        : `<p>匹配度 <b style='color:#2563eb;font-size:24px'>${r.match_score}</b> 分</p>
+           <p>技能覆盖 <b>${covered}/${total}</b> | 优化建议 <b>${(r.suggestions||[]).length}</b> 条</p>
+           <p style='color:#667085;font-size:13px'>耗时 ${backendTime || (store.elapsedSeconds + 's')}</p>`
+
+      ElMessageBox.alert(msg, r.degraded ? '分析完成（降级）' : '分析完成', {
+        dangerouslyUseHTMLString: true,
+        confirmButtonText: '查看详情',
+        type: r.degraded ? 'warning' : 'success',
+      }).then(() => {
+        setTimeout(() => {
+          const el = document.querySelector('.report-grid')
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 200)
+      }).catch(() => {})
     }
-
-    const msg = r.degraded
-      ? `<p style='color:#f59e0b'>⚠ ${r.degraded_reason || '分析降级完成'}</p>`
-      : `<p>匹配度 <b style='color:#2563eb;font-size:24px'>${r.match_score}</b> 分</p>
-         <p>技能覆盖 <b>${covered}/${total}</b> | 优化建议 <b>${(r.suggestions||[]).length}</b> 条</p>
-         <p style='color:#667085;font-size:13px'>耗时 ${backendTime || (store.elapsedSeconds + 's')}</p>
-         ${r.revised_resume ? '<p style=\'color:#22c55e\'>✓ 已生成改写后的简历</p>' : ''}`
-
-    ElMessageBox.alert(msg, r.degraded ? '分析完成（降级）' : '分析完成', {
-      dangerouslyUseHTMLString: true,
-      confirmButtonText: '查看详情',
-      type: r.degraded ? 'warning' : 'success',
-    }).then(() => {
-      setTimeout(() => {
-        const el = document.querySelector('.report-grid')
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 200)
-    }).catch(() => {})
   }
+})
+
+// Reset dialog flag when analysis starts loading
+watch(() => store.loading, (l) => {
+  if (l) shownAnalysisDialog.value = false
 })
 
 function handleRetest() {
@@ -62,7 +71,8 @@ async function handleExport(fmt: 'md' | 'pdf') {
   if (!id) return
   const token = localStorage.getItem('token')
   try {
-    const resp = await fetch(`http://localhost:8001/api/v1/analysis/export-${fmt}/${id}`, {
+    const base = import.meta.env.PROD ? '' : 'http://localhost:8001'
+    const resp = await fetch(`${base}/api/v1/analysis/export-${fmt}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     if (!resp.ok) {
@@ -117,7 +127,26 @@ async function handleExport(fmt: 'md' | 'pdf') {
     <!-- Match Score -->
     <el-card shadow="never" class="panel-card score-card">
       <template #header>匹配得分</template>
-      <div class="score-number">{{ store.report.match_score }}</div>
+      <div class="score-row">
+        <div class="score-main">
+          <div class="score-number">{{ store.report.match_score }}</div>
+          <span class="score-label">LLM 综合评分</span>
+        </div>
+        <div class="score-refs" v-if="store.report.nlp_score">
+          <div class="ref-item">
+            <span class="ref-val">{{ store.report.nlp_score }}</span>
+            <span class="ref-label">NLP 客观分</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-val">{{ store.report.tfidf_score }}</span>
+            <span class="ref-label">TF-IDF 相似度</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-val">{{ store.report.keyword_score }}</span>
+            <span class="ref-label">关键词覆盖率</span>
+          </div>
+        </div>
+      </div>
       <el-progress
         :percentage="store.report.match_score"
         :color="store.report.match_score >= 70 ? '#22c55e' : store.report.match_score >= 40 ? '#f59e0b' : '#ef4444'"
@@ -251,12 +280,56 @@ async function handleExport(fmt: 'md' | 'pdf') {
   grid-column: 1 / -1;
 }
 
+.score-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 16px;
+}
+
+.score-main {
+  text-align: center;
+}
+
 .score-number {
-  margin-bottom: 8px;
   color: #2563eb;
   font-size: 56px;
   font-weight: 800;
   line-height: 1;
+}
+
+.score-label {
+  display: block;
+  margin-top: 4px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.score-refs {
+  display: flex;
+  gap: 24px;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.ref-item {
+  text-align: center;
+}
+
+.ref-val {
+  display: block;
+  color: #374151;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ref-label {
+  display: block;
+  margin-top: 2px;
+  color: #9ca3af;
+  font-size: 11px;
 }
 
 .gap-row {

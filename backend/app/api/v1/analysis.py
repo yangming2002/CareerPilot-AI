@@ -10,6 +10,7 @@ from app.core.errors import InputInsufficientError, LLMConnectionError
 from app.llm.client import get_llm_client
 from app.llm.prompts import RESUME_PARSE_SYSTEM, RESUME_PARSE_USER
 from app.llm.schemas import ParsedResumeFields
+from app.models.models import AnalysisReport
 from app.models.user import User
 from app.schemas.analysis import JDMatchRequest, JDMatchResponse, ReportListItem
 from app.core import progress as progress_store
@@ -20,6 +21,7 @@ from app.services.analysis_service import AnalysisService
 from app.services.graph_analysis_service import GraphAnalysisService
 from app.services.llm_analysis_service import LLMAnalysisService
 from app.services.match_postprocessor import MatchPostprocessor
+from app.services.nlp_scorer import NLPScorer
 from app.utils.file_parser import extract_text
 
 router = APIRouter()
@@ -134,6 +136,7 @@ def jd_match(
     current_user: User = Depends(get_current_user),
 ):
     post = MatchPostprocessor()
+    nlp = NLPScorer()
 
     # ── Primary: Agent workflow ──
     sid = progress_store.create_session()
@@ -145,6 +148,7 @@ def jd_match(
         progress_store.mark_done(sid)
         response = post.process(result, body.jd_text, body.resume_text)
         response.session_id = sid
+        _add_nlp_scores(response, nlp, body.resume_text, body.jd_text)
         _archive_analysis(db, current_user.id, response, body.jd_text, body.company, body.position, body.resume_text)
         return response
 
@@ -159,6 +163,7 @@ def jd_match(
         response = post.process(result, body.jd_text, body.resume_text)
         response.degraded = True
         response.degraded_reason = "Agent 工作流异常，已降级为单次 LLM 分析（功能完整，仅流程简化）"
+        _add_nlp_scores(response, nlp, body.resume_text, body.jd_text)
         _archive_analysis(db, current_user.id, response, body.jd_text, body.company, body.position, body.resume_text)
         return response
 
@@ -169,7 +174,22 @@ def jd_match(
     result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
     result.degraded = True
     result.degraded_reason = "Agent 和 LLM 均不可用，已切换为规则引擎（仅关键词匹配，建议稍后重试）"
-    return post.process(result, body.jd_text, body.resume_text)
+    response = post.process(result, body.jd_text, body.resume_text)
+    _add_nlp_scores(response, nlp, body.resume_text, body.jd_text)
+    return response
+
+
+def _add_nlp_scores(response: JDMatchResponse, nlp: NLPScorer,
+                    resume_text: str, jd_text: str) -> None:
+    """Attach NLP objective scores to the response."""
+    try:
+        scores = nlp.score(resume_text, jd_text)
+        response.tfidf_score = scores["tfidf_similarity"]
+        response.keyword_score = scores["keyword_coverage"]
+        overlap = scores.get("skill_overlap", {})
+        response.nlp_score = round((scores["tfidf_similarity"] + scores["keyword_coverage"]) / 2, 1)
+    except Exception:
+        pass
 
 
 @router.get("/analysis/reports", response_model=list[ReportListItem])
@@ -272,10 +292,11 @@ async def parse_resume(
 def rewrite_resume(
     body: JDMatchRequest,
     match_score: int = Query(..., description="Current match score"),
+    report_id: int = Query(0, description="Report ID to save to"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Generate a revised resume based on existing match analysis. Separate from main analysis for speed."""
+    """Generate a revised resume. Saves to DB if report_id is provided."""
     from app.llm.prompts import RESUME_REWRITE_SYSTEM, RESUME_REWRITE_USER
 
     llm = get_llm_client()
@@ -291,7 +312,19 @@ def rewrite_resume(
                 integrity="",
             ),
         )
-        return {"revised_resume": result.strip()}
+        revised = result.strip()
+
+        # Save to DB if report_id provided
+        if report_id > 0:
+            report = db.query(AnalysisReport).filter(
+                AnalysisReport.id == report_id,
+                AnalysisReport.user_id == current_user.id,
+            ).first()
+            if report:
+                report.revised_resume = revised
+                db.commit()
+
+        return {"revised_resume": revised}
     except Exception as e:
         logger.exception("Resume rewrite failed")
         raise HTTPException(status_code=502, detail=f"简历改写失败：{e}")
@@ -362,7 +395,7 @@ def export_pdf(
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.multi_cell(0, 7, content)
 
-    pdf_bytes = pdf.output()
+    pdf_bytes = bytes(pdf.output())
     headers = {"Content-Disposition": "attachment; filename=revised_resume.pdf"}
     from fastapi.responses import Response
     return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
