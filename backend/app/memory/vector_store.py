@@ -2,14 +2,13 @@
 Milvus vector store for semantic search.
 Uses Milvus Lite (local file) for dev; switch to Milvus Standalone URI for production.
 """
-import logging
 from pathlib import Path
 
 from pymilvus import DataType, MilvusClient
 
 from app.memory.embeddings import DIM
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 DB_PATH = Path(__file__).resolve().parent.parent.parent / "careerpilot_milvus.db"
 

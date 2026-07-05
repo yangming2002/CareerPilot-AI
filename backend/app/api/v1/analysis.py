@@ -1,4 +1,3 @@
-import logging
 import tempfile
 
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
@@ -25,7 +24,7 @@ from app.services.nlp_scorer import NLPScorer
 from app.utils.file_parser import extract_text
 
 router = APIRouter()
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 
 @router.get("/analysis/progress/{session_id}")

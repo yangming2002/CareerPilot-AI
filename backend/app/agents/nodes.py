@@ -1,7 +1,5 @@
 """Node functions for the CareerPilot LangGraph workflow."""
 import hashlib
-import logging
-import sys
 import time
 
 from sqlalchemy.orm import Session
@@ -13,7 +11,7 @@ from app.llm.prompts import JD_MATCH_SYSTEM, JD_MATCH_USER
 from app.llm.schemas import LLMMatchResult, ParsedJD, ParsedResumeFields
 from app.models.models import AnalysisReport
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 MAX_GUARD_RETRIES = 2
 
 # Turbo for all LLM calls — plus is 10x slower for minimal quality gain
@@ -24,7 +22,7 @@ _analysis_client = LLMClient(LLMConfig(model="qwen-turbo", max_tokens=4096, time
 def _log(state: CareerPilotState, msg: str, elapsed: float = 0) -> None:
     ts = f" ({elapsed:.1f}s)" if elapsed else ""
     full_msg = f"{msg}{ts}"
-    print(f"[Agent] {full_msg}", file=sys.stderr, flush=True)
+    logger.info(f"[Agent] {full_msg}")
     state.setdefault("progress_log", []).append(full_msg)
     sid = state.get("session_id", "")
     if sid:
@@ -151,7 +149,7 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
         state["degraded"] = True
         state["degraded_reason"] = f"LLM 分析失败: {e}"
 
-    _log(state, f"  LLM 匹配总计 (plus)", time.time() - t1)
+    _log(state, f"  LLM 匹配总计 (turbo)", time.time() - t1)
     return state
 
 

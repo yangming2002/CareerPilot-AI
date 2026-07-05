@@ -10,7 +10,6 @@ Flow:
        ├─ failed + retries left → llm_analysis (retry)
        └─ failed + exhausted → compose (with warnings) → END
 """
-import logging
 
 from langgraph.graph import StateGraph, END
 from sqlalchemy.orm import Session
@@ -26,7 +25,7 @@ from app.agents.nodes import (
 )
 from app.agents.state import CareerPilotState
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 
 def should_continue(state: CareerPilotState) -> str:

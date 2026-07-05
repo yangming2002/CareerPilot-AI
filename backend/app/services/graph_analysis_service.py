@@ -2,7 +2,6 @@
 Graph-based analysis service using LangGraph workflow.
 Replaces the single-shot LLM call with a multi-step agent graph.
 """
-import logging
 
 from sqlalchemy.orm import Session
 
@@ -18,7 +17,7 @@ from app.schemas.analysis import (
     SuggestionItem,
 )
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 MIN_RESUME_CHARS = 50
 MIN_JD_CHARS = 30

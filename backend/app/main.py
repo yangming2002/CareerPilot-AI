@@ -1,9 +1,11 @@
+import sys
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from app.api.v1 import router as v1_router
 from app.core.config import CORS_ORIGINS
@@ -14,10 +16,29 @@ import app.models.models  # noqa: F401
 import app.models.user  # noqa: F401
 import app.memory.models  # noqa: F401
 
+# Configure loguru
+logger.remove()
+logger.add(
+    sys.stderr,
+    format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>",
+    level="INFO",
+)
+logger.add(
+    "logs/careerpilot_{time:YYYY-MM-DD}.log",
+    rotation="10 MB",
+    retention="7 days",
+    format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} | {message}",
+    level="DEBUG",
+)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
+    # LangSmith: must init after .env loaded, before any LLM calls
+    from app.llm.client import _init_langsmith
+    _init_langsmith()
+    logger.info("CareerPilot-AI 启动完成")
     yield
 
 

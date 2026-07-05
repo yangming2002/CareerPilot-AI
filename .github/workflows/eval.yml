@@ -1,0 +1,33 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r backend/requirements.txt
+      - name: Guard & Injection (no API needed)
+        run: |
+          cd backend
+          python -m evals.runner --suite integrity
+          python -m evals.runner --suite injection
+
+  build:
+    needs: eval
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build backend image
+        run: docker build -t careerpilot-backend ./backend
+      - name: Build frontend image
+        run: docker build -t careerpilot-frontend ./frontend

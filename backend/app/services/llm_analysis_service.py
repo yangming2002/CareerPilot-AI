@@ -1,6 +1,4 @@
 import hashlib
-import logging
-import sys
 from typing import Callable
 
 from openai import APITimeoutError, APIConnectionError
@@ -20,7 +18,7 @@ from app.schemas.analysis import (
     SuggestionItem,
 )
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 MIN_RESUME_CHARS = 50
 MIN_JD_CHARS = 30
@@ -33,7 +31,7 @@ class LLMAnalysisService:
         self._progress: list[str] = []
 
     def _log(self, msg: str) -> None:
-        print(f"[LLM] {msg}", file=sys.stderr, flush=True)
+        logger.info(f"[LLM] {msg}")
         logger.info(msg)
         self._progress.append(msg)
 
