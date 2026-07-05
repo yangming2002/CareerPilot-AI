@@ -53,22 +53,16 @@ def should_continue(state: CareerPilotState) -> str:
 def build_graph() -> StateGraph:
     workflow = StateGraph(CareerPilotState)
 
-    # Add nodes
-    workflow.add_node("parse_jd", parse_jd)
-    workflow.add_node("parse_resume", parse_resume)
+    from app.agents.nodes import parse_both
+    workflow.add_node("parse_both", parse_both)
     workflow.add_node("rule_match", rule_match)
     workflow.add_node("llm_analysis", llm_analysis)
     workflow.add_node("integrity_guard", integrity_guard)
-    workflow.add_node("fallback", lambda s: s)  # placeholder, handled by caller
-
-    # We handle compose differently — it needs db access
-    # So compose is a sentinel node, actual work is done by the caller
+    workflow.add_node("fallback", lambda s: s)
     workflow.add_node("compose", lambda s: s)
 
-    # Edges
-    workflow.set_entry_point("parse_jd")
-    workflow.add_edge("parse_jd", "parse_resume")
-    workflow.add_edge("parse_resume", "rule_match")
+    workflow.set_entry_point("parse_both")
+    workflow.add_edge("parse_both", "rule_match")
     workflow.add_edge("rule_match", "llm_analysis")
     workflow.add_edge("llm_analysis", "integrity_guard")
 

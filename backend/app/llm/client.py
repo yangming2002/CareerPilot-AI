@@ -18,14 +18,20 @@ T = TypeVar("T")
 def _init_langsmith():
     """Enable LangSmith tracing. Called after .env is loaded."""
     import os as _os
-    if not _os.getenv("LANGSMITH_API_KEY"):
+    api_key = _os.getenv("LANGSMITH_API_KEY", "")
+    if not api_key:
+        from loguru import logger
+        logger.debug("LANGSMITH_API_KEY 未设置，跳过追踪")
         return
     try:
+        _os.environ.setdefault("LANGSMITH_TRACING", "true")
+        _os.environ.setdefault("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
+        _os.environ.setdefault("LANGSMITH_PROJECT", "careerpilot-ai")
         from langsmith.wrappers import wrap_openai
         import openai as _openai_module
         wrap_openai(_openai_module)
         from loguru import logger
-        logger.info("LangSmith 追踪已启用")
+        logger.info(f"LangSmith 追踪已启用 (project=careerpilot-ai, key={api_key[:8]}...)")
     except Exception as e:
         from loguru import logger
         logger.warning(f"LangSmith 初始化失败: {e}")

@@ -135,9 +135,9 @@ class LLMAnalysisService:
         keyword_coverage: list[KeywordCoverage] = []
         suggestions = [
             SuggestionItem(category=s.category, original=s.original,
-                           suggestion=f"[{s.confidence}] {s.suggestion}"
-                           + (f" (依据: {s.grounded_in})" if s.grounded_in else ""),
-                           confidence=s.confidence)
+                           suggestion=s.suggestion,
+                           confidence=s.confidence,
+                           grounded_in=s.grounded_in)
             for s in result.suggestions
         ]
         integrity_checks = [

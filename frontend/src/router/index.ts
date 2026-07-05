@@ -16,6 +16,12 @@ const router = createRouter({
       meta: { title: '注册 - CareerPilot-AI', guest: true },
     },
     {
+      path: '/memory',
+      name: 'memory',
+      component: () => import('@/views/MemoryView.vue'),
+      meta: { title: '记忆库 - CareerPilot-AI', requiresAuth: true },
+    },
+    {
       path: '/history',
       name: 'history',
       component: () => import('@/views/JDHistoryView.vue'),

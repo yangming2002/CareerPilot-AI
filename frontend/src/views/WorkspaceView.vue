@@ -18,19 +18,15 @@ const activeModule = ref('matching')
     <section class="page-header">
       <div>
         <p class="eyebrow">CareerPilot-AI</p>
-        <h1>面向个人求职全流程的智能工作台</h1>
-        <p class="subtitle">
-          Agent 驱动 · RAG 记忆增强 · 简历可信优化 · 投递追踪 · 面试/笔试复盘 · 能力画像。
-          上传简历和 JD，Agent 自动解析、匹配、校验并生成改写建议，每次分析沉淀为个人求职记忆。
-        </p>
+        <h1>Agent 驱动求职工作台</h1>
+        <p class="subtitle">上传简历和 JD，Agent 自动解析、匹配、校验并生成改写建议。每次分析沉淀为个人求职记忆。</p>
       </div>
       <el-tag type="success" effect="light">Agent 驱动</el-tag>
     </section>
 
     <!-- Privacy Banner -->
     <section class="privacy-banner">
-      <strong>产品原则：</strong>
-      简历优化不编造经历，LLM 建议必须有原文依据。JD 归档到 RAG 记忆库，下次分析时自动检索相关经历。所有个人数据按敏感数据处理，不默认联网搜索。
+      简历优化不编造经历，建议必须有原文依据。JD 自动归档，下次分析时检索相关经历。
     </section>
 
     <!-- Module Selector -->

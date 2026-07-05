@@ -81,6 +81,7 @@ export interface SuggestionItem {
   original: string
   suggestion: string
   confidence: string
+  grounded_in?: string
 }
 
 export interface IntegrityCheckItem {

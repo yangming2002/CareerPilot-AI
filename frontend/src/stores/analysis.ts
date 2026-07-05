@@ -88,6 +88,17 @@ export const useAnalysisStore = defineStore('analysis', () => {
       )
       if (requestId !== activeRequestId) return
       report.value = result
+      // If session_id available, populate progress from it
+      if (result.session_id) {
+        try {
+          const { getProgress } = await import('@/api')
+          const pdata = await getProgress(result.session_id)
+          if (pdata?.steps?.length) {
+            progressSteps.value = pdata.steps
+            progressDone.value = true
+          }
+        } catch { /* ignore poll errors */ }
+      }
       if (result.progress_log?.length) {
         progressSteps.value = result.progress_log
         progressDone.value = true

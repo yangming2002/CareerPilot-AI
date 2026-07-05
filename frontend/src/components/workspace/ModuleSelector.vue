@@ -12,7 +12,7 @@ const emit = defineEmits<{
   <div class="module-card">
     <div class="section-title">
       <h2>工作台模块</h2>
-      <span>Agent 自动解析 · 匹配 · 校验 · 改写，记忆系统持续沉淀。</span>
+      <span>Agent 分析 · Guard 校验 · STAR 改写</span>
     </div>
 
     <el-radio-group

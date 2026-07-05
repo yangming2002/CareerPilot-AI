@@ -13,6 +13,7 @@ class SuggestionItem(BaseModel):
     original: str
     suggestion: str
     confidence: str  # "high" | "medium" | "low"
+    grounded_in: str = ""  # evidence from resume
 
 
 class IntegrityCheckItem(BaseModel):

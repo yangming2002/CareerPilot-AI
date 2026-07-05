@@ -22,6 +22,7 @@ function handleLogout() {
         <img src="/logo.png" alt="CareerPilot-AI" class="nav-logo-img" @click="router.push('/')" />
         <router-link to="/" class="nav-link" exact>首页</router-link>
         <router-link to="/history" class="nav-link">JD 历史</router-link>
+        <router-link to="/memory" class="nav-link">记忆库</router-link>
       </div>
       <div class="nav-right">
         <span v-if="auth.user" class="nav-user">

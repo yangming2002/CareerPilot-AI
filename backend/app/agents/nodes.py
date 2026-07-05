@@ -1,6 +1,7 @@
 """Node functions for the CareerPilot LangGraph workflow."""
 import hashlib
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 from sqlalchemy.orm import Session
 
@@ -17,6 +18,78 @@ MAX_GUARD_RETRIES = 2
 # Turbo for all LLM calls — plus is 10x slower for minimal quality gain
 _parse_client = LLMClient(LLMConfig(model="qwen-turbo", max_tokens=1024))
 _analysis_client = LLMClient(LLMConfig(model="qwen-turbo", max_tokens=4096, timeout=60))
+
+
+def parse_both(state: CareerPilotState) -> CareerPilotState:
+    """Run JD and resume parsing in parallel. Cached by text hash."""
+    state.setdefault("progress_log", [])
+    t0 = time.time()
+
+    jd_hash = _text_hash(state["jd_text"])
+    resume_hash = _text_hash(state["resume_text"])
+
+    # Check cache
+    if jd_hash in _PARSE_CACHE:
+        state["parsed_jd"] = _PARSE_CACHE[jd_hash]
+    if resume_hash in _PARSE_CACHE:
+        state["parsed_resume"] = _PARSE_CACHE[resume_hash]
+
+    if state.get("parsed_jd") and state.get("parsed_resume"):
+        _log(state, "  JD+简历解析 (缓存命中)", time.time() - t0)
+        return state
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        if not state.get("parsed_jd"):
+            pool.submit(_parse_jd_impl, state)
+        if not state.get("parsed_resume"):
+            pool.submit(_parse_resume_impl, state)
+
+    # Store in cache
+    if state.get("parsed_jd"):
+        _PARSE_CACHE[jd_hash] = state["parsed_jd"]
+    if state.get("parsed_resume"):
+        _PARSE_CACHE[resume_hash] = state["parsed_resume"]
+
+    _log(state, "  JD+简历解析 (并行)", time.time() - t0)
+    return state
+
+
+_PARSE_CACHE: dict[str, object] = {}
+
+
+def _text_hash(text: str) -> str:
+    import hashlib
+    return hashlib.md5(text.encode()).hexdigest()
+
+
+def _parse_resume_impl(state: CareerPilotState) -> None:
+    from app.llm.prompts import RESUME_PARSE_SYSTEM, RESUME_PARSE_USER
+    from app.llm.schemas import ParsedResumeFields
+    try:
+        # Truncate to prevent slow parsing on very long resumes
+        resume_short = state["resume_text"][:2000]
+        result = _parse_client.complete_structured(
+            system=RESUME_PARSE_SYSTEM,
+            user=RESUME_PARSE_USER.format(resume_text=resume_short) + "\n(Please respond with a JSON object.)",
+            output_schema=ParsedResumeFields,
+        )
+        state["parsed_resume"] = result
+    except Exception:
+        state["parsed_resume"] = ParsedResumeFields(raw_summary=state["resume_text"][:200])
+
+
+def _parse_jd_impl(state: CareerPilotState) -> None:
+    from app.llm.schemas import ParsedJD
+    try:
+        jd_short = state["jd_text"][:1500]
+        result = _parse_client.complete_structured(
+            system="Parse this job description. All output in Chinese.",
+            user=f"Parse this JD:\n\n{jd_short}\n\n(Please respond with a JSON object.)",
+            output_schema=ParsedJD,
+        )
+        state["parsed_jd"] = result
+    except Exception:
+        state["parsed_jd"] = ParsedJD(summary=state["jd_text"][:200])
 
 
 def _log(state: CareerPilotState, msg: str, elapsed: float = 0) -> None:
@@ -85,16 +158,20 @@ def rule_match(state: CareerPilotState) -> CareerPilotState:
 def llm_analysis(state: CareerPilotState) -> CareerPilotState:
     t0 = time.time()
 
-    # Retrieve relevant facts from memory
+    # Retrieve relevant facts from memory (skip if no facts exist yet)
     from app.memory.retriever import FactRetriever
+    from app.memory.models import UserFact
     from app.core.database import SessionLocal
     memory_db = SessionLocal()
+    memory_context = {"relevant_skills": [], "relevant_projects": [], "past_weaknesses": [], "similar_jds": [], "user_profile": {}}
     try:
-        retriever = FactRetriever()
-        jd_skills = [g["skill"] for g in state.get("llm_match_result", {}).get("skill_gaps", [])] if state.get("llm_match_result") else []
-        memory_context = retriever.retrieve_for_jd(
-            memory_db, state["user_id"], state["jd_text"], jd_skills, limit=8
-        )
+        fact_count = memory_db.query(UserFact).filter(UserFact.user_id == state["user_id"]).count()
+        if fact_count > 0:
+            retriever = FactRetriever()
+            jd_skills = [g["skill"] for g in state.get("llm_match_result", {}).get("skill_gaps", [])] if state.get("llm_match_result") else []
+            memory_context = retriever.retrieve_for_jd(
+                memory_db, state["user_id"], state["jd_text"], jd_skills, limit=8
+            )
     finally:
         memory_db.close()
 

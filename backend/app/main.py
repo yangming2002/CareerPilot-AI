@@ -35,7 +35,6 @@ logger.add(
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
-    # LangSmith: must init after .env loaded, before any LLM calls
     from app.llm.client import _init_langsmith
     _init_langsmith()
     logger.info("CareerPilot-AI 启动完成")

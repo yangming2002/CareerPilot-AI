@@ -6,6 +6,7 @@ import { useAnalysisStore } from '@/stores/analysis'
 const store = useAnalysisStore()
 const editedResume = ref('')
 const shownAnalysisDialog = ref(false)
+const backendElapsed = ref('')
 
 // Show completion dialog only when analysis first completes (not on resume rewrite)
 watch(() => store.report, (r) => {
@@ -18,18 +19,17 @@ watch(() => store.report, (r) => {
       const gaps = r.skill_gaps || []
       const covered = gaps.filter(g => g.user_has).length
       const total = gaps.length
-      let backendTime = ''
       const log = r.progress_log || []
       for (let i = log.length - 1; i >= 0; i--) {
         const m = log[i].match(/\(([\d.]+)s\)/)
-        if (m) { backendTime = m[1] + 's'; break }
+        if (m) { backendElapsed.value = m[1] + 's'; break }
       }
 
       const msg = r.degraded
         ? `<p style='color:#f59e0b'>⚠ ${r.degraded_reason || '分析降级完成'}</p>`
         : `<p>匹配度 <b style='color:#2563eb;font-size:24px'>${r.match_score}</b> 分</p>
            <p>技能覆盖 <b>${covered}/${total}</b> | 优化建议 <b>${(r.suggestions||[]).length}</b> 条</p>
-           <p style='color:#667085;font-size:13px'>耗时 ${backendTime || (store.elapsedSeconds + 's')}</p>`
+           <p style='color:#667085;font-size:13px'>耗时 ${store.elapsedSeconds}s</p>`
 
       ElMessageBox.alert(msg, r.degraded ? '分析完成（降级）' : '分析完成', {
         dangerouslyUseHTMLString: true,
@@ -99,7 +99,7 @@ async function handleExport(fmt: 'md' | 'pdf') {
     <!-- Completion Notice -->
     <el-alert
       v-if="!store.report.degraded"
-      :title="`分析完成 | 匹配度 ${store.report.match_score} 分 | 耗时 ${store.elapsedSeconds} 秒`"
+      :title="`分析完成 | 匹配度 ${store.report.match_score} 分`"
       type="success"
       :closable="true"
       show-icon
@@ -170,19 +170,24 @@ async function handleExport(fmt: 'md' | 'pdf') {
 
     <!-- Suggestions -->
     <el-card shadow="never" class="panel-card">
-      <template #header>优化建议</template>
+      <template #header>
+        <span>优化建议</span>
+        <el-tag size="small" type="info" style="margin-left:8px">证据链</el-tag>
+      </template>
       <div v-if="store.report.suggestions.length">
         <div v-for="(s, i) in store.report.suggestions" :key="i" class="suggestion-item">
-          <div class="suggestion-header">
-            <el-tag
-              size="small"
-              :type="s.confidence === 'high' ? 'danger' : s.confidence === 'medium' ? 'warning' : ''"
-            >
-              可信度：{{ s.confidence }}
-            </el-tag>
-            <span class="suggestion-category">{{ s.category }}</span>
-          </div>
           <p class="suggestion-text">{{ s.suggestion }}</p>
+          <div class="evidence-row">
+            <span class="evidence-label">依据</span>
+            <span v-if="s.grounded_in" class="evidence-source" :title="s.grounded_in">
+              {{ s.grounded_in.slice(0, 80) }}{{ s.grounded_in.length > 80 ? '…' : '' }}
+            </span>
+            <span v-else class="evidence-source none">未标注出处</span>
+            <el-tag size="small" :type="s.confidence === 'high' ? 'success' : s.confidence === 'medium' ? 'warning' : 'info'">
+              {{ s.confidence === 'high' ? '高可信' : s.confidence === 'medium' ? '中可信' : '低可信' }}
+            </el-tag>
+            <el-tag size="small" type="info">{{ s.category }}</el-tag>
+          </div>
         </div>
       </div>
       <p v-else class="no-data">暂无优化建议</p>
@@ -378,10 +383,39 @@ async function handleExport(fmt: 'md' | 'pdf') {
 }
 
 .suggestion-text {
-  margin: 0;
+  margin: 0 0 8px;
   color: #1f2937;
   font-size: 14px;
   line-height: 1.7;
+}
+
+.evidence-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #f0f9ff;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.evidence-label {
+  color: #2563eb;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.evidence-source {
+  flex: 1;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.evidence-source.none {
+  color: #ef4444;
+  font-style: italic;
 }
 
 .progress-list {

@@ -298,6 +298,33 @@ def rewrite_resume(
     """Generate a revised resume. Saves to DB if report_id is provided."""
     from app.llm.prompts import RESUME_REWRITE_SYSTEM, RESUME_REWRITE_USER
 
+    # Load actual analysis data from DB
+    gaps_text = ""
+    suggestions_text = ""
+    integrity_text = ""
+    db_report = None
+    if report_id > 0:
+        db_report = db.query(AnalysisReport).filter(
+            AnalysisReport.id == report_id, AnalysisReport.user_id == current_user.id
+        ).first()
+        if db_report:
+            gap_skills = []
+            if db_report.skill_gaps:
+                for g in (db_report.skill_gaps or []):
+                    if isinstance(g, dict) and not g.get("user_has"):
+                        gap_skills.append(f"{g.get('skill', '')}: {g.get('note', '')}")
+            gaps_text = "; ".join(gap_skills[:10])
+            if db_report.suggestions:
+                suggestions_text = "; ".join([
+                    s.get("suggestion", "")[:150] for s in (db_report.suggestions or [])[:5]
+                    if isinstance(s, dict)
+                ])
+            if db_report.integrity_checks:
+                integrity_text = "; ".join([
+                    c.get("description", "")[:100] for c in (db_report.integrity_checks or [])[:3]
+                    if isinstance(c, dict)
+                ])
+
     llm = get_llm_client()
     try:
         result = llm.complete(
@@ -306,22 +333,17 @@ def rewrite_resume(
                 resume_text=body.resume_text,
                 jd_text=body.jd_text,
                 match_score=match_score,
-                gaps="",
-                suggestions="",
-                integrity="",
+                gaps=gaps_text,
+                suggestions=suggestions_text,
+                integrity=integrity_text,
             ),
         )
         revised = result.strip()
 
-        # Save to DB if report_id provided
-        if report_id > 0:
-            report = db.query(AnalysisReport).filter(
-                AnalysisReport.id == report_id,
-                AnalysisReport.user_id == current_user.id,
-            ).first()
-            if report:
-                report.revised_resume = revised
-                db.commit()
+        # Save to DB
+        if db_report:
+            db_report.revised_resume = revised
+            db.commit()
 
         return {"revised_resume": revised}
     except Exception as e:

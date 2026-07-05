@@ -37,9 +37,6 @@ const store = useAnalysisStore()
         <span>{{ store.statusMessage }}</span>
         <strong>{{ store.elapsedSeconds }}s</strong>
       </div>
-      <el-progress
-        :percentage="Math.min(99, Math.round((store.elapsedSeconds / 60) * 100))"
-      />
       <div v-if="store.progressSteps.length" class="progress-steps">
         <div v-for="(step, i) in store.progressSteps.slice(-5)" :key="i" class="progress-step">
           <el-icon v-if="i < store.progressSteps.length - 1 || store.progressDone" color="#22c55e"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/></svg></el-icon>
