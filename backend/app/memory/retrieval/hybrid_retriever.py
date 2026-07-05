@@ -20,11 +20,12 @@ class SearchResult:
     company: str
     position: str
     jd_summary: str
+    jd_text: str
     match_score: int | None
     tags: str
     created_at: str
     final_score: float = 0.0
-    sources: list[str] = field(default_factory=list)  # "vector", "bm25", etc.
+    sources: list[str] = field(default_factory=list)
 
 
 class HybridRetriever:
@@ -45,7 +46,7 @@ class HybridRetriever:
 
         for v in variants:
             # Vector search
-            vec_results = vs.search_similar_jds(v, self.user_id, top_k=15)
+            vec_results = vs.search_similar_jds(v, self.user_id, top_k=5)
             for r in vec_results:
                 jid = r.get("jd_id", 0)
                 if jid not in all_results:
@@ -53,7 +54,7 @@ class HybridRetriever:
                 all_results[jid].sources.append(f"vector({r.get('score', 0):.2f})")
 
             # BM25 search
-            bm25_results = self._bm25_search(v, top_k=15)
+            bm25_results = self._bm25_search(v, top_k=5)
             for r in bm25_results:
                 jid = r.get("jd_id", 0)
                 if jid not in all_results:
@@ -69,14 +70,23 @@ class HybridRetriever:
         return ranked[:top_k]
 
     def _make_result(self, jd_id: int, source: dict) -> SearchResult:
+        full_text = source.get("text", "") or ""
+
+        # Try to get full JD text from SQL
+        from app.memory.models import JDArchive
+        archive = self.db.query(JDArchive).filter(JDArchive.id == jd_id).first()
+        jd_full = (archive.jd_text or "") if archive else full_text
+        created_at = str(archive.created_at)[:19] if archive and archive.created_at else ""
+
         return SearchResult(
             jd_id=jd_id,
-            company=source.get("company", ""),
-            position=source.get("position", ""),
-            jd_summary=(source.get("text", "") or "")[:200],
-            match_score=source.get("match_score"),
-            tags=source.get("skills", ""),
-            created_at="",
+            company=source.get("company", "") or (archive.company if archive else ""),
+            position=source.get("position", "") or (archive.position if archive else ""),
+            jd_summary=jd_full[:300],
+            jd_text=jd_full,
+            match_score=source.get("match_score") or (archive.match_score if archive else None),
+            tags=source.get("skills", "") or (archive.tags if archive else ""),
+            created_at=created_at,
             final_score=0.0,
         )
 

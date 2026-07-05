@@ -20,6 +20,11 @@ async function loadHistory(q = '') {
   }
 }
 
+function parseTags(tags: string): string[] {
+  if (!tags) return []
+  return tags.split(/[,，；;]/).map(t => t.trim()).filter(t => t.length > 0)
+}
+
 function search() {
   loadHistory(searchQ.value.trim())
 }
@@ -31,7 +36,7 @@ onMounted(() => loadHistory())
   <div class="history-page">
     <div class="page-header">
       <h1>JD 历史库</h1>
-      <p>每次分析过的 JD 自动归档，可以搜索、回顾匹配结果。JD 有效期请自行确认。</p>
+      <p>每次分析过的 JD 自动归档。点击行展开查看完整 JD 描述。JD 有效期请自行确认。</p>
     </div>
 
     <div class="search-bar">
@@ -47,18 +52,26 @@ onMounted(() => loadHistory())
       </el-input>
     </div>
 
-    <el-table v-if="archives.length" :data="archives" stripe v-loading="loading" style="width:100%">
-      <el-table-column prop="company" label="公司" width="160">
+    <el-table v-if="archives.length" :data="archives" stripe v-loading="loading" style="width:100%" table-layout="auto">
+      <el-table-column type="expand">
         <template #default="{ row }">
-          {{ row.company || '未识别' }}
+          <div class="jd-expand">
+            <div class="jd-meta">
+              <span v-if="row.company"><strong>公司：</strong>{{ row.company }}</span>
+              <span v-if="row.position"><strong>岗位：</strong>{{ row.position }}</span>
+              <span v-if="row.match_score !== null"><strong>匹配分：</strong>{{ row.match_score }}</span>
+              <span v-if="row.created_at"><strong>时间：</strong>{{ row.created_at?.slice(0, 16)?.replace('T', ' ') }}</span>
+            </div>
+            <div class="jd-tags" v-if="row.tags">
+              <el-tag v-for="t in parseTags(row.tags)" :key="t" size="small" style="margin:2px">{{ t }}</el-tag>
+            </div>
+            <div class="jd-full-text">{{ row.jd_text || row.jd_summary || '暂无 JD 描述' }}</div>
+          </div>
         </template>
       </el-table-column>
-      <el-table-column prop="position" label="岗位" width="180">
-        <template #default="{ row }">
-          {{ row.position || '未识别' }}
-        </template>
-      </el-table-column>
-      <el-table-column label="匹配分" width="90">
+      <el-table-column prop="company" label="公司" min-width="120" />
+      <el-table-column prop="position" label="岗位" min-width="150" />
+      <el-table-column label="匹配" width="80">
         <template #default="{ row }">
           <el-tag v-if="row.match_score !== null" :type="row.match_score >= 70 ? 'success' : row.match_score >= 40 ? 'warning' : 'danger'" size="small">
             {{ row.match_score }}
@@ -66,16 +79,17 @@ onMounted(() => loadHistory())
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label="技能标签" min-width="200">
+      <el-table-column label="检索来源" width="140">
         <template #default="{ row }">
-          <el-tag v-for="t in (row.tags || '').split(',').filter(Boolean).slice(0, 6)" :key="t" size="small" style="margin:2px">
-            {{ t }}
-          </el-tag>
+          <template v-if="row.sources?.length">
+            <el-tag v-for="s in row.sources.slice(0,2)" :key="s" size="small" type="info" style="margin:1px">{{ s }}</el-tag>
+          </template>
+          <span v-else style="color:#9ca3af">-</span>
         </template>
       </el-table-column>
-      <el-table-column prop="created_at" label="分析时间" width="170">
+      <el-table-column prop="created_at" label="时间" width="150">
         <template #default="{ row }">
-          {{ row.created_at?.slice(0, 16)?.replace('T', ' ') }}
+          {{ row.created_at?.slice(0, 16)?.replace('T', ' ') || '-' }}
         </template>
       </el-table-column>
     </el-table>
@@ -90,31 +104,40 @@ onMounted(() => loadHistory())
 
 <style scoped>
 .history-page {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 32px;
 }
+.page-header { margin-bottom: 24px; }
+.page-header h1 { margin-bottom: 8px; color: #111827; font-size: 24px; }
+.page-header p { color: #667085; font-size: 14px; }
+.search-bar { margin-bottom: 20px; }
+.back-link { margin-top: 24px; }
 
-.page-header {
-  margin-bottom: 24px;
+.jd-expand {
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-radius: 6px;
 }
-
-.page-header h1 {
-  margin-bottom: 8px;
-  color: #111827;
-  font-size: 24px;
+.jd-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #374151;
 }
-
-.page-header p {
-  color: #667085;
-  font-size: 14px;
-}
-
-.search-bar {
-  margin-bottom: 20px;
-}
-
-.back-link {
-  margin-top: 24px;
+.jd-meta span { display: flex; align-items: center; gap: 4px; }
+.jd-tags { margin-bottom: 12px; }
+.jd-full-text {
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #1f2937;
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto;
 }
 </style>

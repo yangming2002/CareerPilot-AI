@@ -79,7 +79,7 @@ class FactExtractor:
             jd_summary=response.jd_summary,
             required_skills=self._extract_missing_skills(response),
             match_score=response.match_score,
-            tags=",".join([g.skill for g in response.skill_gaps if g.required and not g.user_has]),
+            tags="，".join([g.skill.replace("，", "/").replace(",", "/") for g in response.skill_gaps if g.required and not g.user_has]),
         )
         db.add(archive)
         db.flush()  # Get archive.id

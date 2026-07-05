@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import ModuleSelector from '@/components/workspace/ModuleSelector.vue'
 import ResumeInputPanel from '@/components/workspace/ResumeInputPanel.vue'
 import MatchingPanel from '@/components/workspace/MatchingPanel.vue'
@@ -10,17 +10,6 @@ import SkillProfilePanel from '@/components/workspace/SkillProfilePanel.vue'
 import AnalysisReport from '@/components/workspace/AnalysisReport.vue'
 
 const activeModule = ref('matching')
-
-const moduleTitle = computed(() => {
-  const titles: Record<string, string> = {
-    matching: 'JD 匹配分析',
-    tracker: '投递进度 Tracker',
-    interview: '面试复盘',
-    written: '笔试复盘',
-    profile: '能力画像',
-  }
-  return titles[activeModule.value]
-})
 </script>
 
 <template>
@@ -31,16 +20,17 @@ const moduleTitle = computed(() => {
         <p class="eyebrow">CareerPilot-AI</p>
         <h1>面向个人求职全流程的智能工作台</h1>
         <p class="subtitle">
-          围绕用户主动提供的 JD，完成简历匹配、可信优化、投递追踪、冷静期提醒、面试/笔试复盘与能力画像沉淀。
+          Agent 驱动 · RAG 记忆增强 · 简历可信优化 · 投递追踪 · 面试/笔试复盘 · 能力画像。
+          上传简历和 JD，Agent 自动解析、匹配、校验并生成改写建议，每次分析沉淀为个人求职记忆。
         </p>
       </div>
-      <el-tag type="success" effect="light">全栈模式</el-tag>
+      <el-tag type="success" effect="light">Agent 驱动</el-tag>
     </section>
 
     <!-- Privacy Banner -->
     <section class="privacy-banner">
       <strong>产品原则：</strong>
-      不默认替用户联网找岗位，不实时硬爬招聘平台；用户提供目标 JD 后，系统做匹配、记录、复盘和辅导。简历与求职记录均按敏感数据处理。
+      简历优化不编造经历，LLM 建议必须有原文依据。JD 归档到 RAG 记忆库，下次分析时自动检索相关经历。所有个人数据按敏感数据处理，不默认联网搜索。
     </section>
 
     <!-- Module Selector -->
@@ -50,20 +40,11 @@ const moduleTitle = computed(() => {
     <section class="input-grid">
       <ResumeInputPanel />
 
-      <el-card shadow="never" class="panel-card">
-        <template #header>
-          <div class="card-header">
-            <span>{{ moduleTitle }}</span>
-            <el-tag size="small">用户主动记录</el-tag>
-          </div>
-        </template>
-
-        <MatchingPanel v-if="activeModule === 'matching'" />
-        <TrackerPanel v-else-if="activeModule === 'tracker'" />
-        <InterviewPanel v-else-if="activeModule === 'interview'" />
-        <WrittenTestPanel v-else-if="activeModule === 'written'" />
-        <SkillProfilePanel v-else-if="activeModule === 'profile'" />
-      </el-card>
+      <MatchingPanel v-if="activeModule === 'matching'" />
+      <TrackerPanel v-else-if="activeModule === 'tracker'" />
+      <InterviewPanel v-else-if="activeModule === 'interview'" />
+      <WrittenTestPanel v-else-if="activeModule === 'written'" />
+      <SkillProfilePanel v-else-if="activeModule === 'profile'" />
     </section>
 
     <!-- Analysis Report (only for matching module) -->

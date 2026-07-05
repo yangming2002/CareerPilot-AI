@@ -29,6 +29,17 @@ def _get_client() -> MilvusClient:
                 metric_type="COSINE",
                 auto_id=True,
             )
+            # Build HNSW index for fast approximate search
+            client.create_index(
+                collection_name=coll,
+                field_name="vector",
+                index_params={
+                    "index_type": "HNSW",
+                    "metric_type": "COSINE",
+                    "params": {"M": 16, "efConstruction": 200},
+                },
+            )
+        client.load_collection(coll)
     return client
 
 

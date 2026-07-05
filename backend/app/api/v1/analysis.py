@@ -47,11 +47,13 @@ def jd_history(
         try:
             from app.memory.retrieval.hybrid_retriever import HybridRetriever
             retriever = HybridRetriever(db, current_user.id)
-            results = retriever.search(q, top_k=20)
+            results = retriever.search(q, top_k=10)[:10]
             return [
                 {
                     "id": r.jd_id, "company": r.company, "position": r.position,
-                    "match_score": r.match_score, "jd_summary": r.jd_summary,
+                    "match_score": r.match_score,
+                    "jd_summary": r.jd_summary or (r.jd_text[:300] if hasattr(r, 'jd_text') else ''),
+                    "jd_text": r.jd_text if hasattr(r, 'jd_text') else r.jd_summary,
                     "tags": r.tags, "created_at": r.created_at,
                     "score": r.final_score, "sources": r.sources[:3],
                 }
@@ -69,12 +71,12 @@ def jd_history(
             (JDArchive.position.contains(q)) |
             (JDArchive.tags.contains(q))
         )
-    archives = query.order_by(JDArchive.created_at.desc()).limit(50).all()
+    archives = query.order_by(JDArchive.created_at.desc()).limit(20).all()
     return [
         {
             "id": a.id, "company": a.company, "position": a.position,
-            "match_score": a.match_score, "jd_summary": a.jd_summary,
-            "tags": a.tags, "created_at": str(a.created_at),
+            "match_score": a.match_score, "jd_summary": a.jd_summary or a.jd_text[:500],
+            "jd_text": a.jd_text, "tags": a.tags, "created_at": str(a.created_at),
         }
         for a in archives
     ]
@@ -203,6 +205,7 @@ def get_report(
 @router.post("/analysis/parse-resume", response_model=ParsedResumeFields)
 async def parse_resume(
     file: UploadFile = File(...),
+    db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     """Upload a PDF/DOCX/TXT resume and get structured fields back."""
@@ -263,6 +266,35 @@ async def parse_resume(
     except Exception as e:
         logger.exception("Resume parsing failed")
         return ParsedResumeFields(raw_summary=raw_text[:500])
+
+
+@router.post("/analysis/rewrite-resume")
+def rewrite_resume(
+    body: JDMatchRequest,
+    match_score: int = Query(..., description="Current match score"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Generate a revised resume based on existing match analysis. Separate from main analysis for speed."""
+    from app.llm.prompts import RESUME_REWRITE_SYSTEM, RESUME_REWRITE_USER
+
+    llm = get_llm_client()
+    try:
+        result = llm.complete(
+            system=RESUME_REWRITE_SYSTEM,
+            user=RESUME_REWRITE_USER.format(
+                resume_text=body.resume_text,
+                jd_text=body.jd_text,
+                match_score=match_score,
+                gaps="",
+                suggestions="",
+                integrity="",
+            ),
+        )
+        return {"revised_resume": result.strip()}
+    except Exception as e:
+        logger.exception("Resume rewrite failed")
+        raise HTTPException(status_code=502, detail=f"简历改写失败：{e}")
 
 
 @router.get("/analysis/export-md/{report_id}")

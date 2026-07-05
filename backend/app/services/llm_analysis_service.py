@@ -134,12 +134,7 @@ class LLMAnalysisService:
                      note=f"{g.depth_match}: {g.note}" if g.depth_match else g.note)
             for g in result.skill_gaps
         ]
-        keyword_coverage = [
-            KeywordCoverage(keyword=item.get("keyword", ""),
-                           in_resume=item.get("in_resume", False),
-                           in_jd=item.get("in_jd", True))
-            for item in result.keyword_coverage
-        ]
+        keyword_coverage: list[KeywordCoverage] = []
         suggestions = [
             SuggestionItem(category=s.category, original=s.original,
                            suggestion=f"[{s.confidence}] {s.suggestion}"
@@ -167,7 +162,6 @@ class LLMAnalysisService:
             integrity_checks=[i.model_dump() for i in integrity_checks],
             raw_jd_summary=result.jd_summary,
             raw_resume_summary=result.resume_summary,
-            revised_resume=result.revised_resume,
         )
         db.add(report)
         db.commit()
@@ -179,7 +173,6 @@ class LLMAnalysisService:
             suggestions=suggestions, integrity_checks=integrity_checks,
             jd_summary=result.jd_summary, resume_summary=result.resume_summary,
             progress_log=self._progress,
-            revised_resume=result.revised_resume,
         )
 
     def _build_degraded(

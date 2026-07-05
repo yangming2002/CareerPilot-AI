@@ -2,93 +2,92 @@
 import hashlib
 import logging
 import sys
+import time
 
 from sqlalchemy.orm import Session
 
 from app.agents.state import CareerPilotState
 from app.guards.guard_runner import GuardRunner
-from app.llm.client import get_llm_client
-from app.llm.prompts import (
-    JD_MATCH_SYSTEM,
-    JD_MATCH_USER,
-    RESUME_PARSE_SYSTEM,
-    RESUME_PARSE_USER,
-    INTEGRITY_GUARD_SYSTEM,
-    INTEGRITY_GUARD_USER,
-)
-from app.llm.schemas import LLMIntegrityCheck, LLMMatchResult, ParsedJD, ParsedResumeFields
+from app.llm.client import LLMClient, LLMConfig
+from app.llm.prompts import JD_MATCH_SYSTEM, JD_MATCH_USER
+from app.llm.schemas import LLMMatchResult, ParsedJD, ParsedResumeFields
 from app.models.models import AnalysisReport
 
 logger = logging.getLogger(__name__)
 MAX_GUARD_RETRIES = 2
 
+# Turbo for all LLM calls — plus is 10x slower for minimal quality gain
+_parse_client = LLMClient(LLMConfig(model="qwen-turbo", max_tokens=1024))
+_analysis_client = LLMClient(LLMConfig(model="qwen-turbo", max_tokens=4096, timeout=60))
 
-def _log(state: CareerPilotState, msg: str) -> None:
-    print(f"[Agent] {msg}", file=sys.stderr, flush=True)
-    state.setdefault("progress_log", []).append(msg)
-    # Push to shared store for frontend polling
+
+def _log(state: CareerPilotState, msg: str, elapsed: float = 0) -> None:
+    ts = f" ({elapsed:.1f}s)" if elapsed else ""
+    full_msg = f"{msg}{ts}"
+    print(f"[Agent] {full_msg}", file=sys.stderr, flush=True)
+    state.setdefault("progress_log", []).append(full_msg)
     sid = state.get("session_id", "")
     if sid:
         from app.core import progress as ps
-        ps.push(sid, msg)
+        ps.push(sid, full_msg)
 
 
-# ──────────── Node: parse_jd ────────────
+# ──────────── Node: parse_jd (turbo, fast) ────────────
 
 def parse_jd(state: CareerPilotState) -> CareerPilotState:
-    _log(state, "Agent: 解析 JD...")
-    llm = get_llm_client()
+    t0 = time.time()
     try:
-        result = llm.complete_structured(
-            system="Parse this job description into structured fields. All text in Chinese.",
+        result = _parse_client.complete_structured(
+            system="Parse this job description. All output in Chinese.",
             user=f"Parse this JD:\n\n{state['jd_text']}\n\n(Please respond with a JSON object.)",
             output_schema=ParsedJD,
         )
         state["parsed_jd"] = result
-    except Exception as e:
-        logger.exception("JD parsing failed")
+    except Exception:
         state["parsed_jd"] = ParsedJD(summary=state["jd_text"][:200])
+    _log(state, "  JD 解析 (turbo)", time.time() - t0)
     return state
 
 
-# ──────────── Node: parse_resume ────────────
+# ──────────── Node: parse_resume (turbo, fast) ────────────
 
 def parse_resume(state: CareerPilotState) -> CareerPilotState:
-    _log(state, "Agent: 解析简历...")
-    llm = get_llm_client()
+    t0 = time.time()
+    from app.llm.prompts import RESUME_PARSE_SYSTEM, RESUME_PARSE_USER
     try:
-        result = llm.complete_structured(
+        result = _parse_client.complete_structured(
             system=RESUME_PARSE_SYSTEM,
             user=RESUME_PARSE_USER.format(resume_text=state["resume_text"]) + "\n(Please respond with a JSON object.)",
             output_schema=ParsedResumeFields,
         )
         state["parsed_resume"] = result
-    except Exception as e:
-        logger.exception("Resume parsing failed")
+    except Exception:
         state["parsed_resume"] = ParsedResumeFields(raw_summary=state["resume_text"][:200])
+    _log(state, "  简历解析 (turbo)", time.time() - t0)
     return state
 
 
 # ──────────── Node: rule_match ────────────
 
 def rule_match(state: CareerPilotState) -> CareerPilotState:
-    _log(state, "Agent: 规则引擎快速评分...")
+    t0 = time.time()
     from app.services.analysis_service import AnalysisService
     service = AnalysisService()
-    # Rule engine returns a JDMatchResponse, we just need the score
     jd_skills = service._extract_skills(state["jd_text"].lower())
     resume_skills = service._extract_skills(state["resume_text"].lower())
     gaps = service._compute_skill_gaps(jd_skills, resume_skills)
     score = service._compute_score(jd_skills, resume_skills, gaps)
     state["rule_match_score"] = score
+    _log(state, "  规则引擎评分", time.time() - t0)
     return state
 
 
-# ──────────── Node: llm_analysis ────────────
+# ──────────── Node: llm_analysis (plus, quality) ────────────
 
 def llm_analysis(state: CareerPilotState) -> CareerPilotState:
-    _log(state, "Agent: 检索相关经历...")
-    # Retrieve relevant user facts from memory
+    t0 = time.time()
+
+    # Retrieve relevant facts from memory
     from app.memory.retriever import FactRetriever
     from app.core.database import SessionLocal
     memory_db = SessionLocal()
@@ -101,7 +100,6 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
     finally:
         memory_db.close()
 
-    # Build memory context for prompt
     memory_text = ""
     if memory_context["relevant_skills"]:
         memory_text += "\n## 你的相关技能（来自历史记录）\n"
@@ -111,16 +109,9 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
         memory_text += "\n## 你的相关项目经历\n"
         for p in memory_context["relevant_projects"][:5]:
             memory_text += f"- {p['content'][:200]}\n"
-    if memory_context["past_weaknesses"]:
-        memory_text += "\n## 你过去的技能短板\n"
-        for w in memory_context["past_weaknesses"]:
-            memory_text += f"- {w.content[:100]}\n"
 
-    _log(state, f"Agent: 检索到 {len(memory_context['relevant_skills'])} 个技能, "
-         f"{len(memory_context['relevant_projects'])} 个项目")
-
-    _log(state, "Agent: LLM 深度分析...")
-    llm = get_llm_client()
+    _log(state, f"  检索: {len(memory_context['relevant_skills'])}技能 {len(memory_context['relevant_projects'])}项目", time.time() - t0)
+    t1 = time.time()
 
     extra = ""
     if state.get("guard_retry_count", 0) > 0:
@@ -134,25 +125,40 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
         resume_text=state["resume_text"],
     ) + memory_text + extra + "\n(Please respond with a JSON object.)"
 
+    # --- LLM call with detailed timing ---
+    import json
+    t_build = time.time()
+    structured_system = (
+        JD_MATCH_SYSTEM
+        + f"\n\nYou MUST respond with a single JSON object matching this schema:\n```json\n{json.dumps(LLMMatchResult.model_json_schema(), ensure_ascii=False, indent=2)}\n```\n"
+        + "Reply ONLY with the JSON object, no markdown fences, no extra text."
+    )
+    prompt_chars = len(structured_system) + len(user_prompt)
+    _log(state, f"  Prompt构建 ({prompt_chars}字, schema={len(LLMMatchResult.model_json_schema()['properties'])}字段)", time.time() - t_build)
+
+    t_call = time.time()
     try:
-        result = llm.complete_structured(
+        result = _analysis_client.complete_structured(
             system=JD_MATCH_SYSTEM,
             user=user_prompt,
             output_schema=LLMMatchResult,
         )
         state["llm_match_result"] = result
+        _log(state, f"  API调用+推理", time.time() - t_call)
     except Exception as e:
         logger.exception("LLM analysis failed")
         state["error"] = str(e)
         state["degraded"] = True
         state["degraded_reason"] = f"LLM 分析失败: {e}"
+
+    _log(state, f"  LLM 匹配总计 (plus)", time.time() - t1)
     return state
 
 
 # ──────────── Node: integrity_guard ────────────
 
 def integrity_guard(state: CareerPilotState) -> CareerPilotState:
-    _log(state, "Agent: 真实性校验...")
+    t0 = time.time()
     runner = GuardRunner()
     result = state.get("llm_match_result")
     if result is None:
@@ -164,13 +170,14 @@ def integrity_guard(state: CareerPilotState) -> CareerPilotState:
     state["guard_passed"] = runner_result.passed
     state["guard_findings"] = [f for r in runner_result.results for f in r.findings]
     state["guard_retry_count"] = state.get("guard_retry_count", 0) + 1
+    _log(state, "  真实性校验", time.time() - t0)
     return state
 
 
 # ──────────── Node: compose_report ────────────
 
 def compose_report(state: CareerPilotState, db: Session) -> CareerPilotState:
-    _log(state, "Agent: 汇总报告...")
+    t0 = time.time()
     result = state.get("llm_match_result")
     if result is None:
         state["degraded"] = True
@@ -186,26 +193,24 @@ def compose_report(state: CareerPilotState, db: Session) -> CareerPilotState:
         jd_text_hash=jd_hash,
         match_score=result.match_score,
         skill_gaps=[g.model_dump() for g in result.skill_gaps],
-        keyword_coverage=result.keyword_coverage,
+        keyword_coverage=[],
         suggestions=[s.model_dump() for s in result.suggestions],
         integrity_checks=[c.model_dump() for c in result.integrity_checks],
         raw_jd_summary=result.jd_summary,
         raw_resume_summary=result.resume_summary,
-        revised_resume=result.revised_resume,
     )
     db.add(report)
     db.commit()
     db.refresh(report)
     state["final_report_id"] = report.id
     state["degraded"] = False
-    _log(state, f"Agent: 报告已保存 (ID={report.id}, 匹配分={result.match_score})")
+    _log(state, f"  汇总保存 (ID={report.id})", time.time() - t0)
     return state
 
 
 # ──────────── Node: fallback_rule ────────────
 
 def fallback_rule(state: CareerPilotState, db: Session) -> CareerPilotState:
-    _log(state, "Agent: LLM 不可用，降级为规则引擎...")
     from app.services.analysis_service import AnalysisService
     service = AnalysisService()
     result = service.analyze(db, state["resume_text"], state["jd_text"], state["user_id"])

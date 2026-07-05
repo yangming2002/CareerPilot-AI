@@ -12,7 +12,7 @@ const emit = defineEmits<{
   <div class="module-card">
     <div class="section-title">
       <h2>工作台模块</h2>
-      <span>先跑通求职闭环，再逐步接入后端 Agent 工作流。</span>
+      <span>Agent 自动解析 · 匹配 · 校验 · 改写，记忆系统持续沉淀。</span>
     </div>
 
     <el-radio-group

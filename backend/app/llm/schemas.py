@@ -58,14 +58,17 @@ class LLMIntegrityCheck(BaseModel):
 
 
 class LLMMatchResult(BaseModel):
-    """Complete JD match result from LLM."""
+    """Complete JD match result from LLM (analysis only, no rewriting)."""
     match_score: int = Field(ge=0, le=100)
     jd_summary: str = ""
     resume_summary: str = ""
     skill_gaps: list[LLMSkillGap] = Field(default_factory=list)
-    keyword_coverage: list[dict] = Field(default_factory=list)
     suggestions: list[LLMSuggestion] = Field(default_factory=list)
     integrity_checks: list[LLMIntegrityCheck] = Field(default_factory=list)
+
+
+class LLMRevisedResume(BaseModel):
+    """Standalone revised resume output."""
     revised_resume: str = ""
 
 

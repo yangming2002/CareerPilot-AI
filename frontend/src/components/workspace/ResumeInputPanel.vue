@@ -146,7 +146,7 @@ function clearFields() {
       type="textarea"
       :rows="showFields ? 6 : 14"
       resize="none"
-      placeholder="粘贴简历全文，或点击「上传简历」上传 PDF / DOCX / TXT 文件。"
+      placeholder="粘贴简历全文，或点击「上传简历」上传 PDF / DOCX / TXT 文件。Agent 会自动提取技能、项目和教育信息。"
     />
   </el-card>
 </template>

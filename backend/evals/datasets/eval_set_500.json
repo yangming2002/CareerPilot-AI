@@ -1,0 +1,4826 @@
+{
+  "jds": [
+    {
+      "company": "某AI公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某AI公司招聘大模型应用开发工程师。要求：Agent、多模态、LangGraph、Qwen、LangChain、DeepSeek、MCP协议、Fine-tuning。工具调用、知识库、大模型。",
+      "skills": "Agent,多模态,LangGraph,Qwen,LangChain,DeepSeek,MCP协议,Fine-tuning",
+      "match_score": 23,
+      "domain": "AI/大模型",
+      "id": 0
+    },
+    {
+      "company": "某AI公司",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某AI公司招聘AI Agent开发工程师。要求：多模态、Python、MCP协议、RAG、Qwen、DeepSeek、Transformer。知识库、MCP、文档解析。",
+      "skills": "多模态,Python,MCP协议,RAG,Qwen,DeepSeek,Transformer",
+      "match_score": 55,
+      "domain": "AI/大模型",
+      "id": 1
+    },
+    {
+      "company": "某AI公司",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某AI公司招聘AI Agent开发工程师。要求：DeepSeek、MCP协议、LangGraph、RAG、Fine-tuning、OpenAI API、LangChain、多模态、向量数据库。Agent、多智能体、工具调用。",
+      "skills": "DeepSeek,MCP协议,LangGraph,RAG,Fine-tuning,OpenAI API,LangChain,多模态,向量数据库",
+      "match_score": 53,
+      "domain": "AI/大模型",
+      "id": 2
+    },
+    {
+      "company": "某AI公司",
+      "position": "RAG系统工程师",
+      "jd_text": "某AI公司招聘RAG系统工程师。要求：Fine-tuning、LangGraph、MCP协议、Prompt Engineering、DeepSeek、Function Calling。多智能体、工具调用、MCP。",
+      "skills": "Fine-tuning,LangGraph,MCP协议,Prompt Engineering,DeepSeek,Function Calling",
+      "match_score": 28,
+      "domain": "AI/大模型",
+      "id": 3
+    },
+    {
+      "company": "某AI公司",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某AI公司招聘AI Agent开发工程师。要求：LangGraph、Agent、RLHF、LangChain、向量数据库、Prompt Engineering、Attention机制、OpenAI API。RAG检索增强、多智能体、工具调用。",
+      "skills": "LangGraph,Agent,RLHF,LangChain,向量数据库,Prompt Engineering,Attention机制,OpenAI API",
+      "match_score": 46,
+      "domain": "AI/大模型",
+      "id": 4
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某科技巨头AI Lab招聘大模型应用开发工程师。要求：Agent、OpenAI API、多模态、向量数据库、Prompt Engineering、DeepSeek、MCP协议。MCP、多智能体、大模型。",
+      "skills": "Agent,OpenAI API,多模态,向量数据库,Prompt Engineering,DeepSeek,MCP协议",
+      "match_score": 49,
+      "domain": "AI/大模型",
+      "id": 5
+    },
+    {
+      "company": "某AI公司",
+      "position": "LLM算法工程师",
+      "jd_text": "某AI公司招聘LLM算法工程师。要求：MCP协议、LangGraph、RAG、Function Calling、Qwen、OpenAI API、Transformer、Agent、向量数据库。自主决策、文档解析、RAG检索增强。",
+      "skills": "MCP协议,LangGraph,RAG,Function Calling,Qwen,OpenAI API,Transformer,Agent,向量数据库",
+      "match_score": 53,
+      "domain": "AI/大模型",
+      "id": 6
+    },
+    {
+      "company": "某大模型初创",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某大模型初创招聘AI Agent开发工程师。要求：RLHF、Fine-tuning、OpenAI API、RAG、LangGraph、MCP协议、Agent、LangChain。大模型、Agent、RAG检索增强。",
+      "skills": "RLHF,Fine-tuning,OpenAI API,RAG,LangGraph,MCP协议,Agent,LangChain",
+      "match_score": 40,
+      "domain": "AI/大模型",
+      "id": 7
+    },
+    {
+      "company": "某NLP公司",
+      "position": "提示词工程师",
+      "jd_text": "某NLP公司招聘提示词工程师。要求：Fine-tuning、多模态、Function Calling、Agent、MCP协议、Prompt Engineering。语义检索、大模型、Agent。",
+      "skills": "Fine-tuning,多模态,Function Calling,Agent,MCP协议,Prompt Engineering",
+      "match_score": 88,
+      "domain": "AI/大模型",
+      "id": 8
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "LLM算法工程师",
+      "jd_text": "某科技巨头AI Lab招聘LLM算法工程师。要求：Function Calling、RLHF、LangGraph、Agent、Python、Qwen。LangGraph工作流、语义检索、RAG检索增强。",
+      "skills": "Function Calling,RLHF,LangGraph,Agent,Python,Qwen",
+      "match_score": 84,
+      "domain": "AI/大模型",
+      "id": 9
+    },
+    {
+      "company": "某AI公司",
+      "position": "LLM算法工程师",
+      "jd_text": "某AI公司招聘LLM算法工程师。要求：Prompt Engineering、Qwen、Fine-tuning、LangGraph、MCP协议、Transformer、Python。工具调用、多智能体、文档解析。",
+      "skills": "Prompt Engineering,Qwen,Fine-tuning,LangGraph,MCP协议,Transformer,Python",
+      "match_score": 22,
+      "domain": "AI/大模型",
+      "id": 10
+    },
+    {
+      "company": "某AI公司",
+      "position": "LLM算法工程师",
+      "jd_text": "某AI公司招聘LLM算法工程师。要求：Agent、LangChain、RAG、Function Calling、Attention机制、Fine-tuning、多模态、Qwen。语义检索、RAG检索增强、工具调用。",
+      "skills": "Agent,LangChain,RAG,Function Calling,Attention机制,Fine-tuning,多模态,Qwen",
+      "match_score": 80,
+      "domain": "AI/大模型",
+      "id": 11
+    },
+    {
+      "company": "某Agent平台",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某Agent平台招聘AI Agent开发工程师。要求：多模态、RLHF、RAG、MCP协议、Fine-tuning、Qwen、Transformer、Prompt Engineering。知识库、多智能体、文档解析。",
+      "skills": "多模态,RLHF,RAG,MCP协议,Fine-tuning,Qwen,Transformer,Prompt Engineering",
+      "match_score": 86,
+      "domain": "AI/大模型",
+      "id": 12
+    },
+    {
+      "company": "某NLP公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某NLP公司招聘大模型应用开发工程师。要求：Agent、LangGraph、OpenAI API、Python、Function Calling、MCP协议、RAG。工具调用、MCP、大模型。",
+      "skills": "Agent,LangGraph,OpenAI API,Python,Function Calling,MCP协议,RAG",
+      "match_score": 29,
+      "domain": "AI/大模型",
+      "id": 13
+    },
+    {
+      "company": "某AI公司",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某AI公司招聘AI Agent开发工程师。要求：LangChain、DeepSeek、多模态、MCP协议、RAG、Prompt Engineering。自主决策、文档解析、MCP。",
+      "skills": "LangChain,DeepSeek,多模态,MCP协议,RAG,Prompt Engineering",
+      "match_score": 89,
+      "domain": "AI/大模型",
+      "id": 14
+    },
+    {
+      "company": "某大模型初创",
+      "position": "提示词工程师",
+      "jd_text": "某大模型初创招聘提示词工程师。要求：Agent、Attention机制、Fine-tuning、向量数据库、RAG、LangChain、Qwen、RLHF、OpenAI API。知识库、自主决策、文档解析。",
+      "skills": "Agent,Attention机制,Fine-tuning,向量数据库,RAG,LangChain,Qwen,RLHF,OpenAI API",
+      "match_score": 26,
+      "domain": "AI/大模型",
+      "id": 15
+    },
+    {
+      "company": "某AI公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某AI公司招聘大模型应用开发工程师。要求：DeepSeek、RAG、Attention机制、Transformer、RLHF、MCP协议、Agent、LangGraph、向量数据库。RAG检索增强、LangGraph工作流、文档解析。",
+      "skills": "DeepSeek,RAG,Attention机制,Transformer,RLHF,MCP协议,Agent,LangGraph,向量数据库",
+      "match_score": 51,
+      "domain": "AI/大模型",
+      "id": 16
+    },
+    {
+      "company": "某AI公司",
+      "position": "RAG系统工程师",
+      "jd_text": "某AI公司招聘RAG系统工程师。要求：LangChain、Python、多模态、Fine-tuning、RAG、LangGraph。知识库、文档解析、工具调用。",
+      "skills": "LangChain,Python,多模态,Fine-tuning,RAG,LangGraph",
+      "match_score": 47,
+      "domain": "AI/大模型",
+      "id": 17
+    },
+    {
+      "company": "某NLP公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某NLP公司招聘大模型应用开发工程师。要求：Fine-tuning、Python、向量数据库、Prompt Engineering、多模态、Agent、RLHF。知识库、语义检索、文档解析。",
+      "skills": "Fine-tuning,Python,向量数据库,Prompt Engineering,多模态,Agent,RLHF",
+      "match_score": 39,
+      "domain": "AI/大模型",
+      "id": 18
+    },
+    {
+      "company": "某大模型初创",
+      "position": "LLM算法工程师",
+      "jd_text": "某大模型初创招聘LLM算法工程师。要求：LangChain、多模态、Qwen、OpenAI API、Python、Fine-tuning、Function Calling。文档解析、语义检索、工具调用。",
+      "skills": "LangChain,多模态,Qwen,OpenAI API,Python,Fine-tuning,Function Calling",
+      "match_score": 40,
+      "domain": "AI/大模型",
+      "id": 19
+    },
+    {
+      "company": "某AI公司",
+      "position": "提示词工程师",
+      "jd_text": "某AI公司招聘提示词工程师。要求：OpenAI API、LangGraph、Function Calling、LangChain、DeepSeek、RAG。知识库、Agent、MCP。",
+      "skills": "OpenAI API,LangGraph,Function Calling,LangChain,DeepSeek,RAG",
+      "match_score": 25,
+      "domain": "AI/大模型",
+      "id": 20
+    },
+    {
+      "company": "某Agent平台",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某Agent平台招聘大模型应用开发工程师。要求：多模态、DeepSeek、Transformer、Prompt Engineering、RAG、Attention机制、OpenAI API、Fine-tuning、RLHF。知识库、RAG检索增强、LangGraph工作流。",
+      "skills": "多模态,DeepSeek,Transformer,Prompt Engineering,RAG,Attention机制,OpenAI API,Fine-tuning,RLHF",
+      "match_score": 78,
+      "domain": "AI/大模型",
+      "id": 21
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某科技巨头AI Lab招聘大模型应用开发工程师。要求：Transformer、RAG、LangChain、MCP协议、Attention机制、RLHF。LangGraph工作流、RAG检索增强、多智能体。",
+      "skills": "Transformer,RAG,LangChain,MCP协议,Attention机制,RLHF",
+      "match_score": 28,
+      "domain": "AI/大模型",
+      "id": 22
+    },
+    {
+      "company": "某大模型初创",
+      "position": "LLM算法工程师",
+      "jd_text": "某大模型初创招聘LLM算法工程师。要求：OpenAI API、Transformer、RLHF、MCP协议、Qwen、Prompt Engineering、Function Calling、Attention机制。大模型、语义检索、LangGraph工作流。",
+      "skills": "OpenAI API,Transformer,RLHF,MCP协议,Qwen,Prompt Engineering,Function Calling,Attention机制",
+      "match_score": 33,
+      "domain": "AI/大模型",
+      "id": 23
+    },
+    {
+      "company": "某大模型初创",
+      "position": "LLM算法工程师",
+      "jd_text": "某大模型初创招聘LLM算法工程师。要求：RAG、Prompt Engineering、Attention机制、Transformer、Function Calling、多模态。多智能体、MCP、LangGraph工作流。",
+      "skills": "RAG,Prompt Engineering,Attention机制,Transformer,Function Calling,多模态",
+      "match_score": 84,
+      "domain": "AI/大模型",
+      "id": 24
+    },
+    {
+      "company": "某NLP公司",
+      "position": "LLM算法工程师",
+      "jd_text": "某NLP公司招聘LLM算法工程师。要求：LangGraph、RLHF、Attention机制、Prompt Engineering、Python、Fine-tuning。多智能体、RAG检索增强、LangGraph工作流。",
+      "skills": "LangGraph,RLHF,Attention机制,Prompt Engineering,Python,Fine-tuning",
+      "match_score": 40,
+      "domain": "AI/大模型",
+      "id": 25
+    },
+    {
+      "company": "某NLP公司",
+      "position": "提示词工程师",
+      "jd_text": "某NLP公司招聘提示词工程师。要求：Python、RAG、LangChain、Qwen、LangGraph、MCP协议、多模态、OpenAI API、RLHF。RAG检索增强、知识库、自主决策。",
+      "skills": "Python,RAG,LangChain,Qwen,LangGraph,MCP协议,多模态,OpenAI API,RLHF",
+      "match_score": 25,
+      "domain": "AI/大模型",
+      "id": 26
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "LLM算法工程师",
+      "jd_text": "某科技巨头AI Lab招聘LLM算法工程师。要求：Qwen、向量数据库、DeepSeek、RAG、Transformer、LangChain。多智能体、语义检索、知识库。",
+      "skills": "Qwen,向量数据库,DeepSeek,RAG,Transformer,LangChain",
+      "match_score": 39,
+      "domain": "AI/大模型",
+      "id": 27
+    },
+    {
+      "company": "某大模型初创",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某大模型初创招聘AI Agent开发工程师。要求：RLHF、Python、LangGraph、Qwen、OpenAI API、向量数据库、DeepSeek。MCP、LangGraph工作流、RAG检索增强。",
+      "skills": "RLHF,Python,LangGraph,Qwen,OpenAI API,向量数据库,DeepSeek",
+      "match_score": 33,
+      "domain": "AI/大模型",
+      "id": 28
+    },
+    {
+      "company": "某NLP公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某NLP公司招聘大模型应用开发工程师。要求：Agent、向量数据库、RLHF、多模态、OpenAI API、Prompt Engineering、RAG、DeepSeek、Python。自主决策、MCP、知识库。",
+      "skills": "Agent,向量数据库,RLHF,多模态,OpenAI API,Prompt Engineering,RAG,DeepSeek,Python",
+      "match_score": 62,
+      "domain": "AI/大模型",
+      "id": 29
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某科技巨头AI Lab招聘大模型应用开发工程师。要求：Qwen、Fine-tuning、DeepSeek、RLHF、MCP协议、OpenAI API、Python、LangChain。LangGraph工作流、RAG检索增强、自主决策。",
+      "skills": "Qwen,Fine-tuning,DeepSeek,RLHF,MCP协议,OpenAI API,Python,LangChain",
+      "match_score": 24,
+      "domain": "AI/大模型",
+      "id": 30
+    },
+    {
+      "company": "某AI公司",
+      "position": "提示词工程师",
+      "jd_text": "某AI公司招聘提示词工程师。要求：Qwen、DeepSeek、向量数据库、Function Calling、MCP协议、LangChain、Transformer、RLHF、RAG。LangGraph工作流、大模型、知识库。",
+      "skills": "Qwen,DeepSeek,向量数据库,Function Calling,MCP协议,LangChain,Transformer,RLHF,RAG",
+      "match_score": 20,
+      "domain": "AI/大模型",
+      "id": 31
+    },
+    {
+      "company": "某Agent平台",
+      "position": "提示词工程师",
+      "jd_text": "某Agent平台招聘提示词工程师。要求：Qwen、RLHF、LangChain、DeepSeek、OpenAI API、Function Calling、Fine-tuning。自主决策、Agent、LangGraph工作流。",
+      "skills": "Qwen,RLHF,LangChain,DeepSeek,OpenAI API,Function Calling,Fine-tuning",
+      "match_score": 84,
+      "domain": "AI/大模型",
+      "id": 32
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "RAG系统工程师",
+      "jd_text": "某科技巨头AI Lab招聘RAG系统工程师。要求：Fine-tuning、Function Calling、MCP协议、LangGraph、RAG、向量数据库、DeepSeek、Qwen。自主决策、RAG检索增强、LangGraph工作流。",
+      "skills": "Fine-tuning,Function Calling,MCP协议,LangGraph,RAG,向量数据库,DeepSeek,Qwen",
+      "match_score": 71,
+      "domain": "AI/大模型",
+      "id": 33
+    },
+    {
+      "company": "某Agent平台",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某Agent平台招聘大模型应用开发工程师。要求：Function Calling、向量数据库、Attention机制、Fine-tuning、多模态、RLHF、DeepSeek、OpenAI API。文档解析、自主决策、工具调用。",
+      "skills": "Function Calling,向量数据库,Attention机制,Fine-tuning,多模态,RLHF,DeepSeek,OpenAI API",
+      "match_score": 47,
+      "domain": "AI/大模型",
+      "id": 34
+    },
+    {
+      "company": "某Agent平台",
+      "position": "RAG系统工程师",
+      "jd_text": "某Agent平台招聘RAG系统工程师。要求：LangGraph、Function Calling、MCP协议、DeepSeek、RLHF、Attention机制、OpenAI API。Agent、MCP、LangGraph工作流。",
+      "skills": "LangGraph,Function Calling,MCP协议,DeepSeek,RLHF,Attention机制,OpenAI API",
+      "match_score": 48,
+      "domain": "AI/大模型",
+      "id": 35
+    },
+    {
+      "company": "某大模型初创",
+      "position": "AI Agent开发工程师",
+      "jd_text": "某大模型初创招聘AI Agent开发工程师。要求：LangChain、Agent、Attention机制、Function Calling、Fine-tuning、多模态。文档解析、知识库、MCP。",
+      "skills": "LangChain,Agent,Attention机制,Function Calling,Fine-tuning,多模态",
+      "match_score": 69,
+      "domain": "AI/大模型",
+      "id": 36
+    },
+    {
+      "company": "某NLP公司",
+      "position": "RAG系统工程师",
+      "jd_text": "某NLP公司招聘RAG系统工程师。要求：Prompt Engineering、Python、Transformer、Fine-tuning、RLHF、LangChain、向量数据库。MCP、RAG检索增强、语义检索。",
+      "skills": "Prompt Engineering,Python,Transformer,Fine-tuning,RLHF,LangChain,向量数据库",
+      "match_score": 79,
+      "domain": "AI/大模型",
+      "id": 37
+    },
+    {
+      "company": "某AI公司",
+      "position": "提示词工程师",
+      "jd_text": "某AI公司招聘提示词工程师。要求：RAG、Transformer、LangGraph、Fine-tuning、Agent、DeepSeek、MCP协议。语义检索、工具调用、多智能体。",
+      "skills": "RAG,Transformer,LangGraph,Fine-tuning,Agent,DeepSeek,MCP协议",
+      "match_score": 76,
+      "domain": "AI/大模型",
+      "id": 38
+    },
+    {
+      "company": "某Agent平台",
+      "position": "提示词工程师",
+      "jd_text": "某Agent平台招聘提示词工程师。要求：Transformer、OpenAI API、Qwen、RLHF、Agent、Fine-tuning、Prompt Engineering、RAG、DeepSeek。语义检索、文档解析、MCP。",
+      "skills": "Transformer,OpenAI API,Qwen,RLHF,Agent,Fine-tuning,Prompt Engineering,RAG,DeepSeek",
+      "match_score": 55,
+      "domain": "AI/大模型",
+      "id": 39
+    },
+    {
+      "company": "某NLP公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某NLP公司招聘大模型应用开发工程师。要求：Agent、MCP协议、OpenAI API、Transformer、Attention机制、LangChain、LangGraph、DeepSeek。MCP、知识库、RAG检索增强。",
+      "skills": "Agent,MCP协议,OpenAI API,Transformer,Attention机制,LangChain,LangGraph,DeepSeek",
+      "match_score": 47,
+      "domain": "AI/大模型",
+      "id": 40
+    },
+    {
+      "company": "某AI公司",
+      "position": "RAG系统工程师",
+      "jd_text": "某AI公司招聘RAG系统工程师。要求：DeepSeek、Transformer、向量数据库、Python、RAG、Attention机制、Qwen、Function Calling、RLHF。工具调用、知识库、文档解析。",
+      "skills": "DeepSeek,Transformer,向量数据库,Python,RAG,Attention机制,Qwen,Function Calling,RLHF",
+      "match_score": 20,
+      "domain": "AI/大模型",
+      "id": 41
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "LLM算法工程师",
+      "jd_text": "某科技巨头AI Lab招聘LLM算法工程师。要求：RLHF、Agent、Attention机制、RAG、Prompt Engineering、向量数据库、Transformer、Python、Qwen。多智能体、知识库、RAG检索增强。",
+      "skills": "RLHF,Agent,Attention机制,RAG,Prompt Engineering,向量数据库,Transformer,Python,Qwen",
+      "match_score": 79,
+      "domain": "AI/大模型",
+      "id": 42
+    },
+    {
+      "company": "某大模型初创",
+      "position": "提示词工程师",
+      "jd_text": "某大模型初创招聘提示词工程师。要求：Fine-tuning、Python、LangChain、DeepSeek、向量数据库、LangGraph。文档解析、RAG检索增强、大模型。",
+      "skills": "Fine-tuning,Python,LangChain,DeepSeek,向量数据库,LangGraph",
+      "match_score": 53,
+      "domain": "AI/大模型",
+      "id": 43
+    },
+    {
+      "company": "某NLP公司",
+      "position": "LLM算法工程师",
+      "jd_text": "某NLP公司招聘LLM算法工程师。要求：Transformer、DeepSeek、OpenAI API、Fine-tuning、向量数据库、Prompt Engineering、RLHF。LangGraph工作流、Agent、文档解析。",
+      "skills": "Transformer,DeepSeek,OpenAI API,Fine-tuning,向量数据库,Prompt Engineering,RLHF",
+      "match_score": 22,
+      "domain": "AI/大模型",
+      "id": 44
+    },
+    {
+      "company": "某Agent平台",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某Agent平台招聘大模型应用开发工程师。要求：Agent、LangGraph、Fine-tuning、DeepSeek、Python、Transformer、RAG、RLHF。大模型、工具调用、RAG检索增强。",
+      "skills": "Agent,LangGraph,Fine-tuning,DeepSeek,Python,Transformer,RAG,RLHF",
+      "match_score": 50,
+      "domain": "AI/大模型",
+      "id": 45
+    },
+    {
+      "company": "某大模型初创",
+      "position": "RAG系统工程师",
+      "jd_text": "某大模型初创招聘RAG系统工程师。要求：向量数据库、Transformer、Qwen、Prompt Engineering、Fine-tuning、OpenAI API。RAG检索增强、工具调用、Agent。",
+      "skills": "向量数据库,Transformer,Qwen,Prompt Engineering,Fine-tuning,OpenAI API",
+      "match_score": 40,
+      "domain": "AI/大模型",
+      "id": 46
+    },
+    {
+      "company": "某科技巨头AI Lab",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某科技巨头AI Lab招聘大模型应用开发工程师。要求：Function Calling、Fine-tuning、向量数据库、Qwen、RAG、LangChain。工具调用、MCP、Agent。",
+      "skills": "Function Calling,Fine-tuning,向量数据库,Qwen,RAG,LangChain",
+      "match_score": 58,
+      "domain": "AI/大模型",
+      "id": 47
+    },
+    {
+      "company": "某Agent平台",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某Agent平台招聘大模型应用开发工程师。要求：Qwen、RLHF、DeepSeek、OpenAI API、LangChain、MCP协议。自主决策、多智能体、大模型。",
+      "skills": "Qwen,RLHF,DeepSeek,OpenAI API,LangChain,MCP协议",
+      "match_score": 73,
+      "domain": "AI/大模型",
+      "id": 48
+    },
+    {
+      "company": "某NLP公司",
+      "position": "大模型应用开发工程师",
+      "jd_text": "某NLP公司招聘大模型应用开发工程师。要求：Qwen、Transformer、多模态、LangGraph、向量数据库、RLHF、MCP协议、Prompt Engineering、DeepSeek。文档解析、自主决策、知识库。",
+      "skills": "Qwen,Transformer,多模态,LangGraph,向量数据库,RLHF,MCP协议,Prompt Engineering,DeepSeek",
+      "match_score": 54,
+      "domain": "AI/大模型",
+      "id": 49
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Go开发工程师",
+      "jd_text": "某SaaS公司招聘Go开发工程师。要求：FastAPI、PostgreSQL、Django、微服务、Docker、Kubernetes。容器化部署、缓存策略、后端服务。",
+      "skills": "FastAPI,PostgreSQL,Django,微服务,Docker,Kubernetes",
+      "match_score": 83,
+      "domain": "后端开发",
+      "id": 50
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Go开发工程师",
+      "jd_text": "某SaaS公司招聘Go开发工程师。要求：Django、Spring Boot、消息队列、FastAPI、微服务、gRPC、Docker、Python、Redis。高并发、API设计、数据一致性。",
+      "skills": "Django,Spring Boot,消息队列,FastAPI,微服务,gRPC,Docker,Python,Redis",
+      "match_score": 72,
+      "domain": "后端开发",
+      "id": 51
+    },
+    {
+      "company": "某游戏公司",
+      "position": "后端架构师",
+      "jd_text": "某游戏公司招聘后端架构师。要求：gRPC、PostgreSQL、Kubernetes、RESTful API、微服务、消息队列、Python。API设计、分布式系统、高并发。",
+      "skills": "gRPC,PostgreSQL,Kubernetes,RESTful API,微服务,消息队列,Python",
+      "match_score": 71,
+      "domain": "后端开发",
+      "id": 52
+    },
+    {
+      "company": "某金融科技",
+      "position": "Java后端开发",
+      "jd_text": "某金融科技招聘Java后端开发。要求：PostgreSQL、Redis、微服务、Spring Boot、MySQL、消息队列、gRPC、Docker。CI/CD、分布式系统、性能调优。",
+      "skills": "PostgreSQL,Redis,微服务,Spring Boot,MySQL,消息队列,gRPC,Docker",
+      "match_score": 52,
+      "domain": "后端开发",
+      "id": 53
+    },
+    {
+      "company": "某金融科技",
+      "position": "Python后端工程师",
+      "jd_text": "某金融科技招聘Python后端工程师。要求：Spring Boot、Go、gRPC、Redis、Java、Django、Docker。CI/CD、分布式系统、性能调优。",
+      "skills": "Spring Boot,Go,gRPC,Redis,Java,Django,Docker",
+      "match_score": 32,
+      "domain": "后端开发",
+      "id": 54
+    },
+    {
+      "company": "某金融科技",
+      "position": "Java后端开发",
+      "jd_text": "某金融科技招聘Java后端开发。要求：Spring Boot、Java、FastAPI、Python、Redis、微服务、消息队列。后端服务、数据一致性、分布式系统。",
+      "skills": "Spring Boot,Java,FastAPI,Python,Redis,微服务,消息队列",
+      "match_score": 36,
+      "domain": "后端开发",
+      "id": 55
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Python后端工程师",
+      "jd_text": "某游戏公司招聘Python后端工程师。要求：Docker、FastAPI、PostgreSQL、消息队列、gRPC、Spring Boot。数据库优化、后端服务、分布式系统。",
+      "skills": "Docker,FastAPI,PostgreSQL,消息队列,gRPC,Spring Boot",
+      "match_score": 81,
+      "domain": "后端开发",
+      "id": 56
+    },
+    {
+      "company": "某电商平台",
+      "position": "Python后端工程师",
+      "jd_text": "某电商平台招聘Python后端工程师。要求：PostgreSQL、Go、Docker、Kubernetes、gRPC、Python、Java、Redis、MySQL。数据一致性、分布式系统、API设计。",
+      "skills": "PostgreSQL,Go,Docker,Kubernetes,gRPC,Python,Java,Redis,MySQL",
+      "match_score": 51,
+      "domain": "后端开发",
+      "id": 57
+    },
+    {
+      "company": "某电商平台",
+      "position": "后端架构师",
+      "jd_text": "某电商平台招聘后端架构师。要求：Docker、RESTful API、消息队列、微服务、Django、Redis、MySQL、PostgreSQL、Kubernetes。分布式系统、容器化部署、数据一致性。",
+      "skills": "Docker,RESTful API,消息队列,微服务,Django,Redis,MySQL,PostgreSQL,Kubernetes",
+      "match_score": 27,
+      "domain": "后端开发",
+      "id": 58
+    },
+    {
+      "company": "某物流平台",
+      "position": "Python后端工程师",
+      "jd_text": "某物流平台招聘Python后端工程师。要求：Kubernetes、Django、FastAPI、RESTful API、Go、Java、微服务。数据库优化、性能调优、API设计。",
+      "skills": "Kubernetes,Django,FastAPI,RESTful API,Go,Java,微服务",
+      "match_score": 40,
+      "domain": "后端开发",
+      "id": 59
+    },
+    {
+      "company": "某电商平台",
+      "position": "Node.js工程师",
+      "jd_text": "某电商平台招聘Node.js工程师。要求：gRPC、Docker、PostgreSQL、FastAPI、Python、Django、RESTful API、Redis、Spring Boot。CI/CD、API设计、高并发。",
+      "skills": "gRPC,Docker,PostgreSQL,FastAPI,Python,Django,RESTful API,Redis,Spring Boot",
+      "match_score": 53,
+      "domain": "后端开发",
+      "id": 60
+    },
+    {
+      "company": "某物流平台",
+      "position": "Go开发工程师",
+      "jd_text": "某物流平台招聘Go开发工程师。要求：Go、Redis、Django、Kubernetes、Java、FastAPI、gRPC、RESTful API、Python。数据库优化、分布式系统、性能调优。",
+      "skills": "Go,Redis,Django,Kubernetes,Java,FastAPI,gRPC,RESTful API,Python",
+      "match_score": 76,
+      "domain": "后端开发",
+      "id": 61
+    },
+    {
+      "company": "某电商平台",
+      "position": "Node.js工程师",
+      "jd_text": "某电商平台招聘Node.js工程师。要求：gRPC、MySQL、FastAPI、Redis、RESTful API、PostgreSQL、Docker、Go。数据一致性、后端服务、容器化部署。",
+      "skills": "gRPC,MySQL,FastAPI,Redis,RESTful API,PostgreSQL,Docker,Go",
+      "match_score": 61,
+      "domain": "后端开发",
+      "id": 62
+    },
+    {
+      "company": "某物流平台",
+      "position": "Java后端开发",
+      "jd_text": "某物流平台招聘Java后端开发。要求：Go、Django、Kubernetes、Docker、gRPC、Python。分布式系统、后端服务、数据库优化。",
+      "skills": "Go,Django,Kubernetes,Docker,gRPC,Python",
+      "match_score": 80,
+      "domain": "后端开发",
+      "id": 63
+    },
+    {
+      "company": "某物流平台",
+      "position": "Node.js工程师",
+      "jd_text": "某物流平台招聘Node.js工程师。要求：Java、Docker、MySQL、Kubernetes、PostgreSQL、Go、gRPC、Spring Boot。容器化部署、缓存策略、性能调优。",
+      "skills": "Java,Docker,MySQL,Kubernetes,PostgreSQL,Go,gRPC,Spring Boot",
+      "match_score": 33,
+      "domain": "后端开发",
+      "id": 64
+    },
+    {
+      "company": "某金融科技",
+      "position": "Java后端开发",
+      "jd_text": "某金融科技招聘Java后端开发。要求：gRPC、PostgreSQL、FastAPI、Kubernetes、MySQL、Redis、Python、微服务、Docker。缓存策略、分布式系统、数据一致性。",
+      "skills": "gRPC,PostgreSQL,FastAPI,Kubernetes,MySQL,Redis,Python,微服务,Docker",
+      "match_score": 34,
+      "domain": "后端开发",
+      "id": 65
+    },
+    {
+      "company": "某游戏公司",
+      "position": "后端架构师",
+      "jd_text": "某游戏公司招聘后端架构师。要求：Kubernetes、微服务、Redis、PostgreSQL、MySQL、Python。高并发、性能调优、缓存策略。",
+      "skills": "Kubernetes,微服务,Redis,PostgreSQL,MySQL,Python",
+      "match_score": 83,
+      "domain": "后端开发",
+      "id": 66
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Python后端工程师",
+      "jd_text": "某游戏公司招聘Python后端工程师。要求：FastAPI、Redis、Java、RESTful API、PostgreSQL、Kubernetes、Go。后端服务、高并发、数据库优化。",
+      "skills": "FastAPI,Redis,Java,RESTful API,PostgreSQL,Kubernetes,Go",
+      "match_score": 59,
+      "domain": "后端开发",
+      "id": 67
+    },
+    {
+      "company": "某物流平台",
+      "position": "Python后端工程师",
+      "jd_text": "某物流平台招聘Python后端工程师。要求：Go、Django、RESTful API、PostgreSQL、消息队列、Java、gRPC、FastAPI、Redis。分布式系统、容器化部署、CI/CD。",
+      "skills": "Go,Django,RESTful API,PostgreSQL,消息队列,Java,gRPC,FastAPI,Redis",
+      "match_score": 80,
+      "domain": "后端开发",
+      "id": 68
+    },
+    {
+      "company": "某金融科技",
+      "position": "Node.js工程师",
+      "jd_text": "某金融科技招聘Node.js工程师。要求：MySQL、Django、Docker、Redis、Java、Go、FastAPI。容器化部署、缓存策略、分布式系统。",
+      "skills": "MySQL,Django,Docker,Redis,Java,Go,FastAPI",
+      "match_score": 20,
+      "domain": "后端开发",
+      "id": 69
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Java后端开发",
+      "jd_text": "某SaaS公司招聘Java后端开发。要求：微服务、Java、PostgreSQL、Redis、消息队列、Spring Boot、Docker、MySQL、Django。缓存策略、高并发、性能调优。",
+      "skills": "微服务,Java,PostgreSQL,Redis,消息队列,Spring Boot,Docker,MySQL,Django",
+      "match_score": 69,
+      "domain": "后端开发",
+      "id": 70
+    },
+    {
+      "company": "某金融科技",
+      "position": "Node.js工程师",
+      "jd_text": "某金融科技招聘Node.js工程师。要求：Spring Boot、gRPC、PostgreSQL、微服务、MySQL、Kubernetes。数据库优化、CI/CD、后端服务。",
+      "skills": "Spring Boot,gRPC,PostgreSQL,微服务,MySQL,Kubernetes",
+      "match_score": 36,
+      "domain": "后端开发",
+      "id": 71
+    },
+    {
+      "company": "某物流平台",
+      "position": "后端架构师",
+      "jd_text": "某物流平台招聘后端架构师。要求：微服务、Go、PostgreSQL、RESTful API、Redis、消息队列、Python、Java。容器化部署、数据库优化、API设计。",
+      "skills": "微服务,Go,PostgreSQL,RESTful API,Redis,消息队列,Python,Java",
+      "match_score": 80,
+      "domain": "后端开发",
+      "id": 72
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Java后端开发",
+      "jd_text": "某SaaS公司招聘Java后端开发。要求：Kubernetes、Go、Spring Boot、RESTful API、Redis、MySQL、消息队列、PostgreSQL、Docker。性能调优、后端服务、API设计。",
+      "skills": "Kubernetes,Go,Spring Boot,RESTful API,Redis,MySQL,消息队列,PostgreSQL,Docker",
+      "match_score": 50,
+      "domain": "后端开发",
+      "id": 73
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Go开发工程师",
+      "jd_text": "某SaaS公司招聘Go开发工程师。要求：MySQL、Go、消息队列、Kubernetes、微服务、PostgreSQL。数据库优化、分布式系统、后端服务。",
+      "skills": "MySQL,Go,消息队列,Kubernetes,微服务,PostgreSQL",
+      "match_score": 25,
+      "domain": "后端开发",
+      "id": 74
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Python后端工程师",
+      "jd_text": "某SaaS公司招聘Python后端工程师。要求：Spring Boot、RESTful API、MySQL、Java、Django、Redis、消息队列、gRPC。数据库优化、数据一致性、API设计。",
+      "skills": "Spring Boot,RESTful API,MySQL,Java,Django,Redis,消息队列,gRPC",
+      "match_score": 68,
+      "domain": "后端开发",
+      "id": 75
+    },
+    {
+      "company": "某物流平台",
+      "position": "Go开发工程师",
+      "jd_text": "某物流平台招聘Go开发工程师。要求：RESTful API、Docker、Java、Django、PostgreSQL、FastAPI、Kubernetes、微服务、Spring Boot。后端服务、CI/CD、分布式系统。",
+      "skills": "RESTful API,Docker,Java,Django,PostgreSQL,FastAPI,Kubernetes,微服务,Spring Boot",
+      "match_score": 89,
+      "domain": "后端开发",
+      "id": 76
+    },
+    {
+      "company": "某金融科技",
+      "position": "Python后端工程师",
+      "jd_text": "某金融科技招聘Python后端工程师。要求：Spring Boot、Docker、FastAPI、Kubernetes、MySQL、消息队列、PostgreSQL、微服务、Go。容器化部署、CI/CD、API设计。",
+      "skills": "Spring Boot,Docker,FastAPI,Kubernetes,MySQL,消息队列,PostgreSQL,微服务,Go",
+      "match_score": 50,
+      "domain": "后端开发",
+      "id": 77
+    },
+    {
+      "company": "某游戏公司",
+      "position": "后端架构师",
+      "jd_text": "某游戏公司招聘后端架构师。要求：Docker、FastAPI、gRPC、微服务、Python、MySQL、消息队列、Kubernetes。数据一致性、后端服务、CI/CD。",
+      "skills": "Docker,FastAPI,gRPC,微服务,Python,MySQL,消息队列,Kubernetes",
+      "match_score": 56,
+      "domain": "后端开发",
+      "id": 78
+    },
+    {
+      "company": "某金融科技",
+      "position": "后端架构师",
+      "jd_text": "某金融科技招聘后端架构师。要求：Django、Kubernetes、RESTful API、Docker、FastAPI、Java、Go、Python。分布式系统、CI/CD、后端服务。",
+      "skills": "Django,Kubernetes,RESTful API,Docker,FastAPI,Java,Go,Python",
+      "match_score": 66,
+      "domain": "后端开发",
+      "id": 79
+    },
+    {
+      "company": "某金融科技",
+      "position": "Python后端工程师",
+      "jd_text": "某金融科技招聘Python后端工程师。要求：Spring Boot、gRPC、MySQL、Java、Django、微服务、Redis、RESTful API。性能调优、数据一致性、分布式系统。",
+      "skills": "Spring Boot,gRPC,MySQL,Java,Django,微服务,Redis,RESTful API",
+      "match_score": 41,
+      "domain": "后端开发",
+      "id": 80
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Node.js工程师",
+      "jd_text": "某SaaS公司招聘Node.js工程师。要求：gRPC、微服务、Spring Boot、Go、PostgreSQL、RESTful API、Java、Django。容器化部署、性能调优、缓存策略。",
+      "skills": "gRPC,微服务,Spring Boot,Go,PostgreSQL,RESTful API,Java,Django",
+      "match_score": 31,
+      "domain": "后端开发",
+      "id": 81
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Python后端工程师",
+      "jd_text": "某游戏公司招聘Python后端工程师。要求：Redis、Go、PostgreSQL、Spring Boot、Kubernetes、FastAPI、MySQL、gRPC。API设计、高并发、CI/CD。",
+      "skills": "Redis,Go,PostgreSQL,Spring Boot,Kubernetes,FastAPI,MySQL,gRPC",
+      "match_score": 23,
+      "domain": "后端开发",
+      "id": 82
+    },
+    {
+      "company": "某物流平台",
+      "position": "后端架构师",
+      "jd_text": "某物流平台招聘后端架构师。要求：RESTful API、Docker、Django、Kubernetes、Go、PostgreSQL、FastAPI、MySQL。API设计、数据库优化、后端服务。",
+      "skills": "RESTful API,Docker,Django,Kubernetes,Go,PostgreSQL,FastAPI,MySQL",
+      "match_score": 24,
+      "domain": "后端开发",
+      "id": 83
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Node.js工程师",
+      "jd_text": "某SaaS公司招聘Node.js工程师。要求：Go、Django、Redis、Java、MySQL、PostgreSQL。缓存策略、性能调优、容器化部署。",
+      "skills": "Go,Django,Redis,Java,MySQL,PostgreSQL",
+      "match_score": 39,
+      "domain": "后端开发",
+      "id": 84
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Python后端工程师",
+      "jd_text": "某游戏公司招聘Python后端工程师。要求：Docker、MySQL、FastAPI、Python、Spring Boot、Django、PostgreSQL、Redis、Go。缓存策略、API设计、数据一致性。",
+      "skills": "Docker,MySQL,FastAPI,Python,Spring Boot,Django,PostgreSQL,Redis,Go",
+      "match_score": 89,
+      "domain": "后端开发",
+      "id": 85
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Python后端工程师",
+      "jd_text": "某SaaS公司招聘Python后端工程师。要求：FastAPI、Django、Go、PostgreSQL、消息队列、微服务、Python、Redis、MySQL。缓存策略、高并发、数据库优化。",
+      "skills": "FastAPI,Django,Go,PostgreSQL,消息队列,微服务,Python,Redis,MySQL",
+      "match_score": 46,
+      "domain": "后端开发",
+      "id": 86
+    },
+    {
+      "company": "某电商平台",
+      "position": "后端架构师",
+      "jd_text": "某电商平台招聘后端架构师。要求：Docker、Django、微服务、Spring Boot、Java、RESTful API、Python。分布式系统、数据库优化、性能调优。",
+      "skills": "Docker,Django,微服务,Spring Boot,Java,RESTful API,Python",
+      "match_score": 89,
+      "domain": "后端开发",
+      "id": 87
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Go开发工程师",
+      "jd_text": "某SaaS公司招聘Go开发工程师。要求：Kubernetes、微服务、Python、Java、消息队列、Spring Boot。高并发、缓存策略、后端服务。",
+      "skills": "Kubernetes,微服务,Python,Java,消息队列,Spring Boot",
+      "match_score": 42,
+      "domain": "后端开发",
+      "id": 88
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Python后端工程师",
+      "jd_text": "某SaaS公司招聘Python后端工程师。要求：gRPC、MySQL、Redis、Go、RESTful API、PostgreSQL、Docker。缓存策略、性能调优、API设计。",
+      "skills": "gRPC,MySQL,Redis,Go,RESTful API,PostgreSQL,Docker",
+      "match_score": 77,
+      "domain": "后端开发",
+      "id": 89
+    },
+    {
+      "company": "某物流平台",
+      "position": "Go开发工程师",
+      "jd_text": "某物流平台招聘Go开发工程师。要求：gRPC、消息队列、Kubernetes、Redis、FastAPI、PostgreSQL。后端服务、数据一致性、CI/CD。",
+      "skills": "gRPC,消息队列,Kubernetes,Redis,FastAPI,PostgreSQL",
+      "match_score": 71,
+      "domain": "后端开发",
+      "id": 90
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Python后端工程师",
+      "jd_text": "某游戏公司招聘Python后端工程师。要求：gRPC、PostgreSQL、Go、消息队列、Spring Boot、Docker、Java、RESTful API、微服务。分布式系统、性能调优、缓存策略。",
+      "skills": "gRPC,PostgreSQL,Go,消息队列,Spring Boot,Docker,Java,RESTful API,微服务",
+      "match_score": 68,
+      "domain": "后端开发",
+      "id": 91
+    },
+    {
+      "company": "某物流平台",
+      "position": "后端架构师",
+      "jd_text": "某物流平台招聘后端架构师。要求：PostgreSQL、Redis、Docker、MySQL、Go、Kubernetes、微服务、Django。容器化部署、CI/CD、高并发。",
+      "skills": "PostgreSQL,Redis,Docker,MySQL,Go,Kubernetes,微服务,Django",
+      "match_score": 72,
+      "domain": "后端开发",
+      "id": 92
+    },
+    {
+      "company": "某SaaS公司",
+      "position": "Node.js工程师",
+      "jd_text": "某SaaS公司招聘Node.js工程师。要求：MySQL、gRPC、Go、Spring Boot、RESTful API、微服务、FastAPI、Docker、消息队列。CI/CD、API设计、性能调优。",
+      "skills": "MySQL,gRPC,Go,Spring Boot,RESTful API,微服务,FastAPI,Docker,消息队列",
+      "match_score": 30,
+      "domain": "后端开发",
+      "id": 93
+    },
+    {
+      "company": "某电商平台",
+      "position": "Node.js工程师",
+      "jd_text": "某电商平台招聘Node.js工程师。要求：gRPC、RESTful API、Spring Boot、Java、Redis、Python。数据一致性、性能调优、缓存策略。",
+      "skills": "gRPC,RESTful API,Spring Boot,Java,Redis,Python",
+      "match_score": 35,
+      "domain": "后端开发",
+      "id": 94
+    },
+    {
+      "company": "某游戏公司",
+      "position": "Java后端开发",
+      "jd_text": "某游戏公司招聘Java后端开发。要求：微服务、gRPC、Python、FastAPI、Docker、RESTful API、Spring Boot、Go、Kubernetes。性能调优、高并发、数据库优化。",
+      "skills": "微服务,gRPC,Python,FastAPI,Docker,RESTful API,Spring Boot,Go,Kubernetes",
+      "match_score": 81,
+      "domain": "后端开发",
+      "id": 95
+    },
+    {
+      "company": "某金融科技",
+      "position": "Python后端工程师",
+      "jd_text": "某金融科技招聘Python后端工程师。要求：微服务、Redis、Spring Boot、Go、FastAPI、Docker、Django、MySQL。性能调优、数据一致性、后端服务。",
+      "skills": "微服务,Redis,Spring Boot,Go,FastAPI,Docker,Django,MySQL",
+      "match_score": 54,
+      "domain": "后端开发",
+      "id": 96
+    },
+    {
+      "company": "某电商平台",
+      "position": "Go开发工程师",
+      "jd_text": "某电商平台招聘Go开发工程师。要求：gRPC、消息队列、FastAPI、Spring Boot、RESTful API、Python、Java、Redis。数据一致性、容器化部署、API设计。",
+      "skills": "gRPC,消息队列,FastAPI,Spring Boot,RESTful API,Python,Java,Redis",
+      "match_score": 38,
+      "domain": "后端开发",
+      "id": 97
+    },
+    {
+      "company": "某电商平台",
+      "position": "Python后端工程师",
+      "jd_text": "某电商平台招聘Python后端工程师。要求：MySQL、RESTful API、PostgreSQL、Spring Boot、Java、gRPC、FastAPI。缓存策略、API设计、后端服务。",
+      "skills": "MySQL,RESTful API,PostgreSQL,Spring Boot,Java,gRPC,FastAPI",
+      "match_score": 39,
+      "domain": "后端开发",
+      "id": 98
+    },
+    {
+      "company": "某金融科技",
+      "position": "后端架构师",
+      "jd_text": "某金融科技招聘后端架构师。要求：Kubernetes、Go、FastAPI、PostgreSQL、RESTful API、MySQL。CI/CD、数据一致性、容器化部署。",
+      "skills": "Kubernetes,Go,FastAPI,PostgreSQL,RESTful API,MySQL",
+      "match_score": 54,
+      "domain": "后端开发",
+      "id": 99
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：HTML、Webpack、TypeScript、CSS、Vite、SSR。前端框架、响应式布局、SSR渲染。",
+      "skills": "HTML,Webpack,TypeScript,CSS,Vite,SSR",
+      "match_score": 27,
+      "domain": "前端开发",
+      "id": 100
+    },
+    {
+      "company": "某互联网公司",
+      "position": "React工程师",
+      "jd_text": "某互联网公司招聘React工程师。要求：Vue3、React、CSS、小程序开发、HTML、TypeScript、JavaScript、WebAssembly。前后端分离、状态管理、组件库。",
+      "skills": "Vue3,React,CSS,小程序开发,HTML,TypeScript,JavaScript,WebAssembly",
+      "match_score": 68,
+      "domain": "前端开发",
+      "id": 101
+    },
+    {
+      "company": "某内容平台",
+      "position": "React工程师",
+      "jd_text": "某内容平台招聘React工程师。要求：TypeScript、Webpack、JavaScript、跨平台、小程序开发、Vite、Node.js、React。前后端分离、微前端、SEO。",
+      "skills": "TypeScript,Webpack,JavaScript,跨平台,小程序开发,Vite,Node.js,React",
+      "match_score": 73,
+      "domain": "前端开发",
+      "id": 102
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：JavaScript、HTML、React、SSR、Vite、跨平台、WebAssembly、Vue3、Webpack。响应式布局、前后端分离、性能优化。",
+      "skills": "JavaScript,HTML,React,SSR,Vite,跨平台,WebAssembly,Vue3,Webpack",
+      "match_score": 71,
+      "domain": "前端开发",
+      "id": 103
+    },
+    {
+      "company": "某内容平台",
+      "position": "前端开发工程师",
+      "jd_text": "某内容平台招聘前端开发工程师。要求：CSS、跨平台、HTML、Vue3、小程序开发、React、JavaScript、WebAssembly、Webpack。微前端、响应式布局、前后端分离。",
+      "skills": "CSS,跨平台,HTML,Vue3,小程序开发,React,JavaScript,WebAssembly,Webpack",
+      "match_score": 64,
+      "domain": "前端开发",
+      "id": 104
+    },
+    {
+      "company": "某社交平台",
+      "position": "React工程师",
+      "jd_text": "某社交平台招聘React工程师。要求：TypeScript、React、CSS、Vue3、跨平台、Node.js、Webpack。组件库、状态管理、前后端分离。",
+      "skills": "TypeScript,React,CSS,Vue3,跨平台,Node.js,Webpack",
+      "match_score": 83,
+      "domain": "前端开发",
+      "id": 105
+    },
+    {
+      "company": "某工具产品",
+      "position": "Web前端架构师",
+      "jd_text": "某工具产品招聘Web前端架构师。要求：小程序开发、SSR、WebAssembly、跨平台、HTML、Node.js、TypeScript、Vue3、JavaScript。SSR渲染、微前端、SEO。",
+      "skills": "小程序开发,SSR,WebAssembly,跨平台,HTML,Node.js,TypeScript,Vue3,JavaScript",
+      "match_score": 58,
+      "domain": "前端开发",
+      "id": 106
+    },
+    {
+      "company": "某社交平台",
+      "position": "Web前端架构师",
+      "jd_text": "某社交平台招聘Web前端架构师。要求：HTML、Node.js、TypeScript、CSS、Vite、跨平台。前端框架、微前端、状态管理。",
+      "skills": "HTML,Node.js,TypeScript,CSS,Vite,跨平台",
+      "match_score": 56,
+      "domain": "前端开发",
+      "id": 107
+    },
+    {
+      "company": "某互联网公司",
+      "position": "前端开发工程师",
+      "jd_text": "某互联网公司招聘前端开发工程师。要求：Vite、SSR、Node.js、JavaScript、WebAssembly、Vue3、React、CSS、小程序开发。微前端、状态管理、前端框架。",
+      "skills": "Vite,SSR,Node.js,JavaScript,WebAssembly,Vue3,React,CSS,小程序开发",
+      "match_score": 77,
+      "domain": "前端开发",
+      "id": 108
+    },
+    {
+      "company": "某互联网公司",
+      "position": "Vue前端开发",
+      "jd_text": "某互联网公司招聘Vue前端开发。要求：Node.js、小程序开发、React、JavaScript、Vue3、Vite。SSR渲染、状态管理、微前端。",
+      "skills": "Node.js,小程序开发,React,JavaScript,Vue3,Vite",
+      "match_score": 67,
+      "domain": "前端开发",
+      "id": 109
+    },
+    {
+      "company": "某社交平台",
+      "position": "全栈工程师",
+      "jd_text": "某社交平台招聘全栈工程师。要求：WebAssembly、HTML、小程序开发、SSR、JavaScript、跨平台、Node.js、React、Webpack。微前端、前后端分离、状态管理。",
+      "skills": "WebAssembly,HTML,小程序开发,SSR,JavaScript,跨平台,Node.js,React,Webpack",
+      "match_score": 52,
+      "domain": "前端开发",
+      "id": 110
+    },
+    {
+      "company": "某内容平台",
+      "position": "React工程师",
+      "jd_text": "某内容平台招聘React工程师。要求：TypeScript、SSR、小程序开发、React、HTML、CSS、Node.js、Webpack。前后端分离、状态管理、性能优化。",
+      "skills": "TypeScript,SSR,小程序开发,React,HTML,CSS,Node.js,Webpack",
+      "match_score": 30,
+      "domain": "前端开发",
+      "id": 111
+    },
+    {
+      "company": "某社交平台",
+      "position": "Web前端架构师",
+      "jd_text": "某社交平台招聘Web前端架构师。要求：小程序开发、HTML、React、Node.js、TypeScript、Webpack、CSS、WebAssembly、JavaScript。SEO、性能优化、组件库。",
+      "skills": "小程序开发,HTML,React,Node.js,TypeScript,Webpack,CSS,WebAssembly,JavaScript",
+      "match_score": 47,
+      "domain": "前端开发",
+      "id": 112
+    },
+    {
+      "company": "某社交平台",
+      "position": "全栈工程师",
+      "jd_text": "某社交平台招聘全栈工程师。要求：Vue3、React、跨平台、TypeScript、CSS、SSR、Node.js。微前端、前端框架、SEO。",
+      "skills": "Vue3,React,跨平台,TypeScript,CSS,SSR,Node.js",
+      "match_score": 63,
+      "domain": "前端开发",
+      "id": 113
+    },
+    {
+      "company": "某内容平台",
+      "position": "React工程师",
+      "jd_text": "某内容平台招聘React工程师。要求：React、WebAssembly、跨平台、SSR、小程序开发、Vite、JavaScript、Vue3、Node.js。响应式布局、SSR渲染、性能优化。",
+      "skills": "React,WebAssembly,跨平台,SSR,小程序开发,Vite,JavaScript,Vue3,Node.js",
+      "match_score": 56,
+      "domain": "前端开发",
+      "id": 114
+    },
+    {
+      "company": "某工具产品",
+      "position": "React工程师",
+      "jd_text": "某工具产品招聘React工程师。要求：CSS、Vite、Vue3、HTML、跨平台、Node.js、Webpack。性能优化、前后端分离、微前端。",
+      "skills": "CSS,Vite,Vue3,HTML,跨平台,Node.js,Webpack",
+      "match_score": 87,
+      "domain": "前端开发",
+      "id": 115
+    },
+    {
+      "company": "某工具产品",
+      "position": "React工程师",
+      "jd_text": "某工具产品招聘React工程师。要求：WebAssembly、SSR、React、CSS、JavaScript、Vite、Webpack。SEO、组件库、微前端。",
+      "skills": "WebAssembly,SSR,React,CSS,JavaScript,Vite,Webpack",
+      "match_score": 86,
+      "domain": "前端开发",
+      "id": 116
+    },
+    {
+      "company": "某互联网公司",
+      "position": "Vue前端开发",
+      "jd_text": "某互联网公司招聘Vue前端开发。要求：WebAssembly、React、CSS、Vite、Node.js、跨平台。前后端分离、组件库、SSR渲染。",
+      "skills": "WebAssembly,React,CSS,Vite,Node.js,跨平台",
+      "match_score": 77,
+      "domain": "前端开发",
+      "id": 117
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：JavaScript、Webpack、Node.js、HTML、Vue3、跨平台、WebAssembly、React、TypeScript。前端框架、SEO、微前端。",
+      "skills": "JavaScript,Webpack,Node.js,HTML,Vue3,跨平台,WebAssembly,React,TypeScript",
+      "match_score": 62,
+      "domain": "前端开发",
+      "id": 118
+    },
+    {
+      "company": "某在线教育",
+      "position": "React工程师",
+      "jd_text": "某在线教育招聘React工程师。要求：CSS、Vite、React、跨平台、SSR、JavaScript。组件库、前端框架、状态管理。",
+      "skills": "CSS,Vite,React,跨平台,SSR,JavaScript",
+      "match_score": 47,
+      "domain": "前端开发",
+      "id": 119
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：TypeScript、CSS、Vue3、跨平台、WebAssembly、JavaScript、Node.js、小程序开发、SSR。SSR渲染、组件库、前端框架。",
+      "skills": "TypeScript,CSS,Vue3,跨平台,WebAssembly,JavaScript,Node.js,小程序开发,SSR",
+      "match_score": 83,
+      "domain": "前端开发",
+      "id": 120
+    },
+    {
+      "company": "某内容平台",
+      "position": "Web前端架构师",
+      "jd_text": "某内容平台招聘Web前端架构师。要求：小程序开发、Node.js、SSR、Vue3、React、CSS。前后端分离、前端框架、性能优化。",
+      "skills": "小程序开发,Node.js,SSR,Vue3,React,CSS",
+      "match_score": 65,
+      "domain": "前端开发",
+      "id": 121
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：React、小程序开发、跨平台、TypeScript、Node.js、HTML、JavaScript、CSS、Vite。微前端、前端框架、响应式布局。",
+      "skills": "React,小程序开发,跨平台,TypeScript,Node.js,HTML,JavaScript,CSS,Vite",
+      "match_score": 80,
+      "domain": "前端开发",
+      "id": 122
+    },
+    {
+      "company": "某互联网公司",
+      "position": "全栈工程师",
+      "jd_text": "某互联网公司招聘全栈工程师。要求：CSS、跨平台、JavaScript、HTML、TypeScript、SSR、Node.js、Vite。组件库、SEO、微前端。",
+      "skills": "CSS,跨平台,JavaScript,HTML,TypeScript,SSR,Node.js,Vite",
+      "match_score": 25,
+      "domain": "前端开发",
+      "id": 123
+    },
+    {
+      "company": "某社交平台",
+      "position": "Web前端架构师",
+      "jd_text": "某社交平台招聘Web前端架构师。要求：小程序开发、React、WebAssembly、Vite、SSR、跨平台、Webpack、TypeScript。组件库、SSR渲染、前端框架。",
+      "skills": "小程序开发,React,WebAssembly,Vite,SSR,跨平台,Webpack,TypeScript",
+      "match_score": 57,
+      "domain": "前端开发",
+      "id": 124
+    },
+    {
+      "company": "某在线教育",
+      "position": "前端开发工程师",
+      "jd_text": "某在线教育招聘前端开发工程师。要求：JavaScript、HTML、CSS、Node.js、Webpack、Vite、React。前端框架、响应式布局、状态管理。",
+      "skills": "JavaScript,HTML,CSS,Node.js,Webpack,Vite,React",
+      "match_score": 65,
+      "domain": "前端开发",
+      "id": 125
+    },
+    {
+      "company": "某互联网公司",
+      "position": "Vue前端开发",
+      "jd_text": "某互联网公司招聘Vue前端开发。要求：TypeScript、HTML、Webpack、小程序开发、Vite、SSR、React、WebAssembly。SSR渲染、微前端、状态管理。",
+      "skills": "TypeScript,HTML,Webpack,小程序开发,Vite,SSR,React,WebAssembly",
+      "match_score": 86,
+      "domain": "前端开发",
+      "id": 126
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：TypeScript、Webpack、SSR、React、Node.js、CSS、小程序开发、JavaScript、HTML。SEO、性能优化、状态管理。",
+      "skills": "TypeScript,Webpack,SSR,React,Node.js,CSS,小程序开发,JavaScript,HTML",
+      "match_score": 77,
+      "domain": "前端开发",
+      "id": 127
+    },
+    {
+      "company": "某内容平台",
+      "position": "全栈工程师",
+      "jd_text": "某内容平台招聘全栈工程师。要求：跨平台、Vite、HTML、WebAssembly、JavaScript、小程序开发、CSS。前后端分离、性能优化、SEO。",
+      "skills": "跨平台,Vite,HTML,WebAssembly,JavaScript,小程序开发,CSS",
+      "match_score": 27,
+      "domain": "前端开发",
+      "id": 128
+    },
+    {
+      "company": "某互联网公司",
+      "position": "全栈工程师",
+      "jd_text": "某互联网公司招聘全栈工程师。要求：Node.js、跨平台、小程序开发、React、JavaScript、SSR、Webpack、CSS。SSR渲染、前端框架、组件库。",
+      "skills": "Node.js,跨平台,小程序开发,React,JavaScript,SSR,Webpack,CSS",
+      "match_score": 28,
+      "domain": "前端开发",
+      "id": 129
+    },
+    {
+      "company": "某在线教育",
+      "position": "Vue前端开发",
+      "jd_text": "某在线教育招聘Vue前端开发。要求：Webpack、SSR、JavaScript、跨平台、React、Vite、Node.js、WebAssembly。SSR渲染、组件库、性能优化。",
+      "skills": "Webpack,SSR,JavaScript,跨平台,React,Vite,Node.js,WebAssembly",
+      "match_score": 37,
+      "domain": "前端开发",
+      "id": 130
+    },
+    {
+      "company": "某内容平台",
+      "position": "Vue前端开发",
+      "jd_text": "某内容平台招聘Vue前端开发。要求：HTML、小程序开发、CSS、Vue3、TypeScript、JavaScript、WebAssembly、Node.js、SSR。微前端、前后端分离、性能优化。",
+      "skills": "HTML,小程序开发,CSS,Vue3,TypeScript,JavaScript,WebAssembly,Node.js,SSR",
+      "match_score": 35,
+      "domain": "前端开发",
+      "id": 131
+    },
+    {
+      "company": "某社交平台",
+      "position": "Vue前端开发",
+      "jd_text": "某社交平台招聘Vue前端开发。要求：Vue3、SSR、CSS、Vite、WebAssembly、TypeScript、跨平台、JavaScript、Node.js。状态管理、SSR渲染、前端框架。",
+      "skills": "Vue3,SSR,CSS,Vite,WebAssembly,TypeScript,跨平台,JavaScript,Node.js",
+      "match_score": 60,
+      "domain": "前端开发",
+      "id": 132
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：CSS、React、小程序开发、跨平台、HTML、Vue3、JavaScript、TypeScript。状态管理、响应式布局、前后端分离。",
+      "skills": "CSS,React,小程序开发,跨平台,HTML,Vue3,JavaScript,TypeScript",
+      "match_score": 83,
+      "domain": "前端开发",
+      "id": 133
+    },
+    {
+      "company": "某互联网公司",
+      "position": "Vue前端开发",
+      "jd_text": "某互联网公司招聘Vue前端开发。要求：Vite、Node.js、React、SSR、TypeScript、跨平台、小程序开发、Vue3。SSR渲染、前后端分离、微前端。",
+      "skills": "Vite,Node.js,React,SSR,TypeScript,跨平台,小程序开发,Vue3",
+      "match_score": 72,
+      "domain": "前端开发",
+      "id": 134
+    },
+    {
+      "company": "某内容平台",
+      "position": "前端开发工程师",
+      "jd_text": "某内容平台招聘前端开发工程师。要求：HTML、小程序开发、TypeScript、Vite、SSR、WebAssembly、跨平台。微前端、状态管理、前后端分离。",
+      "skills": "HTML,小程序开发,TypeScript,Vite,SSR,WebAssembly,跨平台",
+      "match_score": 36,
+      "domain": "前端开发",
+      "id": 135
+    },
+    {
+      "company": "某工具产品",
+      "position": "Web前端架构师",
+      "jd_text": "某工具产品招聘Web前端架构师。要求：TypeScript、Node.js、React、CSS、小程序开发、跨平台。SEO、响应式布局、状态管理。",
+      "skills": "TypeScript,Node.js,React,CSS,小程序开发,跨平台",
+      "match_score": 86,
+      "domain": "前端开发",
+      "id": 136
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：Vue3、小程序开发、Node.js、CSS、React、SSR、Vite、Webpack。组件库、状态管理、性能优化。",
+      "skills": "Vue3,小程序开发,Node.js,CSS,React,SSR,Vite,Webpack",
+      "match_score": 39,
+      "domain": "前端开发",
+      "id": 137
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：SSR、JavaScript、跨平台、TypeScript、小程序开发、CSS、HTML、WebAssembly。前后端分离、前端框架、响应式布局。",
+      "skills": "SSR,JavaScript,跨平台,TypeScript,小程序开发,CSS,HTML,WebAssembly",
+      "match_score": 89,
+      "domain": "前端开发",
+      "id": 138
+    },
+    {
+      "company": "某社交平台",
+      "position": "Vue前端开发",
+      "jd_text": "某社交平台招聘Vue前端开发。要求：Vue3、小程序开发、Webpack、CSS、Vite、TypeScript、HTML、JavaScript、Node.js。SSR渲染、前后端分离、响应式布局。",
+      "skills": "Vue3,小程序开发,Webpack,CSS,Vite,TypeScript,HTML,JavaScript,Node.js",
+      "match_score": 79,
+      "domain": "前端开发",
+      "id": 139
+    },
+    {
+      "company": "某在线教育",
+      "position": "Vue前端开发",
+      "jd_text": "某在线教育招聘Vue前端开发。要求：HTML、跨平台、WebAssembly、小程序开发、Webpack、React、Node.js。SEO、组件库、状态管理。",
+      "skills": "HTML,跨平台,WebAssembly,小程序开发,Webpack,React,Node.js",
+      "match_score": 50,
+      "domain": "前端开发",
+      "id": 140
+    },
+    {
+      "company": "某工具产品",
+      "position": "前端开发工程师",
+      "jd_text": "某工具产品招聘前端开发工程师。要求：Vite、Vue3、React、TypeScript、JavaScript、CSS、跨平台、WebAssembly。前后端分离、响应式布局、微前端。",
+      "skills": "Vite,Vue3,React,TypeScript,JavaScript,CSS,跨平台,WebAssembly",
+      "match_score": 40,
+      "domain": "前端开发",
+      "id": 141
+    },
+    {
+      "company": "某社交平台",
+      "position": "Web前端架构师",
+      "jd_text": "某社交平台招聘Web前端架构师。要求：Vue3、React、Vite、Node.js、小程序开发、SSR、跨平台、WebAssembly。前端框架、组件库、响应式布局。",
+      "skills": "Vue3,React,Vite,Node.js,小程序开发,SSR,跨平台,WebAssembly",
+      "match_score": 84,
+      "domain": "前端开发",
+      "id": 142
+    },
+    {
+      "company": "某工具产品",
+      "position": "React工程师",
+      "jd_text": "某工具产品招聘React工程师。要求：SSR、HTML、JavaScript、小程序开发、CSS、Vite、Node.js。SSR渲染、性能优化、微前端。",
+      "skills": "SSR,HTML,JavaScript,小程序开发,CSS,Vite,Node.js",
+      "match_score": 21,
+      "domain": "前端开发",
+      "id": 143
+    },
+    {
+      "company": "某互联网公司",
+      "position": "全栈工程师",
+      "jd_text": "某互联网公司招聘全栈工程师。要求：CSS、跨平台、HTML、Webpack、小程序开发、JavaScript、Vue3。前端框架、响应式布局、状态管理。",
+      "skills": "CSS,跨平台,HTML,Webpack,小程序开发,JavaScript,Vue3",
+      "match_score": 90,
+      "domain": "前端开发",
+      "id": 144
+    },
+    {
+      "company": "某社交平台",
+      "position": "前端开发工程师",
+      "jd_text": "某社交平台招聘前端开发工程师。要求：Node.js、Vite、WebAssembly、CSS、TypeScript、React、JavaScript、Vue3、跨平台。SEO、微前端、前后端分离。",
+      "skills": "Node.js,Vite,WebAssembly,CSS,TypeScript,React,JavaScript,Vue3,跨平台",
+      "match_score": 38,
+      "domain": "前端开发",
+      "id": 145
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：Node.js、JavaScript、跨平台、小程序开发、React、HTML、Webpack、Vue3、CSS。SSR渲染、状态管理、性能优化。",
+      "skills": "Node.js,JavaScript,跨平台,小程序开发,React,HTML,Webpack,Vue3,CSS",
+      "match_score": 85,
+      "domain": "前端开发",
+      "id": 146
+    },
+    {
+      "company": "某在线教育",
+      "position": "Vue前端开发",
+      "jd_text": "某在线教育招聘Vue前端开发。要求：React、Webpack、SSR、CSS、HTML、Vite、Node.js、小程序开发。性能优化、SSR渲染、前后端分离。",
+      "skills": "React,Webpack,SSR,CSS,HTML,Vite,Node.js,小程序开发",
+      "match_score": 22,
+      "domain": "前端开发",
+      "id": 147
+    },
+    {
+      "company": "某社交平台",
+      "position": "Vue前端开发",
+      "jd_text": "某社交平台招聘Vue前端开发。要求：Webpack、SSR、CSS、JavaScript、Vite、小程序开发。响应式布局、前端框架、性能优化。",
+      "skills": "Webpack,SSR,CSS,JavaScript,Vite,小程序开发",
+      "match_score": 81,
+      "domain": "前端开发",
+      "id": 148
+    },
+    {
+      "company": "某在线教育",
+      "position": "Web前端架构师",
+      "jd_text": "某在线教育招聘Web前端架构师。要求：React、小程序开发、Vue3、JavaScript、TypeScript、跨平台、SSR、Vite、WebAssembly。前后端分离、状态管理、响应式布局。",
+      "skills": "React,小程序开发,Vue3,JavaScript,TypeScript,跨平台,SSR,Vite,WebAssembly",
+      "match_score": 46,
+      "domain": "前端开发",
+      "id": 149
+    },
+    {
+      "company": "某芯片公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某芯片公司招聘驱动开发工程师。要求：传感器、FreeRTOS、I2C、UART、C、ARM、电路设计、MCU、STM32。PWM、示波器、焊接。",
+      "skills": "传感器,FreeRTOS,I2C,UART,C,ARM,电路设计,MCU,STM32",
+      "match_score": 68,
+      "domain": "嵌入式/硬件",
+      "id": 150
+    },
+    {
+      "company": "某IoT平台",
+      "position": "硬件工程师",
+      "jd_text": "某IoT平台招聘硬件工程师。要求：FreeRTOS、电路设计、Arduino、传感器、UART、STM32、RTOS、MCU、C++。GPIO、焊接、实时系统。",
+      "skills": "FreeRTOS,电路设计,Arduino,传感器,UART,STM32,RTOS,MCU,C++",
+      "match_score": 48,
+      "domain": "嵌入式/硬件",
+      "id": 151
+    },
+    {
+      "company": "某IoT平台",
+      "position": "MCU开发工程师",
+      "jd_text": "某IoT平台招聘MCU开发工程师。要求：I2C、FreeRTOS、RTOS、Arduino、UART、传感器、电路设计。GPIO、实时系统、单片机。",
+      "skills": "I2C,FreeRTOS,RTOS,Arduino,UART,传感器,电路设计",
+      "match_score": 89,
+      "domain": "嵌入式/硬件",
+      "id": 152
+    },
+    {
+      "company": "某芯片公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某芯片公司招聘IoT开发工程师。要求：UART、FreeRTOS、ARM、STM32、C、I2C、C++、Arduino。示波器、GPIO、实时系统。",
+      "skills": "UART,FreeRTOS,ARM,STM32,C,I2C,C++,Arduino",
+      "match_score": 47,
+      "domain": "嵌入式/硬件",
+      "id": 153
+    },
+    {
+      "company": "某机器人公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某机器人公司招聘驱动开发工程师。要求：FreeRTOS、电路设计、I2C、STM32、ARM、C++、MCU、传感器。嵌入式、焊接、传感器。",
+      "skills": "FreeRTOS,电路设计,I2C,STM32,ARM,C++,MCU,传感器",
+      "match_score": 49,
+      "domain": "嵌入式/硬件",
+      "id": 154
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某智能硬件公司招聘嵌入式软件工程师。要求：Arduino、I2C、RTOS、C++、SPI、ARM、C、PCB、MCU。实时系统、示波器、低功耗。",
+      "skills": "Arduino,I2C,RTOS,C++,SPI,ARM,C,PCB,MCU",
+      "match_score": 45,
+      "domain": "嵌入式/硬件",
+      "id": 155
+    },
+    {
+      "company": "某IoT平台",
+      "position": "MCU开发工程师",
+      "jd_text": "某IoT平台招聘MCU开发工程师。要求：SPI、C、UART、C++、FreeRTOS、PCB、MCU、传感器。硬件调试、ADC、实时系统。",
+      "skills": "SPI,C,UART,C++,FreeRTOS,PCB,MCU,传感器",
+      "match_score": 24,
+      "domain": "嵌入式/硬件",
+      "id": 156
+    },
+    {
+      "company": "某芯片公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某芯片公司招聘IoT开发工程师。要求：FreeRTOS、I2C、STM32、C、传感器、UART、C++。PWM、GPIO、示波器。",
+      "skills": "FreeRTOS,I2C,STM32,C,传感器,UART,C++",
+      "match_score": 89,
+      "domain": "嵌入式/硬件",
+      "id": 157
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "IoT开发工程师",
+      "jd_text": "某可穿戴设备招聘IoT开发工程师。要求：传感器、电路设计、RTOS、STM32、MCU、C++、Arduino。硬件调试、示波器、GPIO。",
+      "skills": "传感器,电路设计,RTOS,STM32,MCU,C++,Arduino",
+      "match_score": 43,
+      "domain": "嵌入式/硬件",
+      "id": 158
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "MCU开发工程师",
+      "jd_text": "某智能硬件公司招聘MCU开发工程师。要求：PCB、SPI、UART、MCU、ARM、FreeRTOS、ESP32、电路设计。焊接、PWM、单片机。",
+      "skills": "PCB,SPI,UART,MCU,ARM,FreeRTOS,ESP32,电路设计",
+      "match_score": 71,
+      "domain": "嵌入式/硬件",
+      "id": 159
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "硬件工程师",
+      "jd_text": "某智能硬件公司招聘硬件工程师。要求：RTOS、Arduino、MCU、C、STM32、ESP32、UART。示波器、GPIO、PWM。",
+      "skills": "RTOS,Arduino,MCU,C,STM32,ESP32,UART",
+      "match_score": 58,
+      "domain": "嵌入式/硬件",
+      "id": 160
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "驱动开发工程师",
+      "jd_text": "某可穿戴设备招聘驱动开发工程师。要求：STM32、SPI、Arduino、I2C、MCU、C。实时系统、单片机、示波器。",
+      "skills": "STM32,SPI,Arduino,I2C,MCU,C",
+      "match_score": 59,
+      "domain": "嵌入式/硬件",
+      "id": 161
+    },
+    {
+      "company": "某机器人公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某机器人公司招聘IoT开发工程师。要求：I2C、C++、SPI、STM32、Arduino、PCB、MCU、电路设计。硬件调试、示波器、实时系统。",
+      "skills": "I2C,C++,SPI,STM32,Arduino,PCB,MCU,电路设计",
+      "match_score": 78,
+      "domain": "嵌入式/硬件",
+      "id": 162
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "MCU开发工程师",
+      "jd_text": "某可穿戴设备招聘MCU开发工程师。要求：I2C、电路设计、RTOS、传感器、SPI、MCU、PCB、C++、STM32。示波器、焊接、PWM。",
+      "skills": "I2C,电路设计,RTOS,传感器,SPI,MCU,PCB,C++,STM32",
+      "match_score": 29,
+      "domain": "嵌入式/硬件",
+      "id": 163
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某可穿戴设备招聘嵌入式软件工程师。要求：传感器、电路设计、FreeRTOS、MCU、PCB、UART。硬件调试、实时系统、PWM。",
+      "skills": "传感器,电路设计,FreeRTOS,MCU,PCB,UART",
+      "match_score": 86,
+      "domain": "嵌入式/硬件",
+      "id": 164
+    },
+    {
+      "company": "某芯片公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某芯片公司招聘嵌入式软件工程师。要求：I2C、PCB、RTOS、C++、电路设计、UART、C。示波器、硬件调试、焊接。",
+      "skills": "I2C,PCB,RTOS,C++,电路设计,UART,C",
+      "match_score": 73,
+      "domain": "嵌入式/硬件",
+      "id": 165
+    },
+    {
+      "company": "某芯片公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某芯片公司招聘驱动开发工程师。要求：电路设计、RTOS、SPI、STM32、C、ESP32。GPIO、嵌入式、传感器。",
+      "skills": "电路设计,RTOS,SPI,STM32,C,ESP32",
+      "match_score": 29,
+      "domain": "嵌入式/硬件",
+      "id": 166
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某智能硬件公司招聘IoT开发工程师。要求：I2C、C++、电路设计、C、传感器、RTOS、FreeRTOS、STM32。ADC、硬件调试、低功耗。",
+      "skills": "I2C,C++,电路设计,C,传感器,RTOS,FreeRTOS,STM32",
+      "match_score": 73,
+      "domain": "嵌入式/硬件",
+      "id": 167
+    },
+    {
+      "company": "某IoT平台",
+      "position": "IoT开发工程师",
+      "jd_text": "某IoT平台招聘IoT开发工程师。要求：传感器、ESP32、FreeRTOS、C++、SPI、电路设计、ARM、Arduino、C。硬件调试、焊接、ADC。",
+      "skills": "传感器,ESP32,FreeRTOS,C++,SPI,电路设计,ARM,Arduino,C",
+      "match_score": 87,
+      "domain": "嵌入式/硬件",
+      "id": 168
+    },
+    {
+      "company": "某机器人公司",
+      "position": "硬件工程师",
+      "jd_text": "某机器人公司招聘硬件工程师。要求：UART、C、STM32、RTOS、SPI、电路设计。ADC、焊接、实时系统。",
+      "skills": "UART,C,STM32,RTOS,SPI,电路设计",
+      "match_score": 49,
+      "domain": "嵌入式/硬件",
+      "id": 169
+    },
+    {
+      "company": "某机器人公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某机器人公司招聘IoT开发工程师。要求：ARM、STM32、MCU、I2C、C++、C、ESP32、PCB。传感器、实时系统、单片机。",
+      "skills": "ARM,STM32,MCU,I2C,C++,C,ESP32,PCB",
+      "match_score": 32,
+      "domain": "嵌入式/硬件",
+      "id": 170
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某可穿戴设备招聘嵌入式软件工程师。要求：PCB、SPI、I2C、C、MCU、UART、ESP32、RTOS、C++。焊接、传感器、嵌入式。",
+      "skills": "PCB,SPI,I2C,C,MCU,UART,ESP32,RTOS,C++",
+      "match_score": 37,
+      "domain": "嵌入式/硬件",
+      "id": 171
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "MCU开发工程师",
+      "jd_text": "某可穿戴设备招聘MCU开发工程师。要求：传感器、I2C、PCB、Arduino、UART、SPI、FreeRTOS。传感器、GPIO、硬件调试。",
+      "skills": "传感器,I2C,PCB,Arduino,UART,SPI,FreeRTOS",
+      "match_score": 86,
+      "domain": "嵌入式/硬件",
+      "id": 172
+    },
+    {
+      "company": "某机器人公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某机器人公司招聘IoT开发工程师。要求：STM32、C、电路设计、PCB、ARM、ESP32、UART、RTOS。嵌入式、PWM、ADC。",
+      "skills": "STM32,C,电路设计,PCB,ARM,ESP32,UART,RTOS",
+      "match_score": 87,
+      "domain": "嵌入式/硬件",
+      "id": 173
+    },
+    {
+      "company": "某IoT平台",
+      "position": "IoT开发工程师",
+      "jd_text": "某IoT平台招聘IoT开发工程师。要求：ARM、STM32、ESP32、FreeRTOS、电路设计、RTOS、MCU、SPI、I2C。硬件调试、示波器、嵌入式。",
+      "skills": "ARM,STM32,ESP32,FreeRTOS,电路设计,RTOS,MCU,SPI,I2C",
+      "match_score": 72,
+      "domain": "嵌入式/硬件",
+      "id": 174
+    },
+    {
+      "company": "某芯片公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某芯片公司招聘驱动开发工程师。要求：ESP32、MCU、STM32、传感器、Arduino、C++、RTOS。PWM、单片机、焊接。",
+      "skills": "ESP32,MCU,STM32,传感器,Arduino,C++,RTOS",
+      "match_score": 44,
+      "domain": "嵌入式/硬件",
+      "id": 175
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "MCU开发工程师",
+      "jd_text": "某智能硬件公司招聘MCU开发工程师。要求：SPI、PCB、传感器、C、C++、MCU、电路设计、UART、RTOS。传感器、PWM、GPIO。",
+      "skills": "SPI,PCB,传感器,C,C++,MCU,电路设计,UART,RTOS",
+      "match_score": 21,
+      "domain": "嵌入式/硬件",
+      "id": 176
+    },
+    {
+      "company": "某机器人公司",
+      "position": "硬件工程师",
+      "jd_text": "某机器人公司招聘硬件工程师。要求：I2C、UART、RTOS、MCU、PCB、FreeRTOS。ADC、传感器、焊接。",
+      "skills": "I2C,UART,RTOS,MCU,PCB,FreeRTOS",
+      "match_score": 61,
+      "domain": "嵌入式/硬件",
+      "id": 177
+    },
+    {
+      "company": "某IoT平台",
+      "position": "IoT开发工程师",
+      "jd_text": "某IoT平台招聘IoT开发工程师。要求：电路设计、SPI、Arduino、STM32、I2C、UART、FreeRTOS、RTOS、MCU。单片机、示波器、PWM。",
+      "skills": "电路设计,SPI,Arduino,STM32,I2C,UART,FreeRTOS,RTOS,MCU",
+      "match_score": 46,
+      "domain": "嵌入式/硬件",
+      "id": 178
+    },
+    {
+      "company": "某IoT平台",
+      "position": "MCU开发工程师",
+      "jd_text": "某IoT平台招聘MCU开发工程师。要求：C、PCB、MCU、I2C、ARM、FreeRTOS、STM32、ESP32、SPI。硬件调试、传感器、PWM。",
+      "skills": "C,PCB,MCU,I2C,ARM,FreeRTOS,STM32,ESP32,SPI",
+      "match_score": 49,
+      "domain": "嵌入式/硬件",
+      "id": 179
+    },
+    {
+      "company": "某芯片公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某芯片公司招聘驱动开发工程师。要求：RTOS、电路设计、SPI、UART、Arduino、STM32、FreeRTOS。实时系统、示波器、低功耗。",
+      "skills": "RTOS,电路设计,SPI,UART,Arduino,STM32,FreeRTOS",
+      "match_score": 41,
+      "domain": "嵌入式/硬件",
+      "id": 180
+    },
+    {
+      "company": "某IoT平台",
+      "position": "硬件工程师",
+      "jd_text": "某IoT平台招聘硬件工程师。要求：I2C、电路设计、RTOS、ARM、传感器、C、SPI。嵌入式、单片机、实时系统。",
+      "skills": "I2C,电路设计,RTOS,ARM,传感器,C,SPI",
+      "match_score": 20,
+      "domain": "嵌入式/硬件",
+      "id": 181
+    },
+    {
+      "company": "某芯片公司",
+      "position": "硬件工程师",
+      "jd_text": "某芯片公司招聘硬件工程师。要求：C++、I2C、ARM、C、MCU、电路设计、RTOS。PWM、嵌入式、示波器。",
+      "skills": "C++,I2C,ARM,C,MCU,电路设计,RTOS",
+      "match_score": 82,
+      "domain": "嵌入式/硬件",
+      "id": 182
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某智能硬件公司招聘嵌入式软件工程师。要求：C、FreeRTOS、电路设计、I2C、STM32、UART、SPI、传感器、PCB。实时系统、ADC、硬件调试。",
+      "skills": "C,FreeRTOS,电路设计,I2C,STM32,UART,SPI,传感器,PCB",
+      "match_score": 33,
+      "domain": "嵌入式/硬件",
+      "id": 183
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某智能硬件公司招聘驱动开发工程师。要求：MCU、FreeRTOS、PCB、电路设计、STM32、Arduino、SPI。ADC、单片机、PWM。",
+      "skills": "MCU,FreeRTOS,PCB,电路设计,STM32,Arduino,SPI",
+      "match_score": 71,
+      "domain": "嵌入式/硬件",
+      "id": 184
+    },
+    {
+      "company": "某芯片公司",
+      "position": "驱动开发工程师",
+      "jd_text": "某芯片公司招聘驱动开发工程师。要求：I2C、MCU、STM32、SPI、C++、C、FreeRTOS。ADC、实时系统、低功耗。",
+      "skills": "I2C,MCU,STM32,SPI,C++,C,FreeRTOS",
+      "match_score": 90,
+      "domain": "嵌入式/硬件",
+      "id": 185
+    },
+    {
+      "company": "某芯片公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某芯片公司招聘嵌入式软件工程师。要求：I2C、ARM、C++、RTOS、ESP32、Arduino。低功耗、单片机、焊接。",
+      "skills": "I2C,ARM,C++,RTOS,ESP32,Arduino",
+      "match_score": 25,
+      "domain": "嵌入式/硬件",
+      "id": 186
+    },
+    {
+      "company": "某机器人公司",
+      "position": "硬件工程师",
+      "jd_text": "某机器人公司招聘硬件工程师。要求：STM32、C、C++、SPI、FreeRTOS、电路设计、传感器、ARM、ESP32。PWM、嵌入式、传感器。",
+      "skills": "STM32,C,C++,SPI,FreeRTOS,电路设计,传感器,ARM,ESP32",
+      "match_score": 38,
+      "domain": "嵌入式/硬件",
+      "id": 187
+    },
+    {
+      "company": "某芯片公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某芯片公司招聘嵌入式软件工程师。要求：ARM、PCB、MCU、传感器、ESP32、电路设计、Arduino、SPI。硬件调试、单片机、焊接。",
+      "skills": "ARM,PCB,MCU,传感器,ESP32,电路设计,Arduino,SPI",
+      "match_score": 64,
+      "domain": "嵌入式/硬件",
+      "id": 188
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "嵌入式软件工程师",
+      "jd_text": "某智能硬件公司招聘嵌入式软件工程师。要求：MCU、传感器、C++、Arduino、PCB、SPI、ESP32、I2C、C。实时系统、GPIO、示波器。",
+      "skills": "MCU,传感器,C++,Arduino,PCB,SPI,ESP32,I2C,C",
+      "match_score": 82,
+      "domain": "嵌入式/硬件",
+      "id": 189
+    },
+    {
+      "company": "某机器人公司",
+      "position": "MCU开发工程师",
+      "jd_text": "某机器人公司招聘MCU开发工程师。要求：ESP32、ARM、SPI、PCB、UART、FreeRTOS、C++、STM32、I2C。传感器、单片机、低功耗。",
+      "skills": "ESP32,ARM,SPI,PCB,UART,FreeRTOS,C++,STM32,I2C",
+      "match_score": 54,
+      "domain": "嵌入式/硬件",
+      "id": 190
+    },
+    {
+      "company": "某机器人公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某机器人公司招聘IoT开发工程师。要求：I2C、ESP32、Arduino、UART、C++、SPI、C。GPIO、示波器、PWM。",
+      "skills": "I2C,ESP32,Arduino,UART,C++,SPI,C",
+      "match_score": 54,
+      "domain": "嵌入式/硬件",
+      "id": 191
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "硬件工程师",
+      "jd_text": "某智能硬件公司招聘硬件工程师。要求：ARM、ESP32、RTOS、电路设计、I2C、SPI。ADC、单片机、嵌入式。",
+      "skills": "ARM,ESP32,RTOS,电路设计,I2C,SPI",
+      "match_score": 31,
+      "domain": "嵌入式/硬件",
+      "id": 192
+    },
+    {
+      "company": "某IoT平台",
+      "position": "驱动开发工程师",
+      "jd_text": "某IoT平台招聘驱动开发工程师。要求：PCB、FreeRTOS、UART、Arduino、ESP32、C。GPIO、ADC、低功耗。",
+      "skills": "PCB,FreeRTOS,UART,Arduino,ESP32,C",
+      "match_score": 30,
+      "domain": "嵌入式/硬件",
+      "id": 193
+    },
+    {
+      "company": "某可穿戴设备",
+      "position": "硬件工程师",
+      "jd_text": "某可穿戴设备招聘硬件工程师。要求：SPI、ESP32、ARM、UART、STM32、FreeRTOS、PCB。示波器、硬件调试、单片机。",
+      "skills": "SPI,ESP32,ARM,UART,STM32,FreeRTOS,PCB",
+      "match_score": 41,
+      "domain": "嵌入式/硬件",
+      "id": 194
+    },
+    {
+      "company": "某芯片公司",
+      "position": "MCU开发工程师",
+      "jd_text": "某芯片公司招聘MCU开发工程师。要求：STM32、RTOS、UART、C++、Arduino、FreeRTOS、MCU、传感器、PCB。低功耗、传感器、示波器。",
+      "skills": "STM32,RTOS,UART,C++,Arduino,FreeRTOS,MCU,传感器,PCB",
+      "match_score": 33,
+      "domain": "嵌入式/硬件",
+      "id": 195
+    },
+    {
+      "company": "某机器人公司",
+      "position": "MCU开发工程师",
+      "jd_text": "某机器人公司招聘MCU开发工程师。要求：ESP32、Arduino、PCB、FreeRTOS、传感器、RTOS。PWM、ADC、硬件调试。",
+      "skills": "ESP32,Arduino,PCB,FreeRTOS,传感器,RTOS",
+      "match_score": 58,
+      "domain": "嵌入式/硬件",
+      "id": 196
+    },
+    {
+      "company": "某IoT平台",
+      "position": "驱动开发工程师",
+      "jd_text": "某IoT平台招聘驱动开发工程师。要求：RTOS、Arduino、ARM、ESP32、传感器、STM32、FreeRTOS。低功耗、传感器、PWM。",
+      "skills": "RTOS,Arduino,ARM,ESP32,传感器,STM32,FreeRTOS",
+      "match_score": 68,
+      "domain": "嵌入式/硬件",
+      "id": 197
+    },
+    {
+      "company": "某IoT平台",
+      "position": "IoT开发工程师",
+      "jd_text": "某IoT平台招聘IoT开发工程师。要求：C++、PCB、MCU、传感器、电路设计、ARM、SPI、C。示波器、传感器、实时系统。",
+      "skills": "C++,PCB,MCU,传感器,电路设计,ARM,SPI,C",
+      "match_score": 57,
+      "domain": "嵌入式/硬件",
+      "id": 198
+    },
+    {
+      "company": "某智能硬件公司",
+      "position": "IoT开发工程师",
+      "jd_text": "某智能硬件公司招聘IoT开发工程师。要求：ARM、SPI、STM32、MCU、UART、FreeRTOS、ESP32、电路设计、C。示波器、低功耗、实时系统。",
+      "skills": "ARM,SPI,STM32,MCU,UART,FreeRTOS,ESP32,电路设计,C",
+      "match_score": 71,
+      "domain": "嵌入式/硬件",
+      "id": 199
+    },
+    {
+      "company": "某安全公司",
+      "position": "基础设施工程师",
+      "jd_text": "某安全公司招聘基础设施工程师。要求：ELK、Linux、Jenkins、Python、Docker、AWS、Prometheus、Grafana、Kubernetes。监控告警、运维自动化、故障排查。",
+      "skills": "ELK,Linux,Jenkins,Python,Docker,AWS,Prometheus,Grafana,Kubernetes",
+      "match_score": 71,
+      "domain": "DevOps/运维",
+      "id": 200
+    },
+    {
+      "company": "某银行科技",
+      "position": "安全运维工程师",
+      "jd_text": "某银行科技招聘安全运维工程师。要求：Linux、Docker、Ansible、Terraform、ELK、AWS。网络配置、容量规划、日志分析。",
+      "skills": "Linux,Docker,Ansible,Terraform,ELK,AWS",
+      "match_score": 79,
+      "domain": "DevOps/运维",
+      "id": 201
+    },
+    {
+      "company": "某安全公司",
+      "position": "基础设施工程师",
+      "jd_text": "某安全公司招聘基础设施工程师。要求：Jenkins、Linux、Grafana、Docker、Ansible、Prometheus、Shell。容器编排、监控告警、网络配置。",
+      "skills": "Jenkins,Linux,Grafana,Docker,Ansible,Prometheus,Shell",
+      "match_score": 59,
+      "domain": "DevOps/运维",
+      "id": 202
+    },
+    {
+      "company": "某银行科技",
+      "position": "安全运维工程师",
+      "jd_text": "某银行科技招聘安全运维工程师。要求：ELK、Grafana、Jenkins、Shell、Docker、AWS、Azure。网络配置、容量规划、运维自动化。",
+      "skills": "ELK,Grafana,Jenkins,Shell,Docker,AWS,Azure",
+      "match_score": 58,
+      "domain": "DevOps/运维",
+      "id": 203
+    },
+    {
+      "company": "某云计算公司",
+      "position": "DevOps工程师",
+      "jd_text": "某云计算公司招聘DevOps工程师。要求：Jenkins、Azure、Docker、Kubernetes、Terraform、AWS。负载均衡、监控告警、网络配置。",
+      "skills": "Jenkins,Azure,Docker,Kubernetes,Terraform,AWS",
+      "match_score": 74,
+      "domain": "DevOps/运维",
+      "id": 204
+    },
+    {
+      "company": "某直播平台",
+      "position": "SRE工程师",
+      "jd_text": "某直播平台招聘SRE工程师。要求：Azure、Kubernetes、Shell、Prometheus、AWS、Linux、Jenkins、Ansible、Docker。网络配置、安全加固、日志分析。",
+      "skills": "Azure,Kubernetes,Shell,Prometheus,AWS,Linux,Jenkins,Ansible,Docker",
+      "match_score": 20,
+      "domain": "DevOps/运维",
+      "id": 205
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "SRE工程师",
+      "jd_text": "某SaaS平台招聘SRE工程师。要求：Python、Shell、Docker、AWS、Azure、Kubernetes、Grafana、Prometheus。日志分析、网络配置、运维自动化。",
+      "skills": "Python,Shell,Docker,AWS,Azure,Kubernetes,Grafana,Prometheus",
+      "match_score": 53,
+      "domain": "DevOps/运维",
+      "id": 206
+    },
+    {
+      "company": "某直播平台",
+      "position": "基础设施工程师",
+      "jd_text": "某直播平台招聘基础设施工程师。要求：AWS、Prometheus、Python、Shell、Docker、Jenkins、Kubernetes、Terraform。监控告警、故障排查、网络配置。",
+      "skills": "AWS,Prometheus,Python,Shell,Docker,Jenkins,Kubernetes,Terraform",
+      "match_score": 30,
+      "domain": "DevOps/运维",
+      "id": 207
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "云平台运维",
+      "jd_text": "某SaaS平台招聘云平台运维。要求：Terraform、Ansible、Docker、Kubernetes、Jenkins、AWS。负载均衡、安全加固、日志分析。",
+      "skills": "Terraform,Ansible,Docker,Kubernetes,Jenkins,AWS",
+      "match_score": 37,
+      "domain": "DevOps/运维",
+      "id": 208
+    },
+    {
+      "company": "某安全公司",
+      "position": "安全运维工程师",
+      "jd_text": "某安全公司招聘安全运维工程师。要求：Kubernetes、Grafana、Azure、ELK、Python、AWS、Terraform、Shell、Docker。监控告警、容量规划、安全加固。",
+      "skills": "Kubernetes,Grafana,Azure,ELK,Python,AWS,Terraform,Shell,Docker",
+      "match_score": 77,
+      "domain": "DevOps/运维",
+      "id": 209
+    },
+    {
+      "company": "某安全公司",
+      "position": "DevOps工程师",
+      "jd_text": "某安全公司招聘DevOps工程师。要求：Linux、Grafana、Kubernetes、Terraform、Prometheus、Shell、AWS、Jenkins。网络配置、安全加固、容量规划。",
+      "skills": "Linux,Grafana,Kubernetes,Terraform,Prometheus,Shell,AWS,Jenkins",
+      "match_score": 76,
+      "domain": "DevOps/运维",
+      "id": 210
+    },
+    {
+      "company": "某直播平台",
+      "position": "SRE工程师",
+      "jd_text": "某直播平台招聘SRE工程师。要求：AWS、Linux、Terraform、Ansible、Shell、Python。日志分析、故障排查、容器编排。",
+      "skills": "AWS,Linux,Terraform,Ansible,Shell,Python",
+      "match_score": 78,
+      "domain": "DevOps/运维",
+      "id": 211
+    },
+    {
+      "company": "某安全公司",
+      "position": "安全运维工程师",
+      "jd_text": "某安全公司招聘安全运维工程师。要求：AWS、Docker、Ansible、ELK、Jenkins、Linux。网络配置、日志分析、负载均衡。",
+      "skills": "AWS,Docker,Ansible,ELK,Jenkins,Linux",
+      "match_score": 33,
+      "domain": "DevOps/运维",
+      "id": 212
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "云平台运维",
+      "jd_text": "某SaaS平台招聘云平台运维。要求：Grafana、Ansible、Jenkins、Docker、Python、AWS。日志分析、负载均衡、安全加固。",
+      "skills": "Grafana,Ansible,Jenkins,Docker,Python,AWS",
+      "match_score": 64,
+      "domain": "DevOps/运维",
+      "id": 213
+    },
+    {
+      "company": "某安全公司",
+      "position": "安全运维工程师",
+      "jd_text": "某安全公司招聘安全运维工程师。要求：AWS、Kubernetes、Terraform、Azure、Linux、Jenkins、Ansible。故障排查、监控告警、网络配置。",
+      "skills": "AWS,Kubernetes,Terraform,Azure,Linux,Jenkins,Ansible",
+      "match_score": 57,
+      "domain": "DevOps/运维",
+      "id": 214
+    },
+    {
+      "company": "某银行科技",
+      "position": "基础设施工程师",
+      "jd_text": "某银行科技招聘基础设施工程师。要求：ELK、Azure、Docker、Kubernetes、Prometheus、Linux、AWS、Jenkins。监控告警、负载均衡、容器编排。",
+      "skills": "ELK,Azure,Docker,Kubernetes,Prometheus,Linux,AWS,Jenkins",
+      "match_score": 38,
+      "domain": "DevOps/运维",
+      "id": 215
+    },
+    {
+      "company": "某银行科技",
+      "position": "SRE工程师",
+      "jd_text": "某银行科技招聘SRE工程师。要求：Grafana、Kubernetes、AWS、Ansible、Prometheus、ELK、Terraform、Linux、Jenkins。安全加固、故障排查、容量规划。",
+      "skills": "Grafana,Kubernetes,AWS,Ansible,Prometheus,ELK,Terraform,Linux,Jenkins",
+      "match_score": 67,
+      "domain": "DevOps/运维",
+      "id": 216
+    },
+    {
+      "company": "某直播平台",
+      "position": "安全运维工程师",
+      "jd_text": "某直播平台招聘安全运维工程师。要求：AWS、Linux、Docker、Grafana、Jenkins、Azure、Prometheus、Ansible。安全加固、日志分析、网络配置。",
+      "skills": "AWS,Linux,Docker,Grafana,Jenkins,Azure,Prometheus,Ansible",
+      "match_score": 47,
+      "domain": "DevOps/运维",
+      "id": 217
+    },
+    {
+      "company": "某直播平台",
+      "position": "云平台运维",
+      "jd_text": "某直播平台招聘云平台运维。要求：Ansible、Jenkins、ELK、AWS、Kubernetes、Grafana、Prometheus、Azure。运维自动化、负载均衡、网络配置。",
+      "skills": "Ansible,Jenkins,ELK,AWS,Kubernetes,Grafana,Prometheus,Azure",
+      "match_score": 78,
+      "domain": "DevOps/运维",
+      "id": 218
+    },
+    {
+      "company": "某云计算公司",
+      "position": "DevOps工程师",
+      "jd_text": "某云计算公司招聘DevOps工程师。要求：Grafana、Python、Linux、Prometheus、Terraform、Kubernetes、Jenkins。故障排查、监控告警、安全加固。",
+      "skills": "Grafana,Python,Linux,Prometheus,Terraform,Kubernetes,Jenkins",
+      "match_score": 55,
+      "domain": "DevOps/运维",
+      "id": 219
+    },
+    {
+      "company": "某云计算公司",
+      "position": "云平台运维",
+      "jd_text": "某云计算公司招聘云平台运维。要求：Docker、Jenkins、Azure、Kubernetes、Linux、Prometheus、Shell、AWS。日志分析、安全加固、容量规划。",
+      "skills": "Docker,Jenkins,Azure,Kubernetes,Linux,Prometheus,Shell,AWS",
+      "match_score": 31,
+      "domain": "DevOps/运维",
+      "id": 220
+    },
+    {
+      "company": "某云计算公司",
+      "position": "DevOps工程师",
+      "jd_text": "某云计算公司招聘DevOps工程师。要求：Grafana、Docker、Kubernetes、AWS、Terraform、Python、Linux。运维自动化、容量规划、安全加固。",
+      "skills": "Grafana,Docker,Kubernetes,AWS,Terraform,Python,Linux",
+      "match_score": 35,
+      "domain": "DevOps/运维",
+      "id": 221
+    },
+    {
+      "company": "某直播平台",
+      "position": "SRE工程师",
+      "jd_text": "某直播平台招聘SRE工程师。要求：Docker、Terraform、Prometheus、Python、AWS、ELK、Kubernetes、Azure、Jenkins。监控告警、安全加固、网络配置。",
+      "skills": "Docker,Terraform,Prometheus,Python,AWS,ELK,Kubernetes,Azure,Jenkins",
+      "match_score": 37,
+      "domain": "DevOps/运维",
+      "id": 222
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "DevOps工程师",
+      "jd_text": "某SaaS平台招聘DevOps工程师。要求：AWS、Azure、Kubernetes、Grafana、Jenkins、Terraform。监控告警、安全加固、故障排查。",
+      "skills": "AWS,Azure,Kubernetes,Grafana,Jenkins,Terraform",
+      "match_score": 76,
+      "domain": "DevOps/运维",
+      "id": 223
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "DevOps工程师",
+      "jd_text": "某SaaS平台招聘DevOps工程师。要求：Kubernetes、Docker、AWS、Prometheus、Jenkins、Azure。容量规划、监控告警、容器编排。",
+      "skills": "Kubernetes,Docker,AWS,Prometheus,Jenkins,Azure",
+      "match_score": 55,
+      "domain": "DevOps/运维",
+      "id": 224
+    },
+    {
+      "company": "某云计算公司",
+      "position": "SRE工程师",
+      "jd_text": "某云计算公司招聘SRE工程师。要求：Python、Shell、Linux、Ansible、Terraform、ELK、Jenkins、Grafana。故障排查、运维自动化、安全加固。",
+      "skills": "Python,Shell,Linux,Ansible,Terraform,ELK,Jenkins,Grafana",
+      "match_score": 50,
+      "domain": "DevOps/运维",
+      "id": 225
+    },
+    {
+      "company": "某直播平台",
+      "position": "安全运维工程师",
+      "jd_text": "某直播平台招聘安全运维工程师。要求：Terraform、Grafana、Azure、AWS、Docker、Linux。容量规划、负载均衡、容器编排。",
+      "skills": "Terraform,Grafana,Azure,AWS,Docker,Linux",
+      "match_score": 69,
+      "domain": "DevOps/运维",
+      "id": 226
+    },
+    {
+      "company": "某安全公司",
+      "position": "安全运维工程师",
+      "jd_text": "某安全公司招聘安全运维工程师。要求：ELK、Azure、Kubernetes、Grafana、Docker、Linux、Ansible、AWS。运维自动化、故障排查、容器编排。",
+      "skills": "ELK,Azure,Kubernetes,Grafana,Docker,Linux,Ansible,AWS",
+      "match_score": 25,
+      "domain": "DevOps/运维",
+      "id": 227
+    },
+    {
+      "company": "某云计算公司",
+      "position": "安全运维工程师",
+      "jd_text": "某云计算公司招聘安全运维工程师。要求：Azure、Shell、ELK、Prometheus、AWS、Python、Linux、Jenkins。负载均衡、监控告警、网络配置。",
+      "skills": "Azure,Shell,ELK,Prometheus,AWS,Python,Linux,Jenkins",
+      "match_score": 30,
+      "domain": "DevOps/运维",
+      "id": 228
+    },
+    {
+      "company": "某银行科技",
+      "position": "DevOps工程师",
+      "jd_text": "某银行科技招聘DevOps工程师。要求：Python、Kubernetes、ELK、Jenkins、Prometheus、Docker、Shell。安全加固、日志分析、运维自动化。",
+      "skills": "Python,Kubernetes,ELK,Jenkins,Prometheus,Docker,Shell",
+      "match_score": 51,
+      "domain": "DevOps/运维",
+      "id": 229
+    },
+    {
+      "company": "某云计算公司",
+      "position": "安全运维工程师",
+      "jd_text": "某云计算公司招聘安全运维工程师。要求：Grafana、AWS、Shell、Linux、Ansible、Kubernetes。容器编排、运维自动化、容量规划。",
+      "skills": "Grafana,AWS,Shell,Linux,Ansible,Kubernetes",
+      "match_score": 37,
+      "domain": "DevOps/运维",
+      "id": 230
+    },
+    {
+      "company": "某云计算公司",
+      "position": "SRE工程师",
+      "jd_text": "某云计算公司招聘SRE工程师。要求：Jenkins、ELK、Shell、Ansible、Kubernetes、Python、Docker、Grafana、Azure。容器编排、运维自动化、监控告警。",
+      "skills": "Jenkins,ELK,Shell,Ansible,Kubernetes,Python,Docker,Grafana,Azure",
+      "match_score": 74,
+      "domain": "DevOps/运维",
+      "id": 231
+    },
+    {
+      "company": "某银行科技",
+      "position": "基础设施工程师",
+      "jd_text": "某银行科技招聘基础设施工程师。要求：Ansible、Shell、AWS、Docker、Grafana、ELK。负载均衡、容量规划、运维自动化。",
+      "skills": "Ansible,Shell,AWS,Docker,Grafana,ELK",
+      "match_score": 83,
+      "domain": "DevOps/运维",
+      "id": 232
+    },
+    {
+      "company": "某安全公司",
+      "position": "SRE工程师",
+      "jd_text": "某安全公司招聘SRE工程师。要求：Kubernetes、Ansible、Docker、AWS、Azure、Terraform、Jenkins、Shell。运维自动化、负载均衡、安全加固。",
+      "skills": "Kubernetes,Ansible,Docker,AWS,Azure,Terraform,Jenkins,Shell",
+      "match_score": 21,
+      "domain": "DevOps/运维",
+      "id": 233
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "DevOps工程师",
+      "jd_text": "某SaaS平台招聘DevOps工程师。要求：Jenkins、Prometheus、Kubernetes、Azure、Linux、Shell、Docker、AWS、Grafana。安全加固、容量规划、监控告警。",
+      "skills": "Jenkins,Prometheus,Kubernetes,Azure,Linux,Shell,Docker,AWS,Grafana",
+      "match_score": 29,
+      "domain": "DevOps/运维",
+      "id": 234
+    },
+    {
+      "company": "某安全公司",
+      "position": "云平台运维",
+      "jd_text": "某安全公司招聘云平台运维。要求：ELK、Azure、Linux、Kubernetes、Terraform、Shell。安全加固、容器编排、日志分析。",
+      "skills": "ELK,Azure,Linux,Kubernetes,Terraform,Shell",
+      "match_score": 56,
+      "domain": "DevOps/运维",
+      "id": 235
+    },
+    {
+      "company": "某银行科技",
+      "position": "云平台运维",
+      "jd_text": "某银行科技招聘云平台运维。要求：ELK、Grafana、Linux、Jenkins、Terraform、Ansible。故障排查、日志分析、网络配置。",
+      "skills": "ELK,Grafana,Linux,Jenkins,Terraform,Ansible",
+      "match_score": 67,
+      "domain": "DevOps/运维",
+      "id": 236
+    },
+    {
+      "company": "某安全公司",
+      "position": "安全运维工程师",
+      "jd_text": "某安全公司招聘安全运维工程师。要求：Shell、ELK、Terraform、Kubernetes、Linux、Prometheus、Python。日志分析、容量规划、网络配置。",
+      "skills": "Shell,ELK,Terraform,Kubernetes,Linux,Prometheus,Python",
+      "match_score": 21,
+      "domain": "DevOps/运维",
+      "id": 237
+    },
+    {
+      "company": "某银行科技",
+      "position": "DevOps工程师",
+      "jd_text": "某银行科技招聘DevOps工程师。要求：Shell、Python、Ansible、Docker、Terraform、ELK、Grafana、Prometheus、Linux。监控告警、故障排查、运维自动化。",
+      "skills": "Shell,Python,Ansible,Docker,Terraform,ELK,Grafana,Prometheus,Linux",
+      "match_score": 25,
+      "domain": "DevOps/运维",
+      "id": 238
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "基础设施工程师",
+      "jd_text": "某SaaS平台招聘基础设施工程师。要求：Shell、Jenkins、Grafana、Docker、AWS、Kubernetes、Python、Terraform、Linux。运维自动化、安全加固、容量规划。",
+      "skills": "Shell,Jenkins,Grafana,Docker,AWS,Kubernetes,Python,Terraform,Linux",
+      "match_score": 36,
+      "domain": "DevOps/运维",
+      "id": 239
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "云平台运维",
+      "jd_text": "某SaaS平台招聘云平台运维。要求：Jenkins、Prometheus、Python、Azure、Grafana、Ansible、Docker、Linux。日志分析、监控告警、安全加固。",
+      "skills": "Jenkins,Prometheus,Python,Azure,Grafana,Ansible,Docker,Linux",
+      "match_score": 33,
+      "domain": "DevOps/运维",
+      "id": 240
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "DevOps工程师",
+      "jd_text": "某SaaS平台招聘DevOps工程师。要求：Grafana、Python、Jenkins、Prometheus、Docker、Azure、AWS。日志分析、网络配置、监控告警。",
+      "skills": "Grafana,Python,Jenkins,Prometheus,Docker,Azure,AWS",
+      "match_score": 79,
+      "domain": "DevOps/运维",
+      "id": 241
+    },
+    {
+      "company": "某银行科技",
+      "position": "DevOps工程师",
+      "jd_text": "某银行科技招聘DevOps工程师。要求：Kubernetes、Azure、Ansible、AWS、Linux、Terraform。容量规划、监控告警、运维自动化。",
+      "skills": "Kubernetes,Azure,Ansible,AWS,Linux,Terraform",
+      "match_score": 51,
+      "domain": "DevOps/运维",
+      "id": 242
+    },
+    {
+      "company": "某银行科技",
+      "position": "安全运维工程师",
+      "jd_text": "某银行科技招聘安全运维工程师。要求：Azure、Ansible、Shell、Kubernetes、Linux、Prometheus。网络配置、日志分析、运维自动化。",
+      "skills": "Azure,Ansible,Shell,Kubernetes,Linux,Prometheus",
+      "match_score": 79,
+      "domain": "DevOps/运维",
+      "id": 243
+    },
+    {
+      "company": "某云计算公司",
+      "position": "SRE工程师",
+      "jd_text": "某云计算公司招聘SRE工程师。要求：Linux、Python、Terraform、Kubernetes、Azure、Prometheus。容量规划、容器编排、故障排查。",
+      "skills": "Linux,Python,Terraform,Kubernetes,Azure,Prometheus",
+      "match_score": 53,
+      "domain": "DevOps/运维",
+      "id": 244
+    },
+    {
+      "company": "某云计算公司",
+      "position": "DevOps工程师",
+      "jd_text": "某云计算公司招聘DevOps工程师。要求：Terraform、Azure、Grafana、Kubernetes、Docker、Jenkins。容器编排、运维自动化、日志分析。",
+      "skills": "Terraform,Azure,Grafana,Kubernetes,Docker,Jenkins",
+      "match_score": 26,
+      "domain": "DevOps/运维",
+      "id": 245
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "基础设施工程师",
+      "jd_text": "某SaaS平台招聘基础设施工程师。要求：Shell、Prometheus、Grafana、Linux、Python、ELK、Docker、Kubernetes、Azure。监控告警、故障排查、负载均衡。",
+      "skills": "Shell,Prometheus,Grafana,Linux,Python,ELK,Docker,Kubernetes,Azure",
+      "match_score": 77,
+      "domain": "DevOps/运维",
+      "id": 246
+    },
+    {
+      "company": "某SaaS平台",
+      "position": "DevOps工程师",
+      "jd_text": "某SaaS平台招聘DevOps工程师。要求：Azure、Ansible、Grafana、Prometheus、ELK、Python、Linux。容器编排、故障排查、日志分析。",
+      "skills": "Azure,Ansible,Grafana,Prometheus,ELK,Python,Linux",
+      "match_score": 37,
+      "domain": "DevOps/运维",
+      "id": 247
+    },
+    {
+      "company": "某直播平台",
+      "position": "SRE工程师",
+      "jd_text": "某直播平台招聘SRE工程师。要求：Azure、ELK、Linux、Prometheus、Jenkins、Grafana、Ansible。网络配置、容量规划、故障排查。",
+      "skills": "Azure,ELK,Linux,Prometheus,Jenkins,Grafana,Ansible",
+      "match_score": 84,
+      "domain": "DevOps/运维",
+      "id": 248
+    },
+    {
+      "company": "某银行科技",
+      "position": "安全运维工程师",
+      "jd_text": "某银行科技招聘安全运维工程师。要求：Kubernetes、Linux、Jenkins、AWS、Terraform、Shell、Prometheus、Python。运维自动化、网络配置、故障排查。",
+      "skills": "Kubernetes,Linux,Jenkins,AWS,Terraform,Shell,Prometheus,Python",
+      "match_score": 65,
+      "domain": "DevOps/运维",
+      "id": 249
+    },
+    {
+      "company": "某广告平台",
+      "position": "BI工程师",
+      "jd_text": "某广告平台招聘BI工程师。要求：Python、Excel、ETL、Tableau、A/B测试、PowerBI、SQL。指标拆解、归因分析、数据看板。",
+      "skills": "Python,Excel,ETL,Tableau,A/B测试,PowerBI,SQL",
+      "match_score": 65,
+      "domain": "数据分析",
+      "id": 250
+    },
+    {
+      "company": "某金融风控",
+      "position": "BI工程师",
+      "jd_text": "某金融风控招聘BI工程师。要求：ETL、PowerBI、数据仓库、SQL、数据可视化、统计学、Pandas。用户画像、归因分析、报表开发。",
+      "skills": "ETL,PowerBI,数据仓库,SQL,数据可视化,统计学,Pandas",
+      "match_score": 83,
+      "domain": "数据分析",
+      "id": 251
+    },
+    {
+      "company": "某广告平台",
+      "position": "数据运营",
+      "jd_text": "某广告平台招聘数据运营。要求：A/B测试、SQL、Python、ETL、数据可视化、Tableau、统计学。数据分析、归因分析、指标拆解。",
+      "skills": "A/B测试,SQL,Python,ETL,数据可视化,Tableau,统计学",
+      "match_score": 20,
+      "domain": "数据分析",
+      "id": 252
+    },
+    {
+      "company": "某咨询公司",
+      "position": "增长分析师",
+      "jd_text": "某咨询公司招聘增长分析师。要求：Pandas、PowerBI、数据仓库、ETL、SQL、统计学、Python。用户画像、留存分析、数据分析。",
+      "skills": "Pandas,PowerBI,数据仓库,ETL,SQL,统计学,Python",
+      "match_score": 87,
+      "domain": "数据分析",
+      "id": 253
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据分析师",
+      "jd_text": "某咨询公司招聘数据分析师。要求：数据仓库、统计学、Python、PowerBI、Pandas、ETL、数据可视化、Tableau。留存分析、数据看板、漏斗分析。",
+      "skills": "数据仓库,统计学,Python,PowerBI,Pandas,ETL,数据可视化,Tableau",
+      "match_score": 82,
+      "domain": "数据分析",
+      "id": 254
+    },
+    {
+      "company": "某咨询公司",
+      "position": "BI工程师",
+      "jd_text": "某咨询公司招聘BI工程师。要求：Excel、ETL、Pandas、统计学、数据可视化、PowerBI、A/B测试、Python。用户画像、漏斗分析、数据分析。",
+      "skills": "Excel,ETL,Pandas,统计学,数据可视化,PowerBI,A/B测试,Python",
+      "match_score": 70,
+      "domain": "数据分析",
+      "id": 255
+    },
+    {
+      "company": "某广告平台",
+      "position": "数据分析师",
+      "jd_text": "某广告平台招聘数据分析师。要求：ETL、PowerBI、Excel、Python、数据可视化、A/B测试、Pandas。报表开发、数据看板、用户画像。",
+      "skills": "ETL,PowerBI,Excel,Python,数据可视化,A/B测试,Pandas",
+      "match_score": 60,
+      "domain": "数据分析",
+      "id": 256
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：A/B测试、SQL、Tableau、Excel、Python、PowerBI、ETL、Pandas。归因分析、留存分析、数据分析。",
+      "skills": "A/B测试,SQL,Tableau,Excel,Python,PowerBI,ETL,Pandas",
+      "match_score": 20,
+      "domain": "数据分析",
+      "id": 257
+    },
+    {
+      "company": "某电商数据部",
+      "position": "商业分析师",
+      "jd_text": "某电商数据部招聘商业分析师。要求：统计学、Pandas、数据仓库、A/B测试、Excel、ETL、Tableau、数据可视化、SQL。数据看板、留存分析、归因分析。",
+      "skills": "统计学,Pandas,数据仓库,A/B测试,Excel,ETL,Tableau,数据可视化,SQL",
+      "match_score": 48,
+      "domain": "数据分析",
+      "id": 258
+    },
+    {
+      "company": "某金融风控",
+      "position": "商业分析师",
+      "jd_text": "某金融风控招聘商业分析师。要求：SQL、Tableau、数据仓库、PowerBI、Pandas、数据可视化。报表开发、用户画像、数据看板。",
+      "skills": "SQL,Tableau,数据仓库,PowerBI,Pandas,数据可视化",
+      "match_score": 68,
+      "domain": "数据分析",
+      "id": 259
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：PowerBI、ETL、A/B测试、SQL、Excel、数据仓库。用户画像、归因分析、指标拆解。",
+      "skills": "PowerBI,ETL,A/B测试,SQL,Excel,数据仓库",
+      "match_score": 40,
+      "domain": "数据分析",
+      "id": 260
+    },
+    {
+      "company": "某电商数据部",
+      "position": "数据分析师",
+      "jd_text": "某电商数据部招聘数据分析师。要求：Excel、数据仓库、统计学、Tableau、PowerBI、Pandas、数据可视化、Python。报表开发、数据分析、指标拆解。",
+      "skills": "Excel,数据仓库,统计学,Tableau,PowerBI,Pandas,数据可视化,Python",
+      "match_score": 90,
+      "domain": "数据分析",
+      "id": 261
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "BI工程师",
+      "jd_text": "某互联网增长团队招聘BI工程师。要求：PowerBI、SQL、统计学、Python、Pandas、数据仓库。数据看板、报表开发、数据分析。",
+      "skills": "PowerBI,SQL,统计学,Python,Pandas,数据仓库",
+      "match_score": 23,
+      "domain": "数据分析",
+      "id": 262
+    },
+    {
+      "company": "某金融风控",
+      "position": "BI工程师",
+      "jd_text": "某金融风控招聘BI工程师。要求：Python、A/B测试、数据仓库、Tableau、统计学、Excel、PowerBI、ETL。归因分析、数据分析、漏斗分析。",
+      "skills": "Python,A/B测试,数据仓库,Tableau,统计学,Excel,PowerBI,ETL",
+      "match_score": 89,
+      "domain": "数据分析",
+      "id": 263
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "BI工程师",
+      "jd_text": "某互联网增长团队招聘BI工程师。要求：统计学、PowerBI、Pandas、A/B测试、SQL、数据可视化、Excel、Tableau。归因分析、报表开发、用户画像。",
+      "skills": "统计学,PowerBI,Pandas,A/B测试,SQL,数据可视化,Excel,Tableau",
+      "match_score": 27,
+      "domain": "数据分析",
+      "id": 264
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：数据仓库、PowerBI、数据可视化、统计学、A/B测试、Tableau。指标拆解、归因分析、数据分析。",
+      "skills": "数据仓库,PowerBI,数据可视化,统计学,A/B测试,Tableau",
+      "match_score": 69,
+      "domain": "数据分析",
+      "id": 265
+    },
+    {
+      "company": "某广告平台",
+      "position": "商业分析师",
+      "jd_text": "某广告平台招聘商业分析师。要求：ETL、Excel、A/B测试、Tableau、SQL、数据仓库、统计学、Python、数据可视化。数据看板、报表开发、留存分析。",
+      "skills": "ETL,Excel,A/B测试,Tableau,SQL,数据仓库,统计学,Python,数据可视化",
+      "match_score": 47,
+      "domain": "数据分析",
+      "id": 266
+    },
+    {
+      "company": "某金融风控",
+      "position": "BI工程师",
+      "jd_text": "某金融风控招聘BI工程师。要求：统计学、Python、数据仓库、Excel、数据可视化、PowerBI。用户画像、留存分析、归因分析。",
+      "skills": "统计学,Python,数据仓库,Excel,数据可视化,PowerBI",
+      "match_score": 53,
+      "domain": "数据分析",
+      "id": 267
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据分析师",
+      "jd_text": "某咨询公司招聘数据分析师。要求：统计学、数据可视化、数据仓库、PowerBI、ETL、Pandas。数据看板、留存分析、数据分析。",
+      "skills": "统计学,数据可视化,数据仓库,PowerBI,ETL,Pandas",
+      "match_score": 86,
+      "domain": "数据分析",
+      "id": 268
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "数据分析师",
+      "jd_text": "某互联网增长团队招聘数据分析师。要求：Pandas、数据仓库、Python、数据可视化、Tableau、SQL、ETL、统计学、A/B测试。归因分析、指标拆解、漏斗分析。",
+      "skills": "Pandas,数据仓库,Python,数据可视化,Tableau,SQL,ETL,统计学,A/B测试",
+      "match_score": 82,
+      "domain": "数据分析",
+      "id": 269
+    },
+    {
+      "company": "某广告平台",
+      "position": "增长分析师",
+      "jd_text": "某广告平台招聘增长分析师。要求：SQL、Pandas、Tableau、统计学、Python、数据可视化、PowerBI、Excel、数据仓库。留存分析、用户画像、漏斗分析。",
+      "skills": "SQL,Pandas,Tableau,统计学,Python,数据可视化,PowerBI,Excel,数据仓库",
+      "match_score": 50,
+      "domain": "数据分析",
+      "id": 270
+    },
+    {
+      "company": "某电商数据部",
+      "position": "商业分析师",
+      "jd_text": "某电商数据部招聘商业分析师。要求：PowerBI、SQL、数据仓库、Tableau、Pandas、统计学、Excel、ETL。指标拆解、报表开发、用户画像。",
+      "skills": "PowerBI,SQL,数据仓库,Tableau,Pandas,统计学,Excel,ETL",
+      "match_score": 76,
+      "domain": "数据分析",
+      "id": 271
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据运营",
+      "jd_text": "某咨询公司招聘数据运营。要求：ETL、Python、Excel、A/B测试、数据仓库、数据可视化、PowerBI、Pandas、SQL。用户画像、数据分析、数据看板。",
+      "skills": "ETL,Python,Excel,A/B测试,数据仓库,数据可视化,PowerBI,Pandas,SQL",
+      "match_score": 84,
+      "domain": "数据分析",
+      "id": 272
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "BI工程师",
+      "jd_text": "某互联网增长团队招聘BI工程师。要求：Pandas、Excel、ETL、SQL、Python、A/B测试。数据看板、数据分析、用户画像。",
+      "skills": "Pandas,Excel,ETL,SQL,Python,A/B测试",
+      "match_score": 45,
+      "domain": "数据分析",
+      "id": 273
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据运营",
+      "jd_text": "某咨询公司招聘数据运营。要求：数据可视化、统计学、Python、SQL、数据仓库、Pandas、Excel、Tableau、A/B测试。数据看板、归因分析、留存分析。",
+      "skills": "数据可视化,统计学,Python,SQL,数据仓库,Pandas,Excel,Tableau,A/B测试",
+      "match_score": 64,
+      "domain": "数据分析",
+      "id": 274
+    },
+    {
+      "company": "某咨询公司",
+      "position": "BI工程师",
+      "jd_text": "某咨询公司招聘BI工程师。要求：Python、Tableau、SQL、统计学、数据可视化、数据仓库、ETL、PowerBI。指标拆解、漏斗分析、报表开发。",
+      "skills": "Python,Tableau,SQL,统计学,数据可视化,数据仓库,ETL,PowerBI",
+      "match_score": 46,
+      "domain": "数据分析",
+      "id": 275
+    },
+    {
+      "company": "某咨询公司",
+      "position": "商业分析师",
+      "jd_text": "某咨询公司招聘商业分析师。要求：数据仓库、SQL、A/B测试、Pandas、PowerBI、Python。数据分析、报表开发、用户画像。",
+      "skills": "数据仓库,SQL,A/B测试,Pandas,PowerBI,Python",
+      "match_score": 59,
+      "domain": "数据分析",
+      "id": 276
+    },
+    {
+      "company": "某咨询公司",
+      "position": "商业分析师",
+      "jd_text": "某咨询公司招聘商业分析师。要求：PowerBI、A/B测试、Tableau、Excel、ETL、Pandas、数据可视化、统计学、数据仓库。报表开发、数据分析、归因分析。",
+      "skills": "PowerBI,A/B测试,Tableau,Excel,ETL,Pandas,数据可视化,统计学,数据仓库",
+      "match_score": 67,
+      "domain": "数据分析",
+      "id": 277
+    },
+    {
+      "company": "某广告平台",
+      "position": "增长分析师",
+      "jd_text": "某广告平台招聘增长分析师。要求：Tableau、Python、A/B测试、ETL、Pandas、统计学、PowerBI、数据仓库。归因分析、漏斗分析、留存分析。",
+      "skills": "Tableau,Python,A/B测试,ETL,Pandas,统计学,PowerBI,数据仓库",
+      "match_score": 58,
+      "domain": "数据分析",
+      "id": 278
+    },
+    {
+      "company": "某金融风控",
+      "position": "BI工程师",
+      "jd_text": "某金融风控招聘BI工程师。要求：SQL、ETL、统计学、PowerBI、A/B测试、Python、数据仓库。数据看板、用户画像、留存分析。",
+      "skills": "SQL,ETL,统计学,PowerBI,A/B测试,Python,数据仓库",
+      "match_score": 73,
+      "domain": "数据分析",
+      "id": 279
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "商业分析师",
+      "jd_text": "某互联网增长团队招聘商业分析师。要求：ETL、数据仓库、Excel、PowerBI、A/B测试、统计学。指标拆解、漏斗分析、归因分析。",
+      "skills": "ETL,数据仓库,Excel,PowerBI,A/B测试,统计学",
+      "match_score": 80,
+      "domain": "数据分析",
+      "id": 280
+    },
+    {
+      "company": "某咨询公司",
+      "position": "增长分析师",
+      "jd_text": "某咨询公司招聘增长分析师。要求：Pandas、数据可视化、数据仓库、Tableau、SQL、Excel、Python、ETL。用户画像、漏斗分析、数据看板。",
+      "skills": "Pandas,数据可视化,数据仓库,Tableau,SQL,Excel,Python,ETL",
+      "match_score": 31,
+      "domain": "数据分析",
+      "id": 281
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据运营",
+      "jd_text": "某金融风控招聘数据运营。要求：Tableau、统计学、PowerBI、数据可视化、Pandas、数据仓库、ETL。数据看板、留存分析、数据分析。",
+      "skills": "Tableau,统计学,PowerBI,数据可视化,Pandas,数据仓库,ETL",
+      "match_score": 80,
+      "domain": "数据分析",
+      "id": 282
+    },
+    {
+      "company": "某电商数据部",
+      "position": "增长分析师",
+      "jd_text": "某电商数据部招聘增长分析师。要求：A/B测试、Excel、数据可视化、Python、统计学、PowerBI。留存分析、归因分析、用户画像。",
+      "skills": "A/B测试,Excel,数据可视化,Python,统计学,PowerBI",
+      "match_score": 72,
+      "domain": "数据分析",
+      "id": 283
+    },
+    {
+      "company": "某电商数据部",
+      "position": "BI工程师",
+      "jd_text": "某电商数据部招聘BI工程师。要求：Excel、PowerBI、统计学、A/B测试、Python、Pandas、数据可视化。报表开发、指标拆解、用户画像。",
+      "skills": "Excel,PowerBI,统计学,A/B测试,Python,Pandas,数据可视化",
+      "match_score": 42,
+      "domain": "数据分析",
+      "id": 284
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据分析师",
+      "jd_text": "某咨询公司招聘数据分析师。要求：A/B测试、Tableau、Excel、Pandas、ETL、Python。数据看板、留存分析、数据分析。",
+      "skills": "A/B测试,Tableau,Excel,Pandas,ETL,Python",
+      "match_score": 36,
+      "domain": "数据分析",
+      "id": 285
+    },
+    {
+      "company": "某广告平台",
+      "position": "商业分析师",
+      "jd_text": "某广告平台招聘商业分析师。要求：统计学、数据仓库、A/B测试、ETL、SQL、数据可视化、Tableau、Python、Pandas。漏斗分析、数据分析、用户画像。",
+      "skills": "统计学,数据仓库,A/B测试,ETL,SQL,数据可视化,Tableau,Python,Pandas",
+      "match_score": 87,
+      "domain": "数据分析",
+      "id": 286
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：数据仓库、Excel、ETL、PowerBI、Pandas、Python。报表开发、指标拆解、归因分析。",
+      "skills": "数据仓库,Excel,ETL,PowerBI,Pandas,Python",
+      "match_score": 59,
+      "domain": "数据分析",
+      "id": 287
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：Tableau、数据仓库、A/B测试、PowerBI、Excel、数据可视化。用户画像、数据看板、指标拆解。",
+      "skills": "Tableau,数据仓库,A/B测试,PowerBI,Excel,数据可视化",
+      "match_score": 65,
+      "domain": "数据分析",
+      "id": 288
+    },
+    {
+      "company": "某金融风控",
+      "position": "BI工程师",
+      "jd_text": "某金融风控招聘BI工程师。要求：SQL、Excel、ETL、Pandas、Python、PowerBI、数据仓库、统计学、Tableau。漏斗分析、数据看板、留存分析。",
+      "skills": "SQL,Excel,ETL,Pandas,Python,PowerBI,数据仓库,统计学,Tableau",
+      "match_score": 24,
+      "domain": "数据分析",
+      "id": 289
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "数据运营",
+      "jd_text": "某互联网增长团队招聘数据运营。要求：ETL、SQL、Python、数据仓库、A/B测试、PowerBI。报表开发、指标拆解、留存分析。",
+      "skills": "ETL,SQL,Python,数据仓库,A/B测试,PowerBI",
+      "match_score": 68,
+      "domain": "数据分析",
+      "id": 290
+    },
+    {
+      "company": "某电商数据部",
+      "position": "增长分析师",
+      "jd_text": "某电商数据部招聘增长分析师。要求：A/B测试、Pandas、Excel、SQL、ETL、数据可视化、数据仓库、统计学。用户画像、指标拆解、数据分析。",
+      "skills": "A/B测试,Pandas,Excel,SQL,ETL,数据可视化,数据仓库,统计学",
+      "match_score": 85,
+      "domain": "数据分析",
+      "id": 291
+    },
+    {
+      "company": "某广告平台",
+      "position": "数据分析师",
+      "jd_text": "某广告平台招聘数据分析师。要求：Python、数据仓库、A/B测试、Excel、Tableau、ETL、Pandas、PowerBI。漏斗分析、数据看板、指标拆解。",
+      "skills": "Python,数据仓库,A/B测试,Excel,Tableau,ETL,Pandas,PowerBI",
+      "match_score": 57,
+      "domain": "数据分析",
+      "id": 292
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：Excel、A/B测试、PowerBI、数据仓库、SQL、统计学、数据可视化、Tableau、Pandas。数据看板、报表开发、数据分析。",
+      "skills": "Excel,A/B测试,PowerBI,数据仓库,SQL,统计学,数据可视化,Tableau,Pandas",
+      "match_score": 85,
+      "domain": "数据分析",
+      "id": 293
+    },
+    {
+      "company": "某电商数据部",
+      "position": "数据分析师",
+      "jd_text": "某电商数据部招聘数据分析师。要求：数据仓库、Excel、A/B测试、Tableau、Pandas、ETL、SQL、数据可视化。用户画像、留存分析、数据分析。",
+      "skills": "数据仓库,Excel,A/B测试,Tableau,Pandas,ETL,SQL,数据可视化",
+      "match_score": 57,
+      "domain": "数据分析",
+      "id": 294
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据运营",
+      "jd_text": "某咨询公司招聘数据运营。要求：Python、数据仓库、SQL、数据可视化、统计学、ETL、PowerBI、Pandas、Tableau。数据看板、归因分析、用户画像。",
+      "skills": "Python,数据仓库,SQL,数据可视化,统计学,ETL,PowerBI,Pandas,Tableau",
+      "match_score": 31,
+      "domain": "数据分析",
+      "id": 295
+    },
+    {
+      "company": "某咨询公司",
+      "position": "数据运营",
+      "jd_text": "某咨询公司招聘数据运营。要求：Python、统计学、ETL、A/B测试、Pandas、Excel、PowerBI。留存分析、漏斗分析、报表开发。",
+      "skills": "Python,统计学,ETL,A/B测试,Pandas,Excel,PowerBI",
+      "match_score": 34,
+      "domain": "数据分析",
+      "id": 296
+    },
+    {
+      "company": "某金融风控",
+      "position": "数据分析师",
+      "jd_text": "某金融风控招聘数据分析师。要求：Python、统计学、A/B测试、数据可视化、数据仓库、Tableau、Excel。漏斗分析、归因分析、数据分析。",
+      "skills": "Python,统计学,A/B测试,数据可视化,数据仓库,Tableau,Excel",
+      "match_score": 36,
+      "domain": "数据分析",
+      "id": 297
+    },
+    {
+      "company": "某互联网增长团队",
+      "position": "商业分析师",
+      "jd_text": "某互联网增长团队招聘商业分析师。要求：统计学、A/B测试、SQL、Python、Pandas、PowerBI。漏斗分析、数据分析、数据看板。",
+      "skills": "统计学,A/B测试,SQL,Python,Pandas,PowerBI",
+      "match_score": 87,
+      "domain": "数据分析",
+      "id": 298
+    },
+    {
+      "company": "某广告平台",
+      "position": "增长分析师",
+      "jd_text": "某广告平台招聘增长分析师。要求：数据仓库、PowerBI、数据可视化、Python、Excel、ETL、A/B测试。数据看板、用户画像、漏斗分析。",
+      "skills": "数据仓库,PowerBI,数据可视化,Python,Excel,ETL,A/B测试",
+      "match_score": 69,
+      "domain": "数据分析",
+      "id": 299
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "CV算法工程师",
+      "jd_text": "某自动驾驶招聘CV算法工程师。要求：Python、TensorFlow、模型部署、XGBoost、深度学习、scikit-learn。CTR预估、排序模型、模型压缩。",
+      "skills": "Python,TensorFlow,模型部署,XGBoost,深度学习,scikit-learn",
+      "match_score": 82,
+      "domain": "算法/机器学习",
+      "id": 300
+    },
+    {
+      "company": "某搜索平台",
+      "position": "机器学习工程师",
+      "jd_text": "某搜索平台招聘机器学习工程师。要求：Spark、Python、模型部署、scikit-learn、数据挖掘、特征工程、XGBoost、深度学习。NLP、排序模型、在线学习。",
+      "skills": "Spark,Python,模型部署,scikit-learn,数据挖掘,特征工程,XGBoost,深度学习",
+      "match_score": 76,
+      "domain": "算法/机器学习",
+      "id": 301
+    },
+    {
+      "company": "某量化基金",
+      "position": "NLP算法工程师",
+      "jd_text": "某量化基金招聘NLP算法工程师。要求：XGBoost、数据挖掘、特征工程、PyTorch、scikit-learn、模型部署。推荐系统、排序模型、NLP。",
+      "skills": "XGBoost,数据挖掘,特征工程,PyTorch,scikit-learn,模型部署",
+      "match_score": 72,
+      "domain": "算法/机器学习",
+      "id": 302
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "CV算法工程师",
+      "jd_text": "某推荐系统公司招聘CV算法工程师。要求：PyTorch、A/B实验、Spark、scikit-learn、特征工程、深度学习。知识蒸馏、目标检测、CTR预估。",
+      "skills": "PyTorch,A/B实验,Spark,scikit-learn,特征工程,深度学习",
+      "match_score": 26,
+      "domain": "算法/机器学习",
+      "id": 303
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "NLP算法工程师",
+      "jd_text": "某自动驾驶招聘NLP算法工程师。要求：模型部署、A/B实验、XGBoost、特征工程、数据挖掘、scikit-learn、Python、Spark。NLP、推荐系统、CTR预估。",
+      "skills": "模型部署,A/B实验,XGBoost,特征工程,数据挖掘,scikit-learn,Python,Spark",
+      "match_score": 65,
+      "domain": "算法/机器学习",
+      "id": 304
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：PyTorch、Python、TensorFlow、XGBoost、数据挖掘、特征工程、scikit-learn、A/B实验。图像识别、NLP、排序模型。",
+      "skills": "PyTorch,Python,TensorFlow,XGBoost,数据挖掘,特征工程,scikit-learn,A/B实验",
+      "match_score": 35,
+      "domain": "算法/机器学习",
+      "id": 305
+    },
+    {
+      "company": "某广告算法",
+      "position": "机器学习工程师",
+      "jd_text": "某广告算法招聘机器学习工程师。要求：scikit-learn、特征工程、PyTorch、深度学习、Python、A/B实验、Spark、XGBoost、模型部署。知识蒸馏、CTR预估、NLP。",
+      "skills": "scikit-learn,特征工程,PyTorch,深度学习,Python,A/B实验,Spark,XGBoost,模型部署",
+      "match_score": 20,
+      "domain": "算法/机器学习",
+      "id": 306
+    },
+    {
+      "company": "某量化基金",
+      "position": "算法工程师",
+      "jd_text": "某量化基金招聘算法工程师。要求：A/B实验、XGBoost、模型部署、TensorFlow、特征工程、Spark、PyTorch、深度学习、Python。模型压缩、目标检测、图像识别。",
+      "skills": "A/B实验,XGBoost,模型部署,TensorFlow,特征工程,Spark,PyTorch,深度学习,Python",
+      "match_score": 69,
+      "domain": "算法/机器学习",
+      "id": 307
+    },
+    {
+      "company": "某广告算法",
+      "position": "CV算法工程师",
+      "jd_text": "某广告算法招聘CV算法工程师。要求：Spark、深度学习、特征工程、数据挖掘、scikit-learn、PyTorch、模型部署。模型压缩、图像识别、在线学习。",
+      "skills": "Spark,深度学习,特征工程,数据挖掘,scikit-learn,PyTorch,模型部署",
+      "match_score": 90,
+      "domain": "算法/机器学习",
+      "id": 308
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：scikit-learn、数据挖掘、Spark、特征工程、XGBoost、PyTorch、深度学习。在线学习、目标检测、知识蒸馏。",
+      "skills": "scikit-learn,数据挖掘,Spark,特征工程,XGBoost,PyTorch,深度学习",
+      "match_score": 34,
+      "domain": "算法/机器学习",
+      "id": 309
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：A/B实验、数据挖掘、深度学习、Spark、模型部署、scikit-learn、Python、XGBoost、特征工程。模型压缩、CTR预估、推荐系统。",
+      "skills": "A/B实验,数据挖掘,深度学习,Spark,模型部署,scikit-learn,Python,XGBoost,特征工程",
+      "match_score": 27,
+      "domain": "算法/机器学习",
+      "id": 310
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "推荐算法工程师",
+      "jd_text": "某自动驾驶招聘推荐算法工程师。要求：Spark、数据挖掘、TensorFlow、Python、特征工程、模型部署、PyTorch。在线学习、推荐系统、CTR预估。",
+      "skills": "Spark,数据挖掘,TensorFlow,Python,特征工程,模型部署,PyTorch",
+      "match_score": 77,
+      "domain": "算法/机器学习",
+      "id": 311
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "CV算法工程师",
+      "jd_text": "某推荐系统公司招聘CV算法工程师。要求：数据挖掘、模型部署、深度学习、scikit-learn、Spark、特征工程、TensorFlow。推荐系统、模型压缩、NLP。",
+      "skills": "数据挖掘,模型部署,深度学习,scikit-learn,Spark,特征工程,TensorFlow",
+      "match_score": 73,
+      "domain": "算法/机器学习",
+      "id": 312
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：Python、Spark、scikit-learn、XGBoost、深度学习、PyTorch。目标检测、NLP、模型压缩。",
+      "skills": "Python,Spark,scikit-learn,XGBoost,深度学习,PyTorch",
+      "match_score": 44,
+      "domain": "算法/机器学习",
+      "id": 313
+    },
+    {
+      "company": "某搜索平台",
+      "position": "NLP算法工程师",
+      "jd_text": "某搜索平台招聘NLP算法工程师。要求：数据挖掘、PyTorch、TensorFlow、模型部署、特征工程、Spark、Python。模型压缩、推荐系统、NLP。",
+      "skills": "数据挖掘,PyTorch,TensorFlow,模型部署,特征工程,Spark,Python",
+      "match_score": 55,
+      "domain": "算法/机器学习",
+      "id": 314
+    },
+    {
+      "company": "某量化基金",
+      "position": "推荐算法工程师",
+      "jd_text": "某量化基金招聘推荐算法工程师。要求：TensorFlow、A/B实验、Spark、Python、数据挖掘、scikit-learn、PyTorch。推荐系统、CTR预估、知识蒸馏。",
+      "skills": "TensorFlow,A/B实验,Spark,Python,数据挖掘,scikit-learn,PyTorch",
+      "match_score": 26,
+      "domain": "算法/机器学习",
+      "id": 315
+    },
+    {
+      "company": "某量化基金",
+      "position": "推荐算法工程师",
+      "jd_text": "某量化基金招聘推荐算法工程师。要求：A/B实验、模型部署、特征工程、PyTorch、深度学习、数据挖掘、TensorFlow、XGBoost、Python。在线学习、排序模型、模型压缩。",
+      "skills": "A/B实验,模型部署,特征工程,PyTorch,深度学习,数据挖掘,TensorFlow,XGBoost,Python",
+      "match_score": 84,
+      "domain": "算法/机器学习",
+      "id": 316
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "NLP算法工程师",
+      "jd_text": "某自动驾驶招聘NLP算法工程师。要求：PyTorch、特征工程、scikit-learn、模型部署、A/B实验、TensorFlow、深度学习、Spark、数据挖掘。NLP、知识蒸馏、图像识别。",
+      "skills": "PyTorch,特征工程,scikit-learn,模型部署,A/B实验,TensorFlow,深度学习,Spark,数据挖掘",
+      "match_score": 21,
+      "domain": "算法/机器学习",
+      "id": 317
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "推荐算法工程师",
+      "jd_text": "某推荐系统公司招聘推荐算法工程师。要求：scikit-learn、A/B实验、数据挖掘、Python、特征工程、TensorFlow、模型部署、XGBoost、PyTorch。图像识别、在线学习、推荐系统。",
+      "skills": "scikit-learn,A/B实验,数据挖掘,Python,特征工程,TensorFlow,模型部署,XGBoost,PyTorch",
+      "match_score": 86,
+      "domain": "算法/机器学习",
+      "id": 318
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：XGBoost、Python、Spark、scikit-learn、TensorFlow、模型部署、A/B实验、特征工程、数据挖掘。在线学习、推荐系统、目标检测。",
+      "skills": "XGBoost,Python,Spark,scikit-learn,TensorFlow,模型部署,A/B实验,特征工程,数据挖掘",
+      "match_score": 28,
+      "domain": "算法/机器学习",
+      "id": 319
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "机器学习工程师",
+      "jd_text": "某自动驾驶招聘机器学习工程师。要求：PyTorch、scikit-learn、模型部署、深度学习、特征工程、Python、数据挖掘、XGBoost、Spark。目标检测、推荐系统、知识蒸馏。",
+      "skills": "PyTorch,scikit-learn,模型部署,深度学习,特征工程,Python,数据挖掘,XGBoost,Spark",
+      "match_score": 29,
+      "domain": "算法/机器学习",
+      "id": 320
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "机器学习工程师",
+      "jd_text": "某推荐系统公司招聘机器学习工程师。要求：模型部署、PyTorch、scikit-learn、Spark、数据挖掘、深度学习、特征工程、XGBoost。模型压缩、目标检测、推荐系统。",
+      "skills": "模型部署,PyTorch,scikit-learn,Spark,数据挖掘,深度学习,特征工程,XGBoost",
+      "match_score": 69,
+      "domain": "算法/机器学习",
+      "id": 321
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "CV算法工程师",
+      "jd_text": "某推荐系统公司招聘CV算法工程师。要求：数据挖掘、A/B实验、PyTorch、Python、特征工程、XGBoost。目标检测、排序模型、CTR预估。",
+      "skills": "数据挖掘,A/B实验,PyTorch,Python,特征工程,XGBoost",
+      "match_score": 58,
+      "domain": "算法/机器学习",
+      "id": 322
+    },
+    {
+      "company": "某量化基金",
+      "position": "算法工程师",
+      "jd_text": "某量化基金招聘算法工程师。要求：XGBoost、深度学习、A/B实验、Python、scikit-learn、PyTorch、Spark、特征工程。CTR预估、模型压缩、知识蒸馏。",
+      "skills": "XGBoost,深度学习,A/B实验,Python,scikit-learn,PyTorch,Spark,特征工程",
+      "match_score": 89,
+      "domain": "算法/机器学习",
+      "id": 323
+    },
+    {
+      "company": "某搜索平台",
+      "position": "机器学习工程师",
+      "jd_text": "某搜索平台招聘机器学习工程师。要求：数据挖掘、特征工程、Python、TensorFlow、模型部署、深度学习、A/B实验、scikit-learn。在线学习、排序模型、CTR预估。",
+      "skills": "数据挖掘,特征工程,Python,TensorFlow,模型部署,深度学习,A/B实验,scikit-learn",
+      "match_score": 46,
+      "domain": "算法/机器学习",
+      "id": 324
+    },
+    {
+      "company": "某搜索平台",
+      "position": "机器学习工程师",
+      "jd_text": "某搜索平台招聘机器学习工程师。要求：数据挖掘、模型部署、TensorFlow、A/B实验、PyTorch、深度学习、Spark、XGBoost、Python。排序模型、CTR预估、目标检测。",
+      "skills": "数据挖掘,模型部署,TensorFlow,A/B实验,PyTorch,深度学习,Spark,XGBoost,Python",
+      "match_score": 26,
+      "domain": "算法/机器学习",
+      "id": 325
+    },
+    {
+      "company": "某量化基金",
+      "position": "NLP算法工程师",
+      "jd_text": "某量化基金招聘NLP算法工程师。要求：Spark、PyTorch、数据挖掘、A/B实验、XGBoost、特征工程。知识蒸馏、目标检测、CTR预估。",
+      "skills": "Spark,PyTorch,数据挖掘,A/B实验,XGBoost,特征工程",
+      "match_score": 36,
+      "domain": "算法/机器学习",
+      "id": 326
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "算法工程师",
+      "jd_text": "某自动驾驶招聘算法工程师。要求：A/B实验、PyTorch、scikit-learn、特征工程、模型部署、深度学习、TensorFlow、Spark。CTR预估、目标检测、模型压缩。",
+      "skills": "A/B实验,PyTorch,scikit-learn,特征工程,模型部署,深度学习,TensorFlow,Spark",
+      "match_score": 60,
+      "domain": "算法/机器学习",
+      "id": 327
+    },
+    {
+      "company": "某广告算法",
+      "position": "机器学习工程师",
+      "jd_text": "某广告算法招聘机器学习工程师。要求：特征工程、scikit-learn、A/B实验、深度学习、TensorFlow、XGBoost。CTR预估、目标检测、NLP。",
+      "skills": "特征工程,scikit-learn,A/B实验,深度学习,TensorFlow,XGBoost",
+      "match_score": 79,
+      "domain": "算法/机器学习",
+      "id": 328
+    },
+    {
+      "company": "某广告算法",
+      "position": "推荐算法工程师",
+      "jd_text": "某广告算法招聘推荐算法工程师。要求：XGBoost、模型部署、PyTorch、TensorFlow、特征工程、Spark、Python、数据挖掘。CTR预估、NLP、在线学习。",
+      "skills": "XGBoost,模型部署,PyTorch,TensorFlow,特征工程,Spark,Python,数据挖掘",
+      "match_score": 29,
+      "domain": "算法/机器学习",
+      "id": 329
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "算法工程师",
+      "jd_text": "某推荐系统公司招聘算法工程师。要求：A/B实验、数据挖掘、深度学习、scikit-learn、Python、Spark。图像识别、知识蒸馏、目标检测。",
+      "skills": "A/B实验,数据挖掘,深度学习,scikit-learn,Python,Spark",
+      "match_score": 39,
+      "domain": "算法/机器学习",
+      "id": 330
+    },
+    {
+      "company": "某搜索平台",
+      "position": "NLP算法工程师",
+      "jd_text": "某搜索平台招聘NLP算法工程师。要求：A/B实验、Spark、TensorFlow、XGBoost、数据挖掘、深度学习、Python。模型压缩、目标检测、图像识别。",
+      "skills": "A/B实验,Spark,TensorFlow,XGBoost,数据挖掘,深度学习,Python",
+      "match_score": 21,
+      "domain": "算法/机器学习",
+      "id": 331
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "CV算法工程师",
+      "jd_text": "某自动驾驶招聘CV算法工程师。要求：模型部署、TensorFlow、XGBoost、A/B实验、PyTorch、Spark、特征工程。CTR预估、知识蒸馏、在线学习。",
+      "skills": "模型部署,TensorFlow,XGBoost,A/B实验,PyTorch,Spark,特征工程",
+      "match_score": 25,
+      "domain": "算法/机器学习",
+      "id": 332
+    },
+    {
+      "company": "某自动驾驶",
+      "position": "NLP算法工程师",
+      "jd_text": "某自动驾驶招聘NLP算法工程师。要求：PyTorch、Spark、特征工程、scikit-learn、Python、模型部署、数据挖掘。在线学习、目标检测、NLP。",
+      "skills": "PyTorch,Spark,特征工程,scikit-learn,Python,模型部署,数据挖掘",
+      "match_score": 80,
+      "domain": "算法/机器学习",
+      "id": 333
+    },
+    {
+      "company": "某广告算法",
+      "position": "算法工程师",
+      "jd_text": "某广告算法招聘算法工程师。要求：数据挖掘、特征工程、PyTorch、Spark、深度学习、A/B实验。图像识别、CTR预估、NLP。",
+      "skills": "数据挖掘,特征工程,PyTorch,Spark,深度学习,A/B实验",
+      "match_score": 68,
+      "domain": "算法/机器学习",
+      "id": 334
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：模型部署、Spark、深度学习、scikit-learn、A/B实验、XGBoost。目标检测、在线学习、NLP。",
+      "skills": "模型部署,Spark,深度学习,scikit-learn,A/B实验,XGBoost",
+      "match_score": 81,
+      "domain": "算法/机器学习",
+      "id": 335
+    },
+    {
+      "company": "某量化基金",
+      "position": "算法工程师",
+      "jd_text": "某量化基金招聘算法工程师。要求：XGBoost、TensorFlow、scikit-learn、PyTorch、Spark、特征工程、A/B实验。NLP、CTR预估、排序模型。",
+      "skills": "XGBoost,TensorFlow,scikit-learn,PyTorch,Spark,特征工程,A/B实验",
+      "match_score": 40,
+      "domain": "算法/机器学习",
+      "id": 336
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：数据挖掘、scikit-learn、深度学习、特征工程、XGBoost、Python。知识蒸馏、在线学习、NLP。",
+      "skills": "数据挖掘,scikit-learn,深度学习,特征工程,XGBoost,Python",
+      "match_score": 46,
+      "domain": "算法/机器学习",
+      "id": 337
+    },
+    {
+      "company": "某量化基金",
+      "position": "机器学习工程师",
+      "jd_text": "某量化基金招聘机器学习工程师。要求：Python、scikit-learn、数据挖掘、TensorFlow、Spark、深度学习、PyTorch、特征工程、XGBoost。在线学习、推荐系统、图像识别。",
+      "skills": "Python,scikit-learn,数据挖掘,TensorFlow,Spark,深度学习,PyTorch,特征工程,XGBoost",
+      "match_score": 38,
+      "domain": "算法/机器学习",
+      "id": 338
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "机器学习工程师",
+      "jd_text": "某推荐系统公司招聘机器学习工程师。要求：TensorFlow、模型部署、深度学习、Python、特征工程、A/B实验、数据挖掘、XGBoost。NLP、知识蒸馏、图像识别。",
+      "skills": "TensorFlow,模型部署,深度学习,Python,特征工程,A/B实验,数据挖掘,XGBoost",
+      "match_score": 80,
+      "domain": "算法/机器学习",
+      "id": 339
+    },
+    {
+      "company": "某广告算法",
+      "position": "机器学习工程师",
+      "jd_text": "某广告算法招聘机器学习工程师。要求：深度学习、A/B实验、TensorFlow、模型部署、Spark、特征工程、数据挖掘。图像识别、CTR预估、目标检测。",
+      "skills": "深度学习,A/B实验,TensorFlow,模型部署,Spark,特征工程,数据挖掘",
+      "match_score": 63,
+      "domain": "算法/机器学习",
+      "id": 340
+    },
+    {
+      "company": "某广告算法",
+      "position": "CV算法工程师",
+      "jd_text": "某广告算法招聘CV算法工程师。要求：scikit-learn、深度学习、A/B实验、TensorFlow、Python、模型部署。NLP、模型压缩、知识蒸馏。",
+      "skills": "scikit-learn,深度学习,A/B实验,TensorFlow,Python,模型部署",
+      "match_score": 39,
+      "domain": "算法/机器学习",
+      "id": 341
+    },
+    {
+      "company": "某量化基金",
+      "position": "算法工程师",
+      "jd_text": "某量化基金招聘算法工程师。要求：XGBoost、A/B实验、Python、PyTorch、模型部署、scikit-learn、数据挖掘。在线学习、推荐系统、模型压缩。",
+      "skills": "XGBoost,A/B实验,Python,PyTorch,模型部署,scikit-learn,数据挖掘",
+      "match_score": 75,
+      "domain": "算法/机器学习",
+      "id": 342
+    },
+    {
+      "company": "某量化基金",
+      "position": "NLP算法工程师",
+      "jd_text": "某量化基金招聘NLP算法工程师。要求：Python、模型部署、深度学习、scikit-learn、A/B实验、XGBoost、特征工程、TensorFlow。排序模型、模型压缩、在线学习。",
+      "skills": "Python,模型部署,深度学习,scikit-learn,A/B实验,XGBoost,特征工程,TensorFlow",
+      "match_score": 52,
+      "domain": "算法/机器学习",
+      "id": 343
+    },
+    {
+      "company": "某广告算法",
+      "position": "机器学习工程师",
+      "jd_text": "某广告算法招聘机器学习工程师。要求：Spark、A/B实验、模型部署、深度学习、TensorFlow、PyTorch。推荐系统、在线学习、图像识别。",
+      "skills": "Spark,A/B实验,模型部署,深度学习,TensorFlow,PyTorch",
+      "match_score": 86,
+      "domain": "算法/机器学习",
+      "id": 344
+    },
+    {
+      "company": "某推荐系统公司",
+      "position": "CV算法工程师",
+      "jd_text": "某推荐系统公司招聘CV算法工程师。要求：深度学习、scikit-learn、特征工程、数据挖掘、TensorFlow、Python。CTR预估、模型压缩、目标检测。",
+      "skills": "深度学习,scikit-learn,特征工程,数据挖掘,TensorFlow,Python",
+      "match_score": 52,
+      "domain": "算法/机器学习",
+      "id": 345
+    },
+    {
+      "company": "某搜索平台",
+      "position": "CV算法工程师",
+      "jd_text": "某搜索平台招聘CV算法工程师。要求：A/B实验、特征工程、Spark、深度学习、XGBoost、PyTorch、scikit-learn、模型部署、Python。目标检测、知识蒸馏、CTR预估。",
+      "skills": "A/B实验,特征工程,Spark,深度学习,XGBoost,PyTorch,scikit-learn,模型部署,Python",
+      "match_score": 59,
+      "domain": "算法/机器学习",
+      "id": 346
+    },
+    {
+      "company": "某量化基金",
+      "position": "推荐算法工程师",
+      "jd_text": "某量化基金招聘推荐算法工程师。要求：TensorFlow、PyTorch、scikit-learn、XGBoost、深度学习、特征工程、A/B实验、Python、模型部署。在线学习、模型压缩、知识蒸馏。",
+      "skills": "TensorFlow,PyTorch,scikit-learn,XGBoost,深度学习,特征工程,A/B实验,Python,模型部署",
+      "match_score": 63,
+      "domain": "算法/机器学习",
+      "id": 347
+    },
+    {
+      "company": "某量化基金",
+      "position": "CV算法工程师",
+      "jd_text": "某量化基金招聘CV算法工程师。要求：TensorFlow、深度学习、Python、PyTorch、A/B实验、XGBoost。知识蒸馏、模型压缩、推荐系统。",
+      "skills": "TensorFlow,深度学习,Python,PyTorch,A/B实验,XGBoost",
+      "match_score": 28,
+      "domain": "算法/机器学习",
+      "id": 348
+    },
+    {
+      "company": "某搜索平台",
+      "position": "机器学习工程师",
+      "jd_text": "某搜索平台招聘机器学习工程师。要求：PyTorch、A/B实验、Python、深度学习、scikit-learn、Spark、特征工程、TensorFlow。推荐系统、CTR预估、目标检测。",
+      "skills": "PyTorch,A/B实验,Python,深度学习,scikit-learn,Spark,特征工程,TensorFlow",
+      "match_score": 83,
+      "domain": "算法/机器学习",
+      "id": 349
+    },
+    {
+      "company": "某移动应用",
+      "position": "测试工程师",
+      "jd_text": "某移动应用招聘测试工程师。要求：Appium、性能测试、Jenkins、Postman、Python、接口测试、Git。缺陷管理、回归测试、测试报告。",
+      "skills": "Appium,性能测试,Jenkins,Postman,Python,接口测试,Git",
+      "match_score": 24,
+      "domain": "测试/QA",
+      "id": 350
+    },
+    {
+      "company": "某游戏QA",
+      "position": "自动化测试工程师",
+      "jd_text": "某游戏QA招聘自动化测试工程师。要求：JMeter、Selenium、Jenkins、测试用例设计、Appium、Git。CI/CD集成、测试报告、回归测试。",
+      "skills": "JMeter,Selenium,Jenkins,测试用例设计,Appium,Git",
+      "match_score": 86,
+      "domain": "测试/QA",
+      "id": 351
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试工程师",
+      "jd_text": "某互联网质量部招聘测试工程师。要求：性能测试、Jenkins、Appium、Git、JMeter、测试用例设计。回归测试、缺陷管理、测试报告。",
+      "skills": "性能测试,Jenkins,Appium,Git,JMeter,测试用例设计",
+      "match_score": 78,
+      "domain": "测试/QA",
+      "id": 352
+    },
+    {
+      "company": "某移动应用",
+      "position": "质量保证工程师",
+      "jd_text": "某移动应用招聘质量保证工程师。要求：Jenkins、JMeter、测试用例设计、Selenium、Appium、Python。缺陷管理、黑盒白盒、测试报告。",
+      "skills": "Jenkins,JMeter,测试用例设计,Selenium,Appium,Python",
+      "match_score": 34,
+      "domain": "测试/QA",
+      "id": 353
+    },
+    {
+      "company": "某企业软件",
+      "position": "性能测试工程师",
+      "jd_text": "某企业软件招聘性能测试工程师。要求：自动化框架、测试用例设计、Appium、Postman、接口测试、JMeter、性能测试、Jenkins。缺陷管理、测试策略、CI/CD集成。",
+      "skills": "自动化框架,测试用例设计,Appium,Postman,接口测试,JMeter,性能测试,Jenkins",
+      "match_score": 34,
+      "domain": "测试/QA",
+      "id": 354
+    },
+    {
+      "company": "某游戏QA",
+      "position": "测试工程师",
+      "jd_text": "某游戏QA招聘测试工程师。要求：Appium、Postman、接口测试、Git、性能测试、JMeter、Jenkins、Python、自动化框架。黑盒白盒、回归测试、测试报告。",
+      "skills": "Appium,Postman,接口测试,Git,性能测试,JMeter,Jenkins,Python,自动化框架",
+      "match_score": 31,
+      "domain": "测试/QA",
+      "id": 355
+    },
+    {
+      "company": "某移动应用",
+      "position": "性能测试工程师",
+      "jd_text": "某移动应用招聘性能测试工程师。要求：性能测试、JMeter、自动化框架、Git、接口测试、Selenium。缺陷管理、黑盒白盒、回归测试。",
+      "skills": "性能测试,JMeter,自动化框架,Git,接口测试,Selenium",
+      "match_score": 44,
+      "domain": "测试/QA",
+      "id": 356
+    },
+    {
+      "company": "某移动应用",
+      "position": "自动化测试工程师",
+      "jd_text": "某移动应用招聘自动化测试工程师。要求：Postman、Jenkins、Appium、性能测试、Selenium、测试用例设计、接口测试。黑盒白盒、回归测试、测试策略。",
+      "skills": "Postman,Jenkins,Appium,性能测试,Selenium,测试用例设计,接口测试",
+      "match_score": 35,
+      "domain": "测试/QA",
+      "id": 357
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试开发",
+      "jd_text": "某互联网质量部招聘测试开发。要求：性能测试、Python、自动化框架、Git、Jenkins、JMeter。CI/CD集成、缺陷管理、黑盒白盒。",
+      "skills": "性能测试,Python,自动化框架,Git,Jenkins,JMeter",
+      "match_score": 82,
+      "domain": "测试/QA",
+      "id": 358
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "质量保证工程师",
+      "jd_text": "某金融测试中心招聘质量保证工程师。要求：测试用例设计、Postman、JMeter、Python、Jenkins、接口测试、Git、自动化框架。缺陷管理、黑盒白盒、CI/CD集成。",
+      "skills": "测试用例设计,Postman,JMeter,Python,Jenkins,接口测试,Git,自动化框架",
+      "match_score": 42,
+      "domain": "测试/QA",
+      "id": 359
+    },
+    {
+      "company": "某移动应用",
+      "position": "测试工程师",
+      "jd_text": "某移动应用招聘测试工程师。要求：Git、Python、接口测试、Postman、自动化框架、Jenkins、性能测试、JMeter、Selenium。缺陷管理、黑盒白盒、回归测试。",
+      "skills": "Git,Python,接口测试,Postman,自动化框架,Jenkins,性能测试,JMeter,Selenium",
+      "match_score": 90,
+      "domain": "测试/QA",
+      "id": 360
+    },
+    {
+      "company": "某游戏QA",
+      "position": "自动化测试工程师",
+      "jd_text": "某游戏QA招聘自动化测试工程师。要求：自动化框架、接口测试、Git、性能测试、Selenium、Postman、Appium、测试用例设计。CI/CD集成、黑盒白盒、缺陷管理。",
+      "skills": "自动化框架,接口测试,Git,性能测试,Selenium,Postman,Appium,测试用例设计",
+      "match_score": 71,
+      "domain": "测试/QA",
+      "id": 361
+    },
+    {
+      "company": "某游戏QA",
+      "position": "测试开发",
+      "jd_text": "某游戏QA招聘测试开发。要求：接口测试、JMeter、Postman、Selenium、Git、Appium、自动化框架。缺陷管理、CI/CD集成、测试报告。",
+      "skills": "接口测试,JMeter,Postman,Selenium,Git,Appium,自动化框架",
+      "match_score": 45,
+      "domain": "测试/QA",
+      "id": 362
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "自动化测试工程师",
+      "jd_text": "某金融测试中心招聘自动化测试工程师。要求：Python、JMeter、测试用例设计、自动化框架、Selenium、Git、Jenkins、接口测试、性能测试。黑盒白盒、测试报告、测试策略。",
+      "skills": "Python,JMeter,测试用例设计,自动化框架,Selenium,Git,Jenkins,接口测试,性能测试",
+      "match_score": 70,
+      "domain": "测试/QA",
+      "id": 363
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "自动化测试工程师",
+      "jd_text": "某互联网质量部招聘自动化测试工程师。要求：Postman、Jenkins、自动化框架、Selenium、Appium、Git。黑盒白盒、测试报告、缺陷管理。",
+      "skills": "Postman,Jenkins,自动化框架,Selenium,Appium,Git",
+      "match_score": 66,
+      "domain": "测试/QA",
+      "id": 364
+    },
+    {
+      "company": "某企业软件",
+      "position": "质量保证工程师",
+      "jd_text": "某企业软件招聘质量保证工程师。要求：Git、Python、测试用例设计、Selenium、JMeter、Appium、Jenkins、自动化框架。缺陷管理、测试报告、回归测试。",
+      "skills": "Git,Python,测试用例设计,Selenium,JMeter,Appium,Jenkins,自动化框架",
+      "match_score": 56,
+      "domain": "测试/QA",
+      "id": 365
+    },
+    {
+      "company": "某游戏QA",
+      "position": "性能测试工程师",
+      "jd_text": "某游戏QA招聘性能测试工程师。要求：自动化框架、Selenium、测试用例设计、Jenkins、Postman、Git、接口测试、Appium、JMeter。黑盒白盒、CI/CD集成、缺陷管理。",
+      "skills": "自动化框架,Selenium,测试用例设计,Jenkins,Postman,Git,接口测试,Appium,JMeter",
+      "match_score": 29,
+      "domain": "测试/QA",
+      "id": 366
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "自动化测试工程师",
+      "jd_text": "某互联网质量部招聘自动化测试工程师。要求：Postman、Git、接口测试、Jenkins、性能测试、JMeter、自动化框架、Appium。黑盒白盒、CI/CD集成、测试报告。",
+      "skills": "Postman,Git,接口测试,Jenkins,性能测试,JMeter,自动化框架,Appium",
+      "match_score": 86,
+      "domain": "测试/QA",
+      "id": 367
+    },
+    {
+      "company": "某移动应用",
+      "position": "测试开发",
+      "jd_text": "某移动应用招聘测试开发。要求：JMeter、Python、Appium、Postman、Git、性能测试、接口测试。回归测试、测试报告、CI/CD集成。",
+      "skills": "JMeter,Python,Appium,Postman,Git,性能测试,接口测试",
+      "match_score": 33,
+      "domain": "测试/QA",
+      "id": 368
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试工程师",
+      "jd_text": "某互联网质量部招聘测试工程师。要求：性能测试、Python、接口测试、测试用例设计、Jenkins、Appium、Git、JMeter、Postman。回归测试、测试策略、CI/CD集成。",
+      "skills": "性能测试,Python,接口测试,测试用例设计,Jenkins,Appium,Git,JMeter,Postman",
+      "match_score": 59,
+      "domain": "测试/QA",
+      "id": 369
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "自动化测试工程师",
+      "jd_text": "某金融测试中心招聘自动化测试工程师。要求：自动化框架、JMeter、接口测试、性能测试、Python、测试用例设计、Appium、Jenkins。CI/CD集成、测试报告、黑盒白盒。",
+      "skills": "自动化框架,JMeter,接口测试,性能测试,Python,测试用例设计,Appium,Jenkins",
+      "match_score": 90,
+      "domain": "测试/QA",
+      "id": 370
+    },
+    {
+      "company": "某移动应用",
+      "position": "自动化测试工程师",
+      "jd_text": "某移动应用招聘自动化测试工程师。要求：接口测试、Appium、自动化框架、测试用例设计、Jenkins、Git、性能测试。黑盒白盒、测试报告、CI/CD集成。",
+      "skills": "接口测试,Appium,自动化框架,测试用例设计,Jenkins,Git,性能测试",
+      "match_score": 89,
+      "domain": "测试/QA",
+      "id": 371
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "测试工程师",
+      "jd_text": "某金融测试中心招聘测试工程师。要求：Jenkins、Git、测试用例设计、Appium、Selenium、JMeter、Python、自动化框架、接口测试。回归测试、黑盒白盒、缺陷管理。",
+      "skills": "Jenkins,Git,测试用例设计,Appium,Selenium,JMeter,Python,自动化框架,接口测试",
+      "match_score": 80,
+      "domain": "测试/QA",
+      "id": 372
+    },
+    {
+      "company": "某企业软件",
+      "position": "测试工程师",
+      "jd_text": "某企业软件招聘测试工程师。要求：自动化框架、Jenkins、Python、测试用例设计、Appium、JMeter、接口测试、Selenium、性能测试。缺陷管理、黑盒白盒、回归测试。",
+      "skills": "自动化框架,Jenkins,Python,测试用例设计,Appium,JMeter,接口测试,Selenium,性能测试",
+      "match_score": 72,
+      "domain": "测试/QA",
+      "id": 373
+    },
+    {
+      "company": "某企业软件",
+      "position": "测试开发",
+      "jd_text": "某企业软件招聘测试开发。要求：Postman、JMeter、测试用例设计、性能测试、Selenium、接口测试、Python、Appium、Git。回归测试、缺陷管理、黑盒白盒。",
+      "skills": "Postman,JMeter,测试用例设计,性能测试,Selenium,接口测试,Python,Appium,Git",
+      "match_score": 56,
+      "domain": "测试/QA",
+      "id": 374
+    },
+    {
+      "company": "某企业软件",
+      "position": "性能测试工程师",
+      "jd_text": "某企业软件招聘性能测试工程师。要求：Postman、Selenium、JMeter、性能测试、自动化框架、Python、Appium、Jenkins、接口测试。测试报告、缺陷管理、CI/CD集成。",
+      "skills": "Postman,Selenium,JMeter,性能测试,自动化框架,Python,Appium,Jenkins,接口测试",
+      "match_score": 44,
+      "domain": "测试/QA",
+      "id": 375
+    },
+    {
+      "company": "某游戏QA",
+      "position": "测试工程师",
+      "jd_text": "某游戏QA招聘测试工程师。要求：Python、性能测试、Appium、JMeter、接口测试、自动化框架、Git。回归测试、CI/CD集成、测试策略。",
+      "skills": "Python,性能测试,Appium,JMeter,接口测试,自动化框架,Git",
+      "match_score": 49,
+      "domain": "测试/QA",
+      "id": 376
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "自动化测试工程师",
+      "jd_text": "某互联网质量部招聘自动化测试工程师。要求：自动化框架、Postman、Git、测试用例设计、JMeter、接口测试。黑盒白盒、CI/CD集成、测试策略。",
+      "skills": "自动化框架,Postman,Git,测试用例设计,JMeter,接口测试",
+      "match_score": 62,
+      "domain": "测试/QA",
+      "id": 377
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "自动化测试工程师",
+      "jd_text": "某互联网质量部招聘自动化测试工程师。要求：Jenkins、测试用例设计、Selenium、自动化框架、性能测试、接口测试。黑盒白盒、CI/CD集成、测试策略。",
+      "skills": "Jenkins,测试用例设计,Selenium,自动化框架,性能测试,接口测试",
+      "match_score": 35,
+      "domain": "测试/QA",
+      "id": 378
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "测试开发",
+      "jd_text": "某金融测试中心招聘测试开发。要求：Postman、Python、Appium、自动化框架、Git、接口测试、Jenkins、Selenium、性能测试。CI/CD集成、黑盒白盒、缺陷管理。",
+      "skills": "Postman,Python,Appium,自动化框架,Git,接口测试,Jenkins,Selenium,性能测试",
+      "match_score": 40,
+      "domain": "测试/QA",
+      "id": 379
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "质量保证工程师",
+      "jd_text": "某互联网质量部招聘质量保证工程师。要求：Jenkins、自动化框架、Appium、Postman、JMeter、Python。测试报告、回归测试、测试策略。",
+      "skills": "Jenkins,自动化框架,Appium,Postman,JMeter,Python",
+      "match_score": 50,
+      "domain": "测试/QA",
+      "id": 380
+    },
+    {
+      "company": "某移动应用",
+      "position": "性能测试工程师",
+      "jd_text": "某移动应用招聘性能测试工程师。要求：JMeter、Jenkins、Selenium、测试用例设计、自动化框架、性能测试。测试策略、测试报告、CI/CD集成。",
+      "skills": "JMeter,Jenkins,Selenium,测试用例设计,自动化框架,性能测试",
+      "match_score": 39,
+      "domain": "测试/QA",
+      "id": 381
+    },
+    {
+      "company": "某游戏QA",
+      "position": "测试工程师",
+      "jd_text": "某游戏QA招聘测试工程师。要求：JMeter、自动化框架、Selenium、Git、测试用例设计、接口测试、Python。测试策略、黑盒白盒、回归测试。",
+      "skills": "JMeter,自动化框架,Selenium,Git,测试用例设计,接口测试,Python",
+      "match_score": 88,
+      "domain": "测试/QA",
+      "id": 382
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "自动化测试工程师",
+      "jd_text": "某互联网质量部招聘自动化测试工程师。要求：Postman、Git、性能测试、接口测试、测试用例设计、Appium、Selenium、Python、JMeter。CI/CD集成、黑盒白盒、回归测试。",
+      "skills": "Postman,Git,性能测试,接口测试,测试用例设计,Appium,Selenium,Python,JMeter",
+      "match_score": 52,
+      "domain": "测试/QA",
+      "id": 383
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试开发",
+      "jd_text": "某互联网质量部招聘测试开发。要求：性能测试、Jenkins、Appium、自动化框架、Selenium、接口测试、测试用例设计、JMeter、Git。测试报告、CI/CD集成、黑盒白盒。",
+      "skills": "性能测试,Jenkins,Appium,自动化框架,Selenium,接口测试,测试用例设计,JMeter,Git",
+      "match_score": 90,
+      "domain": "测试/QA",
+      "id": 384
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "测试工程师",
+      "jd_text": "某金融测试中心招聘测试工程师。要求：自动化框架、Jenkins、接口测试、Git、Postman、Python、性能测试。CI/CD集成、回归测试、测试策略。",
+      "skills": "自动化框架,Jenkins,接口测试,Git,Postman,Python,性能测试",
+      "match_score": 66,
+      "domain": "测试/QA",
+      "id": 385
+    },
+    {
+      "company": "某企业软件",
+      "position": "自动化测试工程师",
+      "jd_text": "某企业软件招聘自动化测试工程师。要求：Selenium、性能测试、测试用例设计、Postman、Jenkins、Git、自动化框架、Appium。缺陷管理、黑盒白盒、测试报告。",
+      "skills": "Selenium,性能测试,测试用例设计,Postman,Jenkins,Git,自动化框架,Appium",
+      "match_score": 72,
+      "domain": "测试/QA",
+      "id": 386
+    },
+    {
+      "company": "某游戏QA",
+      "position": "测试工程师",
+      "jd_text": "某游戏QA招聘测试工程师。要求：性能测试、Selenium、Python、JMeter、接口测试、Appium。回归测试、测试策略、CI/CD集成。",
+      "skills": "性能测试,Selenium,Python,JMeter,接口测试,Appium",
+      "match_score": 44,
+      "domain": "测试/QA",
+      "id": 387
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试工程师",
+      "jd_text": "某互联网质量部招聘测试工程师。要求：Appium、自动化框架、性能测试、Jenkins、Python、JMeter、Selenium、测试用例设计、Postman。回归测试、CI/CD集成、测试策略。",
+      "skills": "Appium,自动化框架,性能测试,Jenkins,Python,JMeter,Selenium,测试用例设计,Postman",
+      "match_score": 79,
+      "domain": "测试/QA",
+      "id": 388
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "性能测试工程师",
+      "jd_text": "某互联网质量部招聘性能测试工程师。要求：Git、Python、Jenkins、接口测试、Appium、自动化框架、JMeter、测试用例设计、Postman。缺陷管理、测试策略、测试报告。",
+      "skills": "Git,Python,Jenkins,接口测试,Appium,自动化框架,JMeter,测试用例设计,Postman",
+      "match_score": 49,
+      "domain": "测试/QA",
+      "id": 389
+    },
+    {
+      "company": "某企业软件",
+      "position": "测试开发",
+      "jd_text": "某企业软件招聘测试开发。要求：Postman、性能测试、Appium、JMeter、Jenkins、Git、测试用例设计。CI/CD集成、测试策略、黑盒白盒。",
+      "skills": "Postman,性能测试,Appium,JMeter,Jenkins,Git,测试用例设计",
+      "match_score": 78,
+      "domain": "测试/QA",
+      "id": 390
+    },
+    {
+      "company": "某移动应用",
+      "position": "测试工程师",
+      "jd_text": "某移动应用招聘测试工程师。要求：JMeter、性能测试、测试用例设计、Git、自动化框架、Selenium、Jenkins。缺陷管理、CI/CD集成、黑盒白盒。",
+      "skills": "JMeter,性能测试,测试用例设计,Git,自动化框架,Selenium,Jenkins",
+      "match_score": 60,
+      "domain": "测试/QA",
+      "id": 391
+    },
+    {
+      "company": "某企业软件",
+      "position": "性能测试工程师",
+      "jd_text": "某企业软件招聘性能测试工程师。要求：测试用例设计、Appium、Git、Postman、Jenkins、接口测试、Selenium、自动化框架。缺陷管理、黑盒白盒、测试报告。",
+      "skills": "测试用例设计,Appium,Git,Postman,Jenkins,接口测试,Selenium,自动化框架",
+      "match_score": 77,
+      "domain": "测试/QA",
+      "id": 392
+    },
+    {
+      "company": "某移动应用",
+      "position": "测试开发",
+      "jd_text": "某移动应用招聘测试开发。要求：Python、Jenkins、Appium、JMeter、自动化框架、性能测试。黑盒白盒、回归测试、缺陷管理。",
+      "skills": "Python,Jenkins,Appium,JMeter,自动化框架,性能测试",
+      "match_score": 60,
+      "domain": "测试/QA",
+      "id": 393
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "性能测试工程师",
+      "jd_text": "某互联网质量部招聘性能测试工程师。要求：Selenium、Python、自动化框架、Git、Appium、测试用例设计、JMeter。黑盒白盒、缺陷管理、回归测试。",
+      "skills": "Selenium,Python,自动化框架,Git,Appium,测试用例设计,JMeter",
+      "match_score": 49,
+      "domain": "测试/QA",
+      "id": 394
+    },
+    {
+      "company": "某游戏QA",
+      "position": "性能测试工程师",
+      "jd_text": "某游戏QA招聘性能测试工程师。要求：接口测试、测试用例设计、Postman、Selenium、Git、JMeter。CI/CD集成、回归测试、测试报告。",
+      "skills": "接口测试,测试用例设计,Postman,Selenium,Git,JMeter",
+      "match_score": 32,
+      "domain": "测试/QA",
+      "id": 395
+    },
+    {
+      "company": "某企业软件",
+      "position": "性能测试工程师",
+      "jd_text": "某企业软件招聘性能测试工程师。要求：接口测试、测试用例设计、Selenium、Python、Appium、JMeter。黑盒白盒、CI/CD集成、缺陷管理。",
+      "skills": "接口测试,测试用例设计,Selenium,Python,Appium,JMeter",
+      "match_score": 35,
+      "domain": "测试/QA",
+      "id": 396
+    },
+    {
+      "company": "某金融测试中心",
+      "position": "质量保证工程师",
+      "jd_text": "某金融测试中心招聘质量保证工程师。要求：Appium、测试用例设计、Python、Jenkins、自动化框架、性能测试。黑盒白盒、缺陷管理、回归测试。",
+      "skills": "Appium,测试用例设计,Python,Jenkins,自动化框架,性能测试",
+      "match_score": 61,
+      "domain": "测试/QA",
+      "id": 397
+    },
+    {
+      "company": "某企业软件",
+      "position": "自动化测试工程师",
+      "jd_text": "某企业软件招聘自动化测试工程师。要求：Python、测试用例设计、自动化框架、Selenium、性能测试、Postman、JMeter。CI/CD集成、回归测试、缺陷管理。",
+      "skills": "Python,测试用例设计,自动化框架,Selenium,性能测试,Postman,JMeter",
+      "match_score": 63,
+      "domain": "测试/QA",
+      "id": 398
+    },
+    {
+      "company": "某互联网质量部",
+      "position": "测试开发",
+      "jd_text": "某互联网质量部招聘测试开发。要求：性能测试、测试用例设计、Jenkins、Selenium、Postman、Appium。CI/CD集成、回归测试、缺陷管理。",
+      "skills": "性能测试,测试用例设计,Jenkins,Selenium,Postman,Appium",
+      "match_score": 81,
+      "domain": "测试/QA",
+      "id": 399
+    },
+    {
+      "company": "某医疗IT",
+      "position": "项目主管",
+      "jd_text": "某医疗IT招聘项目主管。要求：用户研究、Axure、Scrum、PRD撰写、需求分析、竞品分析、敏捷开发、跨部门协作、数据分析。产品规划、路线图、用户访谈。",
+      "skills": "用户研究,Axure,Scrum,PRD撰写,需求分析,竞品分析,敏捷开发,跨部门协作,数据分析",
+      "match_score": 74,
+      "domain": "产品/项目",
+      "id": 400
+    },
+    {
+      "company": "某电商平台",
+      "position": "技术项目经理",
+      "jd_text": "某电商平台招聘技术项目经理。要求：数据分析、跨部门协作、需求分析、用户研究、竞品分析、PRD撰写、Scrum。增长黑客、数据驱动、产品规划。",
+      "skills": "数据分析,跨部门协作,需求分析,用户研究,竞品分析,PRD撰写,Scrum",
+      "match_score": 76,
+      "domain": "产品/项目",
+      "id": 401
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "项目主管",
+      "jd_text": "某互联网产品部招聘项目主管。要求：数据分析、竞品分析、PRD撰写、需求分析、跨部门协作、用户研究、敏捷开发。迭代排期、MVP、增长黑客。",
+      "skills": "数据分析,竞品分析,PRD撰写,需求分析,跨部门协作,用户研究,敏捷开发",
+      "match_score": 21,
+      "domain": "产品/项目",
+      "id": 402
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品经理",
+      "jd_text": "某电商平台招聘产品经理。要求：敏捷开发、跨部门协作、需求分析、竞品分析、PRD撰写、JIRA、数据分析、Scrum。数据驱动、增长黑客、用户访谈。",
+      "skills": "敏捷开发,跨部门协作,需求分析,竞品分析,PRD撰写,JIRA,数据分析,Scrum",
+      "match_score": 38,
+      "domain": "产品/项目",
+      "id": 403
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "产品运营",
+      "jd_text": "某互联网产品部招聘产品运营。要求：JIRA、竞品分析、需求分析、Scrum、PRD撰写、跨部门协作。数据驱动、需求管理、用户访谈。",
+      "skills": "JIRA,竞品分析,需求分析,Scrum,PRD撰写,跨部门协作",
+      "match_score": 21,
+      "domain": "产品/项目",
+      "id": 404
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "产品运营",
+      "jd_text": "某互联网产品部招聘产品运营。要求：数据分析、PRD撰写、需求分析、竞品分析、跨部门协作、Axure、Scrum、JIRA。产品规划、迭代排期、用户访谈。",
+      "skills": "数据分析,PRD撰写,需求分析,竞品分析,跨部门协作,Axure,Scrum,JIRA",
+      "match_score": 88,
+      "domain": "产品/项目",
+      "id": 405
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "项目主管",
+      "jd_text": "某互联网产品部招聘项目主管。要求：Scrum、敏捷开发、需求分析、跨部门协作、PRD撰写、JIRA、竞品分析。路线图、用户访谈、MVP。",
+      "skills": "Scrum,敏捷开发,需求分析,跨部门协作,PRD撰写,JIRA,竞品分析",
+      "match_score": 40,
+      "domain": "产品/项目",
+      "id": 406
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "技术项目经理",
+      "jd_text": "某互联网产品部招聘技术项目经理。要求：数据分析、JIRA、Axure、Scrum、竞品分析、需求分析、跨部门协作、PRD撰写。需求管理、数据驱动、迭代排期。",
+      "skills": "数据分析,JIRA,Axure,Scrum,竞品分析,需求分析,跨部门协作,PRD撰写",
+      "match_score": 48,
+      "domain": "产品/项目",
+      "id": 407
+    },
+    {
+      "company": "某SaaS创业",
+      "position": "技术项目经理",
+      "jd_text": "某SaaS创业招聘技术项目经理。要求：竞品分析、PRD撰写、用户研究、JIRA、数据分析、敏捷开发、Scrum、Axure、需求分析。迭代排期、用户访谈、增长黑客。",
+      "skills": "竞品分析,PRD撰写,用户研究,JIRA,数据分析,敏捷开发,Scrum,Axure,需求分析",
+      "match_score": 62,
+      "domain": "产品/项目",
+      "id": 408
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：Axure、竞品分析、跨部门协作、用户研究、PRD撰写、Scrum、数据分析。MVP、增长黑客、产品规划。",
+      "skills": "Axure,竞品分析,跨部门协作,用户研究,PRD撰写,Scrum,数据分析",
+      "match_score": 40,
+      "domain": "产品/项目",
+      "id": 409
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品经理",
+      "jd_text": "某电商平台招聘产品经理。要求：竞品分析、数据分析、跨部门协作、Scrum、需求分析、敏捷开发。MVP、用户访谈、迭代排期。",
+      "skills": "竞品分析,数据分析,跨部门协作,Scrum,需求分析,敏捷开发",
+      "match_score": 76,
+      "domain": "产品/项目",
+      "id": 410
+    },
+    {
+      "company": "某电商平台",
+      "position": "项目主管",
+      "jd_text": "某电商平台招聘项目主管。要求：PRD撰写、竞品分析、Scrum、需求分析、JIRA、数据分析、敏捷开发。用户访谈、数据驱动、产品规划。",
+      "skills": "PRD撰写,竞品分析,Scrum,需求分析,JIRA,数据分析,敏捷开发",
+      "match_score": 49,
+      "domain": "产品/项目",
+      "id": 411
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "技术项目经理",
+      "jd_text": "某互联网产品部招聘技术项目经理。要求：敏捷开发、竞品分析、跨部门协作、数据分析、用户研究、Scrum。迭代排期、MVP、用户访谈。",
+      "skills": "敏捷开发,竞品分析,跨部门协作,数据分析,用户研究,Scrum",
+      "match_score": 82,
+      "domain": "产品/项目",
+      "id": 412
+    },
+    {
+      "company": "某教育科技",
+      "position": "项目主管",
+      "jd_text": "某教育科技招聘项目主管。要求：Axure、跨部门协作、需求分析、Scrum、敏捷开发、竞品分析、用户研究。用户访谈、路线图、MVP。",
+      "skills": "Axure,跨部门协作,需求分析,Scrum,敏捷开发,竞品分析,用户研究",
+      "match_score": 45,
+      "domain": "产品/项目",
+      "id": 413
+    },
+    {
+      "company": "某SaaS创业",
+      "position": "产品经理",
+      "jd_text": "某SaaS创业招聘产品经理。要求：敏捷开发、跨部门协作、数据分析、用户研究、Axure、PRD撰写、Scrum。MVP、增长黑客、需求管理。",
+      "skills": "敏捷开发,跨部门协作,数据分析,用户研究,Axure,PRD撰写,Scrum",
+      "match_score": 68,
+      "domain": "产品/项目",
+      "id": 414
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品运营",
+      "jd_text": "某电商平台招聘产品运营。要求：Scrum、PRD撰写、敏捷开发、Axure、需求分析、跨部门协作。MVP、路线图、需求管理。",
+      "skills": "Scrum,PRD撰写,敏捷开发,Axure,需求分析,跨部门协作",
+      "match_score": 69,
+      "domain": "产品/项目",
+      "id": 415
+    },
+    {
+      "company": "某医疗IT",
+      "position": "产品经理",
+      "jd_text": "某医疗IT招聘产品经理。要求：JIRA、敏捷开发、用户研究、竞品分析、Scrum、Axure、PRD撰写。MVP、迭代排期、数据驱动。",
+      "skills": "JIRA,敏捷开发,用户研究,竞品分析,Scrum,Axure,PRD撰写",
+      "match_score": 26,
+      "domain": "产品/项目",
+      "id": 416
+    },
+    {
+      "company": "某医疗IT",
+      "position": "项目主管",
+      "jd_text": "某医疗IT招聘项目主管。要求：敏捷开发、PRD撰写、Scrum、跨部门协作、JIRA、数据分析、用户研究、Axure、竞品分析。路线图、用户访谈、需求管理。",
+      "skills": "敏捷开发,PRD撰写,Scrum,跨部门协作,JIRA,数据分析,用户研究,Axure,竞品分析",
+      "match_score": 42,
+      "domain": "产品/项目",
+      "id": 417
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：敏捷开发、PRD撰写、JIRA、竞品分析、数据分析、Scrum、需求分析。产品规划、需求管理、路线图。",
+      "skills": "敏捷开发,PRD撰写,JIRA,竞品分析,数据分析,Scrum,需求分析",
+      "match_score": 77,
+      "domain": "产品/项目",
+      "id": 418
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品经理",
+      "jd_text": "某电商平台招聘产品经理。要求：Scrum、竞品分析、用户研究、JIRA、Axure、需求分析、PRD撰写、数据分析、敏捷开发。迭代排期、MVP、产品规划。",
+      "skills": "Scrum,竞品分析,用户研究,JIRA,Axure,需求分析,PRD撰写,数据分析,敏捷开发",
+      "match_score": 42,
+      "domain": "产品/项目",
+      "id": 419
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "产品运营",
+      "jd_text": "某互联网产品部招聘产品运营。要求：JIRA、敏捷开发、跨部门协作、数据分析、PRD撰写、需求分析、用户研究、Scrum。需求管理、数据驱动、迭代排期。",
+      "skills": "JIRA,敏捷开发,跨部门协作,数据分析,PRD撰写,需求分析,用户研究,Scrum",
+      "match_score": 21,
+      "domain": "产品/项目",
+      "id": 420
+    },
+    {
+      "company": "某教育科技",
+      "position": "产品运营",
+      "jd_text": "某教育科技招聘产品运营。要求：Scrum、需求分析、敏捷开发、PRD撰写、用户研究、JIRA、Axure、数据分析、竞品分析。增长黑客、需求管理、数据驱动。",
+      "skills": "Scrum,需求分析,敏捷开发,PRD撰写,用户研究,JIRA,Axure,数据分析,竞品分析",
+      "match_score": 20,
+      "domain": "产品/项目",
+      "id": 421
+    },
+    {
+      "company": "某SaaS创业",
+      "position": "解决方案架构师",
+      "jd_text": "某SaaS创业招聘解决方案架构师。要求：跨部门协作、Scrum、Axure、需求分析、PRD撰写、数据分析、用户研究、竞品分析。路线图、需求管理、产品规划。",
+      "skills": "跨部门协作,Scrum,Axure,需求分析,PRD撰写,数据分析,用户研究,竞品分析",
+      "match_score": 24,
+      "domain": "产品/项目",
+      "id": 422
+    },
+    {
+      "company": "某医疗IT",
+      "position": "解决方案架构师",
+      "jd_text": "某医疗IT招聘解决方案架构师。要求：数据分析、PRD撰写、需求分析、敏捷开发、Axure、Scrum、JIRA、竞品分析。数据驱动、增长黑客、路线图。",
+      "skills": "数据分析,PRD撰写,需求分析,敏捷开发,Axure,Scrum,JIRA,竞品分析",
+      "match_score": 42,
+      "domain": "产品/项目",
+      "id": 423
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：需求分析、PRD撰写、JIRA、竞品分析、用户研究、Axure、跨部门协作、Scrum。产品规划、迭代排期、用户访谈。",
+      "skills": "需求分析,PRD撰写,JIRA,竞品分析,用户研究,Axure,跨部门协作,Scrum",
+      "match_score": 37,
+      "domain": "产品/项目",
+      "id": 424
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "技术项目经理",
+      "jd_text": "某互联网产品部招聘技术项目经理。要求：Scrum、用户研究、Axure、数据分析、PRD撰写、JIRA、需求分析、敏捷开发。产品规划、用户访谈、路线图。",
+      "skills": "Scrum,用户研究,Axure,数据分析,PRD撰写,JIRA,需求分析,敏捷开发",
+      "match_score": 56,
+      "domain": "产品/项目",
+      "id": 425
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：JIRA、Scrum、数据分析、PRD撰写、跨部门协作、敏捷开发、Axure、竞品分析。增长黑客、用户访谈、产品规划。",
+      "skills": "JIRA,Scrum,数据分析,PRD撰写,跨部门协作,敏捷开发,Axure,竞品分析",
+      "match_score": 49,
+      "domain": "产品/项目",
+      "id": 426
+    },
+    {
+      "company": "某电商平台",
+      "position": "项目主管",
+      "jd_text": "某电商平台招聘项目主管。要求：PRD撰写、需求分析、敏捷开发、数据分析、Scrum、跨部门协作。MVP、用户访谈、需求管理。",
+      "skills": "PRD撰写,需求分析,敏捷开发,数据分析,Scrum,跨部门协作",
+      "match_score": 62,
+      "domain": "产品/项目",
+      "id": 427
+    },
+    {
+      "company": "某电商平台",
+      "position": "解决方案架构师",
+      "jd_text": "某电商平台招聘解决方案架构师。要求：需求分析、Axure、JIRA、竞品分析、跨部门协作、用户研究、敏捷开发。路线图、MVP、需求管理。",
+      "skills": "需求分析,Axure,JIRA,竞品分析,跨部门协作,用户研究,敏捷开发",
+      "match_score": 34,
+      "domain": "产品/项目",
+      "id": 428
+    },
+    {
+      "company": "某电商平台",
+      "position": "技术项目经理",
+      "jd_text": "某电商平台招聘技术项目经理。要求：跨部门协作、需求分析、竞品分析、PRD撰写、敏捷开发、数据分析、Axure、用户研究、Scrum。迭代排期、用户访谈、产品规划。",
+      "skills": "跨部门协作,需求分析,竞品分析,PRD撰写,敏捷开发,数据分析,Axure,用户研究,Scrum",
+      "match_score": 78,
+      "domain": "产品/项目",
+      "id": 429
+    },
+    {
+      "company": "某医疗IT",
+      "position": "技术项目经理",
+      "jd_text": "某医疗IT招聘技术项目经理。要求：用户研究、需求分析、JIRA、敏捷开发、数据分析、竞品分析、Scrum、Axure、PRD撰写。路线图、需求管理、产品规划。",
+      "skills": "用户研究,需求分析,JIRA,敏捷开发,数据分析,竞品分析,Scrum,Axure,PRD撰写",
+      "match_score": 55,
+      "domain": "产品/项目",
+      "id": 430
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "技术项目经理",
+      "jd_text": "某互联网产品部招聘技术项目经理。要求：Scrum、竞品分析、用户研究、PRD撰写、JIRA、需求分析、跨部门协作、Axure、敏捷开发。需求管理、迭代排期、用户访谈。",
+      "skills": "Scrum,竞品分析,用户研究,PRD撰写,JIRA,需求分析,跨部门协作,Axure,敏捷开发",
+      "match_score": 31,
+      "domain": "产品/项目",
+      "id": 431
+    },
+    {
+      "company": "某教育科技",
+      "position": "项目主管",
+      "jd_text": "某教育科技招聘项目主管。要求：敏捷开发、JIRA、Axure、Scrum、竞品分析、PRD撰写、需求分析、用户研究。需求管理、MVP、产品规划。",
+      "skills": "敏捷开发,JIRA,Axure,Scrum,竞品分析,PRD撰写,需求分析,用户研究",
+      "match_score": 31,
+      "domain": "产品/项目",
+      "id": 432
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：敏捷开发、Scrum、竞品分析、PRD撰写、跨部门协作、Axure。数据驱动、MVP、迭代排期。",
+      "skills": "敏捷开发,Scrum,竞品分析,PRD撰写,跨部门协作,Axure",
+      "match_score": 38,
+      "domain": "产品/项目",
+      "id": 433
+    },
+    {
+      "company": "某互联网产品部",
+      "position": "解决方案架构师",
+      "jd_text": "某互联网产品部招聘解决方案架构师。要求：Axure、需求分析、敏捷开发、跨部门协作、数据分析、JIRA、Scrum。需求管理、迭代排期、增长黑客。",
+      "skills": "Axure,需求分析,敏捷开发,跨部门协作,数据分析,JIRA,Scrum",
+      "match_score": 31,
+      "domain": "产品/项目",
+      "id": 434
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品运营",
+      "jd_text": "某电商平台招聘产品运营。要求：PRD撰写、Scrum、JIRA、需求分析、敏捷开发、竞品分析。用户访谈、迭代排期、产品规划。",
+      "skills": "PRD撰写,Scrum,JIRA,需求分析,敏捷开发,竞品分析",
+      "match_score": 44,
+      "domain": "产品/项目",
+      "id": 435
+    },
+    {
+      "company": "某电商平台",
+      "position": "技术项目经理",
+      "jd_text": "某电商平台招聘技术项目经理。要求：敏捷开发、PRD撰写、JIRA、Scrum、用户研究、竞品分析、需求分析、Axure。产品规划、增长黑客、数据驱动。",
+      "skills": "敏捷开发,PRD撰写,JIRA,Scrum,用户研究,竞品分析,需求分析,Axure",
+      "match_score": 64,
+      "domain": "产品/项目",
+      "id": 436
+    },
+    {
+      "company": "某医疗IT",
+      "position": "技术项目经理",
+      "jd_text": "某医疗IT招聘技术项目经理。要求：竞品分析、JIRA、Axure、PRD撰写、需求分析、跨部门协作、Scrum、敏捷开发。增长黑客、需求管理、产品规划。",
+      "skills": "竞品分析,JIRA,Axure,PRD撰写,需求分析,跨部门协作,Scrum,敏捷开发",
+      "match_score": 23,
+      "domain": "产品/项目",
+      "id": 437
+    },
+    {
+      "company": "某教育科技",
+      "position": "产品经理",
+      "jd_text": "某教育科技招聘产品经理。要求：用户研究、需求分析、PRD撰写、Axure、跨部门协作、敏捷开发。增长黑客、数据驱动、迭代排期。",
+      "skills": "用户研究,需求分析,PRD撰写,Axure,跨部门协作,敏捷开发",
+      "match_score": 59,
+      "domain": "产品/项目",
+      "id": 438
+    },
+    {
+      "company": "某电商平台",
+      "position": "项目主管",
+      "jd_text": "某电商平台招聘项目主管。要求：敏捷开发、竞品分析、PRD撰写、用户研究、数据分析、Axure。产品规划、用户访谈、迭代排期。",
+      "skills": "敏捷开发,竞品分析,PRD撰写,用户研究,数据分析,Axure",
+      "match_score": 79,
+      "domain": "产品/项目",
+      "id": 439
+    },
+    {
+      "company": "某教育科技",
+      "position": "项目主管",
+      "jd_text": "某教育科技招聘项目主管。要求：竞品分析、JIRA、数据分析、Axure、PRD撰写、跨部门协作、Scrum。增长黑客、用户访谈、需求管理。",
+      "skills": "竞品分析,JIRA,数据分析,Axure,PRD撰写,跨部门协作,Scrum",
+      "match_score": 28,
+      "domain": "产品/项目",
+      "id": 440
+    },
+    {
+      "company": "某教育科技",
+      "position": "产品经理",
+      "jd_text": "某教育科技招聘产品经理。要求：敏捷开发、跨部门协作、竞品分析、Scrum、用户研究、JIRA、PRD撰写、数据分析。产品规划、用户访谈、路线图。",
+      "skills": "敏捷开发,跨部门协作,竞品分析,Scrum,用户研究,JIRA,PRD撰写,数据分析",
+      "match_score": 33,
+      "domain": "产品/项目",
+      "id": 441
+    },
+    {
+      "company": "某电商平台",
+      "position": "解决方案架构师",
+      "jd_text": "某电商平台招聘解决方案架构师。要求：JIRA、Scrum、敏捷开发、Axure、跨部门协作、用户研究。用户访谈、数据驱动、产品规划。",
+      "skills": "JIRA,Scrum,敏捷开发,Axure,跨部门协作,用户研究",
+      "match_score": 90,
+      "domain": "产品/项目",
+      "id": 442
+    },
+    {
+      "company": "某SaaS创业",
+      "position": "产品运营",
+      "jd_text": "某SaaS创业招聘产品运营。要求：PRD撰写、数据分析、Axure、用户研究、Scrum、JIRA、敏捷开发、跨部门协作、竞品分析。用户访谈、产品规划、路线图。",
+      "skills": "PRD撰写,数据分析,Axure,用户研究,Scrum,JIRA,敏捷开发,跨部门协作,竞品分析",
+      "match_score": 29,
+      "domain": "产品/项目",
+      "id": 443
+    },
+    {
+      "company": "某医疗IT",
+      "position": "产品运营",
+      "jd_text": "某医疗IT招聘产品运营。要求：跨部门协作、敏捷开发、数据分析、JIRA、需求分析、Axure。迭代排期、增长黑客、用户访谈。",
+      "skills": "跨部门协作,敏捷开发,数据分析,JIRA,需求分析,Axure",
+      "match_score": 28,
+      "domain": "产品/项目",
+      "id": 444
+    },
+    {
+      "company": "某医疗IT",
+      "position": "产品经理",
+      "jd_text": "某医疗IT招聘产品经理。要求：数据分析、敏捷开发、需求分析、Scrum、PRD撰写、跨部门协作、用户研究、Axure、竞品分析。增长黑客、数据驱动、迭代排期。",
+      "skills": "数据分析,敏捷开发,需求分析,Scrum,PRD撰写,跨部门协作,用户研究,Axure,竞品分析",
+      "match_score": 69,
+      "domain": "产品/项目",
+      "id": 445
+    },
+    {
+      "company": "某医疗IT",
+      "position": "解决方案架构师",
+      "jd_text": "某医疗IT招聘解决方案架构师。要求：Axure、跨部门协作、数据分析、竞品分析、JIRA、用户研究、Scrum、敏捷开发、PRD撰写。产品规划、数据驱动、需求管理。",
+      "skills": "Axure,跨部门协作,数据分析,竞品分析,JIRA,用户研究,Scrum,敏捷开发,PRD撰写",
+      "match_score": 85,
+      "domain": "产品/项目",
+      "id": 446
+    },
+    {
+      "company": "某教育科技",
+      "position": "项目主管",
+      "jd_text": "某教育科技招聘项目主管。要求：需求分析、数据分析、跨部门协作、敏捷开发、Scrum、JIRA、竞品分析、用户研究。数据驱动、MVP、需求管理。",
+      "skills": "需求分析,数据分析,跨部门协作,敏捷开发,Scrum,JIRA,竞品分析,用户研究",
+      "match_score": 50,
+      "domain": "产品/项目",
+      "id": 447
+    },
+    {
+      "company": "某教育科技",
+      "position": "解决方案架构师",
+      "jd_text": "某教育科技招聘解决方案架构师。要求：数据分析、用户研究、Scrum、Axure、敏捷开发、JIRA、PRD撰写、竞品分析、需求分析。增长黑客、产品规划、MVP。",
+      "skills": "数据分析,用户研究,Scrum,Axure,敏捷开发,JIRA,PRD撰写,竞品分析,需求分析",
+      "match_score": 69,
+      "domain": "产品/项目",
+      "id": 448
+    },
+    {
+      "company": "某电商平台",
+      "position": "产品运营",
+      "jd_text": "某电商平台招聘产品运营。要求：JIRA、竞品分析、Scrum、需求分析、用户研究、数据分析、PRD撰写。增长黑客、路线图、用户访谈。",
+      "skills": "JIRA,竞品分析,Scrum,需求分析,用户研究,数据分析,PRD撰写",
+      "match_score": 37,
+      "domain": "产品/项目",
+      "id": 449
+    },
+    {
+      "company": "某Web3创业",
+      "position": "智能合约工程师",
+      "jd_text": "某Web3创业招聘智能合约工程师。要求：P2P网络、DeFi、共识算法、Go、Ethereum、Web3.js、密码学、智能合约、Rust。跨链、去中心化、钱包。",
+      "skills": "P2P网络,DeFi,共识算法,Go,Ethereum,Web3.js,密码学,智能合约,Rust",
+      "match_score": 74,
+      "domain": "区块链/Web3",
+      "id": 450
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：Ethereum、密码学、Web3.js、共识算法、DeFi、P2P网络、Go、Solidity、NFT。DApp、跨链、智能合约审计。",
+      "skills": "Ethereum,密码学,Web3.js,共识算法,DeFi,P2P网络,Go,Solidity,NFT",
+      "match_score": 34,
+      "domain": "区块链/Web3",
+      "id": 451
+    },
+    {
+      "company": "某交易所",
+      "position": "DeFi协议开发",
+      "jd_text": "某交易所招聘DeFi协议开发。要求：Go、密码学、Web3.js、P2P网络、DeFi、Solidity。去中心化、DApp、EVM。",
+      "skills": "Go,密码学,Web3.js,P2P网络,DeFi,Solidity",
+      "match_score": 29,
+      "domain": "区块链/Web3",
+      "id": 452
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链架构师",
+      "jd_text": "某交易所招聘区块链架构师。要求：DeFi、Solidity、智能合约、NFT、Ethereum、共识算法、Web3.js、密码学。跨链、EVM、智能合约审计。",
+      "skills": "DeFi,Solidity,智能合约,NFT,Ethereum,共识算法,Web3.js,密码学",
+      "match_score": 57,
+      "domain": "区块链/Web3",
+      "id": 453
+    },
+    {
+      "company": "某NFT市场",
+      "position": "智能合约工程师",
+      "jd_text": "某NFT市场招聘智能合约工程师。要求：DeFi、Web3.js、NFT、Solidity、智能合约、Ethereum。智能合约审计、Layer2、区块链。",
+      "skills": "DeFi,Web3.js,NFT,Solidity,智能合约,Ethereum",
+      "match_score": 57,
+      "domain": "区块链/Web3",
+      "id": 454
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：P2P网络、Rust、Go、DeFi、共识算法、密码学、智能合约、NFT。Layer2、智能合约审计、钱包。",
+      "skills": "P2P网络,Rust,Go,DeFi,共识算法,密码学,智能合约,NFT",
+      "match_score": 21,
+      "domain": "区块链/Web3",
+      "id": 455
+    },
+    {
+      "company": "某Web3创业",
+      "position": "区块链架构师",
+      "jd_text": "某Web3创业招聘区块链架构师。要求：DeFi、Go、P2P网络、智能合约、共识算法、Rust、NFT。EVM、DApp、去中心化。",
+      "skills": "DeFi,Go,P2P网络,智能合约,共识算法,Rust,NFT",
+      "match_score": 87,
+      "domain": "区块链/Web3",
+      "id": 456
+    },
+    {
+      "company": "某Web3创业",
+      "position": "Web3前端",
+      "jd_text": "某Web3创业招聘Web3前端。要求：Go、DeFi、NFT、P2P网络、共识算法、Ethereum。钱包、去中心化、跨链。",
+      "skills": "Go,DeFi,NFT,P2P网络,共识算法,Ethereum",
+      "match_score": 76,
+      "domain": "区块链/Web3",
+      "id": 457
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "智能合约工程师",
+      "jd_text": "某DeFi平台招聘智能合约工程师。要求：Solidity、Web3.js、Rust、NFT、密码学、Ethereum、智能合约、DeFi。Layer2、EVM、跨链。",
+      "skills": "Solidity,Web3.js,Rust,NFT,密码学,Ethereum,智能合约,DeFi",
+      "match_score": 88,
+      "domain": "区块链/Web3",
+      "id": 458
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "DeFi协议开发",
+      "jd_text": "某DeFi平台招聘DeFi协议开发。要求：P2P网络、Web3.js、Go、共识算法、Solidity、密码学、Ethereum、DeFi、智能合约。跨链、Layer2、DApp。",
+      "skills": "P2P网络,Web3.js,Go,共识算法,Solidity,密码学,Ethereum,DeFi,智能合约",
+      "match_score": 25,
+      "domain": "区块链/Web3",
+      "id": 459
+    },
+    {
+      "company": "某Web3创业",
+      "position": "区块链架构师",
+      "jd_text": "某Web3创业招聘区块链架构师。要求：共识算法、DeFi、Web3.js、智能合约、Go、NFT、Solidity、P2P网络。钱包、EVM、跨链。",
+      "skills": "共识算法,DeFi,Web3.js,智能合约,Go,NFT,Solidity,P2P网络",
+      "match_score": 50,
+      "domain": "区块链/Web3",
+      "id": 460
+    },
+    {
+      "company": "某交易所",
+      "position": "智能合约工程师",
+      "jd_text": "某交易所招聘智能合约工程师。要求：NFT、Go、智能合约、Solidity、密码学、P2P网络、共识算法、Web3.js。钱包、区块链、Layer2。",
+      "skills": "NFT,Go,智能合约,Solidity,密码学,P2P网络,共识算法,Web3.js",
+      "match_score": 33,
+      "domain": "区块链/Web3",
+      "id": 461
+    },
+    {
+      "company": "某公链项目",
+      "position": "Web3前端",
+      "jd_text": "某公链项目招聘Web3前端。要求：Web3.js、NFT、Ethereum、Solidity、P2P网络、DeFi、共识算法。区块链、Layer2、跨链。",
+      "skills": "Web3.js,NFT,Ethereum,Solidity,P2P网络,DeFi,共识算法",
+      "match_score": 47,
+      "domain": "区块链/Web3",
+      "id": 462
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：Rust、DeFi、Go、共识算法、智能合约、P2P网络。智能合约审计、区块链、跨链。",
+      "skills": "Rust,DeFi,Go,共识算法,智能合约,P2P网络",
+      "match_score": 43,
+      "domain": "区块链/Web3",
+      "id": 463
+    },
+    {
+      "company": "某NFT市场",
+      "position": "Web3前端",
+      "jd_text": "某NFT市场招聘Web3前端。要求：NFT、Rust、P2P网络、Web3.js、共识算法、Ethereum、Go、密码学、Solidity。去中心化、智能合约审计、区块链。",
+      "skills": "NFT,Rust,P2P网络,Web3.js,共识算法,Ethereum,Go,密码学,Solidity",
+      "match_score": 68,
+      "domain": "区块链/Web3",
+      "id": 464
+    },
+    {
+      "company": "某公链项目",
+      "position": "Web3前端",
+      "jd_text": "某公链项目招聘Web3前端。要求：Web3.js、NFT、Go、P2P网络、Solidity、Ethereum。EVM、Layer2、DApp。",
+      "skills": "Web3.js,NFT,Go,P2P网络,Solidity,Ethereum",
+      "match_score": 42,
+      "domain": "区块链/Web3",
+      "id": 465
+    },
+    {
+      "company": "某公链项目",
+      "position": "区块链开发工程师",
+      "jd_text": "某公链项目招聘区块链开发工程师。要求：密码学、共识算法、Ethereum、Rust、NFT、智能合约、Go。去中心化、区块链、钱包。",
+      "skills": "密码学,共识算法,Ethereum,Rust,NFT,智能合约,Go",
+      "match_score": 29,
+      "domain": "区块链/Web3",
+      "id": 466
+    },
+    {
+      "company": "某交易所",
+      "position": "Web3前端",
+      "jd_text": "某交易所招聘Web3前端。要求：Solidity、P2P网络、Go、NFT、DeFi、智能合约、Ethereum、密码学、共识算法。跨链、EVM、Layer2。",
+      "skills": "Solidity,P2P网络,Go,NFT,DeFi,智能合约,Ethereum,密码学,共识算法",
+      "match_score": 20,
+      "domain": "区块链/Web3",
+      "id": 467
+    },
+    {
+      "company": "某交易所",
+      "position": "DeFi协议开发",
+      "jd_text": "某交易所招聘DeFi协议开发。要求：共识算法、NFT、Rust、Ethereum、Solidity、P2P网络、智能合约、DeFi、Go。跨链、智能合约审计、DApp。",
+      "skills": "共识算法,NFT,Rust,Ethereum,Solidity,P2P网络,智能合约,DeFi,Go",
+      "match_score": 58,
+      "domain": "区块链/Web3",
+      "id": 468
+    },
+    {
+      "company": "某公链项目",
+      "position": "区块链开发工程师",
+      "jd_text": "某公链项目招聘区块链开发工程师。要求：智能合约、密码学、NFT、Rust、共识算法、Ethereum。Layer2、跨链、去中心化。",
+      "skills": "智能合约,密码学,NFT,Rust,共识算法,Ethereum",
+      "match_score": 42,
+      "domain": "区块链/Web3",
+      "id": 469
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：NFT、Ethereum、Web3.js、共识算法、Solidity、智能合约、Go、DeFi、P2P网络。DApp、跨链、去中心化。",
+      "skills": "NFT,Ethereum,Web3.js,共识算法,Solidity,智能合约,Go,DeFi,P2P网络",
+      "match_score": 37,
+      "domain": "区块链/Web3",
+      "id": 470
+    },
+    {
+      "company": "某Web3创业",
+      "position": "智能合约工程师",
+      "jd_text": "某Web3创业招聘智能合约工程师。要求：DeFi、Ethereum、P2P网络、共识算法、Solidity、Web3.js。Layer2、EVM、DApp。",
+      "skills": "DeFi,Ethereum,P2P网络,共识算法,Solidity,Web3.js",
+      "match_score": 77,
+      "domain": "区块链/Web3",
+      "id": 471
+    },
+    {
+      "company": "某Web3创业",
+      "position": "区块链开发工程师",
+      "jd_text": "某Web3创业招聘区块链开发工程师。要求：Solidity、智能合约、NFT、共识算法、密码学、Rust、Web3.js、Ethereum。智能合约审计、跨链、Layer2。",
+      "skills": "Solidity,智能合约,NFT,共识算法,密码学,Rust,Web3.js,Ethereum",
+      "match_score": 49,
+      "domain": "区块链/Web3",
+      "id": 472
+    },
+    {
+      "company": "某Web3创业",
+      "position": "区块链开发工程师",
+      "jd_text": "某Web3创业招聘区块链开发工程师。要求：P2P网络、Solidity、NFT、DeFi、Rust、智能合约、共识算法。区块链、去中心化、跨链。",
+      "skills": "P2P网络,Solidity,NFT,DeFi,Rust,智能合约,共识算法",
+      "match_score": 26,
+      "domain": "区块链/Web3",
+      "id": 473
+    },
+    {
+      "company": "某NFT市场",
+      "position": "区块链开发工程师",
+      "jd_text": "某NFT市场招聘区块链开发工程师。要求：DeFi、Go、Rust、密码学、Solidity、Ethereum、Web3.js、P2P网络、共识算法。EVM、DApp、智能合约审计。",
+      "skills": "DeFi,Go,Rust,密码学,Solidity,Ethereum,Web3.js,P2P网络,共识算法",
+      "match_score": 71,
+      "domain": "区块链/Web3",
+      "id": 474
+    },
+    {
+      "company": "某NFT市场",
+      "position": "区块链开发工程师",
+      "jd_text": "某NFT市场招聘区块链开发工程师。要求：智能合约、Ethereum、Solidity、Go、P2P网络、密码学、NFT。Layer2、去中心化、EVM。",
+      "skills": "智能合约,Ethereum,Solidity,Go,P2P网络,密码学,NFT",
+      "match_score": 41,
+      "domain": "区块链/Web3",
+      "id": 475
+    },
+    {
+      "company": "某NFT市场",
+      "position": "区块链架构师",
+      "jd_text": "某NFT市场招聘区块链架构师。要求：P2P网络、Ethereum、Solidity、Go、密码学、智能合约、Web3.js。钱包、DApp、去中心化。",
+      "skills": "P2P网络,Ethereum,Solidity,Go,密码学,智能合约,Web3.js",
+      "match_score": 22,
+      "domain": "区块链/Web3",
+      "id": 476
+    },
+    {
+      "company": "某公链项目",
+      "position": "区块链开发工程师",
+      "jd_text": "某公链项目招聘区块链开发工程师。要求：Solidity、Go、Rust、Web3.js、Ethereum、智能合约。DApp、跨链、去中心化。",
+      "skills": "Solidity,Go,Rust,Web3.js,Ethereum,智能合约",
+      "match_score": 46,
+      "domain": "区块链/Web3",
+      "id": 477
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "Web3前端",
+      "jd_text": "某DeFi平台招聘Web3前端。要求：共识算法、Ethereum、Go、Solidity、Web3.js、Rust、DeFi、P2P网络、密码学。Layer2、智能合约审计、EVM。",
+      "skills": "共识算法,Ethereum,Go,Solidity,Web3.js,Rust,DeFi,P2P网络,密码学",
+      "match_score": 20,
+      "domain": "区块链/Web3",
+      "id": 478
+    },
+    {
+      "company": "某交易所",
+      "position": "智能合约工程师",
+      "jd_text": "某交易所招聘智能合约工程师。要求：Rust、密码学、NFT、智能合约、共识算法、Web3.js、P2P网络。EVM、DApp、跨链。",
+      "skills": "Rust,密码学,NFT,智能合约,共识算法,Web3.js,P2P网络",
+      "match_score": 46,
+      "domain": "区块链/Web3",
+      "id": 479
+    },
+    {
+      "company": "某NFT市场",
+      "position": "区块链开发工程师",
+      "jd_text": "某NFT市场招聘区块链开发工程师。要求：Rust、Go、P2P网络、密码学、NFT、共识算法、Solidity。区块链、跨链、智能合约审计。",
+      "skills": "Rust,Go,P2P网络,密码学,NFT,共识算法,Solidity",
+      "match_score": 56,
+      "domain": "区块链/Web3",
+      "id": 480
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "DeFi协议开发",
+      "jd_text": "某DeFi平台招聘DeFi协议开发。要求：智能合约、DeFi、P2P网络、Solidity、密码学、NFT、共识算法、Rust。智能合约审计、钱包、区块链。",
+      "skills": "智能合约,DeFi,P2P网络,Solidity,密码学,NFT,共识算法,Rust",
+      "match_score": 82,
+      "domain": "区块链/Web3",
+      "id": 481
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：Ethereum、P2P网络、智能合约、共识算法、Rust、密码学。跨链、去中心化、区块链。",
+      "skills": "Ethereum,P2P网络,智能合约,共识算法,Rust,密码学",
+      "match_score": 61,
+      "domain": "区块链/Web3",
+      "id": 482
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "区块链开发工程师",
+      "jd_text": "某DeFi平台招聘区块链开发工程师。要求：共识算法、Ethereum、NFT、DeFi、Solidity、P2P网络、Web3.js。DApp、区块链、EVM。",
+      "skills": "共识算法,Ethereum,NFT,DeFi,Solidity,P2P网络,Web3.js",
+      "match_score": 38,
+      "domain": "区块链/Web3",
+      "id": 483
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "区块链架构师",
+      "jd_text": "某DeFi平台招聘区块链架构师。要求：Go、共识算法、智能合约、NFT、Ethereum、密码学、Rust、P2P网络、Web3.js。EVM、智能合约审计、去中心化。",
+      "skills": "Go,共识算法,智能合约,NFT,Ethereum,密码学,Rust,P2P网络,Web3.js",
+      "match_score": 24,
+      "domain": "区块链/Web3",
+      "id": 484
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链开发工程师",
+      "jd_text": "某交易所招聘区块链开发工程师。要求：Go、Rust、P2P网络、密码学、Ethereum、DeFi、NFT、智能合约。Layer2、DApp、去中心化。",
+      "skills": "Go,Rust,P2P网络,密码学,Ethereum,DeFi,NFT,智能合约",
+      "match_score": 41,
+      "domain": "区块链/Web3",
+      "id": 485
+    },
+    {
+      "company": "某交易所",
+      "position": "区块链架构师",
+      "jd_text": "某交易所招聘区块链架构师。要求：Rust、共识算法、密码学、P2P网络、DeFi、NFT、Web3.js。DApp、钱包、EVM。",
+      "skills": "Rust,共识算法,密码学,P2P网络,DeFi,NFT,Web3.js",
+      "match_score": 55,
+      "domain": "区块链/Web3",
+      "id": 486
+    },
+    {
+      "company": "某Web3创业",
+      "position": "DeFi协议开发",
+      "jd_text": "某Web3创业招聘DeFi协议开发。要求：Ethereum、智能合约、共识算法、NFT、Web3.js、Rust、密码学。区块链、EVM、DApp。",
+      "skills": "Ethereum,智能合约,共识算法,NFT,Web3.js,Rust,密码学",
+      "match_score": 25,
+      "domain": "区块链/Web3",
+      "id": 487
+    },
+    {
+      "company": "某公链项目",
+      "position": "区块链架构师",
+      "jd_text": "某公链项目招聘区块链架构师。要求：共识算法、密码学、NFT、P2P网络、DeFi、智能合约。去中心化、EVM、钱包。",
+      "skills": "共识算法,密码学,NFT,P2P网络,DeFi,智能合约",
+      "match_score": 50,
+      "domain": "区块链/Web3",
+      "id": 488
+    },
+    {
+      "company": "某Web3创业",
+      "position": "区块链架构师",
+      "jd_text": "某Web3创业招聘区块链架构师。要求：共识算法、Ethereum、Go、智能合约、密码学、Rust。去中心化、区块链、EVM。",
+      "skills": "共识算法,Ethereum,Go,智能合约,密码学,Rust",
+      "match_score": 59,
+      "domain": "区块链/Web3",
+      "id": 489
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "DeFi协议开发",
+      "jd_text": "某DeFi平台招聘DeFi协议开发。要求：P2P网络、NFT、Go、共识算法、Rust、密码学。DApp、跨链、钱包。",
+      "skills": "P2P网络,NFT,Go,共识算法,Rust,密码学",
+      "match_score": 20,
+      "domain": "区块链/Web3",
+      "id": 490
+    },
+    {
+      "company": "某Web3创业",
+      "position": "DeFi协议开发",
+      "jd_text": "某Web3创业招聘DeFi协议开发。要求：密码学、Solidity、Web3.js、共识算法、P2P网络、Go、NFT、Rust。去中心化、Layer2、智能合约审计。",
+      "skills": "密码学,Solidity,Web3.js,共识算法,P2P网络,Go,NFT,Rust",
+      "match_score": 27,
+      "domain": "区块链/Web3",
+      "id": 491
+    },
+    {
+      "company": "某交易所",
+      "position": "Web3前端",
+      "jd_text": "某交易所招聘Web3前端。要求：Rust、共识算法、智能合约、P2P网络、Web3.js、Solidity。跨链、智能合约审计、去中心化。",
+      "skills": "Rust,共识算法,智能合约,P2P网络,Web3.js,Solidity",
+      "match_score": 28,
+      "domain": "区块链/Web3",
+      "id": 492
+    },
+    {
+      "company": "某交易所",
+      "position": "智能合约工程师",
+      "jd_text": "某交易所招聘智能合约工程师。要求：智能合约、Ethereum、密码学、Rust、NFT、DeFi、Web3.js。EVM、钱包、跨链。",
+      "skills": "智能合约,Ethereum,密码学,Rust,NFT,DeFi,Web3.js",
+      "match_score": 48,
+      "domain": "区块链/Web3",
+      "id": 493
+    },
+    {
+      "company": "某NFT市场",
+      "position": "Web3前端",
+      "jd_text": "某NFT市场招聘Web3前端。要求：密码学、共识算法、Web3.js、Solidity、P2P网络、Go、智能合约、Ethereum。DApp、Layer2、钱包。",
+      "skills": "密码学,共识算法,Web3.js,Solidity,P2P网络,Go,智能合约,Ethereum",
+      "match_score": 35,
+      "domain": "区块链/Web3",
+      "id": 494
+    },
+    {
+      "company": "某公链项目",
+      "position": "区块链架构师",
+      "jd_text": "某公链项目招聘区块链架构师。要求：P2P网络、DeFi、智能合约、Rust、NFT、Ethereum、Solidity、Web3.js。钱包、去中心化、智能合约审计。",
+      "skills": "P2P网络,DeFi,智能合约,Rust,NFT,Ethereum,Solidity,Web3.js",
+      "match_score": 29,
+      "domain": "区块链/Web3",
+      "id": 495
+    },
+    {
+      "company": "某Web3创业",
+      "position": "智能合约工程师",
+      "jd_text": "某Web3创业招聘智能合约工程师。要求：Rust、Go、P2P网络、DeFi、共识算法、NFT、Web3.js、Solidity。Layer2、EVM、跨链。",
+      "skills": "Rust,Go,P2P网络,DeFi,共识算法,NFT,Web3.js,Solidity",
+      "match_score": 89,
+      "domain": "区块链/Web3",
+      "id": 496
+    },
+    {
+      "company": "某DeFi平台",
+      "position": "DeFi协议开发",
+      "jd_text": "某DeFi平台招聘DeFi协议开发。要求：共识算法、P2P网络、Solidity、Web3.js、Rust、密码学、智能合约、NFT。跨链、EVM、Layer2。",
+      "skills": "共识算法,P2P网络,Solidity,Web3.js,Rust,密码学,智能合约,NFT",
+      "match_score": 63,
+      "domain": "区块链/Web3",
+      "id": 497
+    },
+    {
+      "company": "某NFT市场",
+      "position": "DeFi协议开发",
+      "jd_text": "某NFT市场招聘DeFi协议开发。要求：P2P网络、Web3.js、Go、DeFi、Rust、密码学、共识算法、Ethereum、NFT。Layer2、钱包、区块链。",
+      "skills": "P2P网络,Web3.js,Go,DeFi,Rust,密码学,共识算法,Ethereum,NFT",
+      "match_score": 38,
+      "domain": "区块链/Web3",
+      "id": 498
+    },
+    {
+      "company": "某NFT市场",
+      "position": "Web3前端",
+      "jd_text": "某NFT市场招聘Web3前端。要求：Go、DeFi、NFT、Web3.js、Rust、共识算法、智能合约、P2P网络、Solidity。去中心化、区块链、智能合约审计。",
+      "skills": "Go,DeFi,NFT,Web3.js,Rust,共识算法,智能合约,P2P网络,Solidity",
+      "match_score": 36,
+      "domain": "区块链/Web3",
+      "id": 499
+    }
+  ],
+  "evals": [
+    {
+      "query": "Node.js CSS 前端开发",
+      "expected_domain": "前端开发",
+      "expected_ids": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ]
+    },
+    {
+      "query": "A/B测试 Tableau 增长分析师",
+      "expected_domain": "数据分析",
+      "expected_ids": [
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259
+      ]
+    },
+    {
+      "query": "Vite Node.js React",
+      "expected_domain": "前端开发",
+      "expected_ids": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ]
+    },
+    {
+      "query": "自动化框架 Python 自动化测试",
+      "expected_domain": "测试/QA",
+      "expected_ids": [
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ]
+    },
+    {
+      "query": "gRPC Python Java后端开发",
+      "expected_domain": "后端开发",
+      "expected_ids": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "query": "Spring Boot Java Java后端开发",
+      "expected_domain": "后端开发",
+      "expected_ids": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "query": "Linux Shell 基础设施",
+      "expected_domain": "DevOps/运维",
+      "expected_ids": [
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ]
+    },
+    {
+      "query": "Appium 性能测试 测试",
+      "expected_domain": "测试/QA",
+      "expected_ids": [
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ]
+    },
+    {
+      "query": "数据挖掘 TensorFlow CV算法",
+      "expected_domain": "算法/机器学习",
+      "expected_ids": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ]
+    },
+    {
+      "query": "XGBoost 特征工程 算法",
+      "expected_domain": "算法/机器学习",
+      "expected_ids": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ]
+    },
+    {
+      "query": "数据可视化 PowerBI 数据运营",
+      "expected_domain": "数据分析",
+      "expected_ids": [
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259
+      ]
+    },
+    {
+      "query": "跨部门协作 Axure 产品运营",
+      "expected_domain": "产品/项目",
+      "expected_ids": [
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409
+      ]
+    },
+    {
+      "query": "Solidity DeFi 智能合约",
+      "expected_domain": "区块链/Web3",
+      "expected_ids": [
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459
+      ]
+    },
+    {
+      "query": "OpenAI API 向量数据库 提示词",
+      "expected_domain": "AI/大模型",
+      "expected_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "query": "Transformer MCP协议 LLM算法",
+      "expected_domain": "AI/大模型",
+      "expected_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "query": "FreeRTOS C IoT开发",
+      "expected_domain": "嵌入式/硬件",
+      "expected_ids": [
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ]
+    },
+    {
+      "query": "Grafana Jenkins SRE",
+      "expected_domain": "DevOps/运维",
+      "expected_ids": [
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ]
+    },
+    {
+      "query": "FreeRTOS RTOS 硬件",
+      "expected_domain": "嵌入式/硬件",
+      "expected_ids": [
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ]
+    },
+    {
+      "query": "JIRA 需求分析 产品运营",
+      "expected_domain": "产品/项目",
+      "expected_ids": [
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409
+      ]
+    },
+    {
+      "query": "智能合约 Rust Web3前端",
+      "expected_domain": "区块链/Web3",
+      "expected_ids": [
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459
+      ]
+    }
+  ]
+}

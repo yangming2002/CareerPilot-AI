@@ -1,19 +1,43 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { useAnalysisStore } from '@/stores/analysis'
 
 const store = useAnalysisStore()
 const editedResume = ref('')
-const showNotice = ref(false)
 
-// Show completion notification when report arrives
+// Show completion dialog when report arrives
 watch(() => store.report, (r) => {
   if (r) {
     editedResume.value = r.revised_resume || ''
-    if (!r.degraded) {
-      ElMessage.success(`分析完成！匹配度 ${r.match_score} 分`)
+    const gaps = r.skill_gaps || []
+    const covered = gaps.filter(g => g.user_has).length
+    const total = gaps.length
+    // Parse backend elapsed time from progress_log
+    let backendTime = ''
+    const log = r.progress_log || []
+    for (let i = log.length - 1; i >= 0; i--) {
+      const m = log[i].match(/\(([\d.]+)s\)/)
+      if (m) { backendTime = m[1] + 's'; break }
     }
+
+    const msg = r.degraded
+      ? `<p style='color:#f59e0b'>⚠ ${r.degraded_reason || '分析降级完成'}</p>`
+      : `<p>匹配度 <b style='color:#2563eb;font-size:24px'>${r.match_score}</b> 分</p>
+         <p>技能覆盖 <b>${covered}/${total}</b> | 优化建议 <b>${(r.suggestions||[]).length}</b> 条</p>
+         <p style='color:#667085;font-size:13px'>耗时 ${backendTime || (store.elapsedSeconds + 's')}</p>
+         ${r.revised_resume ? '<p style=\'color:#22c55e\'>✓ 已生成改写后的简历</p>' : ''}`
+
+    ElMessageBox.alert(msg, r.degraded ? '分析完成（降级）' : '分析完成', {
+      dangerouslyUseHTMLString: true,
+      confirmButtonText: '查看详情',
+      type: r.degraded ? 'warning' : 'success',
+    }).then(() => {
+      setTimeout(() => {
+        const el = document.querySelector('.report-grid')
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 200)
+    }).catch(() => {})
   }
 })
 
@@ -157,31 +181,55 @@ async function handleExport(fmt: 'md' | 'pdf') {
     </el-card>
 
     <!-- Revised Resume -->
-    <el-card v-if="store.report.revised_resume" shadow="never" class="panel-card" style="grid-column: 1 / -1">
+    <el-card shadow="never" class="panel-card" style="grid-column: 1 / -1">
       <template #header>
         <div class="revised-header">
-          <span>改写后的简历</span>
-          <el-tag size="small" type="success">仅优化表达，未编造经历</el-tag>
+          <span>改写简历</span>
+          <el-tag v-if="store.report.revised_resume" size="small" type="success">仅优化表达，未编造经历</el-tag>
         </div>
       </template>
-      <p class="revised-hint">
-        以下是基于可信建议改写后的简历。你可以手动编辑，然后重新评估匹配度。
-      </p>
-      <el-input
-        v-model="editedResume"
-        type="textarea"
-        :rows="14"
-        resize="vertical"
-        placeholder="改写后的简历..."
-      />
-      <div class="revised-actions">
-        <el-button type="primary" :loading="store.loading" @click="handleRetest">
-          重新评估匹配度
+
+      <!-- Not yet generated -->
+      <div v-if="!store.report.revised_resume && !store.rewriteLoading">
+        <p class="revised-hint">
+          匹配分析完成。如需改写简历，点击下方按钮生成优化后的版本。
+        </p>
+        <el-button
+          type="primary"
+          :loading="store.rewriteLoading"
+          @click="store.rewriteResume()"
+        >
+          生成改写简历
         </el-button>
-        <el-button @click="handleSave">复制到剪贴板</el-button>
-        <el-button v-if="store.report?.id" @click="handleExport('md')">导出 Markdown</el-button>
-        <el-button v-if="store.report?.id" @click="handleExport('pdf')">导出 PDF</el-button>
       </div>
+
+      <!-- Generating -->
+      <div v-if="store.rewriteLoading" class="loading-rewrite">
+        <el-icon class="is-loading"><svg viewBox="0 0 24 24"><path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z" fill="currentColor"/></svg></el-icon>
+        <span>正在生成改写后的简历...</span>
+      </div>
+
+      <!-- Generated -->
+      <template v-if="store.report.revised_resume">
+        <p class="revised-hint">
+          以下是基于可信建议改写后的简历。可手动编辑，然后重新评估匹配度。
+        </p>
+        <el-input
+          v-model="editedResume"
+          type="textarea"
+          :rows="14"
+          resize="vertical"
+          placeholder="改写后的简历..."
+        />
+        <div class="revised-actions">
+          <el-button type="primary" :loading="store.loading" @click="handleRetest">
+            重新评估匹配度
+          </el-button>
+          <el-button @click="handleSave">复制到剪贴板</el-button>
+          <el-button v-if="store.report?.id" @click="handleExport('md')">导出 Markdown</el-button>
+          <el-button v-if="store.report?.id" @click="handleExport('pdf')">导出 PDF</el-button>
+        </div>
+      </template>
     </el-card>
   </section>
 </template>
@@ -282,6 +330,15 @@ async function handleExport(fmt: 'md' | 'pdf') {
   color: #667085;
   font-size: 13px;
   line-height: 1.6;
+}
+
+.loading-rewrite {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  color: #667085;
+  font-size: 14px;
 }
 
 .revised-actions {

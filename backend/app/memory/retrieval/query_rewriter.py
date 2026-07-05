@@ -1,23 +1,17 @@
 """LLM-based query rewriting: expand user query into multiple search variants."""
 from app.llm.client import get_llm_client
 
-REWRITE_PROMPT = """You are a search query optimizer. Given a user's JD search query, generate 3-5 alternative search queries that would help find relevant job descriptions.
+REWRITE_PROMPT = """You are a search query optimizer. Given a user's JD search query, generate 2-3 FOCUSED alternative search queries.
 
 Rules:
-- Expand abbreviations (AI -> 人工智能, 大模型)
-- Add synonyms (开发 -> 工程师, 编程)
-- Add related skills (Python -> Python FastAPI Django)
-- Generate queries in Chinese
-- Keep each query under 30 characters
-
-Return ONLY a JSON array of strings, no other text.
-
-Example:
-User query: "AI开发"
-Output: ["AI应用开发工程师", "大模型Agent开发", "人工智能算法", "AI开发", "LLM应用开发"]
+- Generate queries in Chinese, each under 25 characters
+- Stay CLOSE to the original intent — do NOT broaden the domain
+- Only add direct synonyms and common abbreviations
+- Do NOT add unrelated skills or change the job category
+- Example: "AI Agent开发" → ["大模型Agent开发", "AI应用开发"] (stay in AI domain, don't add "Python后端")
 
 User query: {query}
-Output:"""
+Output: (JSON array of 2-3 strings)"""
 
 
 def rewrite_query(query: str) -> list[str]:
@@ -40,7 +34,7 @@ def rewrite_query(query: str) -> list[str]:
             # Always include original query
             if query not in variants:
                 variants.insert(0, query)
-            return variants[:5]
+            return variants[:3]
     except Exception:
         pass
     return [query]

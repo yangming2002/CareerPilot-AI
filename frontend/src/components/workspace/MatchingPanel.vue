@@ -7,14 +7,20 @@ const store = useAnalysisStore()
 
 <template>
   <div>
-    <el-row :gutter="8" style="margin-bottom:10px">
-      <el-col :span="12">
-        <el-input v-model="store.jdCompany" placeholder="公司名称（可选，方便归档搜索）" size="default" :disabled="store.loading" clearable />
-      </el-col>
-      <el-col :span="12">
-        <el-input v-model="store.jdPosition" placeholder="岗位名称（可选，方便归档搜索）" size="default" :disabled="store.loading" clearable />
-      </el-col>
-    </el-row>
+    <el-form label-position="top" size="default">
+      <el-row :gutter="16">
+        <el-col :span="12">
+          <el-form-item label="公司名称" required>
+            <el-input v-model="store.jdCompany" placeholder="例如：科大讯飞" :disabled="store.loading" clearable />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="岗位名称" required>
+            <el-input v-model="store.jdPosition" placeholder="例如：AI应用开发实习生" :disabled="store.loading" clearable />
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
 
     <el-input
       v-model="store.jdText"

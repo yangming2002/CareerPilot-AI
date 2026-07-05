@@ -94,12 +94,7 @@ class GraphAnalysisService:
                      note=f"{g.depth_match}: {g.note}" if g.depth_match else g.note)
             for g in result.skill_gaps
         ]
-        keyword_coverage = [
-            KeywordCoverage(keyword=item.get("keyword", ""),
-                           in_resume=item.get("in_resume", False),
-                           in_jd=item.get("in_jd", True))
-            for item in result.keyword_coverage
-        ]
+        keyword_coverage: list[KeywordCoverage] = []
         suggestions = [
             SuggestionItem(category=s.category, original=s.original,
                            suggestion=f"[{s.confidence}] {s.suggestion}"
@@ -122,7 +117,6 @@ class GraphAnalysisService:
             integrity_checks=integrity_checks,
             jd_summary=result.jd_summary,
             resume_summary=result.resume_summary,
-            revised_resume=result.revised_resume,
             degraded=state.get("degraded", False),
             degraded_reason=state.get("degraded_reason", ""),
             progress_log=state.get("progress_log", []),

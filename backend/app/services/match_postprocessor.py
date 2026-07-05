@@ -60,12 +60,18 @@ class MatchPostprocessor:
         jd_lower = jd_text.lower()
         to_keep = []
 
+        import jieba
+
         for g in response.skill_gaps:
             skill_lower = g.skill.lower().strip()
-            # Check if skill appears in JD
-            in_jd = skill_lower in jd_lower or any(
-                word in jd_lower for word in skill_lower.split()
-            )
+            # Use jieba for Chinese word segmentation
+            skill_words = [w for w in jieba.cut(skill_lower) if len(w.strip()) >= 2]
+            jd_words = set(jieba.cut(jd_lower))
+            if skill_words:
+                matched = sum(1 for w in skill_words if w in jd_words)
+                in_jd = (matched / len(skill_words)) >= 0.3
+            else:
+                in_jd = skill_lower in jd_lower
             if in_jd or g.user_has:
                 to_keep.append(g)
             else:
