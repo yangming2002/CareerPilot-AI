@@ -1,6 +1,7 @@
 services:
   backend:
-    build: ./backend
+    build: ./backend                         # 本地: docker compose up --build
+    image: ghcr.io/yangming2002/careerpilot-ai/backend:latest  # 远端: docker compose pull
     container_name: careerpilot-backend
     ports:
       - "8001:8001"
@@ -11,7 +12,8 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ./frontend
+    build: ./frontend                       # 本地: docker compose up --build
+    image: ghcr.io/yangming2002/careerpilot-ai/frontend:latest  # 远端: docker compose pull
     container_name: careerpilot-frontend
     ports:
       - "80:80"
