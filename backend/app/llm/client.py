@@ -15,6 +15,22 @@ from app.core.config import (
 T = TypeVar("T")
 
 
+def _init_langsmith():
+    """Enable LangSmith tracing. Called after .env is loaded."""
+    import os as _os
+    if not _os.getenv("LANGSMITH_API_KEY"):
+        return
+    try:
+        from langsmith.wrappers import wrap_openai
+        import openai as _openai_module
+        wrap_openai(_openai_module)
+        from loguru import logger
+        logger.info("LangSmith 追踪已启用")
+    except Exception as e:
+        from loguru import logger
+        logger.warning(f"LangSmith 初始化失败: {e}")
+
+
 @dataclass
 class LLMConfig:
     model: str = OPENAI_MODEL

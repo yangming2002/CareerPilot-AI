@@ -1,4 +1,3 @@
-import logging
 from dataclasses import dataclass, field
 
 from app.guards.base import GuardBase, GuardResult
@@ -6,7 +5,7 @@ from app.guards.integrity_guard import IntegrityGuard
 from app.guards.grounding_guard import GroundingGuard
 from app.guards.prompt_injection_guard import PromptInjectionGuard
 
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 
 @dataclass

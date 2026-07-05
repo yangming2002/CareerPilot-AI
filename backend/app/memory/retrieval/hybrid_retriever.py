@@ -7,6 +7,7 @@ Hybrid retrieval pipeline:
 5. Rerank by LLM relevance scoring
 """
 from dataclasses import dataclass, field
+from loguru import logger
 from rank_bm25 import BM25Okapi
 import jieba
 
@@ -39,7 +40,7 @@ class HybridRetriever:
         """Full pipeline: rewrite → multi-retrieve → RRF → rerank."""
         # 1. Query rewriting
         variants = rewrite_query(query)
-        print(f"[Retrieval] Query variants: {variants}", flush=True)
+        logger.info(f"[Retrieval] Query variants: {variants}")
 
         # 2. Multi-query retrieval
         all_results: dict[int, SearchResult] = {}  # jd_id -> result
