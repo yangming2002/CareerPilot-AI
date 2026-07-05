@@ -19,7 +19,9 @@ function handleLogout() {
   <div id="app-shell">
     <header v-if="auth.isAuthenticated" class="app-nav">
       <div class="nav-left">
-        <span class="nav-logo">CareerPilot-AI</span>
+        <img src="/logo.png" alt="CareerPilot-AI" class="nav-logo-img" @click="router.push('/')" />
+        <router-link to="/" class="nav-link" exact>首页</router-link>
+        <router-link to="/history" class="nav-link">JD 历史</router-link>
       </div>
       <div class="nav-right">
         <span v-if="auth.user" class="nav-user">
@@ -82,6 +84,12 @@ select {
   z-index: 100;
 }
 
+.nav-logo-img {
+  height: 32px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
 .nav-logo {
   font-weight: 800;
   color: #2563eb;
@@ -106,6 +114,16 @@ select {
   margin-left: 6px;
   font-size: 13px;
 }
+
+.nav-link {
+  margin-left: 20px;
+  color: #667085;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .2s;
+}
+.nav-link:hover { color: #2563eb; }
+.nav-link.router-link-active { color: #2563eb; font-weight: 600; }
 
 .no-nav {
   min-height: 100vh;

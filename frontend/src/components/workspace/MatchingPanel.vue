@@ -7,16 +7,14 @@ const store = useAnalysisStore()
 
 <template>
   <div>
-    <div class="engine-bar">
-      <el-radio-group v-model="store.engine" size="small" :disabled="store.loading">
-        <el-radio-button label="rule">规则引擎</el-radio-button>
-        <el-radio-button label="llm">LLM</el-radio-button>
-        <el-radio-button label="graph">
-          Agent
-          <el-tag size="small" type="warning" effect="dark" class="beta-tag">NEW</el-tag>
-        </el-radio-button>
-      </el-radio-group>
-    </div>
+    <el-row :gutter="8" style="margin-bottom:10px">
+      <el-col :span="12">
+        <el-input v-model="store.jdCompany" placeholder="公司名称（可选，方便归档搜索）" size="default" :disabled="store.loading" clearable />
+      </el-col>
+      <el-col :span="12">
+        <el-input v-model="store.jdPosition" placeholder="岗位名称（可选，方便归档搜索）" size="default" :disabled="store.loading" clearable />
+      </el-col>
+    </el-row>
 
     <el-input
       v-model="store.jdText"
@@ -24,7 +22,7 @@ const store = useAnalysisStore()
       :rows="10"
       resize="none"
       :disabled="store.loading"
-      :placeholder="store.engine === 'rule' ? '粘贴 JD。规则引擎通过关键词白名单和正则快速匹配。' : '粘贴 JD。' + (store.engine === 'graph' ? 'Agent 工作流将逐步解析、匹配、校验。' : 'LLM 深度解析岗位要求和技能权重。')"
+      placeholder="粘贴 JD。Agent 将逐步解析岗位要求、匹配技能、生成建议并校验真实性。"
     />
 
     <div v-if="store.loading" class="analysis-status">
@@ -34,8 +32,7 @@ const store = useAnalysisStore()
         <strong>{{ store.elapsedSeconds }}s</strong>
       </div>
       <el-progress
-        :percentage="Math.min(100, Math.round((store.elapsedSeconds / (store.engine === 'rule' ? 15 : 60)) * 100))"
-        :status="store.isVerySlowLLM ? 'warning' : undefined"
+        :percentage="Math.min(99, Math.round((store.elapsedSeconds / 60) * 100))"
       />
       <div v-if="store.progressSteps.length" class="progress-steps">
         <div v-for="(step, i) in store.progressSteps.slice(-5)" :key="i" class="progress-step">
@@ -54,7 +51,7 @@ const store = useAnalysisStore()
         :disabled="store.loading"
         @click="store.analyze()"
       >
-        {{ store.engine === 'graph' ? 'Agent 工作流分析' : store.engine === 'llm' ? 'LLM 深度分析' : '规则匹配分析' }}
+        开始分析
       </el-button>
     </div>
 

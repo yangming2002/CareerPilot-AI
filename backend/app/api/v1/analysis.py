@@ -37,10 +37,30 @@ def get_progress(session_id: str):
 @router.get("/analysis/jd-history")
 def jd_history(
     q: str = Query("", description="Search keyword"),
+    engine: str = Query("hybrid", description="Search engine: 'hybrid' or 'sql'"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Search archived JDs."""
+    """Search archived JDs with hybrid retrieval (vector + BM25 + RRF)."""
+    # Hybrid pipeline
+    if q and engine == "hybrid":
+        try:
+            from app.memory.retrieval.hybrid_retriever import HybridRetriever
+            retriever = HybridRetriever(db, current_user.id)
+            results = retriever.search(q, top_k=20)
+            return [
+                {
+                    "id": r.jd_id, "company": r.company, "position": r.position,
+                    "match_score": r.match_score, "jd_summary": r.jd_summary,
+                    "tags": r.tags, "created_at": r.created_at,
+                    "score": r.final_score, "sources": r.sources[:3],
+                }
+                for r in results
+            ]
+        except Exception:
+            logger.exception("Hybrid search failed, falling back to SQL")
+
+    # SQL fallback
     query = db.query(JDArchive).filter(JDArchive.user_id == current_user.id)
     if q:
         query = query.filter(
@@ -70,58 +90,84 @@ def user_profile(
     return retriever._get_profile_summary(db, current_user.id)
 
 
+@router.get("/analysis/user-facts")
+def list_user_facts(
+    category: str = Query("", description="Filter by category"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """List all extracted facts for the current user."""
+    query = db.query(UserFact).filter(UserFact.user_id == current_user.id)
+    if category:
+        query = query.filter(UserFact.category == category)
+    facts = query.order_by(UserFact.created_at.desc()).limit(100).all()
+    return [
+        {"id": f.id, "category": f.category, "content": f.content,
+         "source": f.source, "confidence": f.confidence,
+         "tags": f.tags, "created_at": str(f.created_at)}
+        for f in facts
+    ]
+
+
+@router.delete("/analysis/user-facts/{fact_id}", status_code=204)
+def delete_user_fact(
+    fact_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Delete a single user fact."""
+    fact = db.query(UserFact).filter(
+        UserFact.id == fact_id, UserFact.user_id == current_user.id
+    ).first()
+    if not fact:
+        raise HTTPException(status_code=404, detail="事实记录不存在")
+    db.delete(fact)
+    db.commit()
+
+
 @router.post("/analysis/jd-match", response_model=JDMatchResponse)
 def jd_match(
     body: JDMatchRequest,
-    engine: str = Query("rule", description="Analysis engine: 'rule' or 'llm'"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     post = MatchPostprocessor()
 
-    if engine == "graph":
-        sid = progress_store.create_session()
-        try:
-            result = GraphAnalysisService().analyze(
-                db, body.resume_text, body.jd_text, current_user.id, session_id=sid
-            )
-            progress_store.push(sid, "分析完成")
-            progress_store.mark_done(sid)
-            response = post.process(result, body.jd_text, body.resume_text)
-            response.session_id = sid
-            _archive_analysis(db, current_user.id, response, body.jd_text)
-            return response
-        except InputInsufficientError as e:
-            raise HTTPException(status_code=400, detail=str(e))
-        except Exception as e:
-            logger.exception("Graph analysis failed")
-            result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
-            result.degraded = True
-            result.degraded_reason = "Agent 工作流异常，已自动切换为规则引擎分析"
-            return post.process(result, body.jd_text, body.resume_text)
+    # ── Primary: Agent workflow ──
+    sid = progress_store.create_session()
+    try:
+        result = GraphAnalysisService().analyze(
+            db, body.resume_text, body.jd_text, current_user.id, session_id=sid
+        )
+        progress_store.push(sid, "分析完成")
+        progress_store.mark_done(sid)
+        response = post.process(result, body.jd_text, body.resume_text)
+        response.session_id = sid
+        _archive_analysis(db, current_user.id, response, body.jd_text, body.company, body.position, body.resume_text)
+        return response
 
-    if engine == "llm":
-        try:
-            result = LLMAnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
-            response = post.process(result, body.jd_text, body.resume_text)
-            _archive_analysis(db, current_user.id, response, body.jd_text)
-            return response
-        except InputInsufficientError as e:
-            raise HTTPException(status_code=400, detail=str(e))
-        except LLMConnectionError:
-            result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
-            result.degraded = True
-            result.degraded_reason = "LLM 服务暂时不可用，已自动切换为规则引擎分析"
-            return post.process(result, body.jd_text, body.resume_text)
-        except Exception as e:
-            logger.exception("LLM analysis failed unexpectedly")
-            result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
-            result.degraded = True
-            result.degraded_reason = f"LLM 分析异常，已自动切换为规则引擎分析"
-            return post.process(result, body.jd_text, body.resume_text)
+    except InputInsufficientError:
+        raise
+    except Exception:
+        logger.exception("Agent workflow failed, falling back to single-shot LLM")
 
+    # ── Fallback 1: Single-shot LLM ──
+    try:
+        result = LLMAnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
+        response = post.process(result, body.jd_text, body.resume_text)
+        response.degraded = True
+        response.degraded_reason = "Agent 工作流异常，已降级为单次 LLM 分析（功能完整，仅流程简化）"
+        _archive_analysis(db, current_user.id, response, body.jd_text, body.company, body.position, body.resume_text)
+        return response
+
+    except Exception:
+        logger.exception("LLM also failed, falling back to rule engine")
+
+    # ── Fallback 2: Rule engine ──
     result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
-    return result
+    result.degraded = True
+    result.degraded_reason = "Agent 和 LLM 均不可用，已切换为规则引擎（仅关键词匹配，建议稍后重试）"
+    return post.process(result, body.jd_text, body.resume_text)
 
 
 @router.get("/analysis/reports", response_model=list[ReportListItem])
@@ -292,10 +338,37 @@ def export_pdf(
 
 # ── Analysis complete hook: archive facts ──
 
-def _archive_analysis(db: Session, user_id: int, response: JDMatchResponse, jd_text: str) -> None:
+def _archive_analysis(db: Session, user_id: int, response: JDMatchResponse,
+                      jd_text: str, company: str = "", position: str = "",
+                      resume_text: str = "") -> None:
     """After a successful analysis, extract facts and archive the JD."""
+    extractor = FactExtractor()
     try:
-        extractor = FactExtractor()
-        extractor.extract_from_match(db, user_id, response, jd_text)
+        extractor.extract_from_match(db, user_id, response, jd_text, company, position)
     except Exception:
-        logger.exception("Fact archiving failed — non-critical, continuing")
+        logger.exception("Fact archiving failed — non-critical")
+
+    # Also extract resume facts for memory (covers manual paste, not just PDF upload)
+    if resume_text and len(resume_text.strip()) >= 50:
+        try:
+            from app.llm.client import get_llm_client
+            from app.llm.prompts import RESUME_PARSE_SYSTEM, RESUME_PARSE_USER
+            from app.llm.schemas import ParsedResumeFields
+            import json as _json
+
+            llm = get_llm_client()
+            prompt = RESUME_PARSE_USER.format(resume_text=resume_text[:4000])
+            raw_json = llm.complete(
+                system=RESUME_PARSE_SYSTEM + "\nReply with ONLY a JSON object, no other text.",
+                user=prompt,
+            )
+            raw_json = raw_json.strip()
+            if raw_json.startswith("```"):
+                raw_json = raw_json.split("\n", 1)[-1]
+                if raw_json.endswith("```"):
+                    raw_json = raw_json[:-3]
+            fields = ParsedResumeFields.model_validate(_json.loads(raw_json))
+            extractor.extract_from_resume(db, user_id, fields, source="jd_match_auto")
+            logger.info(f"Auto-extracted facts from resume for user {user_id}")
+        except Exception:
+            logger.exception("Auto fact extraction failed — non-critical")

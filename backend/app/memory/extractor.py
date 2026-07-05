@@ -65,14 +65,16 @@ class FactExtractor:
 
     def extract_from_match(
         self, db: Session, user_id: int, response: JDMatchResponse,
-        jd_text: str, source: str = "jd_match"
+        jd_text: str, company: str = "", position: str = "", source: str = "jd_match"
     ) -> None:
         """Store JD and match results. Also extract weakness facts from gaps."""
-        # Archive the JD
+        company = company or self._guess_company(jd_text)
+        position = position or self._guess_position(jd_text)
+
         archive = JDArchive(
             user_id=user_id,
-            company=self._guess_company(jd_text),
-            position=self._guess_position(jd_text),
+            company=company or None,
+            position=position or None,
             jd_text=jd_text[:5000],
             jd_summary=response.jd_summary,
             required_skills=self._extract_missing_skills(response),
@@ -80,6 +82,19 @@ class FactExtractor:
             tags=",".join([g.skill for g in response.skill_gaps if g.required and not g.user_has]),
         )
         db.add(archive)
+        db.flush()  # Get archive.id
+
+        # Index JD into vector store for similarity search
+        jd_skills_text = " ".join([g.skill for g in response.skill_gaps])
+        vs.index_jd({
+            "text": jd_text[:2000],
+            "user_id": user_id,
+            "jd_id": archive.id,
+            "company": company or "",
+            "position": position or "",
+            "skills": jd_skills_text[:500],
+            "match_score": response.match_score,
+        })
 
         # Store weaknesses from gaps
         for gap in response.skill_gaps:

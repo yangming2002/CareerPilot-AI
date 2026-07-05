@@ -13,70 +13,72 @@ logger = logging.getLogger(__name__)
 
 DB_PATH = Path(__file__).resolve().parent.parent.parent / "careerpilot_milvus.db"
 
-COLLECTION_NAME = "careerpilot_memory"
+FACTS_COLLECTION = "user_facts"
+JD_COLLECTION = "jd_archive"
 
 
 def _get_client() -> MilvusClient:
     """Get or create Milvus client. For prod: change to MilvusClient(uri='http://host:19530')."""
     client = MilvusClient(str(DB_PATH))
 
-    # Auto-create collection on first use
-    if COLLECTION_NAME not in client.list_collections():
-        client.create_collection(
-            collection_name=COLLECTION_NAME,
-            dimension=DIM,
-            metric_type="COSINE",
-            auto_id=True,
-        )
-        # Add scalar indexes later if needed
+    for coll in [FACTS_COLLECTION, JD_COLLECTION]:
+        if coll not in client.list_collections():
+            client.create_collection(
+                collection_name=coll,
+                dimension=DIM,
+                metric_type="COSINE",
+                auto_id=True,
+            )
     return client
 
 
-def index_facts(facts: list[dict]) -> None:
-    """
-    Index facts into Milvus. Each fact should have:
-    - text: the fact content (will be embedded)
-    - user_id: int
-    - category: str (skill/project/weakness/etc.)
-    - doc_id: str (source identifier)
-    """
-    if not facts:
+def _insert_batch(collection: str, records: list[dict]) -> None:
+    """Insert records into a Milvus collection with embeddings."""
+    if not records:
         return
-
     from app.memory.embeddings import embed_texts
 
-    texts = [f["text"] for f in facts]
+    texts = [r["text"] for r in records]
     vectors = embed_texts(texts)
 
     data = []
-    for i, fact in enumerate(facts):
-        data.append({
-            "vector": vectors[i],
-            "user_id": fact["user_id"],
-            "category": fact.get("category", ""),
-            "text": fact["text"][:1000],
-            "doc_id": fact.get("doc_id", ""),
-        })
+    for i, rec in enumerate(records):
+        row = {"vector": vectors[i], "text": rec["text"][:2000]}
+        for k, v in rec.items():
+            if k != "text" and k != "vector":
+                row[k] = v
+        data.append(row)
 
     try:
         client = _get_client()
-        client.insert(collection_name=COLLECTION_NAME, data=data)
-        logger.debug(f"Indexed {len(facts)} facts into Milvus")
+        client.insert(collection_name=collection, data=data)
+        logger.debug(f"Inserted {len(records)} records into {collection}")
     except Exception as e:
-        logger.warning(f"Milvus indexing failed (non-critical): {e}")
+        logger.warning(f"Milvus insert failed for {collection}: {e}")
 
 
-def search_similar(
-    query: str,
-    user_id: int,
-    category: str | None = None,
-    top_k: int = 10,
+# ── User Facts ──
+
+def index_facts(facts: list[dict]) -> None:
+    """Index user facts (skills, projects) into Milvus. Low volume, few per user."""
+    records = []
+    for f in facts:
+        records.append({
+            "text": f["text"][:1000],
+            "user_id": f["user_id"],
+            "category": f.get("category", ""),
+            "doc_id": f.get("doc_id", ""),
+        })
+    _insert_batch(FACTS_COLLECTION, records)
+
+
+def search_similar_facts(
+    query: str, user_id: int, category: str | None = None, top_k: int = 10,
 ) -> list[dict]:
-    """Search for facts similar to query, scoped to user."""
+    """Vector search user facts."""
     from app.memory.embeddings import embed_text
 
     query_vec = embed_text(query)
-
     filter_expr = f'user_id == {user_id}'
     if category:
         filter_expr += f' && category == "{category}"'
@@ -84,10 +86,8 @@ def search_similar(
     try:
         client = _get_client()
         results = client.search(
-            collection_name=COLLECTION_NAME,
-            data=[query_vec],
-            limit=top_k,
-            filter=filter_expr,
+            collection_name=FACTS_COLLECTION, data=[query_vec],
+            limit=top_k, filter=filter_expr,
             output_fields=["text", "category", "doc_id"],
         )
         if results and results[0]:
@@ -97,15 +97,55 @@ def search_similar(
                 for r in results[0]
             ]
     except Exception as e:
-        logger.warning(f"Milvus search failed: {e}")
+        logger.warning(f"Facts search failed: {e}")
+    return []
 
+
+# ── JD Archive ──
+
+def index_jd(jd: dict) -> None:
+    """
+    Index a JD into Milvus.
+    jd: {text: JD全文, user_id, jd_id, company, position, skills, match_score}
+    """
+    _insert_batch(JD_COLLECTION, [jd])
+
+
+def search_similar_jds(
+    query: str, user_id: int, top_k: int = 10,
+) -> list[dict]:
+    """Vector search past JDs for similarity to current query."""
+    from app.memory.embeddings import embed_text
+
+    query_vec = embed_text(query)
+    try:
+        client = _get_client()
+        results = client.search(
+            collection_name=JD_COLLECTION, data=[query_vec],
+            limit=top_k, filter=f'user_id == {user_id}',
+            output_fields=["text", "company", "position", "skills", "match_score", "jd_id"],
+        )
+        if results and results[0]:
+            return [
+                {
+                    "jd_id": r["entity"].get("jd_id", 0),
+                    "company": r["entity"].get("company", ""),
+                    "position": r["entity"].get("position", ""),
+                    "skills": r["entity"].get("skills", ""),
+                    "match_score": r["entity"].get("match_score", 0),
+                    "score": round(r["distance"], 3),
+                }
+                for r in results[0]
+            ]
+    except Exception as e:
+        logger.warning(f"JD search failed: {e}")
     return []
 
 
 def delete_user_facts(user_id: int) -> None:
-    """Remove all facts for a user (e.g., on account deletion)."""
     try:
         client = _get_client()
-        client.delete(collection_name=COLLECTION_NAME, filter=f'user_id == {user_id}')
+        for coll in [FACTS_COLLECTION, JD_COLLECTION]:
+            client.delete(collection_name=coll, filter=f'user_id == {user_id}')
     except Exception as e:
         logger.warning(f"Milvus delete failed: {e}")

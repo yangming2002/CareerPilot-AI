@@ -4,6 +4,8 @@ from pydantic import BaseModel, Field
 class JDMatchRequest(BaseModel):
     resume_text: str = Field(..., min_length=1, description="用户简历全文")
     jd_text: str = Field(..., min_length=1, description="目标岗位 JD 全文")
+    company: str = ""
+    position: str = ""
 
 
 class SuggestionItem(BaseModel):

@@ -11,7 +11,7 @@ const showNotice = ref(false)
 watch(() => store.report, (r) => {
   if (r) {
     editedResume.value = r.revised_resume || ''
-    if (!r.degraded && store.engine === 'llm') {
+    if (!r.degraded) {
       ElMessage.success(`分析完成！匹配度 ${r.match_score} 分`)
     }
   }
@@ -64,8 +64,8 @@ async function handleExport(fmt: 'md' | 'pdf') {
   <section v-if="store.report" class="report-grid">
     <!-- Completion Notice -->
     <el-alert
-      v-if="!store.report.degraded && store.engine === 'llm'"
-      :title="`LLM 分析完成 | 匹配度 ${store.report.match_score} 分 | 耗时 ${store.elapsedSeconds} 秒`"
+      v-if="!store.report.degraded"
+      :title="`分析完成 | 匹配度 ${store.report.match_score} 分 | 耗时 ${store.elapsedSeconds} 秒`"
       type="success"
       :closable="true"
       show-icon

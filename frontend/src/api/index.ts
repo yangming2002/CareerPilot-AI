@@ -31,6 +31,8 @@ export function getMe(): Promise<UserResponse> {
 export interface JDMatchRequest {
   resume_text: string
   jd_text: string
+  company?: string
+  position?: string
 }
 
 export interface JDMatchResponse {
@@ -87,13 +89,11 @@ export interface IntegrityCheckItem {
 
 export function runJDMatch(
   data: JDMatchRequest,
-  engine: 'rule' | 'llm' | 'graph' = 'rule',
   options: { signal?: AbortSignal } = {},
 ): Promise<JDMatchResponse> {
   return client.post('/api/v1/analysis/jd-match', data, {
-    params: { engine },
     signal: options.signal,
-    timeout: engine === 'rule' ? 15000 : 90000,
+    timeout: 90000,
   }).then((r) => r.data)
 }
 

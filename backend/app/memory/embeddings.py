@@ -1,23 +1,27 @@
-"""Embedding function for vector search. Uses sentence-transformers for zero-cost local embeddings."""
+"""Embedding function for vector search. Uses Bailian API to avoid local model downloads."""
 from functools import lru_cache
 
-DIM = 512  # bge-small-zh-v1.5 dimension
+from openai import OpenAI
+
+from app.core.config import OPENAI_API_KEY, OPENAI_BASE_URL
+
+DIM = 1536  # text-embedding-v2 dimension
 
 
 @lru_cache(maxsize=1)
-def _get_model():
-    """Lazy-load the embedding model (downloaded once on first use)."""
-    from sentence_transformers import SentenceTransformer
-    return SentenceTransformer("BAAI/bge-small-zh-v1.5")
+def _get_client() -> OpenAI:
+    return OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
-    """Convert texts to embedding vectors."""
-    model = _get_model()
-    embeddings = model.encode(texts, normalize_embeddings=True)
-    return [e.tolist() for e in embeddings]
+    """Convert texts to embedding vectors via Bailian embedding API."""
+    client = _get_client()
+    resp = client.embeddings.create(
+        model="text-embedding-v2",
+        input=texts,
+    )
+    return [d.embedding for d in resp.data]
 
 
 def embed_text(text: str) -> list[float]:
-    """Convert a single text to embedding vector."""
     return embed_texts([text])[0]
