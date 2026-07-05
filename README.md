@@ -1,108 +1,85 @@
 <div align="center">
   <img src="./frontend/logo.png" alt="CareerPilot-AI Logo" width="420" />
-  <p><strong>An intelligent career workspace for JD matching, application tracking, interview review, and skill growth.</strong></p>
+  <p><strong>Agent-driven career workspace: JD-resume matching, trustworthy rewriting, RAG memory, and evaluation harness.</strong></p>
 </div>
 
 ---
 
-CareerPilot-AI is an intelligent career workspace for managing the full job application process. It helps users analyze target job descriptions against their resume, optimize resume wording without fabricating experience, track application progress, remember cooldown windows, review interview and written-test performance, and build a personal skill profile over time.
-
-The system is designed around user-provided job descriptions and user-owned job-search records. Instead of relying on unstable real-time crawling or unverified online search, CareerPilot-AI focuses on a trustworthy workflow: users bring the JD they care about, and the system helps them evaluate, prepare, track, and improve.
+CareerPilot-AI is an LLM Agent-powered career workspace. Users upload a resume, paste a target JD, and the Agent automatically parses, matches, suggests trustworthy optimizations, and generates a STAR-format revised resume — all without fabricating experience. A RAG memory system accumulates user facts across analyses, and a hybrid retrieval pipeline (vector + BM25 + RRF) powers JD history search. Every component is backed by an evaluation harness.
 
 ## Highlights
 
-- **JD-Resume Matching**: Analyze a resume against a user-provided job description and generate a structured match report.
-- **Trustworthy Resume Optimization**: Improve wording based on real user experience without inventing companies, projects, skills, or metrics.
-- **Resume Integrity Guard**: Detect unsupported metrics, exaggerated responsibility claims, inconsistent skills, and fabrication risks.
-- **Application Tracker**: Record companies, positions, resume versions, application channels, dates, status changes, and notes.
-- **Cooldown Reminder**: Help users avoid forgetting previous applications and remind them when a company may still be in a cooldown period.
-- **Interview Review**: Record interview rounds, questions, weak answers, follow-up questions, and generate targeted coaching suggestions.
-- **Written-Test Review**: Track problem types, missed knowledge points, and weak areas across companies and test rounds.
-- **Skill Profile**: Aggregate JD gaps, resume gaps, interview feedback, and written-test performance into a personal capability map.
-- **Privacy-First Design**: Resume and job-search records should remain user-controlled; sensitive data is not persisted unless explicitly required by the user.
-- **Evaluation Harness Ready**: Designed to support automated evaluation for parsing, match scoring, integrity checking, prompt-injection defense, and coaching quality.
+- **Agent Workflow**: LangGraph state graph orchestrates JD parsing → resume parsing → rule scoring → LLM match analysis → integrity guard → report composition, with automatic degradation (Agent → single-shot LLM → rule engine).
+- **Trustworthy Resume Rewriting**: STAR methodology with Result placeholders keyed to appropriate evaluation methods (RAGAS, JMeter, precision/recall). Never fabricates metrics — suggests where to measure and lets the user fill real numbers.
+- **Integrity Guard**: Detects fabrication, exaggeration, and unsupported claims. Guard failures trigger LLM retry with feedback (max 2 rounds).
+- **Post-Processing Corrector**: Five code-level rules fix common LLM mistakes — at-least-one logic, hallucinated gap removal, preferred-vs-required classification, GitHub detection, placeholder cleanup.
+- **RAG Memory System**: Milvus Lite vector store (HNSW index, 1536-dim) + SQLite structured storage. Facts auto-extracted from every analysis. JD history retrievable via hybrid search.
+- **Hybrid JD Retrieval**: Query rewriting (LLM) → multi-query (vector + BM25) → RRF fusion. 100% domain-level precision on 500-JD eval set.
+- **Application Tracker**: CRUD with status history and cooldown detection.
+- **Interview / Written-Test Review**: Record questions, weak points, and generate coaching suggestions.
+- **Evaluation Harness**: 42 test cases across JD matching, integrity guard, prompt injection defense, and RAG retrieval.
+- **Privacy-First**: Resume and job-search records are sensitive. No data leaves the user's machine without authorization.
 
-## Core Workflows
+## Architecture
 
-### JD Matching and Resume Optimization
-
-```text
-Resume + User-provided JD
--> JD parsing
--> Resume structure extraction
--> Match scoring
--> Gap analysis
--> Trustworthy optimization suggestions
--> Integrity check
--> Structured report
 ```
-
-### Application Tracking
-
-```text
-Target company + position + JD
--> Save application record
--> Track current status
--> Link resume version and analysis report
--> Record outcome
--> Trigger cooldown reminder when needed
+┌──────────────────────────────────────────────┐
+│               Frontend (Vue 3)               │
+│  Login → Workspace → JD History              │
+├──────────────────────────────────────────────┤
+│             API Layer (FastAPI)               │
+│  /auth/*  /analysis/*  /applications/*  ...  │
+├──────────────────────────────────────────────┤
+│          Agent Layer (LangGraph)              │
+│  parse_jd → parse_resume → rule_match        │
+│  → llm_analysis → integrity_guard → compose  │
+│       ↓ failure                              │
+│  single-shot LLM → rule engine                │
+├──────────────────────────────────────────────┤
+│        RAG Memory (Milvus + SQLite)           │
+│  Index: JD text → embed → HNSW               │
+│  Retrieval: query rewrite → vector + BM25     │
+│           → RRF fusion → top-K                │
+├──────────────────────────────────────────────┤
+│           Data Layer (SQLite)                 │
+│  8 tables: users, applications,              │
+│  analysis_reports, interview_reviews,        │
+│  written_test_reviews, user_facts,           │
+│  jd_archive, application_status_history      │
+└──────────────────────────────────────────────┘
 ```
-
-### Interview and Written-Test Review
-
-```text
-Interview or written-test record
--> Capture questions and weak points
--> Tag knowledge areas
--> Generate coaching suggestions
--> Update skill profile
--> Recommend next preparation focus
-```
-
-## Product Principles
-
-CareerPilot-AI follows several non-negotiable principles:
-
-- Users provide the JD they want to analyze.
-- Optimize expression, not facts.
-- Suggest real evidence collection instead of inventing numbers.
-- Do not turn "participated in" into "led" unless the user actually led the work.
-- Do not add skills, internships, papers, awards, patents, or projects that the user did not provide.
-- Treat user-provided resume, JD, and interview notes as sensitive data.
-- Use application history to support review and improvement, not to overpromise outcomes.
-
-## Tech Stack
-
-### Frontend
-
-- Vue 3 · Vite · TypeScript
-- Vue Router · Pinia · Element Plus · Axios
-
-### Backend
-
-- Python 3.11+ · FastAPI · Pydantic v2
-- SQLAlchemy 2.x · SQLite (MVP, PostgreSQL-ready)
-- Service layer designed for LLM / Agent drop-in
 
 ## Repository Structure
 
-```text
+```
 CareerPilot-AI/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py              # FastAPI entry + CORS
-│   │   ├── core/                # config, database
-│   │   ├── models/              # SQLAlchemy models (5 tables)
-│   │   ├── schemas/             # Pydantic request / response
-│   │   ├── api/v1/              # REST routes (5 modules)
-│   │   └── services/            # business logic (rule engine, ready for LLM)
+│   │   ├── main.py                  # FastAPI entry, CORS, exception handlers
+│   │   ├── core/                    # config, database, security, errors, progress
+│   │   ├── models/                  # SQLAlchemy models (8 tables)
+│   │   ├── schemas/                 # Pydantic request/response
+│   │   ├── api/v1/                  # REST routes
+│   │   ├── services/                # business logic + post-processor
+│   │   ├── agents/                  # LangGraph nodes, state, graph
+│   │   ├── guards/                  # integrity, injection, grounding
+│   │   ├── llm/                     # LLM client, prompts, schemas
+│   │   ├── memory/                  # Milvus vector store, extractor, retriever
+│   │   │   └── retrieval/           # query rewriter, hybrid retriever (BM25 + RRF)
+│   │   └── utils/                   # file parser (PDF/DOCX)
+│   ├── evals/                       # evaluation harness
+│   │   ├── datasets/                # test cases (JD match, integrity, injection)
+│   │   ├── runner.py                # eval runner
+│   │   ├── ragas_eval.py            # RAG retrieval eval
+│   │   └── retrieval_eval.py        # vector recall eval
 │   └── requirements.txt
 ├── frontend/
 │   └── src/
-│       ├── api/                 # Axios client + API functions
-│       ├── stores/              # Pinia stores (5 modules)
-│       ├── components/workspace/# 8 workspace sub-panels
-│       └── views/               # WorkspaceView
+│       ├── api/                     # Axios client + API functions
+│       ├── stores/                  # Pinia stores (auth, analysis, ...)
+│       ├── components/workspace/    # workspace sub-panels
+│       └── views/                   # Workspace, Login, Register, JDHistory
+├── docs/                            # PRD, TRD, scope docs
 └── README.md
 ```
 
@@ -112,11 +89,10 @@ CareerPilot-AI/
 
 ```bash
 cd backend
+cp .env.example .env    # edit .env with your API key
 pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
 ```
-
-API docs auto-served at http://localhost:8002/docs.
 
 ### Frontend
 
@@ -126,35 +102,57 @@ npm install
 npm run dev
 ```
 
-Frontend served at http://localhost:5173, expects backend on port 8002.
+Frontend served at http://localhost:5173.
 
 ## API Overview
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/api/v1/analysis/jd-match` | JD-resume matching analysis |
-| GET | `/api/v1/analysis/reports` | Historical reports |
-| POST | `/api/v1/applications` | Create application record |
-| GET | `/api/v1/applications` | List applications |
-| PATCH | `/api/v1/applications/{id}/status` | Update application status |
-| DELETE | `/api/v1/applications/{id}` | Delete application |
-| GET | `/api/v1/applications/{id}/cooldown` | Cooldown check |
-| POST | `/api/v1/interviews/reviews` | Create interview review |
-| GET | `/api/v1/interviews/reviews` | List interview reviews |
-| POST | `/api/v1/written-tests/reviews` | Create written-test review |
-| GET | `/api/v1/written-tests/reviews` | List written-test reviews |
+| POST | `/api/v1/auth/register` | Register new user |
+| POST | `/api/v1/auth/login` | Login |
+| GET | `/api/v1/auth/me` | Current user info |
+| POST | `/api/v1/analysis/jd-match` | Agent JD-resume matching |
+| POST | `/api/v1/analysis/rewrite-resume` | STAR-format resume rewrite |
+| POST | `/api/v1/analysis/parse-resume` | Upload PDF/DOCX resume |
+| GET | `/api/v1/analysis/jd-history` | Search archived JDs (hybrid retrieval) |
+| GET | `/api/v1/analysis/reports` | Historical analysis reports |
+| GET | `/api/v1/analysis/export-md/{id}` | Export revised resume as Markdown |
+| GET | `/api/v1/analysis/export-pdf/{id}` | Export revised resume as PDF |
+| GET | `/api/v1/analysis/progress/{sid}` | Real-time analysis progress |
+| GET | `/api/v1/analysis/user-profile` | Aggregated memory profile |
+| GET | `/api/v1/analysis/user-facts` | List extracted facts |
+| DELETE | `/api/v1/analysis/user-facts/{id}` | Delete a fact |
+| CRUD | `/api/v1/applications` | Application tracker |
+| POST/GET | `/api/v1/interviews/reviews` | Interview reviews |
+| POST/GET | `/api/v1/written-tests/reviews` | Written-test reviews |
 | GET | `/api/v1/skill-profile` | Aggregated skill profile |
 
-## Roadmap
+## Evaluation
 
-- Frontend workspace for JD matching and job-search management.
-- Application tracker with status history, resume version linkage, and cooldown reminders.
-- Interview review module with question records, answer review, and coaching suggestions.
-- Written-test review module with problem tags, weak-point tracking, and skill visualization.
-- FastAPI backend with typed request and response models.
-- LLM-based analysis workflow with integrity guard and prompt-injection defense.
-- Evaluation harness for parser quality, match ranking, coaching quality, hallucination control, and safety checks.
+```bash
+# Full eval suite
+cd backend && python -m evals.runner
+
+# RAG retrieval eval
+python -m evals.ragas_eval
+```
+
+| Suite | Cases | Key Metric |
+|-------|-------|------------|
+| JD Match | 7 | Score accuracy vs expected range |
+| Integrity Guard | 5 | Fabrication/exaggeration detection |
+| Injection Defense | 5 | 100% detection, 0% false positive |
+| RAG Retrieval (6 JDs) | 5 queries | Precision@5: 100% |
+| RAG Retrieval (500 JDs) | 20 queries | Domain precision: 100% |
+
+## Key Design Decisions
+
+- **Single Agent, not Multi-Agent**: All nodes in the analysis pipeline are serial dependencies. Multi-agent would add coordination overhead without parallelism benefits. A single LLM with role-switching prompts (advisor → reviewer → coach) achieves the same output quality with fewer calls.
+- **Turbo for everything**: qwen-turbo provides sufficient quality for JD matching at ~3-5s per call. qwen-plus was 10x slower with marginal quality gains.
+- **Resume rewriting is separate**: Decoupled from the main analysis flow. Users only trigger rewriting when the match score justifies it, saving ~40% analysis time.
+- **HNSW over FLAT**: Milvus index acceleration for JD vector search.
+- **RRF over single-method**: Reciprocal Rank Fusion merges vector and BM25 results better than either alone.
 
 ## License
 
-This project is currently under active development. A formal license will be added before public release.
+Active development. Formal license to be added before public release.
