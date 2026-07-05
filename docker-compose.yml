@@ -9,7 +9,7 @@ services:
     env_file:
       - ./backend/.env
     volumes:
-      - careerpilot_data:/app/data
+      - backend_data:/app
     restart: unless-stopped
 
   frontend:
@@ -22,4 +22,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  careerpilot_data:
+  backend_data:

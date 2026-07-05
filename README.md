@@ -55,19 +55,14 @@ npm run dev
 
 Open http://localhost:5173 → register → upload resume → paste JD → analyze.
 
-### 4. Docker (Optional)
+### 4. Docker
 
 ```bash
-# Backend
-docker build -t careerpilot-backend ./backend
-docker run -p 8001:8001 --env-file ./backend/.env careerpilot-backend
-
-# Frontend
-docker build -t careerpilot-frontend ./frontend
-docker run -p 5173:5173 careerpilot-frontend
+cp backend/.env.example backend/.env   # edit with your API key
+docker compose up -d                   # backend + frontend, one command
 ```
 
-For Milvus production deployment, change `MilvusClient("careerpilot_milvus.db")` to `MilvusClient(uri="http://milvus-host:19530")` in `backend/app/memory/vector_store.py`.
+Open http://localhost. For Milvus production deployment, change `MilvusClient("careerpilot_milvus.db")` to `MilvusClient(uri="http://milvus-host:19530")` in `backend/app/memory/vector_store.py`.
 
 ---
 

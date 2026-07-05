@@ -7,9 +7,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Python dependencies
+# Python dependencies — use Aliyun mirror for China
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Application code
 COPY . .
