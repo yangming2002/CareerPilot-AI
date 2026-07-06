@@ -6,7 +6,6 @@ import { ElMessage } from 'element-plus'
 
 const router = useRouter()
 const auth = useAuthStore()
-
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
@@ -16,110 +15,54 @@ async function handleLogin() {
     ElMessage.warning('请填写邮箱和密码')
     return
   }
-  if (!email.value.includes('@')) {
-    ElMessage.warning('请输入有效的邮箱地址')
-    return
-  }
   loading.value = true
   try {
     await auth.login(email.value, password.value)
     ElMessage.success('登录成功')
     router.push('/')
-  } catch {
-    // Error toast already shown by axios interceptor
-  } finally {
-    loading.value = false
-  }
+  } catch { } finally { loading.value = false }
 }
 </script>
 
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <div class="auth-header">
-        <h1>CareerPilot-AI</h1>
-        <p>登录你的求职工作台</p>
-      </div>
-
+      <img src="/logo.png" alt="CareerPilot-AI" class="auth-logo" />
+      <h2>登录</h2>
+      <p class="auth-sub">Agent 驱动求职工作台</p>
       <el-form label-position="top" size="large" @submit.prevent="handleLogin">
         <el-form-item label="邮箱">
-          <el-input
-            v-model="email"
-            type="email"
-            placeholder="your@email.com"
-            autocomplete="email"
-          />
+          <el-input v-model="email" type="email" placeholder="your@email.com" autocomplete="email" />
         </el-form-item>
-
         <el-form-item label="密码">
-          <el-input
-            v-model="password"
-            type="password"
-            placeholder="输入密码"
-            autocomplete="current-password"
-            show-password
-          />
+          <el-input v-model="password" type="password" placeholder="输入密码" autocomplete="current-password" show-password />
         </el-form-item>
-
-        <el-button
-          type="primary"
-          :loading="loading"
-          native-type="submit"
-          style="width: 100%"
-        >
-          登录
-        </el-button>
+        <el-button type="primary" :loading="loading" native-type="submit" class="submit-btn">登录</el-button>
       </el-form>
-
-      <div class="auth-footer">
-        还没有账号？<router-link to="/register">立即注册</router-link>
-      </div>
+      <p class="auth-foot">还没有账号？<router-link to="/register">注册</router-link></p>
     </div>
   </div>
 </template>
 
 <style scoped>
 .auth-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #f5f7fb;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; background: #f8f9fb;
 }
 
 .auth-card {
-  width: 400px;
-  padding: 40px;
-  background: #fff;
-  border: 1px solid #dbe3ef;
-  border-radius: 12px;
+  width: 400px; padding: 44px 40px;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
+.auth-logo { height: 32px; margin-bottom: 24px; }
 
-.auth-header h1 {
-  margin-bottom: 8px;
-  color: #2563eb;
-  font-size: 24px;
-}
+h2 { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 4px; }
 
-.auth-header p {
-  color: #667085;
-  font-size: 14px;
-}
+.auth-sub { color: #6b7280; font-size: 14px; margin-bottom: 32px; }
 
-.auth-footer {
-  margin-top: 20px;
-  text-align: center;
-  color: #667085;
-  font-size: 14px;
-}
+.submit-btn { width: 100%; height: 44px; border-radius: 10px; font-weight: 600; }
 
-.auth-footer a {
-  color: #2563eb;
-  text-decoration: none;
-}
+.auth-foot { margin-top: 20px; text-align: center; font-size: 13px; color: #6b7280; }
+.auth-foot a { color: #2563eb; text-decoration: none; font-weight: 500; }
 </style>

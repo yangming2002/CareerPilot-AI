@@ -1,57 +1,40 @@
 <script setup lang="ts">
-defineProps<{
-  modelValue: string
-}>()
-
-const emit = defineEmits<{
-  'update:modelValue': [value: string]
-}>()
+defineProps<{ modelValue: string }>()
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 </script>
 
 <template>
-  <div class="module-card">
-    <div class="section-title">
-      <h2>工作台模块</h2>
-      <span>Agent 分析 · Guard 校验 · STAR 改写</span>
-    </div>
-
-    <el-radio-group
-      :model-value="modelValue"
-      @change="(v: string) => emit('update:modelValue', v)"
-    >
-      <el-radio-button label="matching">JD 匹配</el-radio-button>
-      <el-radio-button label="tracker">投递 Tracker</el-radio-button>
-      <el-radio-button label="interview">面试复盘</el-radio-button>
-      <el-radio-button label="written">笔试复盘</el-radio-button>
-      <el-radio-button label="profile">能力画像</el-radio-button>
-    </el-radio-group>
+  <div class="tabs">
+    <button v-for="m in modules" :key="m.key"
+      :class="['tab', { active: modelValue === m.key }]"
+      @click="emit('update:modelValue', m.key)"
+    >{{ m.label }}</button>
   </div>
 </template>
 
+<script lang="ts">
+const modules = [
+  { key: 'matching', label: 'JD 匹配' },
+  { key: 'tracker', label: '投递' },
+  { key: 'interview', label: '面试复盘' },
+  { key: 'written', label: '笔试复盘' },
+  { key: 'profile', label: '能力画像' },
+]
+</script>
+
 <style scoped>
-.module-card {
-  margin-bottom: 18px;
-  padding: 18px;
-  border: 1px solid #dbe3ef;
-  border-radius: 8px;
-  background: #ffffff;
+.tabs {
+  display: flex; gap: 4px;
+  background: #f3f4f6; border-radius: 10px; padding: 3px;
 }
 
-.section-title {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 16px;
+.tab {
+  padding: 7px 16px; border: none; border-radius: 8px;
+  background: transparent; color: #6b7280;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all .15s;
 }
 
-.section-title h2 {
-  margin-bottom: 0;
-  font-size: 18px;
-}
-
-.section-title span {
-  color: #667085;
-  font-size: 14px;
-}
+.tab:hover { color: #374151; }
+.tab.active { background: #fff; color: #111827; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 </style>

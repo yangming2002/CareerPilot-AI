@@ -56,6 +56,27 @@ function handleRetest() {
   store.retestWithRevised()
 }
 
+async function handleAction(action: string) {
+  if (action === 'rewrite') store.rewriteResume()
+  else if (action === 'save') {
+    try {
+      const { createApplication } = await import('@/api')
+      await createApplication({
+        company: store.jdCompany || '未填写',
+        position: store.jdPosition || '未填写',
+        status: '已投递',
+      })
+      ElMessage.success('已保存为投递记录')
+    } catch { }
+  }
+  else if (action === 'export') handleExport('md')
+  else if (action === 'learn') {
+    const gapEl = document.querySelector('.panel-card')
+    if (gapEl) gapEl.scrollIntoView({ behavior: 'smooth' })
+  }
+  else if (action === 'retry') { store.reset(); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+}
+
 function handleSave() {
   const text = editedResume.value || store.report?.revised_resume || ''
   if (!text) return
@@ -106,6 +127,15 @@ async function handleExport(fmt: 'md' | 'pdf') {
       style="grid-column: 1 / -1"
     />
 
+    <!-- Pre-Check -->
+    <div v-if="store.report.pre_check?.length" class="precheck-card" style="grid-column:1/-1">
+      <div class="precheck-title">Agent 预检查</div>
+      <div v-for="(c, i) in store.report.pre_check" :key="i" class="precheck-item" :class="c.type">
+        <span class="precheck-icon">{{ c.type === 'ok' ? '✅' : c.type === 'warning' ? '⚠️' : 'ℹ️' }}</span>
+        {{ c.msg }}
+      </div>
+    </div>
+
     <!-- Degraded Banner -->
     <el-alert
       v-if="store.report.degraded"
@@ -151,6 +181,21 @@ async function handleExport(fmt: 'md' | 'pdf') {
         :percentage="store.report.match_score"
         :color="store.report.match_score >= 70 ? '#22c55e' : store.report.match_score >= 40 ? '#f59e0b' : '#ef4444'"
       />
+    </el-card>
+
+    <!-- Similar JDs from RAG -->
+    <el-card v-if="store.report.similar_jds?.length" shadow="never" class="panel-card score-card">
+      <template #header>相关历史岗位</template>
+      <div class="similar-jd-list">
+        <div v-for="(jd, i) in store.report.similar_jds.slice(0, 5)" :key="i" class="similar-jd-item">
+          <span class="similar-jd-company">{{ jd.company || '未知' }}</span>
+          <span class="similar-jd-pos">{{ jd.position || '未知岗位' }}</span>
+          <el-tag size="small" :type="(jd.match_score||0) >= 70 ? 'success' : (jd.match_score||0) >= 40 ? 'warning' : 'danger'">
+            匹配{{ jd.match_score || 0 }}分
+          </el-tag>
+          <span class="similar-jd-sim">相似度 {{ ((jd.score || 0) * 100).toFixed(0) }}%</span>
+        </div>
+      </div>
     </el-card>
 
     <!-- Skill Gaps -->
@@ -265,6 +310,19 @@ async function handleExport(fmt: 'md' | 'pdf') {
         </div>
       </template>
     </el-card>
+    <!-- Next Actions -->
+    <div v-if="store.report.next_actions?.length" class="actions-card" style="grid-column:1/-1">
+      <div class="actions-title">Agent 建议下一步</div>
+      <div class="actions-grid">
+        <button v-for="a in store.report.next_actions" :key="a.action" class="action-btn" @click="handleAction(a.action)">
+          <span class="action-icon">{{ a.icon }}</span>
+          <div>
+            <div class="action-label">{{ a.label }}</div>
+            <div class="action-desc">{{ a.desc }}</div>
+          </div>
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -447,6 +505,37 @@ async function handleExport(fmt: 'md' | 'pdf') {
   color: #667085;
   font-size: 14px;
 }
+
+.precheck-card {
+  background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px;
+}
+.precheck-title { font-weight: 700; font-size: 13px; color: #92400e; margin-bottom: 8px; }
+.precheck-item { font-size: 13px; padding: 3px 0; color: #78350f; display: flex; align-items: center; gap: 6px; }
+.precheck-item.ok { color: #166534; }
+.precheck-icon { flex-shrink: 0; }
+
+.actions-card {
+  background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 16px;
+}
+.actions-title { font-weight: 700; font-size: 13px; color: #0369a1; margin-bottom: 10px; }
+.actions-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.action-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; background: #fff; border: 1px solid #e0f2fe;
+  border-radius: 10px; cursor: pointer; text-align: left;
+  transition: all .15s; flex: 1; min-width: 200px;
+}
+.action-btn:hover { border-color: #0ea5e9; box-shadow: 0 2px 8px rgba(14,165,233,.12); }
+.action-icon { font-size: 20px; flex-shrink: 0; }
+.action-label { font-size: 13px; font-weight: 600; color: #0c4a6e; }
+.action-desc { font-size: 11px; color: #6b7280; margin-top: 2px; }
+
+.similar-jd-list { display: flex; flex-direction: column; gap: 8px; }
+.similar-jd-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; }
+.similar-jd-item:last-child { border: none; }
+.similar-jd-company { font-weight: 600; color: #1f2937; min-width: 100px; }
+.similar-jd-pos { color: #6b7280; flex: 1; }
+.similar-jd-sim { color: #9ca3af; font-size: 11px; margin-left: auto; }
 
 .revised-actions {
   display: flex;

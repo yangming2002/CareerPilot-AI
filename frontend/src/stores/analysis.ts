@@ -29,7 +29,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
     if (progressSteps.value.length) {
       return progressSteps.value[progressSteps.value.length - 1] || 'Agent 正在分析...'
     }
-    return 'Agent 工作流正在逐步分析...'
+    return 'Agent 正在启动...'
   })
 
   function startTimer() {
@@ -57,7 +57,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
     return '分析失败'
   }
 
-  async function analyze() {
+  async function analyze(confirmed = false) {
     if (!resumeText.value.trim() || !jdText.value.trim()) {
       error.value = '请同时填写简历内容和目标 JD'
       return
@@ -73,7 +73,7 @@ export const useAnalysisStore = defineStore('analysis', () => {
 
     loading.value = true
     error.value = ''
-    report.value = null  // 清空上次结果
+    if (!confirmed) report.value = null
     startTimer()
 
     try {
@@ -83,10 +83,48 @@ export const useAnalysisStore = defineStore('analysis', () => {
           jd_text: jdText.value,
           company: jdCompany.value.trim(),
           position: jdPosition.value.trim(),
+          confirmed,
         },
         { signal: currentController.signal },
       )
       if (requestId !== activeRequestId) return
+
+      // Pre-check: show dialog to collect missing info
+      if (result.degraded && result.pre_check?.length) {
+        loading.value = false
+        stopTimer()
+        const warnings = result.pre_check.filter((c: any) => c.type !== 'ok')
+        const hasEdu = warnings.some((c: any) => c.msg.includes('学历'))
+
+        if (hasEdu) {
+          // Show inline form to fill education
+          const { ElMessageBox } = await import('element-plus')
+          try {
+            const { value } = await ElMessageBox.prompt(
+              '请输入最高学历信息（例如：硕士 吉林大学 计算机）',
+              '补充学历信息',
+              { confirmButtonText: '补充后继续', cancelButtonText: '跳过', inputPlaceholder: '硕士 吉林大学 计算机科学与技术' }
+            )
+            if (value?.trim()) {
+              resumeText.value = resumeText.value + '\n学历：' + value.trim()
+            }
+          } catch { /* skip */ }
+          await analyze(true)
+        } else {
+          const { ElMessageBox } = await import('element-plus')
+          const msg = warnings.map((c: any) => `${c.type === 'warning' ? '⚠️' : 'ℹ️'} ${c.msg}`).join('<br>')
+          try {
+            await ElMessageBox.confirm(
+              `<div style="line-height:2">${msg}</div><br>是否继续分析？`,
+              'Agent 预检查',
+              { dangerouslyUseHTMLString: true, confirmButtonText: '继续分析', cancelButtonText: '补充信息', type: 'warning' }
+            )
+            await analyze(true)
+          } catch { /* user chose to fix manually */ }
+        }
+        return
+      }
+
       report.value = result
       // If session_id available, populate progress from it
       if (result.session_id) {
@@ -99,7 +137,18 @@ export const useAnalysisStore = defineStore('analysis', () => {
           }
         } catch { /* ignore poll errors */ }
       }
-      if (result.progress_log?.length) {
+      // Show backend progress steps
+      if (result.session_id) {
+        try {
+          const { getProgress } = await import('@/api')
+          const pdata = await getProgress(result.session_id)
+          if (pdata?.steps?.length) {
+            progressSteps.value = pdata.steps
+            progressDone.value = pdata.done
+          }
+        } catch { /* ignore */ }
+      }
+      if (!progressSteps.value.length && result.progress_log?.length) {
         progressSteps.value = result.progress_log
         progressDone.value = true
       }

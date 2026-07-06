@@ -15,6 +15,7 @@ from app.core.database import Base, engine
 import app.models.models  # noqa: F401
 import app.models.user  # noqa: F401
 import app.memory.models  # noqa: F401
+import app.knowledge.models  # noqa: F401
 
 # Configure loguru
 logger.remove()

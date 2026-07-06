@@ -33,6 +33,7 @@ export interface JDMatchRequest {
   jd_text: string
   company?: string
   position?: string
+  confirmed?: boolean
 }
 
 export interface JDMatchResponse {
@@ -52,6 +53,9 @@ export interface JDMatchResponse {
   nlp_score: number
   tfidf_score: number
   keyword_score: number
+  pre_check: { type: string; msg: string }[]
+  next_actions: { action: string; label: string; desc: string; icon: string }[]
+  similar_jds: { company: string; position: string; match_score: number; score: number }[]
 }
 
 export interface ProgressData {

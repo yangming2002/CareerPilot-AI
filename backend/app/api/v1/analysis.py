@@ -83,6 +83,21 @@ def jd_history(
     ]
 
 
+@router.delete("/analysis/jd-history/{archive_id}", status_code=204)
+def delete_jd_history(archive_id: int, db: Session = Depends(get_db),
+                      current_user: User = Depends(get_current_user)):
+    archive = db.query(JDArchive).filter(JDArchive.id == archive_id, JDArchive.user_id == current_user.id).first()
+    if not archive: raise HTTPException(status_code=404, detail="JD 记录不存在")
+    db.delete(archive); db.commit()
+
+
+@router.post("/analysis/jd-history/batch-delete", status_code=204)
+def batch_delete_jd_history(ids: list[int], db: Session = Depends(get_db),
+                            current_user: User = Depends(get_current_user)):
+    db.query(JDArchive).filter(JDArchive.id.in_(ids), JDArchive.user_id == current_user.id).delete(synchronize_session=False)
+    db.commit()
+
+
 @router.get("/analysis/user-profile")
 def user_profile(
     db: Session = Depends(get_db),
@@ -96,35 +111,37 @@ def user_profile(
 @router.get("/analysis/user-facts")
 def list_user_facts(
     category: str = Query("", description="Filter by category"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """List all extracted facts for the current user."""
     query = db.query(UserFact).filter(UserFact.user_id == current_user.id)
     if category:
         query = query.filter(UserFact.category == category)
-    facts = query.order_by(UserFact.created_at.desc()).limit(100).all()
-    return [
-        {"id": f.id, "category": f.category, "content": f.content,
-         "source": f.source, "confidence": f.confidence,
-         "tags": f.tags, "created_at": str(f.created_at)}
-        for f in facts
-    ]
+    total = query.count()
+    facts = query.order_by(UserFact.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    return {
+        "items": [{"id": f.id, "category": f.category, "content": f.content,
+                   "source": f.source, "confidence": f.confidence,
+                   "tags": f.tags, "created_at": str(f.created_at)} for f in facts],
+        "total": total, "page": page, "page_size": page_size,
+    }
 
 
 @router.delete("/analysis/user-facts/{fact_id}", status_code=204)
-def delete_user_fact(
-    fact_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    """Delete a single user fact."""
-    fact = db.query(UserFact).filter(
-        UserFact.id == fact_id, UserFact.user_id == current_user.id
-    ).first()
+def delete_user_fact(fact_id: int, db: Session = Depends(get_db),
+                     current_user: User = Depends(get_current_user)):
+    fact = db.query(UserFact).filter(UserFact.id == fact_id, UserFact.user_id == current_user.id).first()
     if not fact:
         raise HTTPException(status_code=404, detail="事实记录不存在")
-    db.delete(fact)
+    db.delete(fact); db.commit()
+
+
+@router.post("/analysis/user-facts/batch-delete", status_code=204)
+def batch_delete_facts(ids: list[int], db: Session = Depends(get_db),
+                       current_user: User = Depends(get_current_user)):
+    db.query(UserFact).filter(UserFact.id.in_(ids), UserFact.user_id == current_user.id).delete(synchronize_session=False)
     db.commit()
 
 
@@ -137,6 +154,17 @@ def jd_match(
     post = MatchPostprocessor()
     nlp = NLPScorer()
 
+    # ── Pre-check: return warnings before analysis ──
+    if not getattr(body, 'confirmed', False):
+        checks = _build_pre_check(body.resume_text, body.jd_text, body.company, body.position)
+        warnings = [c for c in checks if c["type"] != "ok"]
+        if warnings:
+            return JDMatchResponse(
+                match_score=0, pre_check=checks,
+                degraded=True,
+                degraded_reason="请确认以下问题后继续",
+            )
+
     # ── Primary: Agent workflow ──
     sid = progress_store.create_session()
     try:
@@ -147,6 +175,8 @@ def jd_match(
         progress_store.mark_done(sid)
         response = post.process(result, body.jd_text, body.resume_text)
         response.session_id = sid
+        response.pre_check = _build_pre_check(body.resume_text, body.jd_text, body.company, body.position)
+        response.next_actions = _build_next_actions(response.match_score, response.skill_gaps, bool(response.revised_resume), response.id)
         _add_nlp_scores(response, nlp, body.resume_text, body.jd_text)
         _archive_analysis(db, current_user.id, response, body.jd_text, body.company, body.position, body.resume_text)
         return response
@@ -173,13 +203,56 @@ def jd_match(
     result = AnalysisService().analyze(db, body.resume_text, body.jd_text, current_user.id)
     result.degraded = True
     result.degraded_reason = "Agent 和 LLM 均不可用，已切换为规则引擎（仅关键词匹配，建议稍后重试）"
-    response = post.process(result, body.jd_text, body.resume_text)
-    _add_nlp_scores(response, nlp, body.resume_text, body.jd_text)
-    return response
+    return post.process(result, body.jd_text, body.resume_text)
 
 
-def _add_nlp_scores(response: JDMatchResponse, nlp: NLPScorer,
-                    resume_text: str, jd_text: str) -> None:
+def _add_nlp_scores(response, nlp, resume_text, jd_text):
+    try:
+        scores = nlp.score(resume_text, jd_text)
+        response.tfidf_score = scores["tfidf_similarity"]
+        response.keyword_score = scores["keyword_coverage"]
+        response.nlp_score = round((scores["tfidf_similarity"] + scores["keyword_coverage"]) / 2, 1)
+    except Exception:
+        pass
+
+
+def _build_pre_check(resume_text: str, jd_text: str, company: str, position: str) -> list[dict]:
+    """Pre-analysis completeness check."""
+    checks = []
+    if len(resume_text.strip()) < 100:
+        checks.append({"type": "warning", "msg": "简历内容较短，建议补充项目经历和技能细节"})
+    if len(jd_text.strip()) < 50:
+        checks.append({"type": "warning", "msg": "JD 内容较短，可能影响匹配准确性"})
+    if not company:
+        checks.append({"type": "info", "msg": "未填写公司名称，JD 归档时可能无法准确识别"})
+    if not position:
+        checks.append({"type": "info", "msg": "未填写岗位名称"})
+    # Simple degree-level check
+    has_degree = any(w in resume_text for w in ["本科", "硕士", "博士", "学士", "研究生", "Bachelor", "Master", "PhD"])
+    if not has_degree:
+        checks.append({"type": "warning", "msg": "简历中未识别到最高学历，建议补充（如：硕士/本科）"})
+    if "项目" not in resume_text and "project" not in resume_text.lower():
+        checks.append({"type": "warning", "msg": "简历中未识别到项目经历，建议至少补充 1-2 个项目"})
+    if not checks:
+        checks.append({"type": "ok", "msg": "材料齐全，开始分析"})
+    return checks
+
+
+def _build_next_actions(match_score: int, skill_gaps: list, has_revised: bool, report_id: int | None) -> list[dict]:
+    """Recommend next actions based on analysis result."""
+    actions = []
+    if match_score >= 50:
+        actions.append({"action": "rewrite", "label": "生成定向改写简历", "desc": f"匹配度 {match_score}，建议针对性优化", "icon": "📝"})
+    if match_score >= 35:
+        actions.append({"action": "save", "label": "保存为投递记录", "desc": "加入投递追踪", "icon": "📋"})
+    missing = [g for g in skill_gaps if hasattr(g, 'user_has') and not g.user_has]
+    if len(missing) >= 3:
+        actions.append({"action": "learn", "label": "查看技能提升建议", "desc": f"{len(missing)} 项技能需要补强", "icon": "📚"})
+    if has_revised and report_id:
+        actions.append({"action": "export", "label": "导出改写简历", "desc": "下载 Markdown / PDF", "icon": "📥"})
+    if match_score < 35:
+        actions.append({"action": "retry", "label": "换个 JD 试试", "desc": "当前匹配度较低，可能不适合该岗位", "icon": "🔄"})
+    return actions
     """Attach NLP objective scores to the response."""
     try:
         scores = nlp.score(resume_text, jd_text)
@@ -325,6 +398,16 @@ def rewrite_resume(
                     if isinstance(c, dict)
                 ])
 
+    # Search knowledge base for relevant methodology
+    kb_context = ""
+    try:
+        from app.knowledge.service import search_kb
+        kb_results = search_kb(db, current_user.id, "改写简历", kb_type="resume_methodology", top_k=3)
+        if kb_results:
+            kb_context = "\n## 知识库参考\n" + "\n".join([r["text"][:300] for r in kb_results[:3]])
+    except Exception:
+        pass
+
     llm = get_llm_client()
     try:
         result = llm.complete(
@@ -336,7 +419,7 @@ def rewrite_resume(
                 gaps=gaps_text,
                 suggestions=suggestions_text,
                 integrity=integrity_text,
-            ),
+            ) + kb_context,
         )
         revised = result.strip()
 

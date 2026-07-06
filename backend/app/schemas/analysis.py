@@ -6,6 +6,7 @@ class JDMatchRequest(BaseModel):
     jd_text: str = Field(..., min_length=1, description="目标岗位 JD 全文")
     company: str = ""
     position: str = ""
+    confirmed: bool = False  # user confirmed pre-check warnings
 
 
 class SuggestionItem(BaseModel):
@@ -53,6 +54,9 @@ class JDMatchResponse(BaseModel):
     nlp_score: float = 0.0
     tfidf_score: float = 0.0
     keyword_score: float = 0.0
+    pre_check: list[dict] = []
+    next_actions: list[dict] = []
+    similar_jds: list[dict] = []
 
 
 class ReportListItem(BaseModel):

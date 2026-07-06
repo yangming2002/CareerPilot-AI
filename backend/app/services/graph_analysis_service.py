@@ -119,4 +119,5 @@ class GraphAnalysisService:
             degraded=state.get("degraded", False),
             degraded_reason=state.get("degraded_reason", ""),
             progress_log=state.get("progress_log", []),
+            similar_jds=state.get("similar_jds", []),
         )

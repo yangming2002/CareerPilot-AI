@@ -35,7 +35,7 @@ def parse_both(state: CareerPilotState) -> CareerPilotState:
         state["parsed_resume"] = _PARSE_CACHE[resume_hash]
 
     if state.get("parsed_jd") and state.get("parsed_resume"):
-        _log(state, "  JD+简历解析 (缓存命中)", time.time() - t0)
+        _tool_step(state, "解析简历&JD", "done", "缓存命中", time.time() - t0)
         return state
 
     with ThreadPoolExecutor(max_workers=2) as pool:
@@ -50,7 +50,10 @@ def parse_both(state: CareerPilotState) -> CareerPilotState:
     if state.get("parsed_resume"):
         _PARSE_CACHE[resume_hash] = state["parsed_resume"]
 
-    _log(state, "  JD+简历解析 (并行)", time.time() - t0)
+    jd_skills_count = len(getattr(state.get("parsed_jd"), "required_skills", []) or [])
+    resume_skills_count = len(getattr(state.get("parsed_resume"), "skills", []) or [])
+    _tool_step(state, "解析简历&JD", "done",
+               f"JD {jd_skills_count}项要求, 简历 {resume_skills_count}个技能", time.time() - t0)
     return state
 
 
@@ -92,11 +95,15 @@ def _parse_jd_impl(state: CareerPilotState) -> None:
         state["parsed_jd"] = ParsedJD(summary=state["jd_text"][:200])
 
 
-def _log(state: CareerPilotState, msg: str, elapsed: float = 0) -> None:
+def _tool_step(state: CareerPilotState, tool: str, status: str, detail: str = "", elapsed: float = 0) -> None:
+    """Record a structured tool execution step."""
+    entry = {"tool": tool, "status": status, "detail": detail, "elapsed": round(elapsed, 1)}
     ts = f" ({elapsed:.1f}s)" if elapsed else ""
-    full_msg = f"{msg}{ts}"
+    full_msg = f"[{status}] {tool}: {detail}{ts}" if detail else f"[{status}] {tool}{ts}"
     logger.info(f"[Agent] {full_msg}")
     state.setdefault("progress_log", []).append(full_msg)
+    # Also push structured data
+    state.setdefault("tool_steps", []).append(entry)
     sid = state.get("session_id", "")
     if sid:
         from app.core import progress as ps
@@ -149,7 +156,7 @@ def rule_match(state: CareerPilotState) -> CareerPilotState:
     gaps = service._compute_skill_gaps(jd_skills, resume_skills)
     score = service._compute_score(jd_skills, resume_skills, gaps)
     state["rule_match_score"] = score
-    _log(state, "  规则引擎评分", time.time() - t0)
+    _tool_step(state, "规则评分", "done", f"关键词覆盖 {score} 分", time.time() - t0)
     return state
 
 
@@ -185,7 +192,15 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
         for p in memory_context["relevant_projects"][:5]:
             memory_text += f"- {p['content'][:200]}\n"
 
-    _log(state, f"  检索: {len(memory_context['relevant_skills'])}技能 {len(memory_context['relevant_projects'])}项目", time.time() - t0)
+    skill_count = len(memory_context.get("relevant_skills", []))
+    proj_count = len(memory_context.get("relevant_projects", []))
+    jd_count = len(memory_context.get("similar_jds", []))
+    state["similar_jds"] = memory_context.get("similar_jds", [])
+    if skill_count or proj_count or jd_count:
+        _tool_step(state, "RAG检索", "done",
+                   f"{skill_count}技能 {proj_count}项目 {jd_count}相似JD", time.time() - t0)
+    else:
+        _tool_step(state, "RAG检索", "done", "无历史记忆，跳过", time.time() - t0)
     t1 = time.time()
 
     extra = ""
@@ -209,7 +224,7 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
         + "Reply ONLY with the JSON object, no markdown fences, no extra text."
     )
     prompt_chars = len(structured_system) + len(user_prompt)
-    _log(state, f"  Prompt构建 ({prompt_chars}字, schema={len(LLMMatchResult.model_json_schema()['properties'])}字段)", time.time() - t_build)
+    logger.info(f"Prompt: {prompt_chars}字, {len(LLMMatchResult.model_json_schema()['properties'])}字段 ({time.time()-t_build:.1f}s)")
 
     t_call = time.time()
     try:
@@ -219,14 +234,18 @@ def llm_analysis(state: CareerPilotState) -> CareerPilotState:
             output_schema=LLMMatchResult,
         )
         state["llm_match_result"] = result
-        _log(state, f"  API调用+推理", time.time() - t_call)
+        logger.info(f"API调用+推理 ({time.time()-t_call:.1f}s)")
     except Exception as e:
         logger.exception("LLM analysis failed")
         state["error"] = str(e)
         state["degraded"] = True
         state["degraded_reason"] = f"LLM 分析失败: {e}"
 
-    _log(state, f"  LLM 匹配总计 (turbo)", time.time() - t1)
+    match_score = result.match_score if result else 0
+    gap_count = len(result.skill_gaps) if result else 0
+    sug_count = len(result.suggestions) if result else 0
+    _tool_step(state, "LLM匹配分析", "done",
+               f"匹配{match_score}分, {gap_count}缺口, {sug_count}建议", time.time() - t1)
     return state
 
 
@@ -245,7 +264,10 @@ def integrity_guard(state: CareerPilotState) -> CareerPilotState:
     state["guard_passed"] = runner_result.passed
     state["guard_findings"] = [f for r in runner_result.results for f in r.findings]
     state["guard_retry_count"] = state.get("guard_retry_count", 0) + 1
-    _log(state, "  真实性校验", time.time() - t0)
+    risk_count = state.get("guard_findings", [])
+    risk_n = sum(1 for f in risk_count if isinstance(f, dict) and f.get("severity") == "risk")
+    _tool_step(state, "Guard校验", "done",
+               f"{'通过' if state.get('guard_passed') else f'发现{risk_n}个风险'}", time.time() - t0)
     return state
 
 
@@ -279,7 +301,7 @@ def compose_report(state: CareerPilotState, db: Session) -> CareerPilotState:
     db.refresh(report)
     state["final_report_id"] = report.id
     state["degraded"] = False
-    _log(state, f"  汇总保存 (ID={report.id})", time.time() - t0)
+    _tool_step(state, "保存报告", "done", f"ID={report.id}", time.time() - t0)
     return state
 
 

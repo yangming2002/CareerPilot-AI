@@ -16,6 +16,12 @@ const router = createRouter({
       meta: { title: '注册 - CareerPilot-AI', guest: true },
     },
     {
+      path: '/knowledge',
+      name: 'knowledge',
+      component: () => import('@/views/KBView.vue'),
+      meta: { title: '知识库 - CareerPilot-AI', requiresAuth: true },
+    },
+    {
       path: '/memory',
       name: 'memory',
       component: () => import('@/views/MemoryView.vue'),
@@ -25,13 +31,13 @@ const router = createRouter({
       path: '/history',
       name: 'history',
       component: () => import('@/views/JDHistoryView.vue'),
-      meta: { title: 'JD 历史库 - CareerPilot-AI', requiresAuth: true },
+      meta: { title: '岗位描述库 - CareerPilot-AI', requiresAuth: true },
     },
     {
       path: '/',
       name: 'workspace',
       component: () => import('@/views/WorkspaceView.vue'),
-      meta: { title: 'CareerPilot-AI 工作台', requiresAuth: true },
+      meta: { title: 'CareerPilot-AI 工作台', requiresAuth: true, key: 'workspace' },
     },
   ],
 })

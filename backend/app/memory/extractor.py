@@ -107,18 +107,27 @@ class FactExtractor:
 
     def _upsert_fact(self, db: Session, user_id: int, category: str,
                      content: str, source: str, tags: str) -> None:
-        """Insert or update a fact."""
-        existing = (
-            db.query(UserFact)
-            .filter(UserFact.user_id == user_id, UserFact.category == category,
-                    UserFact.content == content)
-            .first()
-        )
-        if not existing:
-            db.add(UserFact(
-                user_id=user_id, category=category, content=content,
-                source=source, tags=tags, confidence="auto"
-            ))
+        """Insert or update a fact. Dedup by tags for weaknesses, by content otherwise."""
+        if category == "weakness":
+            # Dedup weaknesses by skill tag (not full description)
+            existing = db.query(UserFact).filter(
+                UserFact.user_id == user_id, UserFact.category == "weakness",
+                UserFact.tags == tags
+            ).first()
+            if existing:
+                existing.content = content  # update with latest description
+                existing.source = source
+            else:
+                db.add(UserFact(user_id=user_id, category=category, content=content,
+                                source=source, tags=tags, confidence="auto"))
+        else:
+            existing = db.query(UserFact).filter(
+                UserFact.user_id == user_id, UserFact.category == category,
+                UserFact.content == content
+            ).first()
+            if not existing:
+                db.add(UserFact(user_id=user_id, category=category, content=content,
+                                source=source, tags=tags, confidence="auto"))
 
     def _tag_skills(self, texts: list[str]) -> str:
         """Extract likely skill tags from text."""
