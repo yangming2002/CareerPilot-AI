@@ -188,7 +188,7 @@ def run_retrieval_eval(n_jds: int = 500, n_queries: int = 50):
         client.insert(collection_name=vs.JD_COLLECTION, data=records)
         if start % 100 == 0:
             print(f"  Indexed {start+len(batch)}/{n_jds}")
-    client.flush()
+    client.flush(collection_name=vs.JD_COLLECTION)
     db.commit()
 
     # Run queries — use BM25 only (avoid Milvus HTTP/2 issues in eval)
